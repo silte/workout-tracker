@@ -14,6 +14,5 @@ export const ExerciseListContainer = () => {
     fetchExerciseList();
   }, []);
 
-  console.log(exerciseList.length > 0 && Object.keys(exerciseList[0]));
   return <ExerciseList exerciseList={exerciseList} />;
 };
