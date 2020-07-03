@@ -1,10 +1,10 @@
 const fs = require("fs");
 const https = require("https");
 
-const { readJson, downloadJson } = require("./jsonHelper");
+const { readJson, downloadJson } = require("../utils/jsonHelper");
 
-const { DATA_DIR, EXERCISE_LIST_FILENAME } = require("./filesNames");
-const { getExerciseEndpoint } = require("./endpoints");
+const { DATA_DIR, EXERCISE_LIST_FILENAME } = require("../constants/filesNames");
+const { getExerciseEndpoint } = require("../constants/endpoints");
 
 const FETCH_INTERVAL_MS = 1000;
 

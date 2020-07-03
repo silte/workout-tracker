@@ -2,7 +2,7 @@ const http = require("http");
 const express = require("express");
 const app = express();
 
-const exerciseRouter = require("./src/routes/exercise");
+const exerciseRouter = require("./routes/exercise");
 
 const HOSTNAME = "127.0.0.1";
 const PORT = 3000;

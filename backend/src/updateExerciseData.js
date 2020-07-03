@@ -1,5 +1,5 @@
-const fetchExerciseList = require("./src/fetchExerciseList");
-const fetchExercisesFromList = require("./src/fetchExercisesFromList");
+const fetchExerciseList = require("./fetchers/fetchExerciseList");
+const fetchExercisesFromList = require("./fetchers/fetchExercisesFromList");
 
 const init = async () => {
   const customArgs = process.argv.slice(2);
