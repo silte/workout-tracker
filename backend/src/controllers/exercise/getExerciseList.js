@@ -1,5 +1,5 @@
-const { readJson } = require("../../jsonHelper");
-const { EXERCISE_LIST_FILENAME } = require("../../filesNames");
+const { readJson } = require("../../utils/jsonHelper");
+const { EXERCISE_LIST_FILENAME } = require("../../constants/filesNames");
 
 const getExerciseList = () => {
   const allExerciseListData = readJson(EXERCISE_LIST_FILENAME);
