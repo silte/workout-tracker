@@ -1,0 +1,70 @@
+@import "lib";
+
+.listing {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  &.col--2 {
+    @media screen and (min-width: $bp-medium-wide) {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  }
+
+  &.col--3 {
+    @media screen and (min-width: $bp-medium-wide) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    @media screen and (min-width: $bp-medium-wide) and (max-width: $bp-extra-wide) {
+      justify-content: space-between;
+    }
+  }
+}
+
+.listing__item {
+  margin-bottom: $spacing;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .col--2 &,
+  .col--3 & {
+    @media screen and (min-width: $bp-medium-wide) {
+      width: calc(100% / 2 - #{$spacing});
+    }
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:nth-child(2) {
+      @media screen and (min-width: $bp-medium-wide) {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .col--3 & {
+    @media screen and (min-width: $bp-extra-wide) {
+      width: calc(100% / 3 - calc(#{$spacing * 1.35}));
+    }
+
+    &:nth-child(3) {
+      @media screen and (min-width: $bp-extra-wide) {
+        margin-top: 0;
+      }
+    }
+
+    &:nth-child(3n + 2) {
+      @media screen and (min-width: $bp-extra-wide) {
+        margin-left: $spacing-medium;
+        margin-right: $spacing-medium;
+      }
+    }
+  }
+}

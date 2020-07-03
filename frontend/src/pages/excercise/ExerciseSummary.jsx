@@ -1,22 +1,25 @@
-import React from "react";
-import { getActivityName } from "../../utils/activityInfo";
-import { unixtimeToString } from "../../utils/timeConverter";
+import React from 'react';
+import { getActivityName } from '../../utils/activityInfo';
+import { unixtimeToString } from '../../utils/timeConverter';
 
-export const ExerciseSummary = ({
-  exerciseList,
-  setFilterStartDate,
-  setFilterEndDate,
-}) => {
+import Container from '../../components/container/container';
+import Heading from '../../components/heading/heading';
+import Listing from '../../components/listing/listing';
+import Spacer from '../../components/spacer/spacer';
+
+export const ExerciseSummary = ({ exerciseList, setFilterStartDate, setFilterEndDate }) => {
   const onChangeFilterStartDate = ({ target: { value } }) =>
-    setFilterStartDate(value !== "" ? new Date(value).getTime() : null);
+    setFilterStartDate(value !== '' ? new Date(value).getTime() : null);
   const onChangeFilterEndDate = ({ target: { value } }) =>
-    setFilterEndDate(value !== "" ? new Date(value).getTime() : null);
+    setFilterEndDate(value !== '' ? new Date(value).getTime() : null);
 
   return (
-    <div>
-      <h1>Exercise summary</h1>
-      <div>
-        <h3>Filters</h3>
+    <Container medium className="exercise-summary">
+      <Spacer large>
+        <Heading headingLevel="1" className="exercise-summary__title">
+          Exercise summary
+        </Heading>
+        <Heading headingLevel="3">Filters</Heading>
         <label>
           Start date:
           <input type="date" onChange={onChangeFilterStartDate} />
@@ -26,13 +29,9 @@ export const ExerciseSummary = ({
           End date:
           <input type="date" onChange={onChangeFilterEndDate} />
         </label>
-      </div>
-      <ul>
-        {exerciseList.map((exercise) => (
-          <Exercise {...exercise} />
-        ))}
-      </ul>
-    </div>
+        <Listing arrayOfContent={exerciseList} listingComponent={Exercise} keyFieldName="workoutKey" />
+      </Spacer>
+    </Container>
   );
 };
 
@@ -51,7 +50,7 @@ const Exercise = ({
   feeling,
 }) => (
   <li>
-    {getActivityName(activityId)} {unixtimeToString(startTime)}, time:{" "}
-    {totalTime}, distance: {totalDistance}m, max speed: {maxSpeed}
+    {getActivityName(activityId)} {unixtimeToString(startTime)}, time: {totalTime}, distance: {totalDistance}m, max
+    speed: {maxSpeed}
   </li>
 );

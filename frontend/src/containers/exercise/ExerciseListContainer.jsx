@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { ExerciseList } from "../../pages/excercise/ExerciseList";
-import { EXCERCISE_LIST_ENDPOINT } from "../../constants/endpoints";
+import React, { useState, useEffect } from 'react';
+import { ExerciseList } from '../../pages/excercise/ExerciseList';
+import { EXCERCISE_LIST_ENDPOINT } from '../../constants/endpoints';
 
 export const ExerciseListContainer = () => {
   const [exerciseList, setExerciseList] = useState([]);
