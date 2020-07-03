@@ -1,4 +1,4 @@
-# Passportjs + express + react template
+# Custom Suunto app
 
 This is a simple demo/template that includes simple frontend for login test and backend that provides rest api for authentication.
 
@@ -30,8 +30,8 @@ Register application!
 ### Clone the repository
 
 ```
-$ git clone git@github.com:silte/passport-express-react-demo.git
-$ cd passport-express-react-demo
+$ git clone git@github.com:silte/custom-suunto-app.git
+$ cd custom-suunto-app
 ```
 
 ### Add your OAuth tokens to the backend
