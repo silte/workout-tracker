@@ -1,0 +1,1154 @@
+[
+    {
+        "Key": "Walking",
+        "STId": 0,
+        "STKey": "walking",
+        "MCId": 12,
+        "Name": "Walking",
+        "PhraseID": "TXT_WALKING",
+        "Icons": [
+            "0xf012",
+            "0xe012"
+        ]
+    },
+    {
+        "Key": "Running",
+        "STId": 1,
+        "STKey": "running",
+        "MCId": 3,
+        "Name": "Running",
+        "PhraseID": "TXT_RUNNING",
+        "Icons": [
+            "0xf003",
+            "0xe003"
+        ]
+    },
+    {
+        "Key": "Cycling",
+        "STId": 2,
+        "STKey": "cycling",
+        "MCId": 4,
+        "Name": "Cycling",
+        "PhraseID": "TXT_CYCLING",
+        "Icons": [
+            "0xf004",
+            "0xe004"
+        ]
+    },
+    {
+        "Key": "NordicSkiing",
+        "STId": 3,
+        "STKey": "cross_country_skiing",
+        "MCId": 22,
+        "Name": "Cross-country skiing",
+        "PhraseID": "TXT_CROSSCOUNTRY_SKIING",
+        "Icons": [
+            "0xf022",
+            "0xe022"
+        ]
+    },
+    {
+        "Key": "Other1",
+        "STId": 4,
+        "STKey": "other_1",
+        "MCId": -1,
+        "Name": "Other 1",
+        "PhraseID": "TXT_OTHER_ACTIVITY_1",
+        "Icons": null
+    },
+    {
+        "Key": "Other2",
+        "STId": 5,
+        "STKey": "other_2",
+        "MCId": -1,
+        "Name": "Other 2",
+        "PhraseID": "TXT_OTHER_ACTIVITY_2",
+        "Icons": null
+    },
+    {
+        "Key": "Other3",
+        "STId": 6,
+        "STKey": "other_3",
+        "MCId": -1,
+        "Name": "Other 3",
+        "PhraseID": "TXT_OTHER_ACTIVITY_3",
+        "Icons": null
+    },
+    {
+        "Key": "Other4",
+        "STId": 7,
+        "STKey": "other_4",
+        "MCId": -1,
+        "Name": "Other 4",
+        "PhraseID": "TXT_OTHER_ACTIVITY_4",
+        "Icons": null
+    },
+    {
+        "Key": "Other5",
+        "STId": 8,
+        "STKey": "other_5",
+        "MCId": -1,
+        "Name": "Other 5",
+        "PhraseID": "TXT_OTHER_ACTIVITY_5",
+        "Icons": null
+    },
+    {
+        "Key": "Other6",
+        "STId": 9,
+        "STKey": "other_6",
+        "MCId": -1,
+        "Name": "Other 6",
+        "PhraseID": "TXT_OTHER_ACTIVITY_6",
+        "Icons": null
+    },
+    {
+        "Key": "MountainBiking",
+        "STId": 10,
+        "STKey": "mountain_biking",
+        "MCId": 5,
+        "Name": "Mountain biking",
+        "PhraseID": "TXT_MOUNTAIN_BIKING",
+        "Icons": [
+            "0xf005",
+            "0xe005"
+        ]
+    },
+    {
+        "Key": "Hiking",
+        "STId": 11,
+        "STKey": "hiking",
+        "MCId": 96,
+        "Name": "Hiking",
+        "PhraseID": "TXT_HIKING",
+        "Icons": [
+            "0xf096",
+            "0xe096"
+        ]
+    },
+    {
+        "Key": "RollerSkating",
+        "STId": 12,
+        "STKey": "roller_skating",
+        "MCId": 8,
+        "Name": "Roller skating",
+        "PhraseID": "TXT_ROLLER_SKATING",
+        "Icons": [
+            "0xf008",
+            "0xe008"
+        ]
+    },
+    {
+        "Key": "DownhillSkiing",
+        "STId": 13,
+        "STKey": "downhill_skiing",
+        "MCId": 20,
+        "Name": "Alpine skiing",
+        "PhraseID": "TXT_ALPINE_SKIING",
+        "Icons": [
+            "0xf020",
+            "0xe020"
+        ]
+    },
+    {
+        "Key": "Paddling",
+        "STId": 14,
+        "STKey": "paddling",
+        "MCId": -1,
+        "Name": "Paddling",
+        "PhraseID": "TXT_PADDLING",
+        "Icons": null
+    },
+    {
+        "Key": "Rowing",
+        "STId": 15,
+        "STKey": "rowing",
+        "MCId": 15,
+        "Name": "Rowing",
+        "PhraseID": "TXT_ROWING",
+        "Icons": [
+            "0xf015",
+            "0xe015"
+        ]
+    },
+    {
+        "Key": "Golf",
+        "STId": 16,
+        "STKey": "golf",
+        "MCId": 66,
+        "Name": "Golf",
+        "PhraseID": "TXT_GOLF",
+        "Icons": [
+            "0xf066",
+            "0xe066"
+        ]
+    },
+    {
+        "Key": "Indoor",
+        "STId": 17,
+        "STKey": "indoor",
+        "MCId": 95,
+        "Name": "Indoor training",
+        "PhraseID": "TXT_INDOOR_TRAINING",
+        "Icons": [
+            "0xf001",
+            "0xe001"
+        ]
+    },
+    {
+        "Key": "Parkour",
+        "STId": 18,
+        "STKey": "parkour",
+        "MCId": -1,
+        "Name": "Parkour",
+        "PhraseID": "TXT_PARKOUR",
+        "Icons": null
+    },
+    {
+        "Key": "Ballgames",
+        "STId": 19,
+        "STKey": "ballgames",
+        "MCId": -1,
+        "Name": "Ball games",
+        "PhraseID": "TXT_BALL_GAMES",
+        "Icons": null
+    },
+    {
+        "Key": "OutdoorGym",
+        "STId": 20,
+        "STKey": "outdoor_gym",
+        "MCId": -1,
+        "Name": "Outdoor gym",
+        "PhraseID": "TXT_OUTDOOR_GYM",
+        "Icons": null
+    },
+    {
+        "Key": "Swimming",
+        "STId": 21,
+        "STKey": "swimming",
+        "MCId": 6,
+        "Name": "Pool swimming",
+        "PhraseID": "TXT_POOL_SWIMMING",
+        "Icons": [
+            "0xf006",
+            "0xe006"
+        ]
+    },
+    {
+        "Key": "TrailRunning",
+        "STId": 22,
+        "STKey": "trail_running",
+        "MCId": 82,
+        "Name": "Trail running",
+        "PhraseID": "TXT_TRAIL_RUNNING",
+        "Icons": [
+            "0xf082",
+            "0xe082"
+        ]
+    },
+    {
+        "Key": "Gym",
+        "STId": 23,
+        "STKey": "gym",
+        "MCId": -1,
+        "Name": "Gym",
+        "PhraseID": "TXT_GYM_ACTIVITY",
+        "Icons": null
+    },
+    {
+        "Key": "NordicWalking",
+        "STId": 24,
+        "STKey": "nordic_walking",
+        "MCId": 84,
+        "Name": "Nordic walking",
+        "PhraseID": "TXT_NORDIC_WALKING",
+        "Icons": [
+            "0xf084",
+            "0xe084"
+        ]
+    },
+    {
+        "Key": "HorsebackRiding",
+        "STId": 25,
+        "STKey": "horseback_riding",
+        "MCId": 69,
+        "Name": "Horseback riding",
+        "PhraseID": "TXT_HORSEBACK_RIDING",
+        "Icons": [
+            "0xf069",
+            "0xe069"
+        ]
+    },
+    {
+        "Key": "Motorsports",
+        "STId": 26,
+        "STKey": "motor_sports",
+        "MCId": 73,
+        "Name": "Motorsports",
+        "PhraseID": "TXT_MOTORSPORTS",
+        "Icons": [
+            "0xf073",
+            "0xe073"
+        ]
+    },
+    {
+        "Key": "Skateboarding",
+        "STId": 27,
+        "STKey": "skateboarding",
+        "MCId": -1,
+        "Name": "Skateboarding",
+        "PhraseID": "TXT_SKATEBOARDING",
+        "Icons": null
+    },
+    {
+        "Key": "WaterSports",
+        "STId": 28,
+        "STKey": "water_sports",
+        "MCId": -1,
+        "Name": "Water sports",
+        "PhraseID": "TXT_WATER_SPORTS",
+        "Icons": null
+    },
+    {
+        "Key": "Climbing",
+        "STId": 29,
+        "STKey": "climbing",
+        "MCId": 16,
+        "Name": "Climbing",
+        "PhraseID": "TXT_CLIMBING",
+        "Icons": [
+            "0xf016",
+            "0xe016"
+        ]
+    },
+    {
+        "Key": "Snowboarding",
+        "STId": 30,
+        "STKey": "snowboarding",
+        "MCId": 21,
+        "Name": "Snowboarding",
+        "PhraseID": "TXT_SNOWBOARDING",
+        "Icons": [
+            "0xf021",
+            "0xe021"
+        ]
+    },
+    {
+        "Key": "SkiTouring",
+        "STId": 31,
+        "STKey": "ski_touring",
+        "MCId": 78,
+        "Name": "Ski touring",
+        "PhraseID": "TXT_SKI_TOURING",
+        "Icons": [
+            "0xf078",
+            "0xe078"
+        ]
+    },
+    {
+        "Key": "FitnessClass",
+        "STId": 32,
+        "STKey": "fitness_class",
+        "MCId": -1,
+        "Name": "Fitness class",
+        "PhraseID": "TXT_FITNESS_CLASS",
+        "Icons": null
+    },
+    {
+        "Key": "Soccer",
+        "STId": 33,
+        "STKey": "soccer",
+        "MCId": 25,
+        "Name": "Soccer / football",
+        "PhraseID": "TXT_SOCCER",
+        "Icons": [
+            "0xf025",
+            "0xe025"
+        ]
+    },
+    {
+        "Key": "Tennis",
+        "STId": 34,
+        "STKey": "tennis",
+        "MCId": 33,
+        "Name": "Tennis",
+        "PhraseID": "TXT_TENNIS",
+        "Icons": [
+            "0xf033",
+            "0xe033"
+        ]
+    },
+    {
+        "Key": "Basketball",
+        "STId": 35,
+        "STKey": "basketball",
+        "MCId": 24,
+        "Name": "Basketball",
+        "PhraseID": "TXT_BASKETBALL",
+        "Icons": [
+            "0xf024",
+            "0xe024"
+        ]
+    },
+    {
+        "Key": "Badminton",
+        "STId": 36,
+        "STKey": "badminton",
+        "MCId": 34,
+        "Name": "Badminton",
+        "PhraseID": "TXT_BADMINTON",
+        "Icons": [
+            "0xf034",
+            "0xe034"
+        ]
+    },
+    {
+        "Key": "Baseball",
+        "STId": 37,
+        "STKey": "baseball",
+        "MCId": 31,
+        "Name": "Baseball",
+        "PhraseID": "TXT_BASEBALL",
+        "Icons": [
+            "0xf031",
+            "0xe031"
+        ]
+    },
+    {
+        "Key": "Volleyball",
+        "STId": 38,
+        "STKey": "volleyball",
+        "MCId": 27,
+        "Name": "Volleyball",
+        "PhraseID": "TXT_VOLLEYBALL",
+        "Icons": [
+            "0xf027",
+            "0xe027"
+        ]
+    },
+    {
+        "Key": "AmericanFootball",
+        "STId": 39,
+        "STKey": "american_football",
+        "MCId": 28,
+        "Name": "American football",
+        "PhraseID": "TXT_FOOTBALL",
+        "Icons": [
+            "0xf028",
+            "0xe028"
+        ]
+    },
+    {
+        "Key": "TableTennis",
+        "STId": 40,
+        "STKey": "table_tennis",
+        "MCId": 35,
+        "Name": "Table tennis",
+        "PhraseID": "TXT_TABLE_TENNIS",
+        "Icons": [
+            "0xf035",
+            "0xe035"
+        ]
+    },
+    {
+        "Key": "RacquetBall",
+        "STId": 41,
+        "STKey": "racquet_ball",
+        "MCId": 36,
+        "Name": "Racquet ball",
+        "PhraseID": "TXT_RACQUET_BALL",
+        "Icons": [
+            "0xf036",
+            "0xe036"
+        ]
+    },
+    {
+        "Key": "Squash",
+        "STId": 42,
+        "STKey": "squash",
+        "MCId": 37,
+        "Name": "Squash",
+        "PhraseID": "TXT_SQUASH",
+        "Icons": [
+            "0xf037",
+            "0xe037"
+        ]
+    },
+    {
+        "Key": "Floorball",
+        "STId": 43,
+        "STKey": "floorball",
+        "MCId": 40,
+        "Name": "Floorball",
+        "PhraseID": "TXT_FLOORBALL",
+        "Icons": [
+            "0xf040",
+            "0xe040"
+        ]
+    },
+    {
+        "Key": "Handball",
+        "STId": 44,
+        "STKey": "handball",
+        "MCId": 68,
+        "Name": "Handball",
+        "PhraseID": "TXT_HANDBALL",
+        "Icons": [
+            "0xf068",
+            "0xe068"
+        ]
+    },
+    {
+        "Key": "Softball",
+        "STId": 45,
+        "STKey": "softball",
+        "MCId": 29,
+        "Name": "Softball",
+        "PhraseID": "TXT_SOFTBALL",
+        "Icons": [
+            "0xf029",
+            "0xe029"
+        ]
+    },
+    {
+        "Key": "Bowling",
+        "STId": 46,
+        "STKey": "bowling",
+        "MCId": 62,
+        "Name": "Bowling",
+        "PhraseID": "TXT_BOWLING",
+        "Icons": [
+            "0xf062",
+            "0xe062"
+        ]
+    },
+    {
+        "Key": "Cricket",
+        "STId": 47,
+        "STKey": "cricket",
+        "MCId": 63,
+        "Name": "Cricket",
+        "PhraseID": "TXT_CRICKET",
+        "Icons": [
+            "0xf063",
+            "0xe063"
+        ]
+    },
+    {
+        "Key": "Rugby",
+        "STId": 48,
+        "STKey": "rugby",
+        "MCId": 76,
+        "Name": "Rugby",
+        "PhraseID": "TXT_RUGBY",
+        "Icons": [
+            "0xf076",
+            "0xe076"
+        ]
+    },
+    {
+        "Key": "IceSkating",
+        "STId": 49,
+        "STKey": "ice_skating",
+        "MCId": 70,
+        "Name": "Ice skating",
+        "PhraseID": "TXT_ICE_SKATING",
+        "Icons": [
+            "0xf070",
+            "0xe070"
+        ]
+    },
+    {
+        "Key": "IceHockey",
+        "STId": 50,
+        "STKey": "ice_hockey",
+        "MCId": 26,
+        "Name": "Ice hockey",
+        "PhraseID": "TXT_ICE_HOCKEY",
+        "Icons": [
+            "0xf026",
+            "0xe026"
+        ]
+    },
+    {
+        "Key": "Yoga",
+        "STId": 51,
+        "STKey": "yoga",
+        "MCId": 10,
+        "Name": "Yoga / pilates",
+        "PhraseID": "TXT_YOGA_PILATES",
+        "Icons": [
+            "0xf010",
+            "0xe010"
+        ]
+    },
+    {
+        "Key": "IndoorCycling",
+        "STId": 52,
+        "STKey": "indoor_cycling",
+        "MCId": 17,
+        "Name": "Indoor cycling",
+        "PhraseID": "TXT_INDOOR_CYCLING",
+        "Icons": [
+            "0xf017",
+            "0xe017"
+        ]
+    },
+    {
+        "Key": "Treadmill",
+        "STId": 53,
+        "STKey": "treadmill",
+        "MCId": 93,
+        "Name": "Treadmill",
+        "PhraseID": "TXT_TREADMILL",
+        "Icons": [
+            "0xf093",
+            "0xe093"
+        ]
+    },
+    {
+        "Key": "Crossfit",
+        "STId": 54,
+        "STKey": "crossfit",
+        "MCId": 90,
+        "Name": "Crossfit",
+        "PhraseID": "TXT_CROSSFIT",
+        "Icons": [
+            "0xf090",
+            "0xe090"
+        ]
+    },
+    {
+        "Key": "Crosstrainer",
+        "STId": 55,
+        "STKey": "crosstrainer",
+        "MCId": 64,
+        "Name": "Crosstrainer",
+        "PhraseID": "TXT_CROSSTRAINER",
+        "Icons": [
+            "0xf064",
+            "0xe064"
+        ]
+    },
+    {
+        "Key": "RollerSkiing",
+        "STId": 56,
+        "STKey": "roller_skiing",
+        "MCId": 88,
+        "Name": "Roller skiing",
+        "PhraseID": "TXT_ROLLER_SKIING",
+        "Icons": [
+            "0xf088",
+            "0xe088"
+        ]
+    },
+    {
+        "Key": "IndoorRowing",
+        "STId": 57,
+        "STKey": "indoor_rowing",
+        "MCId": 71,
+        "Name": "Indoor rowing",
+        "PhraseID": "TXT_INDOOR_ROWING",
+        "Icons": [
+            "0xf071",
+            "0xe071"
+        ]
+    },
+    {
+        "Key": "Stretching",
+        "STId": 58,
+        "STKey": "stretching",
+        "MCId": 79,
+        "Name": "Stretching",
+        "PhraseID": "TXT_STRETCHING",
+        "Icons": [
+            "0xf079",
+            "0xe079"
+        ]
+    },
+    {
+        "Key": "TrackAndField",
+        "STId": 59,
+        "STKey": "track_and_field",
+        "MCId": 81,
+        "Name": "Track and field",
+        "PhraseID": "TXT_TRACK_AND_FIELD",
+        "Icons": [
+            "0xf081",
+            "0xe081"
+        ]
+    },
+    {
+        "Key": "Orienteering",
+        "STId": 60,
+        "STKey": "orienteering",
+        "MCId": 75,
+        "Name": "Orienteering",
+        "PhraseID": "TXT_ORIENTEERING",
+        "Icons": [
+            "0xf075",
+            "0xe075"
+        ]
+    },
+    {
+        "Key": "StandupPaddling",
+        "STId": 61,
+        "STKey": "standup_paddling",
+        "MCId": 89,
+        "Name": "Standup paddling",
+        "PhraseID": "TXT_STANDUP_PADDLING",
+        "Icons": [
+            "0xf089",
+            "0xe089"
+        ]
+    },
+    {
+        "Key": "CombatSport",
+        "STId": 62,
+        "STKey": "combat_sport",
+        "MCId": 38,
+        "Name": "Martial arts",
+        "PhraseID": "TXT_MARTIAL_ARTS",
+        "Icons": [
+            "0xf038",
+            "0xe038"
+        ]
+    },
+    {
+        "Key": "Kettlebell",
+        "STId": 63,
+        "STKey": "kettlebell",
+        "MCId": 87,
+        "Name": "Kettlebell",
+        "PhraseID": "TXT_KETTLEBELL",
+        "Icons": [
+            "0xf087",
+            "0xe087"
+        ]
+    },
+    {
+        "Key": "Dancing",
+        "STId": 64,
+        "STKey": "dancing",
+        "MCId": 65,
+        "Name": "Dancing",
+        "PhraseID": "TXT_DANCING",
+        "Icons": [
+            "0xf065",
+            "0xe065"
+        ]
+    },
+    {
+        "Key": "SnowShoeing",
+        "STId": 65,
+        "STKey": "snow_shoeing",
+        "MCId": 85,
+        "Name": "Snow shoeing",
+        "PhraseID": "TXT_SNOW_SHOEING",
+        "Icons": [
+            "0xf085",
+            "0xe085"
+        ]
+    },
+    {
+        "Key": "FrisbeeGolf",
+        "STId": 66,
+        "STKey": "frisbee",
+        "MCId": -1,
+        "Name": "Frisbee golf",
+        "PhraseID": "TXT_FRISBEE_GOLF",
+        "Icons": null
+    },
+    {
+        "Key": "Futsal",
+        "STId": 67,
+        "STKey": "futsal",
+        "MCId": -1,
+        "Name": "Futsal",
+        "PhraseID": "TXT_FUTSAL",
+        "Icons": null
+    },
+    {
+        "Key": "Multisport",
+        "STId": 68,
+        "STKey": "multisport",
+        "MCId": 2,
+        "Name": "Multisport",
+        "PhraseID": "TXT_MULTISPORT",
+        "Icons": [
+            "0xf002",
+            "0xe002"
+        ]
+    },
+    {
+        "Key": "Aerobics",
+        "STId": 69,
+        "STKey": "aerobics",
+        "MCId": 9,
+        "Name": "Aerobics",
+        "PhraseID": "TXT_AEROBICS",
+        "Icons": [
+            "0xf009",
+            "0xe009"
+        ]
+    },
+    {
+        "Key": "Trekking",
+        "STId": 70,
+        "STKey": "trekking",
+        "MCId": 11,
+        "Name": "Trekking",
+        "PhraseID": "TXT_TREKKING",
+        "Icons": [
+            "0xf011",
+            "0xe011"
+        ]
+    },
+    {
+        "Key": "Sailing",
+        "STId": 71,
+        "STKey": "sailing",
+        "MCId": 13,
+        "Name": "Sailing",
+        "PhraseID": "TXT_SAILING",
+        "Icons": [
+            "0xf013",
+            "0xe013"
+        ]
+    },
+    {
+        "Key": "Kayaking",
+        "STId": 72,
+        "STKey": "kayaking",
+        "MCId": 14,
+        "Name": "Kayaking",
+        "PhraseID": "TXT_KAYAKING",
+        "Icons": [
+            "0xf014",
+            "0xe014"
+        ]
+    },
+    {
+        "Key": "CircuitTraining",
+        "STId": 73,
+        "STKey": "circuit_training",
+        "MCId": 18,
+        "Name": "Circuit training",
+        "PhraseID": "TXT_CIRCUIT_TRAINING",
+        "Icons": [
+            "0xf018",
+            "0xe018"
+        ]
+    },
+    {
+        "Key": "Triathlon",
+        "STId": 74,
+        "STKey": "triathlon",
+        "MCId": 19,
+        "Name": "Triathlon",
+        "PhraseID": "TXT_TRIATHLON",
+        "Icons": [
+            "0xf019",
+            "0xe019"
+        ]
+    },
+    {
+        "Key": "WeightTraining",
+        "STId": 23,
+        "STKey": "gym",
+        "MCId": 23,
+        "Name": "Weight training",
+        "PhraseID": "TXT_WEIGHT_TRAINING",
+        "Icons": [
+            "0xf023",
+            "0xe023"
+        ]
+    },
+    {
+        "Key": "Cheerleading",
+        "STId": 76,
+        "STKey": "cheerleading",
+        "MCId": 30,
+        "Name": "Cheerleading",
+        "PhraseID": "TXT_CHEERLEADING",
+        "Icons": [
+            "0xf030",
+            "0xe030"
+        ]
+    },
+    {
+        "Key": "Boxing",
+        "STId": 77,
+        "STKey": "boxing",
+        "MCId": 39,
+        "Name": "Boxing",
+        "PhraseID": "TXT_BOXING",
+        "Icons": [
+            "0xf039",
+            "0xe039"
+        ]
+    },
+    {
+        "Key": "ScubaDiving",
+        "STId": 78,
+        "STKey": "scubaDiving",
+        "MCId": 51,
+        "Name": "Scuba diving",
+        "PhraseID": "TXT_SCUBA_DIVING",
+        "Icons": [
+            "0xf051",
+            "0xe051"
+        ]
+    },
+    {
+        "Key": "FreeDiving",
+        "STId": 79,
+        "STKey": "freeDiving",
+        "MCId": 52,
+        "Name": "Free diving",
+        "PhraseID": "TXT_FREEDIVING",
+        "Icons": [
+            "0xf052",
+            "0xe052"
+        ]
+    },
+    {
+        "Key": "AdventureRacing",
+        "STId": 80,
+        "STKey": "adventure_racing",
+        "MCId": 61,
+        "Name": "Adventure racing",
+        "PhraseID": "TXT_ADVENTURE_RACING",
+        "Icons": [
+            "0xf061",
+            "0xe061"
+        ]
+    },
+    {
+        "Key": "Gymnastics",
+        "STId": 81,
+        "STKey": "gymnastics",
+        "MCId": 67,
+        "Name": "Gymnastics",
+        "PhraseID": "TXT_GYMNASTICS",
+        "Icons": [
+            "0xf067",
+            "0xe067"
+        ]
+    },
+    {
+        "Key": "Canoeing",
+        "STId": 82,
+        "STKey": "canoeing",
+        "MCId": 72,
+        "Name": "Canoeing",
+        "PhraseID": "TXT_CANOEING",
+        "Icons": [
+            "0xf072",
+            "0xe072"
+        ]
+    },
+    {
+        "Key": "Mountaineering",
+        "STId": 83,
+        "STKey": "mountaineering",
+        "MCId": 74,
+        "Name": "Mountaineering",
+        "PhraseID": "TXT_MOUNTAINEERING",
+        "Icons": [
+            "0xf074",
+            "0xe074"
+        ]
+    },
+    {
+        "Key": "TelemarkSkiing",
+        "STId": 84,
+        "STKey": "telemarkSkiing",
+        "MCId": 80,
+        "Name": "Telemark skiing",
+        "PhraseID": "TXT_TELEMARK_SKIING",
+        "Icons": [
+            "0xf080",
+            "0xe080"
+        ]
+    },
+    {
+        "Key": "OpenwaterSwimming",
+        "STId": 85,
+        "STKey": "openwater_swimming",
+        "MCId": 83,
+        "Name": "Openwater swimming",
+        "PhraseID": "TXT_OPENWATER_SWIMMING",
+        "Icons": [
+            "0xf083",
+            "0xe083"
+        ]
+    },
+    {
+        "Key": "Windsurfing",
+        "STId": 86,
+        "STKey": "windsurfing",
+        "MCId": 86,
+        "Name": "Windsurfing",
+        "PhraseID": "TXT_WINDSURFING",
+        "Icons": [
+            "0xf086",
+            "0xe086"
+        ]
+    },
+    {
+        "Key": "KitesurfingKiting",
+        "STId": 87,
+        "STKey": "kitesurfing_kiting",
+        "MCId": 91,
+        "Name": "Kitesurfing / kiting",
+        "PhraseID": "TXT_KITESURFING",
+        "Icons": [
+            "0xf091",
+            "0xe091"
+        ]
+    },
+    {
+        "Key": "Paragliding",
+        "STId": 88,
+        "STKey": "paragliding",
+        "MCId": 92,
+        "Name": "Paragliding",
+        "PhraseID": "TXT_PARAGLIDING",
+        "Icons": [
+            "0xf092",
+            "0xe092"
+        ]
+    },
+    {
+        "Key": "Frisbee",
+        "STId": 66,
+        "STKey": "frisbee",
+        "MCId": 94,
+        "Name": "Frisbee",
+        "PhraseID": "TXT_FRISBEE",
+        "Icons": [
+            "0xf094",
+            "0xe094"
+        ]
+    },
+    {
+        "Key": "Snorkeling",
+        "STId": 90,
+        "STKey": "snorkeling",
+        "MCId": 53,
+        "Name": "Snorkeling",
+        "PhraseID": "TXT_SNORKELING",
+        "Icons": [
+            "0xf053",
+            "0xe053"
+        ]
+    },
+    {
+        "Key": "Surfing",
+        "STId": 91,
+        "STKey": "surfing",
+        "MCId": 54,
+        "Name": "Surfing",
+        "PhraseID": "TXT_SURFING",
+        "Icons": [
+            "0xf054",
+            "0xe054"
+        ]
+    },
+    {
+        "Key": "SwimRun",
+        "STId": 92,
+        "STKey": "swimRun",
+        "MCId": 55,
+        "Name": "Swimrun",
+        "PhraseID": "TXT_SWIMRUN",
+        "Icons": [
+            "0xf055",
+            "0xe055"
+        ]
+    },
+    {
+        "Key": "Duathlon",
+        "STId": 93,
+        "STKey": "duathlon",
+        "MCId": 56,
+        "Name": "Duathlon",
+        "PhraseID": "TXT_DUATHLON",
+        "Icons": [
+            "0xf056",
+            "0xe056"
+        ]
+    },
+    {
+        "Key": "Aquathlon",
+        "STId": 94,
+        "STKey": "aquathlon",
+        "MCId": 57,
+        "Name": "Aquathlon",
+        "PhraseID": "TXT_AQUATHLON",
+        "Icons": [
+            "0xf057",
+            "0xe057"
+        ]
+    },
+    {
+        "Key": "ObstacleRacing",
+        "STId": 95,
+        "STKey": "obstacle_racing",
+        "MCId": 58,
+        "Name": "Obstacle racing",
+        "PhraseID": "TXT_OBSTACLE_RACING",
+        "Icons": [
+            "0xf058",
+            "0xe058"
+        ]
+    },
+    {
+        "Key": "Fishing",
+        "STId": 96,
+        "STKey": "fishing",
+        "MCId": 97,
+        "Name": "Fishing",
+        "PhraseID": "TXT_FISHING",
+        "Icons": [
+            "0xf097",
+            "0xe097"
+        ]
+    },
+    {
+        "Key": "Hunting",
+        "STId": 97,
+        "STKey": "hunting",
+        "MCId": 98,
+        "Name": "Hunting",
+        "PhraseID": "TXT_HUNTING",
+        "Icons": [
+            "0xf098",
+            "0xe098"
+        ]
+    },
+    {
+        "Key": "Transition",
+        "STId": 98,
+        "STKey": "transition",
+        "MCId": 99,
+        "Name": "Transition",
+        "PhraseID": "TXT_SPORT_TRANSITION",
+        "Icons": [
+            "0xf099",
+            "0xe099"
+        ]
+    },
+    {
+        "Key": "UnspecifiedSport",
+        "STId": -1,
+        "STKey": "none",
+        "MCId": 1,
+        "Name": "Unspecified sport",
+        "PhraseID": "TXT_UNSPECIFIED_SPORT",
+        "Icons": [
+            "0xf001",
+            "0xe001"
+        ]
+    }
+]
