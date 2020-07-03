@@ -8,6 +8,7 @@ const getExerciseList = () => {
 
 const filterExerciseListItemContent = ({
   activityId,
+  workoutKey,
   startTime,
   totalTime,
   totalDistance,
@@ -30,6 +31,7 @@ const filterExerciseListItemContent = ({
 
   return {
     activityId,
+    workoutKey,
     startTime,
     totalTime,
     totalDistance,
