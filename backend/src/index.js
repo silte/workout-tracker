@@ -5,7 +5,7 @@ const app = express();
 const exerciseRouter = require("./routes/exercise");
 
 const HOSTNAME = "127.0.0.1";
-const PORT = 3000;
+const PORT = 4000;
 
 app.get("/", (req, res) => res.send("<h1>Custom suunto app backend</h1>"));
 
