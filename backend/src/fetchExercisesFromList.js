@@ -9,15 +9,14 @@ const { getExerciseEndpoint } = require("./endpoints");
 const FETCH_INTERVAL_MS = 1000;
 
 const init = (apiToken) => {
-  const exerciseListfileLocation = `${DATA_DIR}/${EXERCISE_LIST_FILENAME}`;
-  if (!fs.existsSync(exerciseListfileLocation)) {
+  if (!fs.existsSync(EXERCISE_LIST_FILENAME)) {
     console.log(
       "Excercise list is required before you can fetch excercises.\n"
     );
     process.exit();
   }
 
-  const { payload: excerciseList } = readJson(exerciseListfileLocation);
+  const { payload: excerciseList } = readJson(EXERCISE_LIST_FILENAME);
   console.log(
     `Fetching ${excerciseList.length} excercises with api token ${apiToken}`
   );

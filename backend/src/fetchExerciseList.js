@@ -9,8 +9,7 @@ const init = async (apiToken) => {
   ensureDataDirectoryExists();
 
   const endpoint = getExerciseListEndpoint(apiToken);
-  const filename = `${DATA_DIR}/${EXERCISE_LIST_FILENAME}`;
-  await downloadJson(filename, endpoint);
+  await downloadJson(EXERCISE_LIST_FILENAME, endpoint);
 };
 
 const ensureDataDirectoryExists = () =>
