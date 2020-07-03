@@ -18,10 +18,15 @@ const filterExerciseListItemContent = ({
   hrdata,
   ...otherData
 }) => {
-  const { hrmax, avg: hravg } = hrdata;
+  const summaryExtension =
+    typeof extensions !== "undefined"
+      ? extensions.find((extension) => extension.type === "SummaryExtension")
+      : {};
+
+  const { hrmax, avg: hravg } = typeof hrdata !== "undefined" ? hrdata : {};
+
   const { avgSpeed, avgCadence, feeling } =
-    typeof extensions !== "undefined" &&
-    extensions.find((extension) => extension.type === "SummaryExtension");
+    typeof summaryExtension !== "undefined" ? summaryExtension : {};
 
   return {
     activityId,
