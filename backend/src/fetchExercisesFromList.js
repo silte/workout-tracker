@@ -1,7 +1,7 @@
 const fs = require("fs");
 const https = require("https");
 
-const { readJson, downloadJson } = require("./jsonHandler");
+const { readJson, downloadJson } = require("./jsonHelper");
 
 const { DATA_DIR, EXERCISE_LIST_FILENAME } = require("./filesNames");
 const { getExerciseEndpoint } = require("./endpoints");

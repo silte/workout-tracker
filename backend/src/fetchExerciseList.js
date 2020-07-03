@@ -2,7 +2,7 @@ const fs = require("fs");
 
 const { DATA_DIR, EXERCISE_LIST_FILENAME } = require("./filesNames");
 const { getExerciseListEndpoint } = require("./endpoints");
-const { downloadJson } = require("./jsonHandler");
+const { downloadJson } = require("./jsonHelper");
 
 const init = async (apiToken) => {
   console.log(`Fetching exercise list with api token: ${apiToken}`);
