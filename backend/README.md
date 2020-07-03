@@ -10,8 +10,20 @@ Open https://www.sports-tracker.com/dashboard and login. After that run followin
 ### Fetch data
 
 Run following command
-`node updateExerciseData.js YOUR-API-TOKEN`
+`npm run update-exercise-data YOUR-API-TOKEN`
 
 ## Rest server
 
-@TODO
+Work in progress
+
+### Before start
+
+Install dependencies `npm install`
+
+### Production server
+
+`npm start`
+
+### Devlopment server
+
+`npm run start-dev`
