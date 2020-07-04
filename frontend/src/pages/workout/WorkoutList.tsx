@@ -7,7 +7,7 @@ import { Spacer } from '../../components/spacer/spacer';
 import { WorkoutItem } from './WorkoutItem';
 
 export const WorkoutList = ({ workoutList }: IWorkoutList) => (
-  <Container medium className="workout-list">
+  <Container small className="workout-list">
     <Spacer large>
       <Heading headingLevel={1} className="workout-list__title">
         Workout list

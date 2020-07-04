@@ -1,0 +1,39 @@
+@import "lib";
+
+.workout-list {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.workout-item {
+  background-color: $color-gray-1;
+  border-radius: 6px;
+  border: 1px solid $color-gray-2;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: $spacing;
+  white-space: nowrap;
+}
+
+.workout-data {
+  display: grid;
+  grid-column-gap: $spacing-medium;
+  grid-template-columns: 100px minmax(200px, 250px) repeat(2, 125px);
+  justify-content: space-between;
+  list-style: none;
+}
+
+.workout-data__item {
+  display: flex;
+  flex-direction: column;
+}
+
+.workout-item__label {
+  @include font-size(14px);
+}
+
+.workout-item__type {
+  @include font-size(18px);
+  font-weight: bold;
+  margin: 0;
+}
