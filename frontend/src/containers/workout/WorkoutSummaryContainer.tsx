@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { WorkoutSummary } from "../../pages/workout/WorkoutSummary";
-import { WORKOUT_LIST_ENDPOINT } from "../../constants/endpoints";
+import React, { useState, useEffect } from 'react';
+import { WorkoutSummary } from '../../pages/workout/WorkoutSummary';
+import { WORKOUT_LIST_ENDPOINT } from '../../constants/endpoints';
 
 export const WorkoutSummaryContainer = () => {
-  const [workoutList, setWorkoutList] = useState([]);
-  const [filterStartDate, setFilterStartDate] = useState(null);
-  const [filterEndDate, setFilterEndDate] = useState(null);
+  const [workoutList, setWorkoutList] = useState<IWorkoutSummaryData[]>([]);
+  const [filterStartDate, setFilterStartDate] = useState<number>(NaN);
+  const [filterEndDate, setFilterEndDate] = useState<number>(NaN);
 
   useEffect(() => {
     const fetchWorkoutList = async () => {
@@ -18,8 +18,7 @@ export const WorkoutSummaryContainer = () => {
 
   const filteredWorkoutList = workoutList.filter(
     ({ startTime }) =>
-      (filterStartDate == null || filterStartDate < startTime) &&
-      (filterEndDate == null || filterEndDate > startTime)
+      (filterStartDate == NaN || filterStartDate < startTime) && (filterEndDate == NaN || filterEndDate > startTime),
   );
 
   return (

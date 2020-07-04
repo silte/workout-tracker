@@ -2,7 +2,7 @@ import React from 'react';
 
 import './container.scss';
 
-const Container = ({ children, className = '', small, medium }) => {
+export const Container = ({ children, className = '', small, medium }: IContainer) => {
   const classes = ['container', className];
 
   small && classes.push('container--small');
@@ -11,4 +11,9 @@ const Container = ({ children, className = '', small, medium }) => {
   return <div className={classes.join(' ')}>{children}</div>;
 };
 
-export default Container;
+interface IContainer {
+  children: any;
+  className?: string;
+  small?: boolean;
+  medium?: boolean;
+}
