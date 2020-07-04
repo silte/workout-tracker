@@ -1,17 +1,17 @@
-const fs = require("fs");
-const https = require("https");
+import fs from "fs";
+import https from "https";
 
-const readJson = (filename) => {
+export const readJson = (filename: string) => {
   let rawdata = fs.readFileSync(filename);
-  return JSON.parse(rawdata);
+  return JSON.parse(rawdata.toString());
 };
 
-const writeJson = (filename, data) => {
+export const writeJson = (filename: string, data: JSON) => {
   let dataStr = JSON.stringify(data);
   fs.writeFileSync(filename, dataStr);
 };
 
-const downloadJson = (filename, endpoint) =>
+export const downloadJson = (filename: string, endpoint: string) =>
   new Promise((resolve, reject) => {
     const file = fs.createWriteStream(filename);
     https
@@ -24,14 +24,7 @@ const downloadJson = (filename, endpoint) =>
       })
       .on("error", function (err) {
         // Handle errors
-        fs.unlink(filename);
         console.log(err.message);
-        reject();
+        fs.unlink(filename, reject);
       });
   });
-
-module.exports = {
-  readJson,
-  writeJson,
-  downloadJson,
-};
