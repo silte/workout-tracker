@@ -7,18 +7,18 @@ import Heading from '../../components/heading/heading';
 import Listing from '../../components/listing/listing';
 import Spacer from '../../components/spacer/spacer';
 
-export const ExerciseList = ({ exerciseList }) => (
-  <Container medium className="exercise-list">
+export const WorkoutList = ({ workoutList }) => (
+  <Container medium className="workout-list">
     <Spacer large>
-      <Heading headingLevel="1" className="exercise-list__title">
-        Exercise list
+      <Heading headingLevel="1" className="workout-list__title">
+        Workout list
       </Heading>
-      <Listing arrayOfContent={exerciseList} listingComponent={Exercise} keyFieldName="workoutKey" />
+      <Listing arrayOfContent={workoutList} listingComponent={Workout} keyFieldName="workoutKey" />
     </Spacer>
   </Container>
 );
 
-const Exercise = ({
+const Workout = ({
   activityId,
   workoutKey,
   startTime,

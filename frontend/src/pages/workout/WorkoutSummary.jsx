@@ -7,17 +7,17 @@ import Heading from '../../components/heading/heading';
 import Listing from '../../components/listing/listing';
 import Spacer from '../../components/spacer/spacer';
 
-export const ExerciseSummary = ({ exerciseList, setFilterStartDate, setFilterEndDate }) => {
+export const WorkoutSummary = ({ workoutList, setFilterStartDate, setFilterEndDate }) => {
   const onChangeFilterStartDate = ({ target: { value } }) =>
     setFilterStartDate(value !== '' ? new Date(value).getTime() : null);
   const onChangeFilterEndDate = ({ target: { value } }) =>
     setFilterEndDate(value !== '' ? new Date(value).getTime() : null);
 
   return (
-    <Container medium className="exercise-summary">
+    <Container medium className="workout-summary">
       <Spacer large>
-        <Heading headingLevel="1" className="exercise-summary__title">
-          Exercise summary
+        <Heading headingLevel="1" className="workout-summary__title">
+          Workout summary
         </Heading>
         <Heading headingLevel="3">Filters</Heading>
         <label>
@@ -29,13 +29,13 @@ export const ExerciseSummary = ({ exerciseList, setFilterStartDate, setFilterEnd
           End date:
           <input type="date" onChange={onChangeFilterEndDate} />
         </label>
-        <Listing arrayOfContent={exerciseList} listingComponent={Exercise} keyFieldName="workoutKey" />
+        <Listing arrayOfContent={workoutList} listingComponent={Workout} keyFieldName="workoutKey" />
       </Spacer>
     </Container>
   );
 };
 
-const Exercise = ({
+const Workout = ({
   activityId,
   startTime,
   totalTime,
