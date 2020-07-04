@@ -1,2 +1,2 @@
 export const DATA_DIR: string = "./data";
-export const EXERCISE_LIST_FILENAME: string = `${DATA_DIR}/exercise-list.json`;
+export const WORKOUT_LIST_FILENAME: string = `${DATA_DIR}/workout-list.json`;

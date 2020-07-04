@@ -10,7 +10,7 @@ import profileRoutes from "./routes/profile-route";
 import fileExists from "./utils/fileExists";
 import errorHandler from "./routes/middlewares/errorHandler";
 import authenticationCheck from "./routes/middlewares/authenticationCheck";
-import { exerciseRouter } from "./routes/exercise";
+import { workoutRouter } from "./routes/workout";
 
 
 const REACT_APP_PATH = "/static/react-app/";
@@ -34,7 +34,7 @@ app.use("/api/*", authenticationCheck);
 // set up routes
 app.use("/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
-app.use("/api/exercise", exerciseRouter);
+app.use("/api/workout", workoutRouter);
 
 const reactFrontendExists = fileExists(
   `${__dirname}/../${REACT_APP_PATH}index.html`

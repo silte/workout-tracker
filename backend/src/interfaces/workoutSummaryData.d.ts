@@ -1,4 +1,4 @@
-interface IExerciseSummaryData {
+interface IWorkoutSummaryData {
   activityId: number;
   workoutKey: string;
   startTime: number;

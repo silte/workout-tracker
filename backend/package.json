@@ -13,7 +13,7 @@
     "lint": "eslint src/**/*.ts{,x}",
     "test": "jest --silent --runInBand --config ./jest.config.json --forceExit",
     "test:watch": "npm run test -- --watch",
-    "update-exercise-data": "tsc && node src/updateExerciseData.js"
+    "update-workout-data": "tsc && node src/updateWorkoutData.js"
   },
   "author": "",
   "license": "ISC",
