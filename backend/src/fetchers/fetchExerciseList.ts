@@ -1,10 +1,10 @@
-const fs = require("fs");
+import fs from "fs";
 
-const { DATA_DIR, EXERCISE_LIST_FILENAME } = require("../constants/filesNames");
-const { getExerciseListEndpoint } = require("../constants/endpoints");
-const { downloadJson } = require("../utils/jsonHelper");
+import { getExerciseListEndpoint } from "../constants/endpoints";
+import { EXERCISE_LIST_FILENAME, DATA_DIR } from "../constants/filesNames";
+import { downloadJson } from "../utils/jsonHelper";
 
-const init = async (apiToken) => {
+export const fetchExerciseList = async (apiToken: string) => {
   console.log(`Fetching exercise list with api token: ${apiToken}`);
   ensureDataDirectoryExists();
 
@@ -14,5 +14,3 @@ const init = async (apiToken) => {
 
 const ensureDataDirectoryExists = () =>
   !fs.existsSync(DATA_DIR) && fs.mkdirSync(DATA_DIR);
-
-module.exports = init;

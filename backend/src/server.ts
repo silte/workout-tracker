@@ -10,6 +10,8 @@ import profileRoutes from "./routes/profile-route";
 import fileExists from "./utils/fileExists";
 import errorHandler from "./routes/middlewares/errorHandler";
 import authenticationCheck from "./routes/middlewares/authenticationCheck";
+import { exerciseRouter } from "./routes/exercise";
+
 
 const REACT_APP_PATH = "/static/react-app/";
 const app = express();
@@ -32,6 +34,7 @@ app.use("/api/*", authenticationCheck);
 // set up routes
 app.use("/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
+app.use("/api/exercise", exerciseRouter);
 
 const reactFrontendExists = fileExists(
   `${__dirname}/../${REACT_APP_PATH}index.html`
@@ -46,7 +49,7 @@ if (reactFrontendExists) {
   // eslint-disable-next-line no-console
   console.log("React frontend not found, running developend frontpage.");
   app.get("*", (req, res) =>
-    res.send("<h1>passport-express-react-demo developend backend</h1>")
+    res.send("<h1>Custom suunto app developend backend</h1>")
   );
 }
 

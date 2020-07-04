@@ -1,14 +1,11 @@
-const fs = require("fs");
-const https = require("https");
-
-const { readJson, downloadJson } = require("../utils/jsonHelper");
-
-const { DATA_DIR, EXERCISE_LIST_FILENAME } = require("../constants/filesNames");
-const { getExerciseEndpoint } = require("../constants/endpoints");
+import fs from "fs";
+import { EXERCISE_LIST_FILENAME, DATA_DIR } from "../constants/filesNames";
+import { readJson, downloadJson } from "../utils/jsonHelper";
+import { getExerciseEndpoint } from "../constants/endpoints";
 
 const FETCH_INTERVAL_MS = 1000;
 
-const init = (apiToken) => {
+export const fetchExercisesFromList = (apiToken: string) => {
   if (!fs.existsSync(EXERCISE_LIST_FILENAME)) {
     console.log(
       "Excercise list is required before you can fetch excercises.\n"
@@ -24,8 +21,8 @@ const init = (apiToken) => {
 };
 
 const fetchExcercises = (
-  excerciseList,
-  apiToken,
+  excerciseList: IWorkoutListItem[],
+  apiToken: string,
   iterator = 0,
   downloaded = 0,
   cached = 0
@@ -40,7 +37,6 @@ const fetchExcercises = (
     downloadJson(filename, endpoint);
     downloaded++;
   } else {
-    // console.log(`File "${filename}" already found, skip downloading`);
     sleepTime = 0;
     cached++;
   }
@@ -62,5 +58,3 @@ const fetchExcercises = (
     );
   }
 };
-
-module.exports = init;
