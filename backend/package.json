@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsc && node build/index.js",
     "start-dev": "nodemon",
-    "update-exercise-data": "tsc && node src/updateExerciseData.js",
+    "update-workout-data": "tsc && node src/updateWorkoutData.js",
     "tsc": "tsc"
   },
   "author": "",

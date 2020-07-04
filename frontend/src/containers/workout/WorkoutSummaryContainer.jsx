@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { WorkoutSummary } from '../../pages/workout/WorkoutSummary';
-import { EXCERCISE_LIST_ENDPOINT } from '../../constants/endpoints';
+import React, { useState, useEffect } from "react";
+import { WorkoutSummary } from "../../pages/workout/WorkoutSummary";
+import { WORKOUT_LIST_ENDPOINT } from "../../constants/endpoints";
 
 export const WorkoutSummaryContainer = () => {
   const [workoutList, setWorkoutList] = useState([]);
@@ -9,7 +9,7 @@ export const WorkoutSummaryContainer = () => {
 
   useEffect(() => {
     const fetchWorkoutList = async () => {
-      const rawData = await fetch(EXCERCISE_LIST_ENDPOINT);
+      const rawData = await fetch(WORKOUT_LIST_ENDPOINT);
       const jsonData = await rawData.json();
       setWorkoutList(jsonData);
     };
@@ -18,7 +18,8 @@ export const WorkoutSummaryContainer = () => {
 
   const filteredWorkoutList = workoutList.filter(
     ({ startTime }) =>
-      (filterStartDate == null || filterStartDate < startTime) && (filterEndDate == null || filterEndDate > startTime),
+      (filterStartDate == null || filterStartDate < startTime) &&
+      (filterEndDate == null || filterEndDate > startTime)
   );
 
   return (

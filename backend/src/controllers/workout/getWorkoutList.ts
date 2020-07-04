@@ -1,14 +1,14 @@
 import { readJson } from "../../utils/jsonHelper";
-import { EXERCISE_LIST_FILENAME } from "../../constants/filesNames";
+import { WORKOUT_LIST_FILENAME } from "../../constants/filesNames";
 
-export const getExerciseList = () => {
-  const allExerciseListData: IWorkoutList = readJson(EXERCISE_LIST_FILENAME);
-  return allExerciseListData.payload.map(filterExerciseListItemContent);
+export const getWorkoutList = () => {
+  const allWorkoutListData: IWorkoutList = readJson(WORKOUT_LIST_FILENAME);
+  return allWorkoutListData.payload.map(filterWorkoutListItemContent);
 };
 
-const filterExerciseListItemContent = (
+const filterWorkoutListItemContent = (
   workout: IWorkoutListItem
-): IExerciseSummaryData => {
+): IWorkoutSummaryData => {
   const {
     extensions = [],
     hrdata = <IHrdata>{},

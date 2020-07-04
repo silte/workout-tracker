@@ -1,1 +1,1 @@
-export const EXCERCISE_LIST_ENDPOINT = "/api/exercise/list";
+export const WORKOUT_LIST_ENDPOINT = "/api/workout/list";

@@ -1,5 +1,5 @@
-import { fetchExercisesFromList } from "./fetchers/fetchExercisesFromList";
-import { fetchExerciseList } from "./fetchers/fetchExerciseList";
+import { fetchWorkoutsFromList } from "./fetchers/fetchWorkoutsFromList";
+import { fetchWorkoutList } from "./fetchers/fetchWorkoutList";
 
 const init = async () => {
   const customArgs = process.argv.slice(2);
@@ -13,8 +13,8 @@ const init = async () => {
   }
   const [apiToken] = customArgs;
 
-  await fetchExerciseList(apiToken);
-  fetchExercisesFromList(apiToken);
+  await fetchWorkoutList(apiToken);
+  fetchWorkoutsFromList(apiToken);
 };
 
 init();

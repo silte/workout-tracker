@@ -1,6 +1,6 @@
-# Backend for custom app to analyze your Suunto / Sports-tracker exercise data
+# Backend for custom app to analyze your Suunto / Sports-tracker workout data
 
-## Fetch your exercise data from Suunto / Sports-tracker API
+## Fetch your workout data from Suunto / Sports-tracker API
 
 ### Get your api token
 
@@ -10,7 +10,7 @@ Open https://www.sports-tracker.com/dashboard and login. After that run followin
 ### Fetch data
 
 Run following command
-`npm run update-exercise-data YOUR-API-TOKEN`
+`npm run update-workout-data YOUR-API-TOKEN`
 
 ## Rest server
 
