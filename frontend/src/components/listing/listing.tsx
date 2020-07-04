@@ -2,7 +2,7 @@ import React from 'react';
 
 import './listing.scss';
 
-const Listing = ({ listingComponent, arrayOfContent, className = '', col2, col3, keyFieldName }) => {
+export const Listing = ({ listingComponent, arrayOfContent, className = '', col2, col3, keyFieldName }: IListing) => {
   const ListingComponent = listingComponent;
   const classes = ['listing', className];
 
@@ -20,4 +20,11 @@ const Listing = ({ listingComponent, arrayOfContent, className = '', col2, col3,
   );
 };
 
-export default Listing;
+interface IListing {
+  className?: string;
+  listingComponent: any;
+  arrayOfContent: any[];
+  col2?: boolean;
+  col3?: boolean;
+  keyFieldName: string;
+}

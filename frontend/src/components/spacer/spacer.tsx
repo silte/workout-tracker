@@ -2,7 +2,7 @@ import React from 'react';
 
 import './spacer.scss';
 
-const Spacer = ({ children, large, className = '' }) => {
+export const Spacer = ({ children, large, className = '' }: ISpacer) => {
   const classes = ['spacer', className];
 
   large && classes.push('spacer--large');
@@ -10,4 +10,8 @@ const Spacer = ({ children, large, className = '' }) => {
   return <div className={classes.join(' ')}>{children}</div>;
 };
 
-export default Spacer;
+interface ISpacer {
+  children: any;
+  className?: string;
+  large: boolean;
+}
