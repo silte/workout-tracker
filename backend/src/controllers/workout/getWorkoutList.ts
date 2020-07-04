@@ -6,22 +6,18 @@ export const getWorkoutList = () => {
   return allWorkoutListData.payload.map(filterWorkoutListItemContent);
 };
 
-const filterWorkoutListItemContent = (
-  workout: IWorkoutListItem
-): IWorkoutSummaryData => {
-  const {
-    extensions = [],
-    hrdata = <IHrdata>{},
-    activityId,
-    workoutKey,
-    startTime,
-    totalTime,
-    totalDistance,
-    totalAscent,
-    totalDescent,
-    maxSpeed,
-  } = workout;
-
+const filterWorkoutListItemContent = ({
+  extensions = [],
+  hrdata = <IHrdata>{},
+  activityId,
+  workoutKey,
+  startTime,
+  totalTime,
+  totalDistance,
+  totalAscent,
+  totalDescent,
+  maxSpeed,
+}: IWorkoutListItem): IWorkoutSummaryData => {
   const summaryExtension = extensions.find(
     (extension) => extension.type === "SummaryExtension"
   );
