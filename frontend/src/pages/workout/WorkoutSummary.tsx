@@ -13,7 +13,7 @@ export const WorkoutSummary = ({ workoutList, setFilterStartDate, setFilterEndDa
     setFilterEndDate(value !== '' ? new Date(value).getTime() : NaN);
 
   return (
-    <Container medium className="workout-summary">
+    <Container small className="workout-summary">
       <Spacer large>
         <Heading headingLevel={1} className="workout-summary__title">
           Workout summary
