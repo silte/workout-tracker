@@ -1,21 +1,31 @@
 @import "lib";
 
 .spacer {
-  padding-top: $spacing-medium;
   padding-bottom: $spacing-medium;
+  padding-top: $spacing-medium;
 
   @media screen and (min-width: $bp-wide) {
-    padding-top: $spacing-extra-large;
     padding-bottom: $spacing-extra-large;
+    padding-top: $spacing-extra-large;
+  }
+}
+
+.spacer--small {
+  padding-bottom: $spacing;
+  padding-top: $spacing;
+
+  @media screen and (min-width: $bp-wide) {
+    padding-bottom: $spacing-medium;
+    padding-top: $spacing-medium;
   }
 }
 
 .spacer--large {
-  padding-top: $spacing-extra-large;
   padding-bottom: $spacing-extra-large;
+  padding-top: $spacing-extra-large;
 
   @media screen and (min-width: $bp-wide) {
-    padding-top: $spacing-extra-large * 2;
     padding-bottom: $spacing-extra-large * 2;
+    padding-top: $spacing-extra-large * 2;
   }
 }
