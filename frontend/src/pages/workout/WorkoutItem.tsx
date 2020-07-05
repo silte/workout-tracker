@@ -7,12 +7,14 @@ import './WorkoutItem.scss';
 
 export const WorkoutItem = ({ activityId, startTime, totalTime, totalDistance }: IWorkoutSummaryData) => (
   <article className="workout-item">
-    <ul className="workout-data">
-      <WorkoutDataItem label="Activity">{getActivityName(activityId)}</WorkoutDataItem>
-      <WorkoutDataItem label="Date">{unixtimeToDate(startTime)}</WorkoutDataItem>
-      <WorkoutDataItem label="Total time">{secondsToHms(totalTime)}</WorkoutDataItem>
-      <WorkoutDataItem label="Distance">{metresToKilometres(totalDistance)}</WorkoutDataItem>
-    </ul>
+    <a href="#" className="workout-item__link">
+      <ul className="workout-data">
+        <WorkoutDataItem label="Activity">{getActivityName(activityId)}</WorkoutDataItem>
+        <WorkoutDataItem label="Date">{unixtimeToDate(startTime)}</WorkoutDataItem>
+        <WorkoutDataItem label="Total time">{secondsToHms(totalTime)}</WorkoutDataItem>
+        <WorkoutDataItem label="Distance">{metresToKilometres(totalDistance)}</WorkoutDataItem>
+      </ul>
+    </a>
   </article>
 );
 

@@ -5,14 +5,23 @@
   overflow-y: hidden;
 }
 
-.workout-item {
+.workout-item__link {
   background-color: $color-gray-1;
   border-radius: 6px;
   border: 1px solid $color-gray-2;
+  color: initial;
+  display: block;
   overflow-x: auto;
   overflow-y: hidden;
   padding: $spacing;
   white-space: nowrap;
+
+  &:hover,
+  &:focus {
+    background-color: $color-gray-2;
+    border-color: $color-gray-3;
+    color: initial;
+  }
 }
 
 .workout-data {
@@ -30,6 +39,7 @@
 
 .workout-item__label {
   @include font-size(14px);
+  opacity: .75;
 }
 
 .workout-item__type {
