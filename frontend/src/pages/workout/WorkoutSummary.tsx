@@ -1,33 +1,38 @@
-import React from 'react';
+import React from "react";
 
-import { Container } from '../../components/container/container';
-import { Heading } from '../../components/heading/heading';
-import { Listing } from '../../components/listing/listing';
-import { Spacer } from '../../components/spacer/spacer';
-import { WorkoutItem } from './WorkoutItem';
-import { secondsToHms } from '../../utils/timeConverter';
-import { metresToKilometres, getRoundedMetres } from '../../utils/distanceConverter';
+import { Container } from "../../components/container/container";
+import { Heading } from "../../components/heading/heading";
+import { Listing } from "../../components/listing/listing";
+import { Spacer } from "../../components/spacer/spacer";
+import { WorkoutItem } from "./WorkoutItem";
+import { secondsToHms } from "../../utils/timeConverter";
+import { getActivityName } from "../../utils/activityInfo";
+import {
+  metresToKilometres,
+  getRoundedMetres,
+} from "../../utils/distanceConverter";
 
 interface IWorkoutSummary {
   workoutList: IWorkoutSummaryData[];
+  workoutSummaryData: ISummaryData[];
   setFilterStartDate: any;
   setFilterEndDate: any;
 }
 
-interface ISummaryData {
-  totalDuration: number;
-  totalDistance: number;
-  totalAscent: number;
-}
-
-export const WorkoutSummary = ({ workoutList, setFilterStartDate, setFilterEndDate }: IWorkoutSummary) => {
+export const WorkoutSummary = ({
+  workoutList,
+  workoutSummaryData,
+  setFilterStartDate,
+  setFilterEndDate,
+}: IWorkoutSummary) => {
   const onChangeFilterStartDate = ({ target: { value } }: { target: any }) =>
-    setFilterStartDate(value !== '' ? new Date(value).getTime() : NaN);
+    setFilterStartDate(value !== "" ? new Date(value).getTime() : NaN);
   const onChangeFilterEndDate = ({ target: { value } }: { target: any }) =>
-    setFilterEndDate(value !== '' ? new Date(value).getTime() : NaN);
+    setFilterEndDate(value !== "" ? new Date(value).getTime() : NaN);
 
   const workoutCount = workoutList.length;
 
+  if (workoutCount === 0) {
     return (
       <div className="workout-summary">
         <Container small>
@@ -48,8 +53,13 @@ export const WorkoutSummary = ({ workoutList, setFilterStartDate, setFilterEndDa
       <Container small>
         <Spacer large>
           <Spacer small>
-            <Heading headingLevel={1} className="workout-summary__title" label="Summary of">
-              {workoutCount} {workoutCount > 1 || workoutCount === 0 ? 'Workouts' : 'Workout'}
+            <Heading
+              headingLevel={1}
+              className="workout-summary__title"
+              label="Summary of"
+            >
+              {workoutCount}{" "}
+              {workoutCount > 1 || workoutCount === 0 ? "Workouts" : "Workout"}
             </Heading>
             <Heading headingLevel={3}>Filters</Heading>
             <label>
@@ -63,10 +73,17 @@ export const WorkoutSummary = ({ workoutList, setFilterStartDate, setFilterEndDa
             </label>
           </Spacer>
           <Spacer small>
-            <WorkoutSummaryData workoutList={workoutList} />
+            <WorkoutTotalSummary workoutSummaryData={workoutSummaryData} />
+          </Spacer>{" "}
+          <Spacer small>
+            <WorkoutAcivitySummary workoutSummaryData={workoutSummaryData} />
           </Spacer>
           <Spacer small>
-            <Listing arrayOfContent={workoutList} listingComponent={WorkoutItem} keyFieldName="workoutKey" />
+            <Listing
+              arrayOfContent={workoutList}
+              listingComponent={WorkoutItem}
+              keyFieldName="workoutKey"
+            />
           </Spacer>
         </Spacer>
       </Container>
@@ -74,28 +91,49 @@ export const WorkoutSummary = ({ workoutList, setFilterStartDate, setFilterEndDa
   );
 };
 
-const WorkoutSummaryData = ({ workoutList }: { workoutList: IWorkoutSummaryData[] }) => {
-  const workoutSummaryData = workoutList.reduce(
-    ({ totalDuration, totalDistance, totalAscent }: ISummaryData, currentValue) => {
-      return {
-        totalDuration: totalDuration + currentValue.totalTime,
-        totalDistance: totalDistance + currentValue.totalDistance,
-        totalAscent: totalAscent + currentValue.totalAscent,
-      };
-    },
-    { totalDuration: 0, totalDistance: 0, totalAscent: 0 },
+const WorkoutAcivitySummary = ({
+  workoutSummaryData,
+}: {
+  workoutSummaryData: ISummaryData[];
+}) => (
+  <ul>
+    {workoutSummaryData.map(
+      ({ activityId, totalDistance, totalDuration, totalAscent }) => (
+        <li key={activityId}>
+          {getActivityName(activityId)}: duration {secondsToHms(totalDuration)},
+          distance {metresToKilometres(totalDistance)}, ascent{" "}
+          {getRoundedMetres(totalAscent)}
+        </li>
+      )
+    )}
+  </ul>
+);
+
+const WorkoutTotalSummary = ({
+  workoutSummaryData,
+}: {
+  workoutSummaryData: ISummaryData[];
+}) => {
+  const workoutTotalSummaryData = workoutSummaryData.reduce(
+    ({ totalAscent, totalDuration, totalDistance }, current) => ({
+      activityId: -1,
+      totalAscent: totalAscent + current.totalAscent,
+      totalDuration: totalDuration + current.totalDuration,
+      totalDistance: totalDistance + current.totalDistance,
+    }),
+    { totalAscent: 0, totalDuration: 0, totalDistance: 0 } as ISummaryData
   );
 
   return (
     <div className="workout-summary-data">
       <Heading headingLevel={2} label="Duration">
-        {secondsToHms(workoutSummaryData.totalDuration)}
+        {secondsToHms(workoutTotalSummaryData.totalDuration)}
       </Heading>
       <Heading headingLevel={2} label="Distance">
-        {metresToKilometres(workoutSummaryData.totalDistance)}
+        {metresToKilometres(workoutTotalSummaryData.totalDistance)}
       </Heading>
       <Heading headingLevel={2} label="Ascent">
-        {getRoundedMetres(workoutSummaryData.totalAscent)}
+        {getRoundedMetres(workoutTotalSummaryData.totalAscent)}
       </Heading>
     </div>
   );
