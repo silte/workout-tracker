@@ -22,11 +22,58 @@ export const WorkoutSummaryContainer = () => {
       (isNaN(filterEndDate) || filterEndDate > startTime)
   );
 
+  const workoutSummaryData =
+    filteredWorkoutList.length > 0 ? parseSummaryData(filteredWorkoutList) : [];
+
   return (
     <WorkoutSummary
       workoutList={filteredWorkoutList}
+      workoutSummaryData={workoutSummaryData}
       setFilterStartDate={setFilterStartDate}
       setFilterEndDate={setFilterEndDate}
     />
   );
 };
+
+const parseSummaryData = (workoutList: IWorkoutSummaryData[]) =>
+  workoutList
+    .reduce(
+      (
+        previousValue: ISummaryData[],
+        {
+          activityId: currentActivityId,
+          totalTime: currentTime,
+          totalDistance: currentDistance,
+          totalAscent: currentAscent,
+        }
+      ) => {
+        const currentActivitySummary = previousValue.find(
+          ({ activityId }) => activityId === currentActivityId
+        );
+
+        const currectActivityTotal = {
+          activityId: currentActivityId,
+          totalDistance:
+            typeof currentActivitySummary !== "undefined"
+              ? currentActivitySummary.totalDistance + currentDistance
+              : currentDistance,
+          totalDuration:
+            typeof currentActivitySummary !== "undefined"
+              ? currentActivitySummary.totalDuration + currentTime
+              : currentTime,
+          totalAscent:
+            typeof currentActivitySummary !== "undefined"
+              ? currentActivitySummary.totalAscent + currentAscent
+              : currentAscent,
+        };
+
+        return [
+          ...previousValue.filter(
+            ({ activityId }) => activityId !== currentActivityId
+          ),
+          { ...currectActivityTotal },
+        ];
+      },
+      [] as ISummaryData[]
+    )
+    .sort((a, b) => (a.totalDuration > b.totalDuration ? -1 : 1));
