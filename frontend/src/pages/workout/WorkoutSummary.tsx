@@ -28,6 +28,21 @@ export const WorkoutSummary = ({ workoutList, setFilterStartDate, setFilterEndDa
 
   const workoutCount = workoutList.length;
 
+    return (
+      <div className="workout-summary">
+        <Container small>
+          <Heading
+            headingLevel={1}
+            className="workout-summary__title"
+            label="Summary of"
+          >
+            Loading...
+          </Heading>
+        </Container>
+      </div>
+    );
+  }
+
   return (
     <div className="workout-summary">
       <Container small>
