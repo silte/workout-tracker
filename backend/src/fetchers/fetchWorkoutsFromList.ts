@@ -1,5 +1,8 @@
 import fs from "fs";
-import { WORKOUT_LIST_FILENAME, DATA_DIR } from "../constants/filesNames";
+import {
+  WORKOUT_LIST_FILENAME,
+  getWorkoutRawDataFilename,
+} from "../constants/filesNames";
 import { readJson, downloadJson } from "../utils/jsonHelper";
 import { getWorkoutEndpoint } from "../constants/endpoints";
 
@@ -31,7 +34,7 @@ const fetchWorkouts = (
   const { workoutKey: workoutId } = workoutList[iterator];
 
   const endpoint = getWorkoutEndpoint(workoutId, apiToken);
-  const filename = `${DATA_DIR}/${workoutId}.json`;
+  const filename = getWorkoutRawDataFilename(workoutId);
   if (!fs.existsSync(filename)) {
     console.log(`Downloading workout ${iterator + 1}/${workoutList.length}`);
     downloadJson(filename, endpoint);

@@ -1,4 +1,4 @@
-const getAltitudeStreamExtension = (workoutRawData: IWorkoutRawData) => {
+export const getAltitudeStreamExtension = (workoutRawData: IWorkoutRawData) => {
   const extension = workoutRawData.extensions.find(
     (extension) => extension.type === "AltitudeStreamExtension"
   );
@@ -6,7 +6,7 @@ const getAltitudeStreamExtension = (workoutRawData: IWorkoutRawData) => {
     ? <IBaseExtension>extension
     : <IBaseExtension>{};
 };
-const getCadenceStreamExtension = (workoutRawData: IWorkoutRawData) => {
+export const getCadenceStreamExtension = (workoutRawData: IWorkoutRawData) => {
   const extension = workoutRawData.extensions.find(
     (extension) => extension.type === "CadenceStreamExtension"
   );
@@ -14,7 +14,9 @@ const getCadenceStreamExtension = (workoutRawData: IWorkoutRawData) => {
     ? <IBaseExtension>extension
     : <IBaseExtension>{};
 };
-const getDistanceDeltaStreamExtension = (workoutRawData: IWorkoutRawData) => {
+export const getDistanceDeltaStreamExtension = (
+  workoutRawData: IWorkoutRawData
+) => {
   const extension = workoutRawData.extensions.find(
     (extension) => extension.type === "DistanceDeltaStreamExtension"
   );
@@ -22,7 +24,7 @@ const getDistanceDeltaStreamExtension = (workoutRawData: IWorkoutRawData) => {
     ? <IBaseExtension>extension
     : <IBaseExtension>{};
 };
-const getDistanceLapExtension = (workoutRawData: IWorkoutRawData) => {
+export const getDistanceLapExtension = (workoutRawData: IWorkoutRawData) => {
   const extension = workoutRawData.extensions.find(
     (extension) => extension.type === "DistanceLapExtension"
   );
@@ -30,7 +32,7 @@ const getDistanceLapExtension = (workoutRawData: IWorkoutRawData) => {
     ? <ILapExtension>extension
     : <ILapExtension>{};
 };
-const getFitnessExtension = (workoutRawData: IWorkoutRawData) => {
+export const getFitnessExtension = (workoutRawData: IWorkoutRawData) => {
   const extension = workoutRawData.extensions.find(
     (extension) => extension.type === "FitnessExtension"
   );
@@ -38,7 +40,7 @@ const getFitnessExtension = (workoutRawData: IWorkoutRawData) => {
     ? <IFitnessExtension>extension
     : <IFitnessExtension>{};
 };
-const getHeartRateExtension = (workoutRawData: IWorkoutRawData) => {
+export const getHeartRateExtension = (workoutRawData: IWorkoutRawData) => {
   const extension = workoutRawData.extensions.find(
     (extension) => extension.type === "HeartRateExtension"
   );
@@ -46,7 +48,9 @@ const getHeartRateExtension = (workoutRawData: IWorkoutRawData) => {
     ? <IHrExtension>extension
     : <IHrExtension>{};
 };
-const getHeartrateStreamExtension = (workoutRawData: IWorkoutRawData) => {
+export const getHeartrateStreamExtension = (
+  workoutRawData: IWorkoutRawData
+) => {
   const extension = workoutRawData.extensions.find(
     (extension) => extension.type === "HeartrateStreamExtension"
   );
@@ -54,7 +58,7 @@ const getHeartrateStreamExtension = (workoutRawData: IWorkoutRawData) => {
     ? <IBaseExtension>extension
     : <IBaseExtension>{};
 };
-const getIBIStreamExtension = (workoutRawData: IWorkoutRawData) => {
+export const getIBIStreamExtension = (workoutRawData: IWorkoutRawData) => {
   const extension = workoutRawData.extensions.find(
     (extension) => extension.type === "IBIStreamExtension"
   );
@@ -62,7 +66,7 @@ const getIBIStreamExtension = (workoutRawData: IWorkoutRawData) => {
     ? <IBaseExtension>extension
     : <IBaseExtension>{};
 };
-const getIntensityExtension = (workoutRawData: IWorkoutRawData) => {
+export const getIntensityExtension = (workoutRawData: IWorkoutRawData) => {
   const extension = workoutRawData.extensions.find(
     (extension) => extension.type === "IntensityExtension"
   );
@@ -70,7 +74,7 @@ const getIntensityExtension = (workoutRawData: IWorkoutRawData) => {
     ? <IIntensityExtension>extension
     : <IIntensityExtension>{};
 };
-const getLocationStreamExtension = (workoutRawData: IWorkoutRawData) => {
+export const getLocationStreamExtension = (workoutRawData: IWorkoutRawData) => {
   const extension = workoutRawData.extensions.find(
     (extension) => extension.type === "LocationStreamExtension"
   );
@@ -78,7 +82,9 @@ const getLocationStreamExtension = (workoutRawData: IWorkoutRawData) => {
     ? <ILocationExtension>extension
     : <ILocationExtension>{};
 };
-const getManualLapStreamExtension = (workoutRawData: IWorkoutRawData) => {
+export const getManualLapStreamExtension = (
+  workoutRawData: IWorkoutRawData
+) => {
   const extension = workoutRawData.extensions.find(
     (extension) => extension.type === "ManualLapStreamExtension"
   );
@@ -86,7 +92,7 @@ const getManualLapStreamExtension = (workoutRawData: IWorkoutRawData) => {
     ? <ILapExtension>extension
     : <ILapExtension>{};
 };
-const getMultisportMarker = (workoutRawData: IWorkoutRawData) => {
+export const getMultisportExtension = (workoutRawData: IWorkoutRawData) => {
   const extension = workoutRawData.extensions.find(
     (extension) => extension.type === "MultisportMarker"
   );
@@ -94,7 +100,7 @@ const getMultisportMarker = (workoutRawData: IWorkoutRawData) => {
     ? <IMultisportExtension>extension
     : <IMultisportExtension>{};
 };
-const getPauseMarkerExtension = (workoutRawData: IWorkoutRawData) => {
+export const getPauseMarkerExtension = (workoutRawData: IWorkoutRawData) => {
   const extension = workoutRawData.extensions.find(
     (extension) => extension.type === "PauseMarkerExtension"
   );
@@ -102,7 +108,7 @@ const getPauseMarkerExtension = (workoutRawData: IWorkoutRawData) => {
     ? <IPauseMarkerExtension>extension
     : <IPauseMarkerExtension>{};
 };
-const getPowerStreamExtension = (workoutRawData: IWorkoutRawData) => {
+export const getPowerStreamExtension = (workoutRawData: IWorkoutRawData) => {
   const extension = workoutRawData.extensions.find(
     (extension) => extension.type === "PowerStreamExtension"
   );
@@ -110,7 +116,7 @@ const getPowerStreamExtension = (workoutRawData: IWorkoutRawData) => {
     ? <IBaseExtension>extension
     : <IBaseExtension>{};
 };
-const getSpeedStreamExtension = (workoutRawData: IWorkoutRawData) => {
+export const getSpeedStreamExtension = (workoutRawData: IWorkoutRawData) => {
   const extension = workoutRawData.extensions.find(
     (extension) => extension.type === "SpeedStreamExtension"
   );
@@ -118,7 +124,7 @@ const getSpeedStreamExtension = (workoutRawData: IWorkoutRawData) => {
     ? <IBaseExtension>extension
     : <IBaseExtension>{};
 };
-const getSummaryExtension = (workoutRawData: IWorkoutRawData) => {
+export const getSummaryExtension = (workoutRawData: IWorkoutRawData) => {
   const extension = workoutRawData.extensions.find(
     (extension) => extension.type === "SummaryExtension"
   );
@@ -126,7 +132,9 @@ const getSummaryExtension = (workoutRawData: IWorkoutRawData) => {
     ? <ISummaryExtension>extension
     : <ISummaryExtension>{};
 };
-const getVerticalSpeedStreamExtension = (workoutRawData: IWorkoutRawData) => {
+export const getVerticalSpeedStreamExtension = (
+  workoutRawData: IWorkoutRawData
+) => {
   const extension = workoutRawData.extensions.find(
     (extension) => extension.type === "VerticalSpeedStreamExtension"
   );

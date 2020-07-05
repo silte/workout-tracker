@@ -12,4 +12,17 @@ interface IWorkoutSummaryData {
   avgSpeed: number;
   avgCadence: number;
   feeling: number;
+  energyConsumption: number;
+  multisportSummary?: IWorkoutMultisportSummaryData[];
+}
+
+interface IWorkoutMultisportSummaryData {
+  activityId: number;
+  duration: number;
+  distance: number;
+  ascent: number;
+  maxHr: number;
+  avgHr: number;
+  maxSpeed: number;
+  avgSpeed: number;
 }
