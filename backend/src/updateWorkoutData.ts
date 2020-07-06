@@ -14,7 +14,7 @@ const init = async () => {
   const [apiToken] = customArgs;
 
   await fetchWorkoutList(apiToken);
-  fetchWorkoutsFromList(apiToken);
+  await fetchWorkoutsFromList(apiToken);
 };
 
 init();

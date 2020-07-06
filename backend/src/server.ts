@@ -11,10 +11,13 @@ import fileExists from "./utils/fileExists";
 import errorHandler from "./routes/middlewares/errorHandler";
 import authenticationCheck from "./routes/middlewares/authenticationCheck";
 import { workoutRouter } from "./routes/workout";
+import { buildWorkoutSummaryDataCache } from "./cacheBuilder";
 
 
 const REACT_APP_PATH = "/static/react-app/";
 const app = express();
+
+buildWorkoutSummaryDataCache();
 
 app.use(
   cookieSession({
