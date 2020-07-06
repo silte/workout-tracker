@@ -35,6 +35,7 @@
   .col--2 &,
   .col--3 & {
     @media screen and (min-width: $bp-medium-wide) {
+      margin-bottom: $spacing-medium;
       width: calc(100% / 2 - #{$spacing});
     }
 

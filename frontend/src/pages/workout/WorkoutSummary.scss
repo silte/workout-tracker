@@ -1,0 +1,45 @@
+@import "lib";
+
+.workout-summary-data {
+  list-style: none;
+
+  &.workout-summary-data--total {
+    margin-bottom: $spacing;
+
+    @media screen and (min-width: $bp-medium-wide) {
+      margin-bottom: $spacing-medium;
+    }
+  }
+}
+
+.workout-summary-data__item {
+  background-color: $color-gray-1;
+  border-radius: 6px;
+  border: 1px solid $color-gray-2;
+  padding: $spacing-medium;
+
+  .workout-summary-data--total & {
+    background-color: $color-blue-1;
+
+    .heading {
+      margin-bottom: 0;
+      color: $color-white;
+    }
+
+    @media screen and (min-width: $bp-extra-wide) {
+      margin-bottom: 0;
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  .workout-summary-data--activity & {
+    .heading {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
