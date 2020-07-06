@@ -86,8 +86,3 @@ interface IHrdata {
   max: number;
   avg: number;
 }
-
-interface IPositionCoordinates {
-  x: number;
-  y: number;
-}
