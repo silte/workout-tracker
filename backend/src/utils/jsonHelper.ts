@@ -6,7 +6,7 @@ export const readJson = (filename: string) => {
   return JSON.parse(rawdata.toString());
 };
 
-export const writeJson = (filename: string, data: JSON) => {
+export const writeJson = (filename: string, data: object) => {
   let dataStr = JSON.stringify(data);
   fs.writeFileSync(filename, dataStr);
 };
