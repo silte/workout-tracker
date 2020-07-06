@@ -103,8 +103,3 @@ interface ITotalTimeOnRouteRanking {
   originalRanking: number;
   originalNumberOfWorkouts: number;
 }
-
-interface IPositionCoordinates {
-  x: number;
-  y: number;
-}
