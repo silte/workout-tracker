@@ -37,6 +37,7 @@ export const WorkoutSummaryContainer = () => {
       setFilterStartDate={setFilterStartDate}
       setFilterEndDate={setFilterEndDate}
       setIsMultisportExposed={setIsMultisportExposed}
+      isMultisportExposed={isMultisportExposed}
     />
   );
 };
