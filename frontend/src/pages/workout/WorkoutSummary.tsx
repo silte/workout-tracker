@@ -17,6 +17,7 @@ interface IWorkoutSummary {
   setFilterStartDate: any;
   setFilterEndDate: any;
   setIsMultisportExposed: any;
+  isMultisportExposed: boolean;
 }
 
 export const WorkoutSummary = ({
@@ -25,6 +26,7 @@ export const WorkoutSummary = ({
   setFilterStartDate,
   setFilterEndDate,
   setIsMultisportExposed,
+  isMultisportExposed,
 }: IWorkoutSummary) => {
   const onChangeFilterStartDate = ({ target: { value } }: { target: any }) =>
     setFilterStartDate(value !== '' ? new Date(value).getTime() : NaN);
@@ -69,11 +71,18 @@ export const WorkoutSummary = ({
               End date:
               <input type="date" onChange={onChangeFilterEndDate} />
             </label>
-            <button onClick={toggleMultisportExpose}>Toggle multisports</button>
           </Spacer>
         </Container>
         <Container>
           <Spacer small>
+            <div className="workout-summary__multisport">
+              <button
+                className={`workout-summary__toggle ${isMultisportExposed ? 'is-active' : ''}`}
+                onClick={toggleMultisportExpose}
+              >
+                Toggle multisports
+              </button>
+            </div>
             <WorkoutTotalSummary workoutSummaryData={workoutSummaryData} />
             <WorkoutAcivitySummary workoutSummaryData={workoutSummaryData} />
           </Spacer>
