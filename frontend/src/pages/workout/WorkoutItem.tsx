@@ -4,22 +4,23 @@ import { unixtimeToDate, secondsToHms } from '../../utils/timeConverter';
 import { metresToKilometres } from '../../utils/distanceConverter';
 
 import './WorkoutItem.scss';
+import { Link } from 'react-router-dom';
 
 interface IWorkoutDataItem {
   label: string;
   children: any;
 }
 
-export const WorkoutItem = ({ activityId, startTime, totalTime, totalDistance }: IWorkoutSummaryData) => (
+export const WorkoutItem = ({ activityId, startTime, totalTime, totalDistance, workoutKey }: IWorkoutSummaryData) => (
   <article className="workout-item">
-    <a href="#" className="workout-item__link">
+    <Link to={`/workout/${workoutKey}`} className="workout-item__link">
       <ul className="workout-data">
         <WorkoutDataItem label="Activity">{getActivityName(activityId)}</WorkoutDataItem>
         <WorkoutDataItem label="Date">{unixtimeToDate(startTime)}</WorkoutDataItem>
         <WorkoutDataItem label="Total time">{secondsToHms(totalTime)}</WorkoutDataItem>
         <WorkoutDataItem label="Distance">{metresToKilometres(totalDistance)}</WorkoutDataItem>
       </ul>
-    </a>
+    </Link>
   </article>
 );
 
