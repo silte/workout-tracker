@@ -4,9 +4,9 @@ import { readJson, writeJson } from "./utils/jsonHelper";
 import { getMultisportExtension } from "./model/getWorkoutExtension";
 import {
   WORKOUT_LIST_RAW_FILENAME,
-  getWorkoutRawDataFilename,
   WORKOUT_LIST_FILENAME,
   CACHE_DIR,
+  getWorkoutRawDataFilename,
 } from "./constants/filesNames";
 
 const MULTISPORT_ACTIVITY_ID = 68;
@@ -69,6 +69,40 @@ const parseWorkoutSummarData = ({
 };
 
 const getWorkoutMultisportSummaryData = (workoutId: string) => {
+  const getMissingMultisportSummaryFromWorkout = (
+    workoutRawData: IWorkoutRawData,
+    workoutMultisportSummaryData: IWorkoutMultisportSummaryData[],
+    missingActivityId: number
+  ): IWorkoutMultisportSummaryData => {
+    const knowMultisportSummaries = workoutMultisportSummaryData.reduce(
+      (
+        {
+          activityId,
+          ascent,
+          distance,
+          duration,
+        }: IWorkoutMultisportSummaryData,
+        currentValue
+      ) => {
+        return {
+          activityId: activityId,
+          ascent: ascent + currentValue.ascent,
+          distance: distance + currentValue.distance,
+          duration: duration + currentValue.duration,
+        } as IWorkoutMultisportSummaryData;
+      }
+    );
+    return {
+      activityId: missingActivityId,
+      distance: workoutRawData.totalDistance - knowMultisportSummaries.distance,
+      duration: workoutRawData.totalTime - knowMultisportSummaries.duration,
+      ascent: workoutRawData.totalAscent - knowMultisportSummaries.ascent,
+      avgSpeed: NaN,
+      avgHr: NaN,
+      maxHr: NaN,
+      maxSpeed: NaN,
+    };
+  };
   const workoutRawData = <IWorkoutRawDataContainer>(
     readJson(getWorkoutRawDataFilename(workoutId))
   );
@@ -83,12 +117,18 @@ const getWorkoutMultisportSummaryData = (workoutId: string) => {
   const filteredMultisportExtensions = multisportExtensionData.Markers.filter(
     (activity) => activity.Totals !== null
   );
+  const missingMultisportTotalsCount = multisportExtensionData.Markers.filter(
+    (activity) => activity.Totals === null
+  ).length;
 
-  if (typeof filteredMultisportExtensions === "undefined") {
+  if (
+    typeof filteredMultisportExtensions === "undefined" ||
+    missingMultisportTotalsCount >= 2
+  ) {
     return [];
   }
 
-  return filteredMultisportExtensions.map(
+  const multisportSummaries = filteredMultisportExtensions.map(
     ({ ActivityID, Totals: { duration, distance, ascent, hr, speed } }) => {
       const { avg: avgHr, max: maxHr } = hr !== null ? hr : <ISummary>{};
       const { avg: avgSpeed, max: maxSpeed } =
@@ -106,4 +146,19 @@ const getWorkoutMultisportSummaryData = (workoutId: string) => {
       };
     }
   );
+
+  if (missingMultisportTotalsCount === 0) {
+    return multisportSummaries;
+  }
+  const missingActivityId = multisportExtensionData.Markers.find(
+    (activity) => activity.Totals === null
+  )?.ActivityID;
+
+  const missingMultisportActivity = getMissingMultisportSummaryFromWorkout(
+    workoutRawData.payload,
+    multisportSummaries,
+    missingActivityId as number
+  );
+
+  return multisportSummaries.concat(missingMultisportActivity);
 };
