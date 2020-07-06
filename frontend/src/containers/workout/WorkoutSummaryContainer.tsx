@@ -4,6 +4,9 @@ import { WORKOUT_LIST_ENDPOINT } from "../../constants/endpoints";
 
 export const WorkoutSummaryContainer = () => {
   const [workoutList, setWorkoutList] = useState<IWorkoutSummaryData[]>([]);
+  const [isMultisportExposed, setIsMultisportExposed] = useState<boolean>(
+    false
+  );
   const [filterStartDate, setFilterStartDate] = useState<number>(NaN);
   const [filterEndDate, setFilterEndDate] = useState<number>(NaN);
 
@@ -23,7 +26,9 @@ export const WorkoutSummaryContainer = () => {
   );
 
   const workoutSummaryData =
-    filteredWorkoutList.length > 0 ? parseSummaryData(filteredWorkoutList) : [];
+    filteredWorkoutList.length > 0
+      ? parseSummaryData(filteredWorkoutList, isMultisportExposed)
+      : [];
 
   return (
     <WorkoutSummary
@@ -31,49 +36,79 @@ export const WorkoutSummaryContainer = () => {
       workoutSummaryData={workoutSummaryData}
       setFilterStartDate={setFilterStartDate}
       setFilterEndDate={setFilterEndDate}
+      setIsMultisportExposed={setIsMultisportExposed}
     />
   );
 };
 
-const parseSummaryData = (workoutList: IWorkoutSummaryData[]) =>
-  workoutList
-    .reduce(
-      (
-        previousValue: ISummaryData[],
+const parseMultisportSummaryData = (workoutList: IWorkoutSummaryData[]) =>
+  workoutList.reduce((previousValue: IWorkoutSummaryData[], currentValue) => {
+    const multisportSummaries = currentValue.multisportSummary?.map(
+      ({ duration, distance, ascent, activityId }) =>
+        ({
+          activityId,
+          totalTime: duration,
+          totalDistance: distance,
+          totalAscent: ascent,
+        } as IWorkoutSummaryData)
+    );
+
+    return typeof multisportSummaries !== "undefined" &&
+      multisportSummaries.length > 0
+      ? previousValue.concat(multisportSummaries)
+      : previousValue.concat(currentValue);
+  }, [] as IWorkoutSummaryData[]);
+
+const parseSummaryData = (
+  workoutList: IWorkoutSummaryData[],
+  isMultisportExposed: boolean
+) => {
+  const parsedWorkoutList = !isMultisportExposed
+    ? workoutList
+    : parseMultisportSummaryData(workoutList);
+
+  return parsedWorkoutList
+    .reduce((previousValue: ISummaryData[], currentValue) => {
+      const currentActivityId = currentValue.activityId;
+      const currentSummary = previousValue.find(
+        ({ activityId }) => activityId === currentActivityId
+      );
+      const currentActivityNewSummary = sumSummaryDataAndWorkoutSummaryData(
+        currentSummary,
+        currentValue
+      );
+      return [
+        ...previousValue.filter(
+          ({ activityId }) => activityId !== currentActivityId
+        ),
         {
-          activityId: currentActivityId,
-          totalTime: currentTime,
-          totalDistance: currentDistance,
-          totalAscent: currentAscent,
-        }
-      ) => {
-        const currentActivitySummary = previousValue.find(
-          ({ activityId }) => activityId === currentActivityId
-        );
-
-        const currectActivityTotal = {
-          activityId: currentActivityId,
-          totalDistance:
-            typeof currentActivitySummary !== "undefined"
-              ? currentActivitySummary.totalDistance + currentDistance
-              : currentDistance,
-          totalDuration:
-            typeof currentActivitySummary !== "undefined"
-              ? currentActivitySummary.totalDuration + currentTime
-              : currentTime,
-          totalAscent:
-            typeof currentActivitySummary !== "undefined"
-              ? currentActivitySummary.totalAscent + currentAscent
-              : currentAscent,
-        };
-
-        return [
-          ...previousValue.filter(
-            ({ activityId }) => activityId !== currentActivityId
-          ),
-          { ...currectActivityTotal },
-        ];
-      },
-      [] as ISummaryData[]
-    )
+          ...currentActivityNewSummary,
+        },
+      ];
+    }, [])
     .sort((a, b) => (a.totalDuration > b.totalDuration ? -1 : 1));
+};
+
+const sumSummaryDataAndWorkoutSummaryData = (
+  summaryData: ISummaryData | undefined,
+  {
+    activityId: newActivityId,
+    totalTime: newTime,
+    totalAscent: newAscent,
+    totalDistance: newDistance,
+  }: IWorkoutSummaryData
+): ISummaryData => ({
+  activityId: newActivityId,
+  totalDistance:
+    typeof summaryData !== "undefined"
+      ? summaryData.totalDistance + newDistance
+      : newDistance,
+  totalDuration:
+    typeof summaryData !== "undefined"
+      ? summaryData.totalDuration + newTime
+      : newTime,
+  totalAscent:
+    typeof summaryData !== "undefined"
+      ? summaryData.totalAscent + newAscent
+      : newAscent,
+});
