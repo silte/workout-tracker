@@ -6,8 +6,18 @@ import { WorkoutContainer } from "./containers/workout/WorkoutContainer";
 
 export const WorkoutRouter = () => (
   <Switch>
-    <Route path="/workout/list" component={WorkoutListContainer} />
-    <Route path="/workout/summary" component={WorkoutSummaryContainer} />
-    <Route path="/workout/:workoutId" component={WorkoutContainer} />
+    <Route exact path="/workout/list" component={WorkoutListContainer} />
+    <Route exact path="/workout/summary" component={WorkoutSummaryContainer} />
+    <Route
+      exact
+      path="/workout/summary/:startDate"
+      component={WorkoutSummaryContainer}
+    />
+    <Route
+      exact
+      path="/workout/summary/:startDate/:endDate"
+      component={WorkoutSummaryContainer}
+    />
+    <Route exact path="/workout/:workoutId" component={WorkoutContainer} />
   </Switch>
 );

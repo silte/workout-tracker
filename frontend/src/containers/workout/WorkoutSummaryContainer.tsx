@@ -1,14 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { WorkoutSummary } from "../../pages/workout/WorkoutSummary";
 import { WORKOUT_LIST_ENDPOINT } from "../../constants/endpoints";
+import { useParams, useHistory } from "react-router-dom";
+import { formatDateToISO8601 } from "../../utils/timeConverter";
 
 export const WorkoutSummaryContainer = () => {
+  const { startDate, endDate } = useParams<{
+    startDate: string;
+    endDate: string;
+  }>();
+  const history = useHistory();
+
   const [workoutList, setWorkoutList] = useState<IWorkoutSummaryData[]>([]);
   const [isMultisportExposed, setIsMultisportExposed] = useState<boolean>(
     false
   );
-  const [filterStartDate, setFilterStartDate] = useState<number>(NaN);
-  const [filterEndDate, setFilterEndDate] = useState<number>(NaN);
+  const [filterStartDate, setFilterStartDate] = useState<number>(
+    new Date(startDate).getTime()
+  );
+  const [filterEndDate, setFilterEndDate] = useState<number>(
+    new Date(endDate).getTime()
+  );
 
   useEffect(() => {
     const fetchWorkoutList = async () => {
@@ -18,6 +30,22 @@ export const WorkoutSummaryContainer = () => {
     };
     fetchWorkoutList();
   }, []);
+
+  useEffect(() => {
+    let path = "/workout/summary";
+    if (!isNaN(filterStartDate) && !isNaN(filterEndDate)) {
+      const startDate = formatDateToISO8601(new Date(filterStartDate));
+      const endDate = formatDateToISO8601(new Date(filterEndDate));
+      path = `${path}/${startDate}/${endDate}`;
+    } else if (!isNaN(filterStartDate)) {
+      const startDate = formatDateToISO8601(new Date(filterStartDate));
+      path = `${path}/${startDate}`;
+    } else if (!isNaN(filterEndDate)) {
+      const endDate = formatDateToISO8601(new Date(filterEndDate));
+      path = `${path}/-/${endDate}`;
+    }
+    history.replace({ pathname: path });
+  }, [filterEndDate, filterStartDate, history]);
 
   const filteredWorkoutList = workoutList.filter(
     ({ startTime }) =>

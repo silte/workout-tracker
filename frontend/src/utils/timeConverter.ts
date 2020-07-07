@@ -17,4 +17,11 @@ export const unixtimeToDate = (unixtime: number) => {
   return `${day}.${month}.${year} – klo ${addLeadingZero(hours)}.${addLeadingZero(minutes)}`;
 };
 
+export const formatDateToISO8601 = (date : Date) => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  
+  return `${year}-${addLeadingZero(month)}-${addLeadingZero(day)}`;
+};
 const addLeadingZero = (time: number) => (time < 10 ? `0${time}` : time);
