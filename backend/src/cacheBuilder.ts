@@ -115,10 +115,10 @@ const getWorkoutMultisportSummaryData = (workoutId: string) => {
   }
 
   const filteredMultisportExtensions = multisportExtensionData.Markers.filter(
-    (activity) => activity.Totals !== null
+    (activity) => activity.Totals !== null && activity.Totals.duration !== null
   );
   const missingMultisportTotalsCount = multisportExtensionData.Markers.filter(
-    (activity) => activity.Totals === null
+    (activity) => activity.Totals === null || activity.Totals.duration === null
   ).length;
 
   if (
