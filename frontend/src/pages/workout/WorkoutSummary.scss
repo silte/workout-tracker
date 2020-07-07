@@ -68,3 +68,34 @@
     border-color: $color-blue-1;
   }
 }
+
+.workout-summary__date-picker {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: $bp-medium-wide) {
+    flex-direction: row;
+  }
+
+  .react-datepicker-wrapper {
+    &:first-child {
+      margin-bottom: $spacing;
+
+      @media screen and (min-width: $bp-medium-wide) {
+        margin-bottom: 0;
+        margin-right: $spacing;
+      }
+    }
+  }
+}
+
+.workout-summary__date-picker-input {
+  @include font-size(16px);
+  background-color: $color-gray-1;
+  border-radius: 3px;
+  border: 1px solid $color-gray-3;
+  color: $color-black;
+  max-width: 100%;
+  padding: $spacing;
+  width: 100%;
+}
