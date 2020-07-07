@@ -1,4 +1,7 @@
 import React from 'react';
+import DatePicker from 'react-datepicker';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 import { Container } from '../../components/container/container';
 import { Heading } from '../../components/heading/heading';
@@ -14,6 +17,8 @@ import './WorkoutSummary.scss';
 interface IWorkoutSummary {
   workoutList: IWorkoutSummaryData[];
   workoutSummaryData: ISummaryData[];
+  filterStartDate: any;
+  filterEndDate: any;
   setFilterStartDate: any;
   setFilterEndDate: any;
   setIsMultisportExposed: any;
@@ -23,16 +28,15 @@ interface IWorkoutSummary {
 export const WorkoutSummary = ({
   workoutList,
   workoutSummaryData,
+  filterStartDate,
+  filterEndDate,
   setFilterStartDate,
   setFilterEndDate,
   setIsMultisportExposed,
   isMultisportExposed,
 }: IWorkoutSummary) => {
-  const onChangeFilterStartDate = ({ target: { value } }: { target: any }) =>
-    setFilterStartDate(value !== '' ? new Date(value).getTime() : NaN);
-  const onChangeFilterEndDate = ({ target: { value } }: { target: any }) =>
-    setFilterEndDate(value !== '' ? new Date(value).getTime() : NaN);
-
+  const onChangeFilterStartDate = (date: any) => setFilterStartDate(date !== 0 ? new Date(date).getTime() : NaN);
+  const onChangeFilterEndDate = (date: any) => setFilterEndDate(date !== 0 ? new Date(date).getTime() : NaN);
   const toggleMultisportExpose = () => setIsMultisportExposed((prev: boolean) => !prev);
 
   const workoutCount = workoutList.length;
@@ -62,15 +66,22 @@ export const WorkoutSummary = ({
               {workoutCount} {workoutCount > 1 || workoutCount === 0 ? 'Workouts' : 'Workout'}
             </Heading>
             <Heading headingLevel={3}>Filters</Heading>
-            <label>
-              Start date:
-              <input type="date" onChange={onChangeFilterStartDate} />
-            </label>
-            <br />
-            <label>
-              End date:
-              <input type="date" onChange={onChangeFilterEndDate} />
-            </label>
+            <div className="workout-summary__date-picker">
+              <DatePicker
+                selected={filterStartDate}
+                onChange={date => onChangeFilterStartDate(date)}
+                dateFormat="d.M.yyyy"
+                placeholderText="Start date"
+                className="workout-summary__date-picker-input"
+              />
+              <DatePicker
+                selected={filterEndDate}
+                onChange={date => onChangeFilterEndDate(date)}
+                dateFormat="d.M.yyyy"
+                placeholderText="End date"
+                className="workout-summary__date-picker-input"
+              />
+            </div>
           </Spacer>
         </Container>
         <Container>

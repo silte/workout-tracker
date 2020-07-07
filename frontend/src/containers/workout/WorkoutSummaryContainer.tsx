@@ -34,6 +34,8 @@ export const WorkoutSummaryContainer = () => {
     <WorkoutSummary
       workoutList={filteredWorkoutList}
       workoutSummaryData={workoutSummaryData}
+      filterStartDate={filterStartDate}
+      filterEndDate={filterEndDate}
       setFilterStartDate={setFilterStartDate}
       setFilterEndDate={setFilterEndDate}
       setIsMultisportExposed={setIsMultisportExposed}
