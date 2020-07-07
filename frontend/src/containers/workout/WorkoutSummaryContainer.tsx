@@ -19,7 +19,9 @@ export const WorkoutSummaryContainer = () => {
     new Date(startDate).getTime()
   );
   const [filterEndDate, setFilterEndDate] = useState<number>(
-    new Date(endDate).getTime()
+    typeof endDate !== "undefined"
+      ? new Date(endDate).getTime() + 86399999
+      : NaN
   );
 
   useEffect(() => {

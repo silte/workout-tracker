@@ -43,7 +43,7 @@ export const WorkoutSummary = ({
   const onChangeFilterStartDate = (date: any) =>
     setFilterStartDate(date !== 0 ? new Date(date).getTime() : NaN);
   const onChangeFilterEndDate = (date: any) =>
-    setFilterEndDate(date !== 0 ? new Date(date).getTime() : NaN);
+    setFilterEndDate(date !== 0 ? new Date(date).getTime() + 86399999 : NaN);
   const toggleMultisportExpose = () =>
     setIsMultisportExposed((prev: boolean) => !prev);
 
