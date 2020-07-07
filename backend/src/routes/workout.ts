@@ -5,7 +5,7 @@ import { getWorkoutData } from "../controllers/workout/getWorkoutData";
 
 const workoutRouter = Router();
 
-workoutRouter.get("/list", (request: Request, response: Response) => {
+workoutRouter.get("/workout-list.json", (request: Request, response: Response) => {
   response.json(getWorkoutList());
 });
 
