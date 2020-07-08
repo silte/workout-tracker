@@ -146,19 +146,19 @@ const sumSummaryDataAndWorkoutSummaryData = (
       newHrIntensity?.zone1?.totalTime
     ),
     zone2: sumNumbers(
-      summaryData?.hrIntensity?.zone1,
+      summaryData?.hrIntensity?.zone2,
       newHrIntensity?.zone2?.totalTime
     ),
     zone3: sumNumbers(
-      summaryData?.hrIntensity?.zone1,
+      summaryData?.hrIntensity?.zone3,
       newHrIntensity?.zone3?.totalTime
     ),
     zone4: sumNumbers(
-      summaryData?.hrIntensity?.zone1,
+      summaryData?.hrIntensity?.zone4,
       newHrIntensity?.zone4?.totalTime
     ),
     zone5: sumNumbers(
-      summaryData?.hrIntensity?.zone1,
+      summaryData?.hrIntensity?.zone5,
       newHrIntensity?.zone5?.totalTime
     ),
   },
