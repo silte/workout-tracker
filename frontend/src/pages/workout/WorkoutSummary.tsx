@@ -8,7 +8,7 @@ import { Heading } from "../../components/heading/heading";
 import { Listing } from "../../components/listing/listing";
 import { Spacer } from "../../components/spacer/spacer";
 import { WorkoutItem } from "./WorkoutItem";
-import { secondsToHms } from "../../utils/timeConverter";
+import { secondsToHms, formatDateToISO8601 } from "../../utils/timeConverter";
 import { getActivityName } from "../../utils/activityInfo";
 import {
   metresToKilometres,
@@ -16,6 +16,7 @@ import {
 } from "../../utils/distanceConverter";
 
 import "./WorkoutSummary.scss";
+import { sumNumbers } from "../../utils/numberOperations";
 
 interface IWorkoutSummary {
   workoutList: IWorkoutSummaryData[];
@@ -29,6 +30,7 @@ interface IWorkoutSummary {
 }
 
 const DAY_IN_MS = 86400000;
+const TIMEZONE_OFFSET = new Date().getTimezoneOffset() * 60 * 1000;
 
 export const WorkoutSummary = ({
   workoutList,
@@ -42,13 +44,18 @@ export const WorkoutSummary = ({
 }: IWorkoutSummary) => {
   const onChangeFilterStartDate = (date: any) =>
     setFilterStartDate(date !== 0 ? new Date(date).getTime() : NaN);
-  const onChangeFilterEndDate = (date: any) =>
-    setFilterEndDate(date !== 0 ? new Date(date).getTime() + 86399999 : NaN);
+  const onChangeFilterEndDate = (date: any) => {
+    console.log(date);
+    return setFilterEndDate(
+      date !== 0
+        ? new Date(formatDateToISO8601(date)).getTime() + 86399999
+        : NaN
+    );
+  };
   const toggleMultisportExpose = () =>
     setIsMultisportExposed((prev: boolean) => !prev);
 
   const today = new Date();
-  const yesterday = new Date(today.getTime() - DAY_IN_MS);
 
   const workoutCount = workoutList.length;
 
@@ -69,15 +76,15 @@ export const WorkoutSummary = ({
             <div className="workout-summary__date-picker">
               <DatePicker
                 selected={filterStartDate}
-                onChange={(date) => onChangeFilterStartDate(date)}
-                maxDate={yesterday}
+                onChange={(date: Date) => onChangeFilterStartDate(date)}
+                maxDate={today}
                 dateFormat="d.M.yyyy"
                 placeholderText="Start date"
                 className="workout-summary__date-picker-input"
               />
               <DatePicker
-                selected={filterEndDate}
-                onChange={(date) => onChangeFilterEndDate(date)}
+                selected={filterEndDate + TIMEZONE_OFFSET}
+                onChange={(date: Date) => onChangeFilterEndDate(date)}
                 maxDate={today}
                 dateFormat="d.M.yyyy"
                 placeholderText="End date"
@@ -138,13 +145,19 @@ const WorkoutTotalSummary = ({
   workoutSummaryData: ISummaryData[];
 }) => {
   const workoutTotalSummaryData = workoutSummaryData.reduce(
-    ({ totalAscent, totalDuration, totalDistance }, current) => ({
+    ({ totalAscent, totalDuration, totalDistance, hrIntensity }, current) => ({
       activityId: -1,
       totalAscent: totalAscent + current.totalAscent,
       totalDuration: totalDuration + current.totalDuration,
       totalDistance: totalDistance + current.totalDistance,
-    }),
-    { totalAscent: 0, totalDuration: 0, totalDistance: 0 } as ISummaryData
+      hrIntensity: {
+        zone1: sumNumbers(hrIntensity?.zone1, current.hrIntensity?.zone1),
+        zone2: sumNumbers(hrIntensity?.zone2, current.hrIntensity?.zone2),
+        zone3: sumNumbers(hrIntensity?.zone3, current.hrIntensity?.zone3),
+        zone4: sumNumbers(hrIntensity?.zone4, current.hrIntensity?.zone4),
+        zone5: sumNumbers(hrIntensity?.zone5, current.hrIntensity?.zone5),
+      },
+    })
   );
 
   return (
@@ -162,6 +175,45 @@ const WorkoutTotalSummary = ({
       <li className="listing__item workout-summary-data__item">
         <Heading headingLevel={2} label="Ascent" className="h3">
           {getRoundedMetres(workoutTotalSummaryData.totalAscent)}
+        </Heading>
+      </li>
+      <li className="listing__item workout-summary-data__item">
+        <Heading headingLevel={2} label="Hr zones" className="h3">
+          zone1{" "}
+          {secondsToHms(
+            typeof workoutTotalSummaryData.hrIntensity?.zone1 !== "undefined"
+              ? workoutTotalSummaryData.hrIntensity?.zone1
+              : 0
+          )}
+          <br />
+          zone2{" "}
+          {secondsToHms(
+            typeof workoutTotalSummaryData.hrIntensity?.zone2 !== "undefined"
+              ? workoutTotalSummaryData.hrIntensity?.zone2
+              : 0
+          )}
+          <br />
+          zone3{" "}
+          {secondsToHms(
+            typeof workoutTotalSummaryData.hrIntensity?.zone3 !== "undefined"
+              ? workoutTotalSummaryData.hrIntensity?.zone3
+              : 0
+          )}
+          <br />
+          zone4{" "}
+          {secondsToHms(
+            typeof workoutTotalSummaryData.hrIntensity?.zone4 !== "undefined"
+              ? workoutTotalSummaryData.hrIntensity?.zone4
+              : 0
+          )}
+          <br />
+          zone5{" "}
+          {secondsToHms(
+            typeof workoutTotalSummaryData.hrIntensity?.zone5 !== "undefined"
+              ? workoutTotalSummaryData.hrIntensity?.zone5
+              : 0
+          )}
+          <br />
         </Heading>
       </li>
     </ul>

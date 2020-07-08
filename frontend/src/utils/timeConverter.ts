@@ -18,9 +18,9 @@ export const unixtimeToDate = (unixtime: number) => {
 };
 
 export const formatDateToISO8601 = (date : Date) => {
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
+  const year = date.getUTCFullYear();
+  const month = date.getUTCMonth() + 1;
+  const day = date.getUTCDate();
   
   return `${year}-${addLeadingZero(month)}-${addLeadingZero(day)}`;
 };
