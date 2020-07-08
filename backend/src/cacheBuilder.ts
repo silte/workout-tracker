@@ -1,7 +1,10 @@
 import fs from "fs";
 
 import { readJson, writeJson } from "./utils/jsonHelper";
-import { getMultisportExtension } from "./model/getWorkoutExtension";
+import {
+  getMultisportExtension,
+  getIntensityExtension,
+} from "./model/getWorkoutExtension";
 import {
   WORKOUT_LIST_RAW_FILENAME,
   WORKOUT_LIST_FILENAME,
@@ -14,10 +17,14 @@ const MULTISPORT_ACTIVITY_ID = 68;
 export const buildWorkoutSummaryDataCache = () => {
   ensureCacheDirectoryExists();
   console.log("Building workout summary data to cache from workout list");
+  const startTime = Date.now();
   const allWorkoutListData: IWorkoutList = readJson(WORKOUT_LIST_RAW_FILENAME);
   const workoutSummartData = allWorkoutListData.payload.map(
     parseWorkoutSummarData
   );
+  const endTime = Date.now();
+  const processingTime = (endTime - startTime) / 1000;
+  console.log(`Done in ${processingTime.toFixed(1)} seconds`);
   writeJson(WORKOUT_LIST_FILENAME, workoutSummartData);
 };
 
@@ -37,6 +44,10 @@ const parseWorkoutSummarData = ({
   maxSpeed,
   energyConsumption,
 }: IWorkoutListItem): IWorkoutSummaryData => {
+  const workoutRawData = <IWorkoutRawDataContainer>(
+    readJson(getWorkoutRawDataFilename(workoutKey))
+  );
+
   const summaryExtension = extensions.find(
     (extension) => extension.type === "SummaryExtension"
   );
@@ -46,8 +57,9 @@ const parseWorkoutSummarData = ({
     typeof summaryExtension !== "undefined" ? summaryExtension : <IExtension>{};
   const multisportSummary =
     activityId === MULTISPORT_ACTIVITY_ID
-      ? getWorkoutMultisportSummaryData(workoutKey)
+      ? getWorkoutMultisportSummaryData(workoutRawData)
       : <IWorkoutMultisportSummaryData[]>[];
+  const hrIntensity = getHrIntensityData(workoutRawData);
 
   return {
     activityId,
@@ -64,11 +76,14 @@ const parseWorkoutSummarData = ({
     avgCadence,
     feeling,
     energyConsumption,
+    hrIntensity,
     multisportSummary,
   };
 };
 
-const getWorkoutMultisportSummaryData = (workoutId: string) => {
+const getWorkoutMultisportSummaryData = (
+  workoutRawData: IWorkoutRawDataContainer
+) => {
   const getMissingMultisportSummaryFromWorkout = (
     workoutRawData: IWorkoutRawData,
     workoutMultisportSummaryData: IWorkoutMultisportSummaryData[],
@@ -103,9 +118,7 @@ const getWorkoutMultisportSummaryData = (workoutId: string) => {
       maxSpeed: NaN,
     };
   };
-  const workoutRawData = <IWorkoutRawDataContainer>(
-    readJson(getWorkoutRawDataFilename(workoutId))
-  );
+
   const multisportExtensionData = getMultisportExtension(
     workoutRawData.payload
   );
@@ -161,4 +174,13 @@ const getWorkoutMultisportSummaryData = (workoutId: string) => {
   );
 
   return multisportSummaries.concat(missingMultisportActivity);
+};
+
+const getHrIntensityData = ({
+  payload: workoutData,
+}: IWorkoutRawDataContainer): IZoneSummary => {
+  const intensityExtension = getIntensityExtension(workoutData);
+  return {
+    ...intensityExtension?.zones?.heartRate,
+  };
 };

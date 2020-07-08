@@ -119,19 +119,6 @@ interface IZones {
   power?: any;
 }
 
-interface IZoneSummary {
-  zone1: IZoneSummary;
-  zone2: IZoneSummary;
-  zone3: IZoneSummary;
-  zone4: IZoneSummary;
-  zone5: IZoneSummary;
-}
-
-interface IZoneSummary {
-  totalTime: number;
-  lowerLimit: number;
-}
-
 interface ILocationPoint {
   altitude: number;
   bearing?: any;

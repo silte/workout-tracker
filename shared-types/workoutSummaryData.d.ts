@@ -13,6 +13,7 @@ interface IWorkoutSummaryData {
   avgCadence: number;
   feeling: number;
   energyConsumption: number;
+  hrIntensity: IZoneSummary;
   multisportSummary?: IWorkoutMultisportSummaryData[];
 }
 
@@ -25,4 +26,17 @@ interface IWorkoutMultisportSummaryData {
   avgHr: number;
   maxSpeed: number;
   avgSpeed: number;
+}
+
+interface IZoneSummary {
+  zone1: IZoneSummaryValue;
+  zone2: IZoneSummaryValue;
+  zone3: IZoneSummaryValue;
+  zone4: IZoneSummaryValue;
+  zone5: IZoneSummaryValue;
+}
+
+interface IZoneSummaryValue {
+  totalTime: number;
+  lowerLimit: number;
 }

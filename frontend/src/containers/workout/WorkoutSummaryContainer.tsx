@@ -3,6 +3,7 @@ import { WorkoutSummary } from "../../pages/workout/WorkoutSummary";
 import { WORKOUT_LIST_ENDPOINT } from "../../constants/endpoints";
 import { useParams, useHistory } from "react-router-dom";
 import { formatDateToISO8601 } from "../../utils/timeConverter";
+import { sumNumbers } from "../../utils/numberOperations";
 
 export const WorkoutSummaryContainer = () => {
   const { startDate, endDate } = useParams<{
@@ -85,11 +86,14 @@ const parseMultisportSummaryData = (workoutList: IWorkoutSummaryData[]) =>
           totalAscent: ascent,
         } as IWorkoutSummaryData)
     );
-
-    return typeof multisportSummaries !== "undefined" &&
-      multisportSummaries.length > 0
-      ? previousValue.concat(multisportSummaries)
-      : previousValue.concat(currentValue);
+    if (
+      typeof multisportSummaries === "undefined" ||
+      multisportSummaries.length === 0
+    ) {
+      return previousValue.concat(currentValue);
+    }
+    multisportSummaries[0].multisportSummary = currentValue.multisportSummary;
+    return previousValue.concat(multisportSummaries);
   }, [] as IWorkoutSummaryData[]);
 
 const parseSummaryData = (
@@ -129,19 +133,33 @@ const sumSummaryDataAndWorkoutSummaryData = (
     totalTime: newTime,
     totalAscent: newAscent,
     totalDistance: newDistance,
+    hrIntensity: newHrIntensity,
   }: IWorkoutSummaryData
 ): ISummaryData => ({
   activityId: newActivityId,
-  totalDistance:
-    typeof summaryData !== "undefined"
-      ? summaryData.totalDistance + newDistance
-      : newDistance,
-  totalDuration:
-    typeof summaryData !== "undefined"
-      ? summaryData.totalDuration + newTime
-      : newTime,
-  totalAscent:
-    typeof summaryData !== "undefined"
-      ? summaryData.totalAscent + newAscent
-      : newAscent,
+  totalDistance: sumNumbers(summaryData?.totalDistance, newDistance),
+  totalDuration: sumNumbers(summaryData?.totalDuration, newTime),
+  totalAscent: sumNumbers(summaryData?.totalAscent, newAscent),
+  hrIntensity: {
+    zone1: sumNumbers(
+      summaryData?.hrIntensity?.zone1,
+      newHrIntensity?.zone1?.totalTime
+    ),
+    zone2: sumNumbers(
+      summaryData?.hrIntensity?.zone1,
+      newHrIntensity?.zone2?.totalTime
+    ),
+    zone3: sumNumbers(
+      summaryData?.hrIntensity?.zone1,
+      newHrIntensity?.zone3?.totalTime
+    ),
+    zone4: sumNumbers(
+      summaryData?.hrIntensity?.zone1,
+      newHrIntensity?.zone4?.totalTime
+    ),
+    zone5: sumNumbers(
+      summaryData?.hrIntensity?.zone1,
+      newHrIntensity?.zone5?.totalTime
+    ),
+  },
 });
