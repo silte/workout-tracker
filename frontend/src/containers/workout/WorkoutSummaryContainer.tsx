@@ -92,7 +92,7 @@ const parseMultisportSummaryData = (workoutList: IWorkoutSummaryData[]) =>
     ) {
       return previousValue.concat(currentValue);
     }
-    multisportSummaries[0].multisportSummary = currentValue.multisportSummary;
+    multisportSummaries[0].hrIntensity = currentValue.hrIntensity;
     return previousValue.concat(multisportSummaries);
   }, [] as IWorkoutSummaryData[]);
 
