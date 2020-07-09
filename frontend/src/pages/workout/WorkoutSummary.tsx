@@ -179,41 +179,21 @@ const WorkoutTotalSummary = ({
       </li>
       <li className="listing__item workout-summary-data__item">
         <Heading headingLevel={2} label="Hr zones" className="h3">
-          zone1{" "}
-          {secondsToHms(
-            typeof workoutTotalSummaryData.hrIntensity?.zone1 !== "undefined"
-              ? workoutTotalSummaryData.hrIntensity?.zone1
-              : 0
-          )}
-          <br />
-          zone2{" "}
-          {secondsToHms(
-            typeof workoutTotalSummaryData.hrIntensity?.zone2 !== "undefined"
-              ? workoutTotalSummaryData.hrIntensity?.zone2
-              : 0
-          )}
-          <br />
-          zone3{" "}
-          {secondsToHms(
-            typeof workoutTotalSummaryData.hrIntensity?.zone3 !== "undefined"
-              ? workoutTotalSummaryData.hrIntensity?.zone3
-              : 0
-          )}
-          <br />
-          zone4{" "}
-          {secondsToHms(
-            typeof workoutTotalSummaryData.hrIntensity?.zone4 !== "undefined"
-              ? workoutTotalSummaryData.hrIntensity?.zone4
-              : 0
-          )}
-          <br />
-          zone5{" "}
-          {secondsToHms(
-            typeof workoutTotalSummaryData.hrIntensity?.zone5 !== "undefined"
-              ? workoutTotalSummaryData.hrIntensity?.zone5
-              : 0
-          )}
-          <br />
+          <Heading headingLevel={3} label="zone 1">
+            {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone1)}
+          </Heading>
+          <Heading headingLevel={3} label="zone 2">
+            {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone2)}
+          </Heading>
+          <Heading headingLevel={3} label="zone 3">
+            {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone3)}
+          </Heading>
+          <Heading headingLevel={3} label="zone 4">
+            {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone4)}
+          </Heading>
+          <Heading headingLevel={3} label="zone 5">
+            {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone5)}
+          </Heading>
         </Heading>
       </li>
     </ul>
