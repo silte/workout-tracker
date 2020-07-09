@@ -1,4 +1,4 @@
-export const secondsToHms = (totalSeconds: number) => {
+export const secondsToHms = (totalSeconds: number | undefined = 0) => {
   const hours = Math.floor(totalSeconds / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = Math.floor((totalSeconds % 3600) % 60);
