@@ -4,6 +4,10 @@ import {
   getMultisportExtension,
   getCadenceStreamExtension,
   getSummaryExtension,
+  getHeartrateStreamExtension,
+  getSpeedStreamExtension,
+  getDistanceDeltaStreamExtension,
+  getAltitudeStreamExtension,
 } from "../../model/getWorkoutExtension";
 
 export const getWorkoutData = (workoutId: string): IWorkoutData => {
@@ -26,6 +30,8 @@ export const getWorkoutData = (workoutId: string): IWorkoutData => {
   } = workoutData;
   const cadenceExtension = getSummaryExtension(workoutData);
 
+  const dataPoints = parseDataPoints(workoutData);
+
   return {
     workoutKey,
     activityId,
@@ -42,5 +48,56 @@ export const getWorkoutData = (workoutId: string): IWorkoutData => {
     minAltitude,
     avgCadence: cadenceExtension?.avgCadence,
     maxCadence: cadenceExtension?.maxCadence,
+    dataPoints,
   };
+};
+
+const roundToThousands = (number: number) => Math.round(number / 1000) * 1000;
+
+const parseDataPoints = (
+  workoutRawData: IWorkoutRawData
+): IWorkoutDataPointData[] => {
+  const roundDataPointTimestampToSeconds = ({
+    timestamp,
+    value,
+  }: IDataPoint): IDataPoint => ({
+    timestamp: roundToThousands(timestamp),
+    value,
+  });
+  const addValueToDatapoint = (dataPointName: string) => ({
+    timestamp,
+    value,
+  }: IDataPoint) => {
+    if (!(timestamp in dataPoints)) {
+      dataPoints[timestamp] = {};
+    }
+    dataPoints[timestamp][dataPointName] = value;
+  };
+  const hrData = getHeartrateStreamExtension(workoutRawData)?.points.map(
+    roundDataPointTimestampToSeconds
+  );
+  const speedData = getSpeedStreamExtension(workoutRawData)?.points.map(
+    roundDataPointTimestampToSeconds
+  );
+  const distanceData = getDistanceDeltaStreamExtension(
+    workoutRawData
+  )?.points.map(roundDataPointTimestampToSeconds);
+  const altitudeData = getAltitudeStreamExtension(workoutRawData)?.points.map(
+    roundDataPointTimestampToSeconds
+  );
+  const cadenceData = getCadenceStreamExtension(workoutRawData)?.points.map(
+    roundDataPointTimestampToSeconds
+  );
+
+  const dataPoints: any = {};
+  hrData.forEach(addValueToDatapoint("hr"));
+  speedData.forEach(addValueToDatapoint("speed"));
+  distanceData.forEach(addValueToDatapoint("distance"));
+  altitudeData.forEach(addValueToDatapoint("altitude"));
+  cadenceData.forEach(addValueToDatapoint("cadence"));
+
+  return Object.entries(dataPoints).map(([timestamp, content]: any) => ({
+    timestamp,
+    ...content,
+  }));
 };
