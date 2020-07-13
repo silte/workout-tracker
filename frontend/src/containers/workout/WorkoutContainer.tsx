@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { WorkoutList } from "../../pages/workout/WorkoutList";
 import { WORKOUT_DATA_ENDPOINT } from "../../constants/endpoints";
 import { useParams } from "react-router-dom";
 import { Workout } from "../../pages/workout/Workout";
