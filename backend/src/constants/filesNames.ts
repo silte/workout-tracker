@@ -2,6 +2,7 @@ export const DATA_DIR: string = "./data";
 export const CACHE_DIR: string = "./cache";
 export const WORKOUT_LIST_RAW_FILENAME: string = `${DATA_DIR}/workout-list.json`;
 export const WORKOUT_LIST_FILENAME: string = `${CACHE_DIR}/workout-list.json`;
+export const REACT_APP_PATH: string = "/static/react-app/";
 
 export const getWorkoutRawDataFilename = (workoutId: string) =>
   `${DATA_DIR}/${workoutId}.json`;

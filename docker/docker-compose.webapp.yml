@@ -1,0 +1,19 @@
+version: "3.4"
+
+services:
+  webapp:
+    image: node:14.5.0-alpine
+    image: custom-suunto-app
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    environment:
+      NODE_ENV: production
+    volumes:
+      - ../backend/data:/app/data
+      - ../backend/cache:/app/cache
+    working_dir: /app/
+    ports: 
+      - 4000:4000
+
+    command: node build/index.js
