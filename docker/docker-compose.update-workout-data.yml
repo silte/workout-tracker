@@ -1,0 +1,17 @@
+version: "3.4"
+
+services:
+  update-workout-data:
+    image: node:14.5.0-alpine
+    image: custom-suunto-app
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    environment:
+      NODE_ENV: production
+    volumes:
+      - ../backend/data:/app/data
+      - ../backend/cache:/app/cache
+    working_dir: /app/
+
+    command: node build/updateWorkoutData.js API-TOKEN
