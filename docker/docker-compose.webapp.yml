@@ -2,7 +2,6 @@ version: "3.4"
 
 services:
   webapp:
-    image: node:14.5.0-alpine
     image: custom-suunto-app
     build:
       context: ../
@@ -13,7 +12,7 @@ services:
       - ../backend/data:/app/data
       - ../backend/cache:/app/cache
     working_dir: /app/
-    ports: 
+    ports:
       - 4000:4000
 
     command: node build/index.js
