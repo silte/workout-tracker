@@ -14,18 +14,49 @@ import {
 
 const MULTISPORT_ACTIVITY_ID = 68;
 
-export const buildWorkoutSummaryDataCache = () => {
+export const buildWorkoutSummaryDataCache = (
+  forceCacheRebuild: boolean = false
+) => {
   ensureCacheDirectoryExists();
   console.log("Building workout summary data to cache from workout list");
   const startTime = Date.now();
   const allWorkoutListData: IWorkoutList = readJson(WORKOUT_LIST_RAW_FILENAME);
-  const workoutSummartData = allWorkoutListData.payload.map(
-    parseWorkoutSummarData
-  );
+
+  if (!forceCacheRebuild) {
+    const cachedWorkoutSummaryData: IWorkoutSummaryData[] = readJson(
+      WORKOUT_LIST_FILENAME
+    );
+    const missingFromCacheWorkoutListData = allWorkoutListData.payload.filter(
+      ({ workoutKey }) =>
+        cachedWorkoutSummaryData.every(
+          ({ workoutKey: cachedWorkoutKey }) => workoutKey !== cachedWorkoutKey
+        )
+    );
+    if (missingFromCacheWorkoutListData.length === 0) {
+      console.log("All workouts found from cache, no need to build cache");
+    } else {
+      console.log(
+        `Adding ${missingFromCacheWorkoutListData.length} workout(s) missing to cache`
+      );
+      const workoutSummartData = missingFromCacheWorkoutListData.map(
+        parseWorkoutSummarData
+      );
+      writeJson(
+        WORKOUT_LIST_FILENAME,
+        workoutSummartData.concat(cachedWorkoutSummaryData)
+      );
+    }
+  } else {
+    console.log("Full cache rebuild");
+    const workoutSummartData = allWorkoutListData.payload.map(
+      parseWorkoutSummarData
+    );
+    writeJson(WORKOUT_LIST_FILENAME, workoutSummartData);
+  }
+
   const endTime = Date.now();
   const processingTime = (endTime - startTime) / 1000;
   console.log(`Done in ${processingTime.toFixed(1)} seconds`);
-  writeJson(WORKOUT_LIST_FILENAME, workoutSummartData);
 };
 
 const ensureCacheDirectoryExists = () =>
