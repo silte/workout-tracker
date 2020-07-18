@@ -23,9 +23,10 @@ export const buildWorkoutSummaryDataCache = (
   const allWorkoutListData: IWorkoutList = readJson(WORKOUT_LIST_RAW_FILENAME);
 
   if (!forceCacheRebuild) {
-    const cachedWorkoutSummaryData: IWorkoutSummaryData[] = readJson(
-      WORKOUT_LIST_FILENAME
-    );
+    const isCacheAvailable = fs.existsSync(WORKOUT_LIST_FILENAME);
+    const cachedWorkoutSummaryData: IWorkoutSummaryData[] = isCacheAvailable
+      ? readJson(WORKOUT_LIST_FILENAME)
+      : [];
     const missingFromCacheWorkoutListData = allWorkoutListData.payload.filter(
       ({ workoutKey }) =>
         cachedWorkoutSummaryData.every(
@@ -36,7 +37,7 @@ export const buildWorkoutSummaryDataCache = (
       console.log("All workouts found from cache, no need to build cache");
     } else {
       console.log(
-        `Adding ${missingFromCacheWorkoutListData.length} workout(s) missing to cache`
+        `Adding ${missingFromCacheWorkoutListData.length} workout(s) to cache, total ${allWorkoutListData.payload.length} workout(s)`
       );
       const workoutSummartData = missingFromCacheWorkoutListData.map(
         parseWorkoutSummarData
