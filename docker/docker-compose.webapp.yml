@@ -6,6 +6,7 @@ services:
     build:
       context: ../
       dockerfile: docker/Dockerfile
+    restart: always
     environment:
       NODE_ENV: production
     volumes:
