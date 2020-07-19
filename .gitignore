@@ -1,5 +1,6 @@
 data/*
 node_modules
 build
+docker/.env
 
 .vscode

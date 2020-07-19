@@ -11,5 +11,6 @@ services:
     volumes:
       - ../backend/data:/app/data
     working_dir: /app/
+    env_file: .env
 
-    command: node build/updateWorkoutData.js API-TOKEN
+    command: "node build/updateWorkoutData.js ${API_TOKEN}"
