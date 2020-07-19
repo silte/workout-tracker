@@ -73,28 +73,28 @@ const parseDataPoints = (
     }
     dataPoints[timestamp][dataPointName] = value;
   };
-  const hrData = getHeartrateStreamExtension(workoutRawData)?.points.map(
+  const hrData = getHeartrateStreamExtension(workoutRawData).points?.map(
     roundDataPointTimestampToSeconds
   );
-  const speedData = getSpeedStreamExtension(workoutRawData)?.points.map(
+  const speedData = getSpeedStreamExtension(workoutRawData).points?.map(
     roundDataPointTimestampToSeconds
   );
   const distanceData = getDistanceDeltaStreamExtension(
     workoutRawData
-  )?.points.map(roundDataPointTimestampToSeconds);
-  const altitudeData = getAltitudeStreamExtension(workoutRawData)?.points.map(
+  ).points?.map(roundDataPointTimestampToSeconds);
+  const altitudeData = getAltitudeStreamExtension(workoutRawData).points?.map(
     roundDataPointTimestampToSeconds
   );
-  const cadenceData = getCadenceStreamExtension(workoutRawData)?.points.map(
+  const cadenceData = getCadenceStreamExtension(workoutRawData).points?.map(
     roundDataPointTimestampToSeconds
   );
 
   const dataPoints: any = {};
-  hrData.forEach(addValueToDatapoint("hr"));
-  speedData.forEach(addValueToDatapoint("speed"));
-  distanceData.forEach(addValueToDatapoint("distance"));
-  altitudeData.forEach(addValueToDatapoint("altitude"));
-  cadenceData.forEach(addValueToDatapoint("cadence"));
+  hrData?.forEach(addValueToDatapoint("hr"));
+  speedData?.forEach(addValueToDatapoint("speed"));
+  distanceData?.forEach(addValueToDatapoint("distance"));
+  altitudeData?.forEach(addValueToDatapoint("altitude"));
+  cadenceData?.forEach(addValueToDatapoint("cadence"));
 
   return Object.entries(dataPoints).map(([timestamp, content]: any) => ({
     timestamp,
