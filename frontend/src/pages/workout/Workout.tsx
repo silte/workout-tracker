@@ -67,66 +67,60 @@ export const Workout = ({ workout }: IWorkout) => {
           </Heading>
         </Spacer>
       </Container>
-      <Container>
-        <Spacer>
-          <div style={{ width: "100%", height: "33vh" }}>
-            <ResponsiveContainer>
-              <ComposedChart
-                width={1500}
-                height={800}
-                data={chartData}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis
-                  dataKey="timestamp"
-                  tickFormatter={formatXAxisTick}
-                  minTickGap={10}
-                />
-                <YAxis />
-                <YAxis yAxisId="altitude" />
-                <YAxis yAxisId="speed" orientation="right" />
-                <YAxis yAxisId="cadence" orientation="right" />
-                <Tooltip />
-                <Legend />
-                <Area
-                  type="monotone"
-                  dataKey="altitude"
-                  yAxisId="altitude"
-                  stroke="#dedede"
-                  fill="#dedede"
-                />
-                <Line
-                  dot={false}
-                  type="monotone"
-                  dataKey="hr"
-                  stroke="#f42424"
-                />
-                <Line
-                  dot={false}
-                  type="monotone"
-                  dataKey="speed"
-                  yAxisId="speed"
-                  stroke="#8884d8"
-                />
-                <Line
-                  dot={false}
-                  type="monotone"
-                  dataKey="cadence"
-                  stroke="#82ca9d"
-                  yAxisId="cadence"
-                />
-                <Brush />
-              </ComposedChart>
-            </ResponsiveContainer>
-          </div>
-        </Spacer>
-      </Container>
+      <Spacer>
+        <div style={{ width: "100%", height: "33vh" }}>
+          <ResponsiveContainer>
+            <ComposedChart
+              width={1500}
+              height={800}
+              data={chartData}
+              style={{ minHeight: "450px" }}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                dataKey="timestamp"
+                tickFormatter={formatXAxisTick}
+                minTickGap={10}
+              />
+              <YAxis />
+              <YAxis yAxisId="altitude" hide={true} />
+              <YAxis yAxisId="speed" orientation="right" />
+              <YAxis yAxisId="cadence" orientation="right" hide={true} />
+              <Tooltip />
+              <Legend />
+              <Area
+                type="monotone"
+                dataKey="altitude"
+                yAxisId="altitude"
+                stroke="#dedede"
+                fill="#dedede"
+              />
+              <Line dot={false} type="monotone" dataKey="hr" stroke="#f42424" />
+              <Line
+                dot={false}
+                type="monotone"
+                dataKey="speed"
+                yAxisId="speed"
+                stroke="#8884d8"
+              />
+              <Line
+                dot={false}
+                type="monotone"
+                dataKey="cadence"
+                stroke="#82ca9d"
+                yAxisId="cadence"
+              />
+              <Brush />
+            </ComposedChart>
+          </ResponsiveContainer>
+        </div>
+      </Spacer>
     </>
   );
 };
