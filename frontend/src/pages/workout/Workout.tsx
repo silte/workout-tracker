@@ -68,19 +68,13 @@ export const Workout = ({ workout }: IWorkout) => {
         </Spacer>
       </Container>
       <Spacer>
-        <div style={{ width: "100%", height: "33vh" }}>
+        <div style={{ width: "100%", height: "33vh", minHeight: "450px" }}>
           <ResponsiveContainer>
             <ComposedChart
               width={1500}
               height={800}
               data={chartData}
-              style={{ minHeight: "450px" }}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
+              margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
