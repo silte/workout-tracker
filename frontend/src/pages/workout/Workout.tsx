@@ -11,7 +11,7 @@ import {
   ComposedChart,
   Area,
   ResponsiveContainer,
-} from "recharts";
+} from "@silte/recharts";
 
 import { Container } from "../../components/container/container";
 import { Heading } from "../../components/heading/heading";
@@ -22,8 +22,6 @@ import {
   metresToKilometres,
   getRoundedMetres,
 } from "../../utils/distanceConverter";
-
-const DATA_POINTS_IN_CHART = 500;
 
 interface IWorkout {
   workout: IWorkoutData;
@@ -37,13 +35,6 @@ export const Workout = ({ workout }: IWorkout) => {
   const formatXAxisTick = (tickTime: number) => {
     return secondsToHms((tickTime - workout.startTime) / 1000);
   };
-  const every_nth = (arr: any[], nth: number) =>
-    arr.filter((e, i) => i % nth === nth - 1);
-
-  const dataPointCountDivider = Math.floor(
-    workout.dataPoints.length / DATA_POINTS_IN_CHART
-  );
-  const chartData = every_nth(workout.dataPoints, dataPointCountDivider);
 
   return (
     <>
@@ -73,8 +64,9 @@ export const Workout = ({ workout }: IWorkout) => {
             <ComposedChart
               width={1500}
               height={800}
-              data={chartData}
+              data={workout.dataPoints}
               margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+              maxDataPointsToRender={300}
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
