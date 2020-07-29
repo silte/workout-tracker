@@ -27,14 +27,27 @@ interface IWorkout {
   workout: IWorkoutData;
 }
 
+interface IWorkoutDataPointsChart extends IWorkoutDataPointData {
+  timeString?: string;
+}
+
 export const Workout = ({ workout }: IWorkout) => {
   if (!("activityId" in workout)) {
     return <h1>Loading...</h1>;
   }
 
-  const formatXAxisTick = (tickTime: number) => {
-    return secondsToHms((tickTime - workout.startTime) / 1000);
+  const getWorkoutDurationFromTimestamp = (timestamp: number) => {
+    return secondsToHms((timestamp - workout.startTime) / 1000);
   };
+
+  const chartDataPoints: IWorkoutDataPointsChart[] = workout.dataPoints.map(
+    (dataPoint) => ({
+      ...dataPoint,
+      timeString: getWorkoutDurationFromTimestamp(
+        parseInt(dataPoint.timestamp)
+      ),
+    })
+  );
 
   return (
     <>
@@ -64,16 +77,12 @@ export const Workout = ({ workout }: IWorkout) => {
             <ComposedChart
               width={1500}
               height={800}
-              data={workout.dataPoints}
+              data={chartDataPoints}
               margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
               maxDataPointsToRender={300}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                dataKey="timestamp"
-                tickFormatter={formatXAxisTick}
-                minTickGap={10}
-              />
+              <XAxis dataKey="timeString" minTickGap={10} />
               <YAxis />
               <YAxis yAxisId="altitude" hide={true} />
               <YAxis yAxisId="speed" orientation="right" />
@@ -102,7 +111,7 @@ export const Workout = ({ workout }: IWorkout) => {
                 stroke="#82ca9d"
                 yAxisId="cadence"
               />
-              <Brush />
+              <Brush dataKey="timeString" />
             </ComposedChart>
           </ResponsiveContainer>
         </div>
