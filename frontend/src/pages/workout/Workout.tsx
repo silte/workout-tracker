@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Line,
@@ -16,6 +16,7 @@ import {
 import { Container } from "../../components/container/container";
 import { Heading } from "../../components/heading/heading";
 import { Spacer } from "../../components/spacer/spacer";
+import { Button } from "../../components/button/button";
 import { getActivityName } from "../../utils/activityInfo";
 import { unixtimeToDate, secondsToHms } from "../../utils/timeConverter";
 import {
@@ -32,6 +33,13 @@ interface IWorkoutDataPointsChart extends IWorkoutDataPointData {
 }
 
 export const Workout = ({ workout }: IWorkout) => {
+  const [isHearRateVisible, setIsHearRateVisible] = useState<boolean>(true);
+  const [isSpeedVisible, setIsSpeedVisible] = useState<boolean>(true);
+  const [isAltitudeVisible, setIsAltitudeVisible] = useState<boolean>(true);
+  const [isCadenceVisible, setIsCadenceVisible] = useState<boolean>(true);
+
+  const toggleBooleanState = (prevStat: boolean) => !prevStat;
+
   if (!("activityId" in workout)) {
     return <h1>Loading...</h1>;
   }
@@ -71,6 +79,34 @@ export const Workout = ({ workout }: IWorkout) => {
           </Heading>
         </Spacer>
       </Container>
+      <Container medium className="workout__toggle-buttons">
+        <Spacer>
+          <Button
+            isActive={isHearRateVisible}
+            onClick={() => setIsHearRateVisible(toggleBooleanState)}
+          >
+            Toggle HR
+          </Button>
+          <Button
+            isActive={isAltitudeVisible}
+            onClick={() => setIsAltitudeVisible(toggleBooleanState)}
+          >
+            Toggle Altitude
+          </Button>
+          <Button
+            isActive={isSpeedVisible}
+            onClick={() => setIsSpeedVisible(toggleBooleanState)}
+          >
+            Toggle Speed
+          </Button>
+          <Button
+            isActive={isCadenceVisible}
+            onClick={() => setIsCadenceVisible(toggleBooleanState)}
+          >
+            Toggle Cadence
+          </Button>
+        </Spacer>
+      </Container>
       <Spacer>
         <div style={{ width: "100%", height: "33vh", minHeight: "450px" }}>
           <ResponsiveContainer>
@@ -97,28 +133,41 @@ export const Workout = ({ workout }: IWorkout) => {
               />
               <Tooltip />
               <Legend />
-              <Area
-                type="monotone"
-                dataKey="altitude"
-                yAxisId="altitude"
-                stroke="#dedede"
-                fill="#dedede"
-              />
-              <Line dot={false} type="monotone" dataKey="hr" stroke="#f42424" />
-              <Line
-                dot={false}
-                type="monotone"
-                dataKey="speed"
-                yAxisId="speed"
-                stroke="#8884d8"
-              />
-              <Line
-                dot={false}
-                type="monotone"
-                dataKey="cadence"
-                stroke="#82ca9d"
-                yAxisId="cadence"
-              />
+              {isAltitudeVisible && (
+                <Area
+                  type="monotone"
+                  dataKey="altitude"
+                  yAxisId="altitude"
+                  stroke="#dedede"
+                  fill="#dedede"
+                />
+              )}
+              {isHearRateVisible && (
+                <Line
+                  dot={false}
+                  type="monotone"
+                  dataKey="hr"
+                  stroke="#f42424"
+                />
+              )}
+              {isSpeedVisible && (
+                <Line
+                  dot={false}
+                  type="monotone"
+                  dataKey="speed"
+                  yAxisId="speed"
+                  stroke="#8884d8"
+                />
+              )}
+              {isCadenceVisible && (
+                <Line
+                  dot={false}
+                  type="monotone"
+                  dataKey="cadence"
+                  stroke="#82ca9d"
+                  yAxisId="cadence"
+                />
+              )}
               <Brush dataKey="timeString" />
             </ComposedChart>
           </ResponsiveContainer>
