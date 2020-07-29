@@ -1,0 +1,20 @@
+@import "lib";
+
+.button {
+  @include font-size(14px);
+  background-color: transparent;
+  border-radius: 6px;
+  border: 2px solid $color-gray-3;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 0.25px;
+  padding: $spacing $spacing-medium;
+  text-indent: 0.25px;
+  text-transform: uppercase;
+
+  &.is-active {
+    background-color: $color-blue-1;
+    color: $color-white;
+    border-color: $color-blue-1;
+  }
+}
