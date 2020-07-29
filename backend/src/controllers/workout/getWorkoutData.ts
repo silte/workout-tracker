@@ -10,6 +10,9 @@ import {
   getAltitudeStreamExtension,
 } from "../../model/getWorkoutExtension";
 
+const roundToThousands = (number: number) => Math.round(number / 1000) * 1000;
+const roundToSingleDecimal = (number: number) => Math.round(number * 10) / 10;
+
 export const getWorkoutData = (workoutId: string): IWorkoutData => {
   const filename = `${DATA_DIR}/${workoutId}.json`;
   const { payload: workoutData } = <IWorkoutRawDataContainer>readJson(filename);
@@ -43,7 +46,7 @@ export const getWorkoutData = (workoutId: string): IWorkoutData => {
     centerPosition,
     startPosition,
     stopPosition,
-    maxSpeed,
+    maxSpeed: roundToSingleDecimal(maxSpeed * 3.6),
     maxAltitude,
     minAltitude,
     avgCadence: cadenceExtension?.avgCadence,
@@ -51,8 +54,6 @@ export const getWorkoutData = (workoutId: string): IWorkoutData => {
     dataPoints,
   };
 };
-
-const roundToThousands = (number: number) => Math.round(number / 1000) * 1000;
 
 const parseDataPoints = (
   workoutRawData: IWorkoutRawData
@@ -76,9 +77,13 @@ const parseDataPoints = (
   const hrData = getHeartrateStreamExtension(workoutRawData).points?.map(
     roundDataPointTimestampToSeconds
   );
-  const speedData = getSpeedStreamExtension(workoutRawData).points?.map(
-    roundDataPointTimestampToSeconds
-  );
+  const speedData = getSpeedStreamExtension(workoutRawData)
+    .points?.map(roundDataPointTimestampToSeconds)
+    .map((dataPoint) => ({
+      ...dataPoint,
+      value: roundToSingleDecimal(dataPoint.value * 3.6),
+    }));
+
   const distanceData = getDistanceDeltaStreamExtension(
     workoutRawData
   ).points?.map(roundDataPointTimestampToSeconds);
