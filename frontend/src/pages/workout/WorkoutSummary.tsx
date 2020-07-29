@@ -7,6 +7,7 @@ import { Container } from "../../components/container/container";
 import { Heading } from "../../components/heading/heading";
 import { Listing } from "../../components/listing/listing";
 import { Spacer } from "../../components/spacer/spacer";
+import { Button } from "../../components/button/button";
 import { WorkoutItem } from "./WorkoutItem";
 import { secondsToHms, formatDateToISO8601 } from "../../utils/timeConverter";
 import { getActivityName } from "../../utils/activityInfo";
@@ -98,14 +99,12 @@ export const WorkoutSummary = ({
             <Container>
               <Spacer small>
                 <div className="workout-summary__multisport">
-                  <button
-                    className={`workout-summary__toggle ${
-                      isMultisportExposed ? "is-active" : ""
-                    }`}
+                  <Button
                     onClick={toggleMultisportExpose}
+                    isActive={isMultisportExposed}
                   >
                     Toggle multisports
-                  </button>
+                  </Button>
                 </div>
                 <WorkoutTotalSummary workoutSummaryData={workoutSummaryData} />
                 <WorkoutAcivitySummary
