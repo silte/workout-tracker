@@ -83,10 +83,18 @@ export const Workout = ({ workout }: IWorkout) => {
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="timeString" minTickGap={10} />
-              <YAxis />
-              <YAxis yAxisId="altitude" hide={true} />
+              <YAxis domain={["dataMin", "dataMax"]} />
+              <YAxis
+                domain={["dataMin", "dataMax"]}
+                yAxisId="altitude"
+                hide={true}
+              />
               <YAxis yAxisId="speed" orientation="right" />
-              <YAxis yAxisId="cadence" orientation="right" hide={true} />
+              <YAxis
+                domain={["dataMin", "dataMax"]}
+                yAxisId="cadence"
+                hide={true}
+              />
               <Tooltip />
               <Legend />
               <Area
