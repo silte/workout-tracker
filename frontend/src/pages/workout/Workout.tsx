@@ -23,6 +23,7 @@ import {
   metresToKilometres,
   getRoundedMetres,
 } from "../../utils/distanceConverter";
+import { ButtonGroup } from "@material-ui/core";
 
 interface IWorkout {
   workout: IWorkoutData;
@@ -80,7 +81,7 @@ export const Workout = ({ workout }: IWorkout) => {
         </Spacer>
       </Container>
       <Container medium className="workout__toggle-buttons">
-        <Spacer>
+        <ButtonGroup>
           <Button
             isActive={isHearRateVisible}
             onClick={() => setIsHearRateVisible(toggleBooleanState)}
@@ -105,7 +106,7 @@ export const Workout = ({ workout }: IWorkout) => {
           >
             Toggle Cadence
           </Button>
-        </Spacer>
+        </ButtonGroup>
       </Container>
       <Spacer>
         <div style={{ width: "100%", height: "33vh", minHeight: "450px" }}>
