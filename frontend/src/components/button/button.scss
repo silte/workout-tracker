@@ -17,4 +17,9 @@
     color: $color-white;
     border-color: $color-blue-1;
   }
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
 }

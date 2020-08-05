@@ -6,6 +6,7 @@ interface IButton extends React.HTMLAttributes<HTMLButtonElement> {
   children: any;
   className?: string;
   isActive?: boolean;
+  disabled?: boolean;
 }
 
 export const Button = ({

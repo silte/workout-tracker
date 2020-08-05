@@ -9,7 +9,18 @@ import { Listing } from "../../components/listing/listing";
 import { Spacer } from "../../components/spacer/spacer";
 import { Button } from "../../components/button/button";
 import { WorkoutItem } from "./WorkoutItem";
-import { secondsToHms, formatDateToISO8601 } from "../../utils/timeConverter";
+import {
+  secondsToHms,
+  formatDateToISO8601,
+  getFirstDayOfWeek,
+  getLastDayOfWeek,
+  getFirstDayOfMonth,
+  getLastDayOfMonth,
+  getFirstDayOfNextWeek,
+  getFirstDayOfPreviousWeek,
+  getFirstDayOfNextMonth,
+  getFirstDayOfPreviousMonth,
+} from "../../utils/timeConverter";
 import { getActivityName } from "../../utils/activityInfo";
 import {
   metresToKilometres,
@@ -18,6 +29,7 @@ import {
 
 import "./WorkoutSummary.scss";
 import { sumNumbers } from "../../utils/numberOperations";
+import { ButtonGroup } from "../../components/button/buttonGroup";
 
 interface IWorkoutSummary {
   workoutList: IWorkoutSummaryData[];
@@ -56,9 +68,60 @@ export const WorkoutSummary = ({
   const toggleMultisportExpose = () =>
     setIsMultisportExposed((prev: boolean) => !prev);
 
-  const today = new Date();
+  const setWeekByStartDate = (date: Date) => {
+    const monday = getFirstDayOfWeek(date);
+    const sunday = getLastDayOfWeek(date);
+    setFilterStartDate(monday.getTime());
+    setFilterEndDate(sunday.getTime());
+  };
 
+  const setMonthByStartDate = (date: Date) => {
+    const firstDayOfMonth = getFirstDayOfMonth(date);
+    const lastDayOfMonth = getLastDayOfMonth(date);
+    setFilterStartDate(firstDayOfMonth.getTime());
+    setFilterEndDate(lastDayOfMonth.getTime());
+  };
+
+  const getStartDate = () => {
+    return isNaN(filterStartDate) ? new Date() : new Date(filterStartDate);
+  };
+
+  const selectWeek = () => {
+    const baseDayForWeek = getStartDate();
+    setWeekByStartDate(baseDayForWeek);
+  };
+
+  const selectNextWeek = () => {
+    const baseDayForWeek = getStartDate();
+    setWeekByStartDate(getFirstDayOfNextWeek(baseDayForWeek));
+  };
+
+  const selectPreviousWeek = () => {
+    const baseDayForWeek = getStartDate();
+    setWeekByStartDate(getFirstDayOfPreviousWeek(baseDayForWeek));
+  };
+
+  const selectMonth = () => {
+    const baseDayForMonth = getStartDate();
+    setMonthByStartDate(baseDayForMonth);
+  };
+
+  const selectNextMonth = () => {
+    const baseDayForMonth = getStartDate();
+    const firstDayOfNextMonth = getFirstDayOfNextMonth(baseDayForMonth);
+    setMonthByStartDate(firstDayOfNextMonth);
+  };
+
+  const selectPreviousMonth = () => {
+    const baseDayForMonth = getStartDate();
+    const firstDayOfPreviousMonth = getFirstDayOfPreviousMonth(baseDayForMonth);
+    setMonthByStartDate(firstDayOfPreviousMonth);
+  };
+
+  const today = new Date();
   const workoutCount = workoutList.length;
+  const isNextWeekFuture = new Date() < getFirstDayOfNextWeek(getStartDate());
+  const isNextMonthFuture = new Date() < getFirstDayOfNextMonth(getStartDate());
 
   return (
     <div className="workout-summary">
@@ -92,6 +155,22 @@ export const WorkoutSummary = ({
                 className="workout-summary__date-picker-input"
               />
             </div>
+          </Spacer>
+          <Spacer>
+            <ButtonGroup>
+              <Button onClick={selectPreviousWeek}>Previous</Button>
+              <Button onClick={selectWeek}>Week</Button>
+              <Button onClick={selectNextWeek} disabled={isNextWeekFuture}>
+                Next
+              </Button>
+            </ButtonGroup>
+            <ButtonGroup>
+              <Button onClick={selectPreviousMonth}>Previous</Button>
+              <Button onClick={selectMonth}>Month</Button>
+              <Button onClick={selectNextMonth} disabled={isNextMonthFuture}>
+                Next
+              </Button>
+            </ButtonGroup>
           </Spacer>
         </Container>
         {workoutCount > 0 ? (
