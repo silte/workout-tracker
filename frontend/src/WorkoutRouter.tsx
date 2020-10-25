@@ -19,5 +19,6 @@ export const WorkoutRouter = () => (
       component={WorkoutSummaryContainer}
     />
     <Route exact path="/workout/:workoutId" component={WorkoutContainer} />
+    <Route exact path="/workout/:workoutId/:chartStartIndex/:chartEndIndex" component={WorkoutContainer} />
   </Switch>
 );
