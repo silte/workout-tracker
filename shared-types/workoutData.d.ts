@@ -46,4 +46,5 @@ interface ILapDataPoint {
   avgHr: number;
   avgSpeed: number;
   maxSpeed: number;
+  endTime: number;
 }

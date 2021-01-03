@@ -112,7 +112,7 @@ const parseDataPoints = (
 
 const getLapData = (  workoutRawData: IWorkoutRawData): ILapData => {
   const parseLapExtensionData = (lapData: ILapExtension): (ILapDataPoint | undefined)[] => 
-  lapData.markers.map(({totals}) => {
+  lapData.markers.map(({totals, endTime}) => {
     if(!totals) return;
     const {
       duration, 
@@ -132,7 +132,8 @@ const getLapData = (  workoutRawData: IWorkoutRawData): ILapData => {
       minHr,
       avgHr,
       avgSpeed,
-      maxSpeed
+      maxSpeed,
+      endTime
     }
   }).filter(data => data !== undefined)
 
