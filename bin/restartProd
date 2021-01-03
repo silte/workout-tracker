@@ -1,5 +1,5 @@
 #!/bin/bash
 
-docker-compose -f ./docker/docker-compose.production.yml -p passport-express-react-demo pull webapp
-docker-compose -f ./docker/docker-compose.production.yml -p passport-express-react-demo down
-docker-compose -f ./docker/docker-compose.production.yml -p passport-express-react-demo up -d
+docker-compose -f ./docker/docker-compose.production.yml -p custom-suunto-app pull webapp
+docker-compose -f ./docker/docker-compose.production.yml -p custom-suunto-app down
+docker-compose -f ./docker/docker-compose.production.yml -p custom-suunto-app up -d

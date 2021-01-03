@@ -2,27 +2,19 @@ version: "3.4"
 
 services:
   webapp:
-    image: ghcr.io/USERNAME/PROJECT-NAME:latest
-    container_name: passport-express-react-demo_webapp
-    restart: unless-stopped
+    image: custom-suunto-app
+    container_name: custom-suunto-app_webapp
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    restart: always
     environment:
       NODE_ENV: production
-    env_file: .env.production
+    volumes:
+      - ../backend/data:/app/data
+      - ../backend/cache:/app/cache
+    working_dir: /app/
     ports:
       - 4000:4000
 
-  mongodb:
-    image: mongo:4.2.10-bionic
-    container_name: passport-express-react-demo_mongodb
-    restart: unless-stopped
-    env_file: .env.production
-    volumes:
-      - ./mongo-entrypoint:/docker-entrypoint-initdb.d
-      - mongo_data:/data/db
-      - mongo_config:/data/configdb
-
-volumes:
-  mongo_data:
-    name: passport-express-react-demo-mongodata
-  mongo_config:
-    name: passport-express-react-demo-mongoconfig
+    command: node build/index.js
