@@ -1,0 +1,17 @@
+#!/bin/sh
+
+cd backend
+npm ci --quiet
+npm run tsc
+
+cd ../frontend
+npm ci --quiet
+npm run build
+
+cd ..
+
+rm -rf build
+mkdir -p build/static build/
+cp -r backend/build build/
+cp -r backend/node_modules build/
+cp -r frontend/build build/static/react-app

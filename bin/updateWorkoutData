@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker-compose -f ./docker/docker-compose.update-workout-data.yml -p suunto-app-update-data up
