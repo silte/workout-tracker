@@ -1,13 +1,13 @@
 import { DATA_DIR } from "../../constants/filesNames";
 import { readJson } from "../../utils/jsonHelper";
 import {
-  getMultisportExtension,
   getCadenceStreamExtension,
   getSummaryExtension,
   getHeartrateStreamExtension,
   getSpeedStreamExtension,
   getDistanceDeltaStreamExtension,
   getAltitudeStreamExtension,
+  getDistanceLapExtension,
 } from "../../model/getWorkoutExtension";
 
 const roundToThousands = (number: number) => Math.round(number / 1000) * 1000;
@@ -34,6 +34,8 @@ export const getWorkoutData = (workoutId: string): IWorkoutData => {
   const cadenceExtension = getSummaryExtension(workoutData);
 
   const dataPoints = parseDataPoints(workoutData);
+  
+  const lapData = getLapData(workoutData);
 
   return {
     workoutKey,
@@ -52,6 +54,7 @@ export const getWorkoutData = (workoutId: string): IWorkoutData => {
     avgCadence: cadenceExtension?.avgCadence,
     maxCadence: cadenceExtension?.maxCadence,
     dataPoints,
+    lapData,
   };
 };
 
@@ -106,3 +109,38 @@ const parseDataPoints = (
     ...content,
   }));
 };
+
+const getLapData = (  workoutRawData: IWorkoutRawData): ILapData => {
+  const parseLapExtensionData = (lapData: ILapExtension): (ILapDataPoint | undefined)[] => 
+  lapData.markers.map(({totals}) => {
+    if(!totals) return;
+    const {
+      duration, 
+      distance, 
+      ascent, 
+      descent, 
+      hr:{max: maxHr, min: minHr, avg: avgHr}, 
+      speed: {avg: avgSpeed, max: maxSpeed}
+    } = totals;
+    
+    return {
+      duration,
+      distance,
+      ascent,
+      descent,
+      maxHr,
+      minHr,
+      avgHr,
+      avgSpeed,
+      maxSpeed
+    }
+  }).filter(data => data !== undefined)
+
+  const distanceLapData = getDistanceLapExtension(workoutRawData)
+
+  const autolap = parseLapExtensionData(distanceLapData)
+
+  return {
+    autolap
+  }
+}

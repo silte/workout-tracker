@@ -15,6 +15,7 @@ interface IWorkoutData {
   avgCadence: number;
   maxCadence: number;
   dataPoints: IWorkoutDataPointData[];
+  lapData: ILapData;
 }
 
 interface IPositionCoordinates {
@@ -29,4 +30,20 @@ interface IWorkoutDataPointData {
   distance?: number;
   altitude?: number;
   cadence?: number;
+}
+
+interface ILapData {
+  autolap?: (ILapDataPoint|undefined)[]
+}
+
+interface ILapDataPoint {
+  duration: number;
+  distance: number;
+  ascent: number;
+  descent: number;
+  maxHr: number;
+  minHr: number;
+  avgHr: number;
+  avgSpeed: number;
+  maxSpeed: number;
 }
