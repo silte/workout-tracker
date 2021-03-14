@@ -9,7 +9,10 @@ const app = express();
 const HOSTNAME: string = "0.0.0.0";
 const PORT: number = 4000;
 
-buildWorkoutSummaryDataCache();
+
+if(process.env.NODE_ENV === "development") {
+  buildWorkoutSummaryDataCache(true);
+}
 
 app.use("/api/workout", workoutRouter);
 

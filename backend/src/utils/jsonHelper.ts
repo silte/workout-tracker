@@ -12,7 +12,7 @@ export const writeJson = (filename: string, data: object) => {
 };
 
 export const downloadJson = (filename: string, endpoint: string) =>
-  new Promise((resolve, reject) => {
+  new Promise<void>((resolve, reject) => {
     const file = fs.createWriteStream(filename);
     https
       .get(endpoint, function (response) {
