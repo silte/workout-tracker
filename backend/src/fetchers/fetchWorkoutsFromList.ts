@@ -6,9 +6,7 @@ import {
 import { readJson, downloadJson } from "../utils/jsonHelper";
 import { getWorkoutEndpoint } from "../constants/endpoints";
 
-const FETCH_INTERVAL_MS = 1000;
-
-export const fetchWorkoutsFromList = (apiToken: string) => {
+export const fetchWorkoutsFromList = async (apiToken: string) => {
   if (!fs.existsSync(WORKOUT_LIST_RAW_FILENAME)) {
     console.log("Workout list is required before you can fetch workouts.\n");
     process.exit();
@@ -17,47 +15,31 @@ export const fetchWorkoutsFromList = (apiToken: string) => {
   const { payload: workoutList }: IWorkoutList = readJson(
     WORKOUT_LIST_RAW_FILENAME
   );
+  const totalCount = workoutList.length
   console.log(
-    `Fetching ${workoutList.length} workouts with api token ${apiToken}`
+    `Fetching ${totalCount} workouts with api token ${apiToken}`
   );
-  fetchWorkouts(workoutList, apiToken);
+  const fetchReport = await Promise.all(workoutList.map(({workoutKey}, index) => fetchWorkouts(workoutKey, apiToken, index, totalCount)));
+
+  const cached = fetchReport.reduce((prev, {cached}) => prev + cached, 0)
+  const downloaded = fetchReport.reduce((prev, {downloaded}) => prev + downloaded, 0)
+  console.log(
+    `${downloaded} workouts download and ${cached} workout found from cache`
+  );
 };
 
-const fetchWorkouts = (
-  workoutList: IWorkoutListItem[],
+const fetchWorkouts = async (
+  workoutId: string,
   apiToken: string,
-  iterator = 0,
-  downloaded = 0,
-  cached = 0
-) => {
-  let sleepTime = FETCH_INTERVAL_MS;
-  const { workoutKey: workoutId } = workoutList[iterator];
-
+  current: number,
+  totalCount: number
+): Promise<{cached: number, downloaded:number}> => {
   const endpoint = getWorkoutEndpoint(workoutId, apiToken);
   const filename = getWorkoutRawDataFilename(workoutId);
   if (!fs.existsSync(filename)) {
-    console.log(`Downloading workout ${iterator + 1}/${workoutList.length}`);
-    downloadJson(filename, endpoint);
-    downloaded++;
-  } else {
-    sleepTime = 0;
-    cached++;
+    console.log(`Downloading workout ${current}/${totalCount}`);
+    await downloadJson(filename, endpoint);
+    return ({cached: 0, downloaded: 1})
   }
-
-  iterator++;
-  if (workoutList.length > iterator) {
-    setTimeout(
-      fetchWorkouts,
-      sleepTime,
-      workoutList,
-      apiToken,
-      iterator,
-      downloaded,
-      cached
-    );
-  } else {
-    console.log(
-      `${downloaded} workouts download and ${cached} workout found from cache`
-    );
-  }
+  return ({cached: 1, downloaded: 0})
 };
