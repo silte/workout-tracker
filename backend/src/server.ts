@@ -17,7 +17,9 @@ import { buildWorkoutSummaryDataCache } from "./cacheBuilder";
 const REACT_APP_PATH = "/static/react-app/";
 const app = express();
 
-buildWorkoutSummaryDataCache();
+if(process.env.NODE_ENV === "development") {
+  buildWorkoutSummaryDataCache(true);
+}
 
 app.use(
   cookieSession({

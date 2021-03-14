@@ -1,5 +1,6 @@
 import { fetchWorkoutsFromList } from "./fetchers/fetchWorkoutsFromList";
 import { fetchWorkoutList } from "./fetchers/fetchWorkoutList";
+import { buildWorkoutSummaryDataCache } from "./cacheBuilder";
 
 const init = async () => {
   const customArgs = process.argv.slice(2);
@@ -15,6 +16,7 @@ const init = async () => {
 
   await fetchWorkoutList(apiToken);
   await fetchWorkoutsFromList(apiToken);
+  buildWorkoutSummaryDataCache();
 };
 
 init();
