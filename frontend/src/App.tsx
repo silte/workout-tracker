@@ -1,38 +1,36 @@
 import React, { useEffect, useState } from "react";
-
-const LoginBlock = () => (
-  <ul>
-    <li>
-      <a href="/api/auth/github">Login with github</a>
-    </li>
-  </ul>
-);
-
-const Logout = () => <a href="/api/auth/logout">Logout</a>;
+import Notification from "./components/notification/notification";
+import AppRouter from "./AppRouter";
+import { getAuthenticationStatus } from "./services/AuthenticationService";
 
 const App = (): JSX.Element => {
-  const [profileInfo, setProfileInfo] = useState<IUser | IAuthenticationFailed>(
-    { authenticated: false, message: "" }
-  );
+  const [
+    authenticationStatus,
+    setAuthenticationStatus,
+  ] = useState<IAuthenticationStatus>({
+    authenticated: false,
+  });
+
   useEffect(() => {
     const fetchUserInfo = async () => {
-      const userInfo = await fetch("/api/profile");
-      setProfileInfo(await userInfo.json());
+      setAuthenticationStatus(await getAuthenticationStatus());
     };
     fetchUserInfo();
   }, []);
 
   return (
-    <div>
-      {"authenticated" in profileInfo &&
-      profileInfo?.authenticated === false ? (
-        <LoginBlock />
-      ) : (
-        <Logout />
+    <>
+      {authenticationStatus.errors && (
+        <Notification
+          type="error"
+          label="Something went wrong!"
+          className="z-20"
+        >
+          {authenticationStatus.errors?.join(" ") || ""}
+        </Notification>
       )}
-
-      <pre>{JSON.stringify(profileInfo)}</pre>
-    </div>
+      <AppRouter isLoggedIn={authenticationStatus?.authenticated} />
+    </>
   );
 };
 

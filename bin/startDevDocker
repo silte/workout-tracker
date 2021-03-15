@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker-compose -f ./docker/docker-compose.development.yml -p passport-express-react-demo-dev up -d
