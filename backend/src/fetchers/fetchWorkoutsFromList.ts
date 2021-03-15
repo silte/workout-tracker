@@ -19,10 +19,17 @@ export const fetchWorkoutsFromList = async (apiToken: string) => {
   console.log(
     `Fetching ${totalCount} workouts with api token ${apiToken}`
   );
-  const fetchReport = await Promise.all(workoutList.map(({workoutKey}, index) => fetchWorkouts(workoutKey, apiToken, index, totalCount)));
+  const fetchResults: {cached: number, downloaded:number}[] = []
 
-  const cached = fetchReport.reduce((prev, {cached}) => prev + cached, 0)
-  const downloaded = fetchReport.reduce((prev, {downloaded}) => prev + downloaded, 0)
+  let index = 0;
+  for(const {workoutKey} of workoutList) {
+    index++;
+    const fetchResult = await fetchWorkouts(workoutKey, apiToken, index, totalCount)
+    fetchResults.push(fetchResult)
+  }
+
+  const cached = fetchResults.reduce((prev, {cached}) => prev + cached, 0)
+  const downloaded = fetchResults.reduce((prev, {downloaded}) => prev + downloaded, 0)
   console.log(
     `${downloaded} workouts download and ${cached} workout found from cache`
   );
