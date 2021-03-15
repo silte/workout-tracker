@@ -1,6 +1,4 @@
-import { fetchWorkoutsFromList } from "./fetchers/fetchWorkoutsFromList";
-import { fetchWorkoutList } from "./fetchers/fetchWorkoutList";
-import { buildWorkoutSummaryDataCache } from "./cacheBuilder";
+import { updateUserWorkoutData } from "./integrations/suunto/updateUserWorkoutData";
 
 const init = async () => {
   const customArgs = process.argv.slice(2);
@@ -14,9 +12,7 @@ const init = async () => {
   }
   const [apiToken] = customArgs;
 
-  await fetchWorkoutList(apiToken);
-  await fetchWorkoutsFromList(apiToken);
-  buildWorkoutSummaryDataCache();
+  await updateUserWorkoutData(apiToken)
 };
 
 init();

@@ -1,8 +1,8 @@
 import fs from "fs";
 
-import { getWorkoutListEndpoint } from "../constants/endpoints";
-import { WORKOUT_LIST_RAW_FILENAME, DATA_DIR } from "../constants/filesNames";
-import { downloadJson } from "../utils/jsonHelper";
+import { getWorkoutListEndpoint } from "../../../constants/endpoints";
+import { WORKOUT_LIST_RAW_FILENAME, DATA_DIR } from "../../../constants/filesNames";
+import { downloadJson } from "../../../utils/jsonHelper";
 
 export const fetchWorkoutList = async (apiToken: string) => {
   console.log(`Fetching workout list with api token: ${apiToken}`);
