@@ -2,9 +2,9 @@ import fs from "fs";
 import {
   WORKOUT_LIST_RAW_FILENAME,
   getWorkoutRawDataFilename,
-} from "../constants/filesNames";
-import { readJson, downloadJson } from "../utils/jsonHelper";
-import { getWorkoutEndpoint } from "../constants/endpoints";
+} from "../../../constants/filesNames";
+import { readJson, downloadJson } from "../../../utils/jsonHelper";
+import { getWorkoutEndpoint } from "../../../constants/endpoints";
 
 export const fetchWorkoutsFromList = async (apiToken: string) => {
   if (!fs.existsSync(WORKOUT_LIST_RAW_FILENAME)) {
