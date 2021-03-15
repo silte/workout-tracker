@@ -14,6 +14,8 @@ if(process.env.NODE_ENV === "development") {
   buildWorkoutSummaryDataCache(true);
 }
 
+app.use(express.json());
+
 app.use("/api/workout", workoutRouter);
 
 const reactFrontendExists = fs.existsSync(
