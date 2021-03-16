@@ -8,7 +8,7 @@ interface IProps {
 const SEO = ({ title }: IProps): JSX.Element => {
   return (
     <Helmet>
-      <title>{title} | Financer</title>
+      <title>{title} | Custom suunto app</title>
     </Helmet>
   );
 };

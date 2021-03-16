@@ -7,6 +7,9 @@ interface IButtonGroup {
   className?: string;
 }
 
-export const ButtonGroup = (props: IButtonGroup) => (
+const ButtonGroup = (props: IButtonGroup): JSX.Element => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
   <MuiButtonGroup {...props} />
 );
+
+export default ButtonGroup;

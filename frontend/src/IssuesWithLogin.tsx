@@ -158,7 +158,7 @@ const IssuesWithLogin = (): JSX.Element => {
             </Link>
             <h1>
               <span className="mt-2 block text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                Login issues to Financer
+                Login issues to Custom suunto app
               </span>
             </h1>
           </div>

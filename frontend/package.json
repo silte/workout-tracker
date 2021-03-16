@@ -41,7 +41,7 @@
     "format": "prettier --write src/**/*.ts{,x} && eslint src/**/*.ts{,x} --fix",
     "lint": "eslint src/**/*.ts{,x}",
     "eject": "react-scripts eject",
-    "watch:css": "postcss src/assets/tailwind.css -o src/assets/passport-express-react-demo.css"
+    "watch:css": "postcss src/assets/tailwind.css -o src/assets/custom-suunto-app.css"
   },
   "eslintConfig": {
     "extends": [

@@ -15,21 +15,27 @@ export const fetchWorkoutsFromList = async (apiToken: string) => {
   const { payload: workoutList }: IWorkoutList = readJson(
     WORKOUT_LIST_RAW_FILENAME
   );
-  const totalCount = workoutList.length
-  console.log(
-    `Fetching ${totalCount} workouts with api token ${apiToken}`
-  );
-  const fetchResults: {cached: number, downloaded:number}[] = []
+  const totalCount = workoutList.length;
+  console.log(`Fetching ${totalCount} workouts with api token ${apiToken}`);
+  const fetchResults: { cached: number; downloaded: number }[] = [];
 
   let index = 0;
-  for(const {workoutKey} of workoutList) {
+  for (const { workoutKey } of workoutList) {
     index++;
-    const fetchResult = await fetchWorkouts(workoutKey, apiToken, index, totalCount)
-    fetchResults.push(fetchResult)
+    const fetchResult = await fetchWorkouts(
+      workoutKey,
+      apiToken,
+      index,
+      totalCount
+    );
+    fetchResults.push(fetchResult);
   }
 
-  const cached = fetchResults.reduce((prev, {cached}) => prev + cached, 0)
-  const downloaded = fetchResults.reduce((prev, {downloaded}) => prev + downloaded, 0)
+  const cached = fetchResults.reduce((prev, { cached }) => prev + cached, 0);
+  const downloaded = fetchResults.reduce(
+    (prev, { downloaded }) => prev + downloaded,
+    0
+  );
   console.log(
     `${downloaded} workouts download and ${cached} workout found from cache`
   );
@@ -40,13 +46,13 @@ const fetchWorkouts = async (
   apiToken: string,
   current: number,
   totalCount: number
-): Promise<{cached: number, downloaded:number}> => {
+): Promise<{ cached: number; downloaded: number }> => {
   const endpoint = getWorkoutEndpoint(workoutId, apiToken);
   const filename = getWorkoutRawDataFilename(workoutId);
   if (!fs.existsSync(filename)) {
     console.log(`Downloading workout ${current}/${totalCount}`);
     await downloadJson(filename, endpoint);
-    return ({cached: 0, downloaded: 1})
+    return { cached: 0, downloaded: 1 };
   }
-  return ({cached: 1, downloaded: 0})
+  return { cached: 1, downloaded: 0 };
 };

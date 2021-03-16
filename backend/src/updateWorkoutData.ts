@@ -12,7 +12,7 @@ const init = async () => {
   }
   const [apiToken] = customArgs;
 
-  await updateUserWorkoutData(apiToken)
+  await updateUserWorkoutData(apiToken);
 };
 
 init();

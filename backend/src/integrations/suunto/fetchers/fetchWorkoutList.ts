@@ -1,7 +1,10 @@
 import fs from "fs";
 
 import { getWorkoutListEndpoint } from "../../../constants/endpoints";
-import { WORKOUT_LIST_RAW_FILENAME, DATA_DIR } from "../../../constants/filesNames";
+import {
+  WORKOUT_LIST_RAW_FILENAME,
+  DATA_DIR,
+} from "../../../constants/filesNames";
 import { downloadJson } from "../../../utils/jsonHelper";
 
 export const fetchWorkoutList = async (apiToken: string) => {

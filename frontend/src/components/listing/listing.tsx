@@ -1,17 +1,25 @@
-import React from 'react';
+/* eslint-disable react/jsx-props-no-spreading, @typescript-eslint/no-unused-expressions */
+import React from "react";
 
-import './listing.scss';
+import "./listing.scss";
 
-export const Listing = ({ listingComponent, arrayOfContent, className = '', col2, col3, keyFieldName }: IListing) => {
+const Listing = ({
+  listingComponent,
+  arrayOfContent,
+  className = "",
+  col2,
+  col3,
+  keyFieldName,
+}: IListing): JSX.Element => {
   const ListingComponent = listingComponent;
-  const classes = ['listing', className];
+  const classes = ["listing", className];
 
-  col2 && classes.push('col--2');
-  col3 && classes.push('col--3');
+  col2 && classes.push("col--2");
+  col3 && classes.push("col--3");
 
   return (
-    <ul className={classes.join(' ')}>
-      {arrayOfContent.map(fields => (
+    <ul className={classes.join(" ")}>
+      {arrayOfContent.map((fields) => (
         <li className="listing__item" key={fields[keyFieldName]}>
           <ListingComponent {...fields} />
         </li>
@@ -28,3 +36,5 @@ interface IListing {
   col3?: boolean;
   keyFieldName: string;
 }
+
+export default Listing;
