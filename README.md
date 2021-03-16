@@ -21,7 +21,7 @@ Fill the form with these:
 
 - `Application name` as you want, doesn't matter.
 - `Homepage URL` as `http://localhost:3000/`.
-- `Authorization callback URL` as `http://localhost:3000/api/auth/github/redirect`.
+- `Authorization callback URL` as `http://localhost:3000/auth/github/redirect`.
 
 Register application!
 
@@ -56,10 +56,21 @@ $ nvm use
 $ npm ci
 ```
 
+#### Known issues
+
+If `npm ci` doesn't work, do this:
+
+```
+// Delete node_modules and package-lock.json
+$ rm -rf node_modules/ package-lock.json
+// Install all dependencies.
+$ npm i --legacy-peer-deps
+```
+
 ### Start up docker
 
 ```
-$ docker-compose -f ./docker/docker-compose.development.yaml up -d
+$ ./bin/startDevDocker
 ```
 
 ### Start up the backend and frontend
@@ -82,6 +93,15 @@ $ npm --prefix frontend install DEPENDENCY-NAME
 $ npm --prefix backend install DEPENDENCY-NAME
 ```
 
+#### Known issues
+
+If backend fails after first authentication attempt, restart the backend.
+
+```
+$ npm start
+```
+
 ## Authors
 
+- **Sebastian Hämäläinen** - [shamalainen](https://github.com/shamalainen)
 - **Teemu Sillantaus** - [silte](https://github.com/silte)
