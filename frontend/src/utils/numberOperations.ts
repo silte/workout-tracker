@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export const sumNumbers = (
   number1: number | undefined,
   number2: number | undefined

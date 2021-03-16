@@ -6,7 +6,7 @@ This is a simple demo/template that includes simple frontend for login test and 
 
 This quick start guide should get you up and running in no time with local development environment.
 
-## Requirements for Financer
+## Requirements for Custom Suunto app
 
 - Docker 18.06.0+
 - Docker Compose

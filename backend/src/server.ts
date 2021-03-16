@@ -13,11 +13,10 @@ import authenticationCheck from "./routes/middlewares/authenticationCheck";
 import { workoutRouter } from "./routes/workout";
 import { buildWorkoutSummaryDataCache } from "./cacheBuilder";
 
-
 const REACT_APP_PATH = "/static/react-app/";
 const app = express();
 
-if(process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "development") {
   buildWorkoutSummaryDataCache(true);
 }
 

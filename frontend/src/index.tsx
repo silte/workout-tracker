@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
 
 import App from "./App";
-import "./assets/passport-express-react-demo.css";
+import "./assets/custom-suunto-app.css";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import isUpdateAllowed from "./utils/allowedUpdateLocations";

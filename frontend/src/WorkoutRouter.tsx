@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { WorkoutListContainer } from "./containers/workout/WorkoutListContainer";
-import { WorkoutSummaryContainer } from "./containers/workout/WorkoutSummaryContainer";
-import { WorkoutContainer } from "./containers/workout/WorkoutContainer";
+import WorkoutListContainer from "./containers/workout/WorkoutListContainer";
+import WorkoutSummaryContainer from "./containers/workout/WorkoutSummaryContainer";
+import WorkoutContainer from "./containers/workout/WorkoutContainer";
 
-export const WorkoutRouter = () => (
+const WorkoutRouter = (): JSX.Element => (
   <Switch>
     <Route exact path="/workout/list" component={WorkoutListContainer} />
     <Route exact path="/workout/summary" component={WorkoutSummaryContainer} />
@@ -19,6 +19,12 @@ export const WorkoutRouter = () => (
       component={WorkoutSummaryContainer}
     />
     <Route exact path="/workout/:workoutId" component={WorkoutContainer} />
-    <Route exact path="/workout/:workoutId/:chartStartIndex/:chartEndIndex" component={WorkoutContainer} />
+    <Route
+      exact
+      path="/workout/:workoutId/:chartStartIndex/:chartEndIndex"
+      component={WorkoutContainer}
+    />
   </Switch>
 );
+
+export default WorkoutRouter;

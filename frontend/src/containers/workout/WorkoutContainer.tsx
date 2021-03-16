@@ -1,14 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { WORKOUT_DATA_ENDPOINT } from "../../constants/endpoints";
 import { useHistory, useParams } from "react-router-dom";
-import { Workout } from "../../pages/workout/Workout";
+import { WORKOUT_DATA_ENDPOINT } from "../../constants/endpoints";
+import Workout from "../../pages/workout/Workout";
 
-export const WorkoutContainer = () => {
+const WorkoutContainer = (): JSX.Element => {
   const [workout, setWorkout] = useState<IWorkoutData>({} as IWorkoutData);
-  const { workoutId, chartEndIndex: defaultChartEndIndex, chartStartIndex: defaultChartStartIndex } = useParams<{ workoutId: string, chartStartIndex?: string, chartEndIndex?: string }>();
+  const {
+    workoutId,
+    chartEndIndex: defaultChartEndIndex,
+    chartStartIndex: defaultChartStartIndex,
+  } = useParams<{
+    workoutId: string;
+    chartStartIndex?: string;
+    chartEndIndex?: string;
+  }>();
 
-  const [chartStartIndex, setChartStartIndex] = useState<number>(typeof defaultChartStartIndex !== "undefined" ? parseInt(defaultChartStartIndex) : NaN);
-  const [chartEndIndex, setChartEndIndex] = useState<number>(typeof defaultChartEndIndex !== "undefined" ? parseInt(defaultChartEndIndex) : NaN);
+  const [chartStartIndex, setChartStartIndex] = useState<number>(
+    typeof defaultChartStartIndex !== "undefined"
+      ? parseInt(defaultChartStartIndex, 10)
+      : NaN
+  );
+  const [chartEndIndex, setChartEndIndex] = useState<number>(
+    typeof defaultChartEndIndex !== "undefined"
+      ? parseInt(defaultChartEndIndex, 10)
+      : NaN
+  );
 
   const history = useHistory();
 
@@ -23,11 +39,31 @@ export const WorkoutContainer = () => {
 
   useEffect(() => {
     let path = `/workout/${workoutId}`;
-    if((!isNaN(chartStartIndex) && !isNaN(chartEndIndex)) && (chartStartIndex > 0 || chartEndIndex < workout.dataPoints?.length - 1)) {
+    if (
+      !Number.isNaN(chartStartIndex) &&
+      !Number.isNaN(chartEndIndex) &&
+      (chartStartIndex > 0 || chartEndIndex < workout.dataPoints?.length - 1)
+    ) {
       path = `/workout/${workoutId}/${chartStartIndex}/${chartEndIndex}`;
     }
     history.replace(path);
-  }, [chartStartIndex, chartEndIndex, workoutId, history]);
+  }, [
+    chartStartIndex,
+    chartEndIndex,
+    workoutId,
+    history,
+    workout.dataPoints?.length,
+  ]);
 
-  return <Workout workout={workout} chartStartIndex={chartStartIndex} chartEndIndex={chartEndIndex} setChartStartIndex={setChartStartIndex} setChartEndIndex={setChartEndIndex} />;
+  return (
+    <Workout
+      workout={workout}
+      chartStartIndex={chartStartIndex}
+      chartEndIndex={chartEndIndex}
+      setChartStartIndex={setChartStartIndex}
+      setChartEndIndex={setChartEndIndex}
+    />
+  );
 };
+
+export default WorkoutContainer;

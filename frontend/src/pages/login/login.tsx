@@ -30,7 +30,7 @@ const Login = (): JSX.Element => {
             aria-labelledby="modal-headline"
           >
             <div className="bg-white rounded-lg text-left shadow-xl overflow-hidden">
-              <LoginHeader label="passport-express-react-demo">
+              <LoginHeader label="Custom Suunto app">
                 Please login to manage your profile.
               </LoginHeader>
               {checkIsEnabled(REACT_APP_IS_GITHUB_OAUTH_ENABLED) && (
