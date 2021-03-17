@@ -1,4 +1,5 @@
-import { updateUserWorkoutData } from "./integrations/suunto/updateUserWorkoutData";
+/* eslint-disable no-console */
+import updateUserWorkoutData from "./integrations/suunto/updateUserWorkoutData";
 
 const init = async () => {
   const customArgs = process.argv.slice(2);
