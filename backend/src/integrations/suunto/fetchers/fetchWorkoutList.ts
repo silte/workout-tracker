@@ -7,7 +7,11 @@ import {
 } from "../../../constants/filesNames";
 import { downloadJson } from "../../../utils/jsonHelper";
 
-export const fetchWorkoutList = async (apiToken: string) => {
+const ensureDataDirectoryExists = () =>
+  !fs.existsSync(DATA_DIR) && fs.mkdirSync(DATA_DIR);
+
+const fetchWorkoutList = async (apiToken: string): Promise<void> => {
+  // eslint-disable-next-line no-console
   console.log(`Fetching workout list with api token: ${apiToken}`);
   ensureDataDirectoryExists();
 
@@ -15,5 +19,4 @@ export const fetchWorkoutList = async (apiToken: string) => {
   await downloadJson(WORKOUT_LIST_RAW_FILENAME, endpoint);
 };
 
-const ensureDataDirectoryExists = () =>
-  !fs.existsSync(DATA_DIR) && fs.mkdirSync(DATA_DIR);
+export default fetchWorkoutList;

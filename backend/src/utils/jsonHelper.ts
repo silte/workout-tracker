@@ -2,12 +2,12 @@
 import fs from "fs";
 import https from "https";
 
-export const readJson = (filename: string): JSON => {
+export const readJson = <T>(filename: string): T => {
   const rawdata = fs.readFileSync(filename);
   return JSON.parse(rawdata.toString());
 };
 
-export const writeJson = (filename: string, data: object): void => {
+export const writeJson = <T>(filename: string, data: T): void => {
   const dataStr = JSON.stringify(data);
   fs.writeFileSync(filename, dataStr);
 };

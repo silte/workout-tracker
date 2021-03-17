@@ -1,14 +1,18 @@
-export const getAltitudeStreamExtension = (workoutRawData: IWorkoutRawData) => {
+export const getAltitudeStreamExtension = (
+  workoutRawData: IWorkoutRawData
+): IBaseExtension => {
   const extension = workoutRawData.extensions.find(
-    (extension) => extension.type === "AltitudeStreamExtension"
+    (currentExtension) => currentExtension.type === "AltitudeStreamExtension"
   );
   return typeof extension !== "undefined"
     ? <IBaseExtension>extension
     : <IBaseExtension>{};
 };
-export const getCadenceStreamExtension = (workoutRawData: IWorkoutRawData) => {
+export const getCadenceStreamExtension = (
+  workoutRawData: IWorkoutRawData
+): IBaseExtension => {
   const extension = workoutRawData.extensions.find(
-    (extension) => extension.type === "CadenceStreamExtension"
+    (currentExtension) => currentExtension.type === "CadenceStreamExtension"
   );
   return typeof extension !== "undefined"
     ? <IBaseExtension>extension
@@ -16,33 +20,40 @@ export const getCadenceStreamExtension = (workoutRawData: IWorkoutRawData) => {
 };
 export const getDistanceDeltaStreamExtension = (
   workoutRawData: IWorkoutRawData
-) => {
+): IBaseExtension => {
   const extension = workoutRawData.extensions.find(
-    (extension) => extension.type === "DistanceDeltaStreamExtension"
+    (currentExtension) =>
+      currentExtension.type === "DistanceDeltaStreamExtension"
   );
   return typeof extension !== "undefined"
     ? <IBaseExtension>extension
     : <IBaseExtension>{};
 };
-export const getDistanceLapExtension = (workoutRawData: IWorkoutRawData) => {
+export const getDistanceLapExtension = (
+  workoutRawData: IWorkoutRawData
+): ILapExtension => {
   const extension = workoutRawData.extensions.find(
-    (extension) => extension.type === "DistanceLapExtension"
+    (currentExtension) => currentExtension.type === "DistanceLapExtension"
   );
   return typeof extension !== "undefined"
     ? <ILapExtension>extension
     : <ILapExtension>{};
 };
-export const getFitnessExtension = (workoutRawData: IWorkoutRawData) => {
+export const getFitnessExtension = (
+  workoutRawData: IWorkoutRawData
+): IFitnessExtension => {
   const extension = workoutRawData.extensions.find(
-    (extension) => extension.type === "FitnessExtension"
+    (currentExtension) => currentExtension.type === "FitnessExtension"
   );
   return typeof extension !== "undefined"
     ? <IFitnessExtension>extension
     : <IFitnessExtension>{};
 };
-export const getHeartRateExtension = (workoutRawData: IWorkoutRawData) => {
+export const getHeartRateExtension = (
+  workoutRawData: IWorkoutRawData
+): IHrExtension => {
   const extension = workoutRawData.extensions.find(
-    (extension) => extension.type === "HeartRateExtension"
+    (currentExtension) => currentExtension.type === "HeartRateExtension"
   );
   return typeof extension !== "undefined"
     ? <IHrExtension>extension
@@ -50,33 +61,39 @@ export const getHeartRateExtension = (workoutRawData: IWorkoutRawData) => {
 };
 export const getHeartrateStreamExtension = (
   workoutRawData: IWorkoutRawData
-) => {
+): IBaseExtension => {
   const extension = workoutRawData.extensions.find(
-    (extension) => extension.type === "HeartrateStreamExtension"
+    (currentExtension) => currentExtension.type === "HeartrateStreamExtension"
   );
   return typeof extension !== "undefined"
     ? <IBaseExtension>extension
     : <IBaseExtension>{};
 };
-export const getIBIStreamExtension = (workoutRawData: IWorkoutRawData) => {
+export const getIBIStreamExtension = (
+  workoutRawData: IWorkoutRawData
+): IBaseExtension => {
   const extension = workoutRawData.extensions.find(
-    (extension) => extension.type === "IBIStreamExtension"
+    (currentExtension) => currentExtension.type === "IBIStreamExtension"
   );
   return typeof extension !== "undefined"
     ? <IBaseExtension>extension
     : <IBaseExtension>{};
 };
-export const getIntensityExtension = (workoutRawData: IWorkoutRawData) => {
+export const getIntensityExtension = (
+  workoutRawData: IWorkoutRawData
+): IIntensityExtension => {
   const extension = workoutRawData.extensions.find(
-    (extension) => extension.type === "IntensityExtension"
+    (currentExtension) => currentExtension.type === "IntensityExtension"
   );
   return typeof extension !== "undefined"
     ? <IIntensityExtension>extension
     : <IIntensityExtension>{};
 };
-export const getLocationStreamExtension = (workoutRawData: IWorkoutRawData) => {
+export const getLocationStreamExtension = (
+  workoutRawData: IWorkoutRawData
+): ILocationExtension => {
   const extension = workoutRawData.extensions.find(
-    (extension) => extension.type === "LocationStreamExtension"
+    (currentExtension) => currentExtension.type === "LocationStreamExtension"
   );
   return typeof extension !== "undefined"
     ? <ILocationExtension>extension
@@ -84,49 +101,59 @@ export const getLocationStreamExtension = (workoutRawData: IWorkoutRawData) => {
 };
 export const getManualLapStreamExtension = (
   workoutRawData: IWorkoutRawData
-) => {
+): ILapExtension => {
   const extension = workoutRawData.extensions.find(
-    (extension) => extension.type === "ManualLapStreamExtension"
+    (currentExtension) => currentExtension.type === "ManualLapStreamExtension"
   );
   return typeof extension !== "undefined"
     ? <ILapExtension>extension
     : <ILapExtension>{};
 };
-export const getMultisportExtension = (workoutRawData: IWorkoutRawData) => {
+export const getMultisportExtension = (
+  workoutRawData: IWorkoutRawData
+): IMultisportExtension => {
   const extension = workoutRawData.extensions.find(
-    (extension) => extension.type === "MultisportMarker"
+    (currentExtension) => currentExtension.type === "MultisportMarker"
   );
   return typeof extension !== "undefined"
     ? <IMultisportExtension>extension
     : <IMultisportExtension>{};
 };
-export const getPauseMarkerExtension = (workoutRawData: IWorkoutRawData) => {
+export const getPauseMarkerExtension = (
+  workoutRawData: IWorkoutRawData
+): IPauseMarkerExtension => {
   const extension = workoutRawData.extensions.find(
-    (extension) => extension.type === "PauseMarkerExtension"
+    (currentExtension) => currentExtension.type === "PauseMarkerExtension"
   );
   return typeof extension !== "undefined"
     ? <IPauseMarkerExtension>extension
     : <IPauseMarkerExtension>{};
 };
-export const getPowerStreamExtension = (workoutRawData: IWorkoutRawData) => {
+export const getPowerStreamExtension = (
+  workoutRawData: IWorkoutRawData
+): IBaseExtension => {
   const extension = workoutRawData.extensions.find(
-    (extension) => extension.type === "PowerStreamExtension"
+    (currentExtension) => currentExtension.type === "PowerStreamExtension"
   );
   return typeof extension !== "undefined"
     ? <IBaseExtension>extension
     : <IBaseExtension>{};
 };
-export const getSpeedStreamExtension = (workoutRawData: IWorkoutRawData) => {
+export const getSpeedStreamExtension = (
+  workoutRawData: IWorkoutRawData
+): IBaseExtension => {
   const extension = workoutRawData.extensions.find(
-    (extension) => extension.type === "SpeedStreamExtension"
+    (currentExtension) => currentExtension.type === "SpeedStreamExtension"
   );
   return typeof extension !== "undefined"
     ? <IBaseExtension>extension
     : <IBaseExtension>{};
 };
-export const getSummaryExtension = (workoutRawData: IWorkoutRawData) => {
+export const getSummaryExtension = (
+  workoutRawData: IWorkoutRawData
+): ISummaryExtension => {
   const extension = workoutRawData.extensions.find(
-    (extension) => extension.type === "SummaryExtension"
+    (currentExtension) => currentExtension.type === "SummaryExtension"
   );
   return typeof extension !== "undefined"
     ? <ISummaryExtension>extension
@@ -134,9 +161,10 @@ export const getSummaryExtension = (workoutRawData: IWorkoutRawData) => {
 };
 export const getVerticalSpeedStreamExtension = (
   workoutRawData: IWorkoutRawData
-) => {
+): IBaseExtension => {
   const extension = workoutRawData.extensions.find(
-    (extension) => extension.type === "VerticalSpeedStreamExtension"
+    (currentExtension) =>
+      currentExtension.type === "VerticalSpeedStreamExtension"
   );
   return typeof extension !== "undefined"
     ? <IBaseExtension>extension
