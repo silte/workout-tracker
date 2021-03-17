@@ -9,7 +9,7 @@ export const getMyData = async (req: Request, res: Response): Promise<void> => {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
-    return `my-passport-express-react-demo-data-${year}${addLeadingZero(
+    return `my-workout-tracker-data-${year}${addLeadingZero(
       month
     )}${addLeadingZero(day)}.json`;
   };

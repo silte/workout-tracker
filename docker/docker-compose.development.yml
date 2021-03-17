@@ -9,11 +9,11 @@ version: "3.6"
 services:
   mongodb:
     image: mongo:4.2.10-bionic
-    container_name: passport-express-react-demo_dev-mongodb
+    container_name: workout-tracker_dev-mongodb
     ports:
       - 27017:27017
     environment:
-      - MONGO_INITDB_DATABASE=passport-express-react-demo_dev
+      - MONGO_INITDB_DATABASE=workout-tracker_dev
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=change-me
     volumes:
@@ -22,11 +22,11 @@ services:
       - mongo_config:/data/configdb
   mongodbclient:
     image: mongo-express:latest
-    container_name: passport-express-react-demo_dev-mongoclient
+    container_name: workout-tracker_dev-mongoclient
     hostname: mongoclient
     environment:
       - ME_CONFIG_MONGODB_SERVER=mongodb
-      - ME_CONFIG_MONGODB_AUTH_DATABASE=passport-express-react-demo_dev
+      - ME_CONFIG_MONGODB_AUTH_DATABASE=workout-tracker_dev
       - ME_CONFIG_MONGODB_AUTH_USERNAME=admin
       - ME_CONFIG_MONGODB_AUTH_PASSWORD=change-me
       - ME_CONFIG_MONGODB_ENABLE_ADMIN=false
@@ -37,6 +37,6 @@ services:
 
 volumes:
   mongo_data:
-    name: passport-express-react-demo_dev-mongodata
+    name: workout-tracker_dev-mongodata
   mongo_config:
-    name: passport-express-react-demo_dev-mongoconfig
+    name: workout-tracker_dev-mongoconfig

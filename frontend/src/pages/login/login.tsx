@@ -30,7 +30,7 @@ const Login = (): JSX.Element => {
             aria-labelledby="modal-headline"
           >
             <div className="bg-white rounded-lg text-left shadow-xl overflow-hidden">
-              <LoginHeader label="Custom Suunto app">
+              <LoginHeader label="Workout tracker">
                 Please login to manage your profile.
               </LoginHeader>
               {checkIsEnabled(REACT_APP_IS_GITHUB_OAUTH_ENABLED) && (
