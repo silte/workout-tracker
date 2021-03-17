@@ -30,8 +30,8 @@ Register application!
 ### Clone the repository
 
 ```
-$ git clone git@github.com:silte/custom-suunto-app.git
-$ cd custom-suunto-app
+$ git clone git@github.com:silte/workout-tracker.git
+$ cd workout-tracker
 ```
 
 ### Add your OAuth tokens to the backend

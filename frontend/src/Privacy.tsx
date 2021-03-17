@@ -123,12 +123,12 @@ const PrivacyPolicy = (): JSX.Element => {
                 Privacy policy
               </span>
               <span className="mt-2 block text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                SITE-NAME
+                Workout tracker
               </span>
             </h1>
             <p className="mt-8 text-xl text-gray-500 leading-8">
-              SITE-NAME operates the SITE-URL website, which provides the
-              SERVICE.
+              Workout tracker operates the https://workout.silte.fi website,
+              which provides the SERVICE.
             </p>
           </div>
           <div className="mt-6 prose prose-blue prose-lg text-gray-500 mx-auto">
