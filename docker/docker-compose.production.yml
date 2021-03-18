@@ -9,7 +9,7 @@ services:
     environment:
       NODE_ENV: production
     volumes:
-      - ../backend/data:/app/app/data
+      - ../backend/data:/app/data
     ports:
       - 4000:4000
 
