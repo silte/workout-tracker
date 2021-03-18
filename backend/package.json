@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "start": "tsc && node build/index.js",
-    "start-dev": "nodemon",
+    "start-dev": "NODE_ENV=development nodemon",
     "tsc": "tsc",
     "compile": "rm -rf dist && webpack --mode production",
     "build": "tsc && npm run compile",
@@ -34,12 +34,14 @@
     "mongodb": "^3.6.2",
     "mongodb-memory-server": "^6.9.2",
     "mongoose": "^5.10.13",
+    "node-fetch": "^2.6.1",
     "passport": "^0.4.1",
     "passport-auth0": "^1.4.0",
     "passport-github2": "^0.1.12",
     "typescript": "^4.2.3"
   },
   "devDependencies": {
+    "@types/node-fetch": "^2.5.8",
     "@types/passport-auth0": "^1.0.4",
     "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^4.6.1",

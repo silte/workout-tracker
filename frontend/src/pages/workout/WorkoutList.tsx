@@ -22,6 +22,6 @@ const WorkoutList = ({ workoutList }: IWorkoutList): JSX.Element => (
 );
 
 interface IWorkoutList {
-  workoutList: IWorkoutSummaryData[];
+  workoutList: IWorkoutSummary[];
 }
 export default WorkoutList;

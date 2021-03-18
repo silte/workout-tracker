@@ -1,9 +1,5 @@
-import { DATA_DIR } from "../../constants/filesNames";
-import { readJson } from "../../utils/jsonHelper";
 import {
-  getMultisportExtension,
   getCadenceStreamExtension,
-  getSummaryExtension,
   getHeartrateStreamExtension,
   getSpeedStreamExtension,
   getDistanceDeltaStreamExtension,
@@ -11,9 +7,11 @@ import {
 } from "../../model/getWorkoutExtension";
 
 const roundToThousands = (number: number) => Math.round(number / 1000) * 1000;
-const roundToSingleDecimal = (number: number) => Math.round(number * 10) / 10;
+export const roundToSingleDecimal = (number: number): number =>
+  Math.round(number * 10) / 10;
 
-const parseDataPoints = (
+// eslint-disable-next-line import/prefer-default-export
+export const parseDataPoints = (
   workoutRawData: IWorkoutRawData
 ): IWorkoutDataPointData[] => {
   const dataPoints: any = {};
@@ -65,47 +63,3 @@ const parseDataPoints = (
     ...content,
   }));
 };
-
-const getWorkoutData = (workoutId: string): IWorkoutData => {
-  const filename = `${DATA_DIR}/${workoutId}.json`;
-  const { payload: workoutData } = <IWorkoutRawDataContainer>readJson(filename);
-  const {
-    activityId,
-    startTime,
-    totalAscent,
-    totalDescent,
-    totalDistance,
-    totalTime,
-    centerPosition,
-    startPosition,
-    stopPosition,
-    maxSpeed,
-    maxAltitude,
-    minAltitude,
-    workoutKey,
-  } = workoutData;
-  const cadenceExtension = getSummaryExtension(workoutData);
-
-  const dataPoints = parseDataPoints(workoutData);
-
-  return {
-    workoutKey,
-    activityId,
-    startTime,
-    totalAscent,
-    totalDescent,
-    totalDistance,
-    totalTime,
-    centerPosition,
-    startPosition,
-    stopPosition,
-    maxSpeed: roundToSingleDecimal(maxSpeed * 3.6),
-    maxAltitude,
-    minAltitude,
-    avgCadence: cadenceExtension?.avgCadence,
-    maxCadence: cadenceExtension?.maxCadence,
-    dataPoints,
-  };
-};
-
-export default getWorkoutData;

@@ -14,6 +14,13 @@ const NavigationMobile = ({ isOpen }: IProps): JSX.Element => {
         <NavigationMobileMenuItem isExact link="/" accentColor="pink">
           Dashboard
         </NavigationMobileMenuItem>
+        <NavigationMobileMenuItem
+          isExact
+          link="/workout/summary"
+          accentColor="blue"
+        >
+          Summary
+        </NavigationMobileMenuItem>
       </NavigationMobileMenu>
       <UserMenu type="mobile" />
     </div>

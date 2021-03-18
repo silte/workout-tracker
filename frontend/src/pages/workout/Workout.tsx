@@ -25,6 +25,7 @@ import {
   getRoundedMetres,
 } from "../../utils/distanceConverter";
 import { useWindowWidth } from "../../containers/workout/windowSize";
+import Loader from "../../components/loader/loader";
 
 interface IWorkout {
   workout: IWorkoutData;
@@ -186,11 +187,8 @@ const Workout = ({
   ]);
 
   if (!("activityId" in workout)) {
-    return <h1>Loading...</h1>;
+    return <Loader />;
   }
-
-  // </>), [workout, windowWidth, isHearRateVisible, isSpeedVisible, isAltitudeVisible, isCadenceVisible]) (
-
   return (
     <>
       <Container>
@@ -199,16 +197,16 @@ const Workout = ({
             {getActivityName(workout.activityId)}{" "}
             {unixtimeToDate(workout.startTime)}
           </Heading>
-          <Heading headingLevel={2} label="Duration">
+          <Heading headingLevel={2} accent="Duration">
             {secondsToHms(workout.totalTime)}
           </Heading>
-          <Heading headingLevel={2} label="Distance">
+          <Heading headingLevel={2} accent="Distance">
             {metresToKilometres(workout.totalDistance)}
           </Heading>
-          <Heading headingLevel={2} label="Ascent">
+          <Heading headingLevel={2} accent="Ascent">
             {getRoundedMetres(workout.totalAscent)}
           </Heading>
-          <Heading headingLevel={2} label="Max speed">
+          <Heading headingLevel={2} accent="Max speed">
             {workout.maxSpeed}
           </Heading>
         </Spacer>
