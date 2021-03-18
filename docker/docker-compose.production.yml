@@ -2,19 +2,29 @@ version: "3.4"
 
 services:
   webapp:
-    image: workout-tracker
-    container_name: workout-tracker_webapp
-    build:
-      context: ../
-      dockerfile: docker/Dockerfile
-    restart: always
+    image: ghcr.io/silte/workout-tracker:latest
+    container_name: workout-tracker-production_webapp
+    restart: unless-stopped
+    env_file: .env.production
     environment:
       NODE_ENV: production
     volumes:
-      - ../backend/data:/app/data
-      - ../backend/cache:/app/cache
-    working_dir: /app/
+      - ../backend/data:/app/app/data
     ports:
       - 4000:4000
 
-    command: node build/index.js
+  mongodb:
+    image: mongo:4.2.10-bionic
+    container_name: workout-tracker-production_mongodb
+    restart: unless-stopped
+    env_file: .env.production
+    volumes:
+      - ./mongo-entrypoint:/docker-entrypoint-initdb.d
+      - mongo_data:/data/db
+      - mongo_config:/data/configdb
+
+volumes:
+  mongo_data:
+    name: workout-tracker_production-mongodata
+  mongo_config:
+    name: workout-tracker_production-mongoconfig
