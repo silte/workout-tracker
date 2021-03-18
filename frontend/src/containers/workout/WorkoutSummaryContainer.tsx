@@ -13,7 +13,7 @@ const sumSummaryDataAndWorkoutSummaryData = (
     totalAscent: newAscent,
     totalDistance: newDistance,
     hrIntensity: newHrIntensity,
-  }: IWorkoutSummaryData
+  }: IWorkoutSummary
 ): ISummaryData => ({
   activityId: newActivityId,
   totalDistance: sumNumbers(summaryData?.totalDistance, newDistance),
@@ -43,8 +43,8 @@ const sumSummaryDataAndWorkoutSummaryData = (
   },
 });
 
-const parseMultisportSummaryData = (workoutList: IWorkoutSummaryData[]) =>
-  workoutList.reduce((previousValue: IWorkoutSummaryData[], currentValue) => {
+const parseMultisportSummaryData = (workoutList: IWorkoutSummary[]) =>
+  workoutList.reduce((previousValue: IWorkoutSummary[], currentValue) => {
     const multisportSummaries = currentValue.multisportSummary?.map(
       ({ duration, distance, ascent, activityId }) =>
         ({
@@ -52,7 +52,7 @@ const parseMultisportSummaryData = (workoutList: IWorkoutSummaryData[]) =>
           totalTime: duration,
           totalDistance: distance,
           totalAscent: ascent,
-        } as IWorkoutSummaryData)
+        } as IWorkoutSummary)
     );
     if (
       typeof multisportSummaries === "undefined" ||
@@ -62,10 +62,10 @@ const parseMultisportSummaryData = (workoutList: IWorkoutSummaryData[]) =>
     }
     multisportSummaries[0].hrIntensity = currentValue.hrIntensity;
     return previousValue.concat(multisportSummaries);
-  }, [] as IWorkoutSummaryData[]);
+  }, [] as IWorkoutSummary[]);
 
 const parseSummaryData = (
-  workoutList: IWorkoutSummaryData[],
+  workoutList: IWorkoutSummary[],
   isMultisportExposed: boolean
 ) => {
   const parsedWorkoutList = !isMultisportExposed
@@ -101,7 +101,7 @@ const WorkoutSummaryContainer = (): JSX.Element => {
   }>();
   const history = useHistory();
 
-  const [workoutList, setWorkoutList] = useState<IWorkoutSummaryData[]>([]);
+  const [workoutList, setWorkoutList] = useState<IWorkoutSummary[]>([]);
   const [isMultisportExposed, setIsMultisportExposed] = useState<boolean>(
     false
   );

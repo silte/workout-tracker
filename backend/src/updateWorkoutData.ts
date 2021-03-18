@@ -11,9 +11,9 @@ const init = async () => {
     );
     process.exit();
   }
-  const [apiToken] = customArgs;
+  const [userId] = customArgs;
 
-  await updateUserWorkoutData(apiToken);
+  await updateUserWorkoutData(userId, "");
 };
 
 init();

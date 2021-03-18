@@ -3,7 +3,7 @@ import WorkoutList from "../../pages/workout/WorkoutList";
 import { WORKOUT_LIST_ENDPOINT } from "../../constants/endpoints";
 
 const WorkoutListContainer = (): JSX.Element => {
-  const [workoutList, setWorkoutList] = useState<IWorkoutSummaryData[]>([]);
+  const [workoutList, setWorkoutList] = useState<IWorkoutSummary[]>([]);
 
   useEffect(() => {
     const fetchWorkoutList = async () => {

@@ -1,9 +1,10 @@
 import React from "react";
 import Container from "../container/container";
+import Heading from "../heading/heading";
 
 interface IProps {
   accent?: string;
-  accentColor?: "pink" | "red" | "green" | "blue";
+  accentColor?: "pink" | "red" | "green" | "blue" | "white" | "black";
   label: string;
   children: React.ReactNode;
   standAlone?: boolean;
@@ -20,17 +21,9 @@ const Hero = ({
 }: IProps): JSX.Element => {
   const heroContent = (
     <div className="max-w-xl">
-      <h1 className="text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:leading-none sm:text-5xl">
-        {accent && (
-          <>
-            <span className={`text-2xl text-${accentColor}-500 leading-none`}>
-              {accent}
-            </span>
-            <br />
-          </>
-        )}
+      <Heading headingLevel={1} accent={accent} accentColor={accentColor}>
         {label}
-      </h1>
+      </Heading>
       <p className="mt-5 text-xl leading-7 text-gray-500">{children}</p>
     </div>
   );

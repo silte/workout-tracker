@@ -1,4 +1,4 @@
-interface IWorkoutSummaryData {
+interface IWorkoutSummary {
   activityId: number;
   workoutKey: string;
   startTime: number;
@@ -14,10 +14,10 @@ interface IWorkoutSummaryData {
   feeling: number;
   energyConsumption: number;
   hrIntensity: IZoneSummary;
-  multisportSummary?: IWorkoutMultisportSummaryData[];
+  multisportSummary?: IWorkoutMultisportSummary[];
 }
 
-interface IWorkoutMultisportSummaryData {
+interface IWorkoutMultisportSummary {
   activityId: number;
   duration: number;
   distance: number;

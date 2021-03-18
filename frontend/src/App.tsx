@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Notification from "./components/notification/notification";
-import AppRouter from "./AppRouter";
+import WorkoutTracker from "./WorkoutTracker";
 import { getAuthenticationStatus } from "./services/AuthenticationService";
 
 const App = (): JSX.Element => {
@@ -29,7 +29,7 @@ const App = (): JSX.Element => {
           {authenticationStatus.errors?.join(" ") || ""}
         </Notification>
       )}
-      <AppRouter isLoggedIn={authenticationStatus?.authenticated} />
+      <WorkoutTracker isLoggedIn={authenticationStatus?.authenticated} />
     </>
   );
 };

@@ -1,10 +1,8 @@
 import fs from "fs";
-import {
-  WORKOUT_LIST_RAW_FILENAME,
-  getWorkoutRawDataFilename,
-} from "../../../constants/filesNames";
-import { readJson, downloadJson } from "../../../utils/jsonHelper";
+import { getWorkoutRawDataFilename } from "../../../constants/filesNames";
+import { downloadJson } from "../../../utils/jsonHelper";
 import { getWorkoutEndpoint } from "../../../constants/endpoints";
+import { findRawWorkoutSummariesByUser } from "../../../services/raw-workout-list-service";
 
 const fetchWorkouts = async (
   workoutId: string,
@@ -23,16 +21,18 @@ const fetchWorkouts = async (
   return { cached: 1, downloaded: 0 };
 };
 
-const fetchWorkoutsFromList = async (apiToken: string): Promise<void> => {
-  if (!fs.existsSync(WORKOUT_LIST_RAW_FILENAME)) {
+const fetchWorkoutsFromList = async (
+  apiToken: string,
+  userId: string
+): Promise<void> => {
+  const workoutList = await findRawWorkoutSummariesByUser(userId);
+
+  if (workoutList === null) {
     // eslint-disable-next-line no-console
-    console.log("Workout list is required before you can fetch workouts.\n");
-    process.exit();
+    console.log("Workout list not found, cannot fetch workouts");
+    return;
   }
 
-  const { payload: workoutList }: IWorkoutList = readJson(
-    WORKOUT_LIST_RAW_FILENAME
-  );
   const totalCount = workoutList.length;
   // eslint-disable-next-line no-console
   console.log(`Fetching ${totalCount} workouts with api token ${apiToken}`);

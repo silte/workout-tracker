@@ -1,6 +1,6 @@
-interface IWorkoutList {
+interface IRawWorkoutSummaryWrapper {
   error?: any;
-  payload: IWorkoutListItem[];
+  payload: IRawWorkoutSummary[];
   metadata: IMetadata;
 }
 
@@ -9,7 +9,7 @@ interface IMetadata {
   until: string;
 }
 
-interface IWorkoutListItem {
+interface IRawWorkoutSummary {
   activityId: number;
   startTime: number;
   totalTime: number;

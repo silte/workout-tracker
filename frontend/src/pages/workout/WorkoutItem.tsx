@@ -28,7 +28,7 @@ const WorkoutItem = ({
   totalTime,
   totalDistance,
   workoutKey,
-}: IWorkoutSummaryData): JSX.Element => (
+}: IWorkoutSummary): JSX.Element => (
   <article className="workout-item">
     <Link to={`/workout/${workoutKey}`} className="workout-item__link">
       <ul className="workout-data">
