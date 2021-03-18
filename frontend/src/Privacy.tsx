@@ -157,8 +157,9 @@ const PrivacyPolicy = (): JSX.Element => {
 
             <p>
               The terms used in this Privacy Policy have the same meanings as in
-              our Terms and Conditions, which is accessible at SITE-URL, unless
-              otherwise defined in this Privacy Policy.
+              our Terms and Conditions, which is accessible at
+              https://workout.silte.fi, unless otherwise defined in this Privacy
+              Policy.
             </p>
 
             <h2>Information Collection and Use</h2>
