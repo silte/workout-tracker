@@ -10,6 +10,7 @@ import {
   findWorkoutSummariesByUser,
   createWorkoutListItem,
 } from "./services/workout-list-service";
+import { expandSuuntoEventlog } from "./integrations/suunto/logSuuntoFetchEvent";
 
 const MULTISPORT_ACTIVITY_ID = 68;
 
@@ -164,7 +165,10 @@ const parseWorkoutSummarData = ({
 };
 
 const buildWorkoutSummaryDataCache = async (userId: string): Promise<void> => {
-  console.log("Building workout summary data to cache from workout list");
+  await expandSuuntoEventlog(
+    userId,
+    "Building workout summary data to cache from workout list"
+  );
   const startTime = Date.now();
   const rawWorkoutSummaries = await findRawWorkoutSummariesByUser(userId);
 
@@ -181,10 +185,14 @@ const buildWorkoutSummaryDataCache = async (userId: string): Promise<void> => {
     ({ workoutKey }) => !cachedWorkoutKeys?.includes(workoutKey)
   );
   if (missingFromWorkoutSummaryCache.length === 0) {
-    console.log("All workouts found from cache, no need to build cache");
+    await expandSuuntoEventlog(
+      userId,
+      "All workouts found from cache, no need to build cache"
+    );
     return;
   }
-  console.log(
+  await expandSuuntoEventlog(
+    userId,
     `Adding ${missingFromWorkoutSummaryCache.length} workout(s) to cache, total ${rawWorkoutSummaries.length} workout(s)`
   );
   const newWorkoutSummariesToCache = missingFromWorkoutSummaryCache.map(
@@ -199,7 +207,10 @@ const buildWorkoutSummaryDataCache = async (userId: string): Promise<void> => {
 
   const endTime = Date.now();
   const processingTime = (endTime - startTime) / 1000;
-  console.log(`Done in ${processingTime.toFixed(1)} seconds`);
+  await expandSuuntoEventlog(
+    userId,
+    `Cache build done in ${processingTime.toFixed(1)} seconds`
+  );
 };
 
 export default buildWorkoutSummaryDataCache;

@@ -13,7 +13,7 @@ const init = async () => {
   }
   const [userId] = customArgs;
 
-  await updateUserWorkoutData(userId, "");
+  await updateUserWorkoutData(userId);
 };
 
 init();

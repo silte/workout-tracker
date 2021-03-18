@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import ButtonPlain from "./button.plain";
 import ButtonExternal from "./button.external";
 import ButtonInternal from "./button.internal";
@@ -8,9 +8,10 @@ interface IProps {
   children: string;
   className?: string;
   link?: string;
-  onClick?(): void;
+  onClick?(e: MouseEvent): void;
   type?: "button" | "submit" | "reset" | undefined;
   size?: "small" | "medium" | "large";
+  disabled?: boolean;
 }
 
 export const isExternalLink = (link: string): boolean =>
@@ -29,6 +30,7 @@ const Button = ({
   onClick = () => {},
   type = "button",
   size = "medium",
+  disabled,
 }: IProps): JSX.Element => {
   const fontSizeMapping = {
     small: "sm:text-sm leading-5",
@@ -37,7 +39,10 @@ const Button = ({
   };
 
   const elementClasses = [
-    `inline-flex justify-center w-full sm:w-auto items-center px-4 py-2 border font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-150 text-base ${fontSizeMapping[size]} ${className}`,
+    "inline-flex justify-center w-full sm:w-auto items-center px-4 py-2 border font-medium",
+    "rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 transition",
+    "ease-in-out duration-150 text-base disabled:cursor-not-allowed disabled:opacity-50 ",
+    `${fontSizeMapping[size]} ${className}`,
   ];
 
   if (accentColor === "plain") {
@@ -71,6 +76,7 @@ const Button = ({
       type={type}
       onClick={onClick}
       className={elementClasses.join(" ")}
+      disabled={disabled}
     >
       {children}
     </ButtonPlain>

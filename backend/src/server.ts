@@ -7,6 +7,7 @@ import path from "path";
 import { COOKIE_KEY } from "./config/keys";
 import authRoutes from "./routes/authentication-route";
 import profileRoutes from "./routes/profile-route";
+import dataSourceRouter from "./routes/data-source";
 import fileExists from "./utils/fileExists";
 import errorHandler from "./routes/middlewares/errorHandler";
 import authenticationCheck from "./routes/middlewares/authenticationCheck";
@@ -34,6 +35,7 @@ app.use("/api/*", authenticationCheck);
 app.use("/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/workout", workoutRouter);
+app.use("/api/data-source", dataSourceRouter);
 
 const reactFrontendExists = fileExists(
   `${__dirname}/../${REACT_APP_PATH}index.html`

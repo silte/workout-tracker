@@ -5,13 +5,13 @@ import {
   createRawWorkoutSummary,
   findRawWorkoutSummariesByUser,
 } from "../../../services/raw-workout-list-service";
+import { setSuuntoEventlog } from "../logSuuntoFetchEvent";
 
 const fetchWorkoutList = async (
   apiToken: string,
   userId: string
 ): Promise<void> => {
-  // eslint-disable-next-line no-console
-  console.log(`Fetching workout list with api token: ${apiToken}`);
+  await setSuuntoEventlog(userId, `Fetching workout list`, `user ${userId}`);
 
   const endpoint = getWorkoutListEndpoint(apiToken);
 
