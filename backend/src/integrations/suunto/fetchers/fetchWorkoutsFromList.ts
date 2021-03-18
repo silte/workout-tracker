@@ -3,18 +3,22 @@ import { getWorkoutRawDataFilename } from "../../../constants/filesNames";
 import { downloadJson } from "../../../utils/jsonHelper";
 import { getWorkoutEndpoint } from "../../../constants/endpoints";
 import { findRawWorkoutSummariesByUser } from "../../../services/raw-workout-list-service";
+import { expandSuuntoEventlog } from "../logSuuntoFetchEvent";
 
 const fetchWorkouts = async (
   workoutId: string,
   apiToken: string,
   current: number,
-  totalCount: number
+  totalCount: number,
+  userId: string
 ): Promise<{ cached: number; downloaded: number }> => {
   const endpoint = getWorkoutEndpoint(workoutId, apiToken);
   const filename = getWorkoutRawDataFilename(workoutId);
   if (!fs.existsSync(filename)) {
-    // eslint-disable-next-line no-console
-    console.log(`Downloading workout ${current}/${totalCount}`);
+    await expandSuuntoEventlog(
+      userId,
+      `Downloading workout ${current}/${totalCount}`
+    );
     await downloadJson(filename, endpoint);
     return { cached: 0, downloaded: 1 };
   }
@@ -28,14 +32,19 @@ const fetchWorkoutsFromList = async (
   const workoutList = await findRawWorkoutSummariesByUser(userId);
 
   if (workoutList === null) {
-    // eslint-disable-next-line no-console
-    console.log("Workout list not found, cannot fetch workouts");
+    await expandSuuntoEventlog(
+      userId,
+      "Workout list not found, cannot fetch workouts"
+    );
     return;
   }
 
   const totalCount = workoutList.length;
-  // eslint-disable-next-line no-console
-  console.log(`Fetching ${totalCount} workouts with api token ${apiToken}`);
+  await expandSuuntoEventlog(
+    userId,
+    `Fetching ${totalCount} workouts`,
+    `user ${apiToken}`
+  );
   const fetchResults: { cached: number; downloaded: number }[] = [];
 
   let index = 0;
@@ -47,7 +56,8 @@ const fetchWorkoutsFromList = async (
       workoutKey,
       apiToken,
       index,
-      totalCount
+      totalCount,
+      userId
     );
     fetchResults.push(fetchResult);
   }
@@ -60,8 +70,9 @@ const fetchWorkoutsFromList = async (
     (prev, { downloaded }) => prev + downloaded,
     0
   );
-  // eslint-disable-next-line no-console
-  console.log(
+
+  await expandSuuntoEventlog(
+    userId,
     `${totalDownloaded} workouts download and ${totalCached} workout found from cache`
   );
 };

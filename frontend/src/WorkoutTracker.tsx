@@ -7,6 +7,7 @@ import IssuesWithLogin from "./IssuesWithLogin";
 import ProfileRouter from "./pages/profile/ProfileRouter";
 import WorkoutRouter from "./WorkoutRouter";
 import Home from "./pages/Home";
+import SuuntoApi from "./pages/dataSources/SuuntoApi";
 
 interface IProps {
   isLoggedIn: boolean;
@@ -29,6 +30,9 @@ const WorkoutTracker = ({ isLoggedIn = false }: IProps): JSX.Element => {
       <Layout>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route exact path="/data-source/suunto">
+          <SuuntoApi />
         </Route>
         <Route path="/workout">
           <WorkoutRouter />

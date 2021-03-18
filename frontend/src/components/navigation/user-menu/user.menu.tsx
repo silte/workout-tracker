@@ -14,6 +14,9 @@ const UserMenu = ({ type }: IProps): JSX.Element => {
         <UserMenuItem link="/profile" type="desktop">
           Profile
         </UserMenuItem>
+        <UserMenuItem link="/data-source/suunto" type="desktop">
+          Suunto data
+        </UserMenuItem>
         <UserMenuItem link="/auth/logout" type="desktop">
           Sign out
         </UserMenuItem>
@@ -25,6 +28,9 @@ const UserMenu = ({ type }: IProps): JSX.Element => {
     <UserMenuMobile>
       <UserMenuItem link="/profile" type="mobile">
         Profile
+      </UserMenuItem>
+      <UserMenuItem link="/data-source/suunto" type="mobile">
+        Suunto data
       </UserMenuItem>
       <UserMenuItem link="/auth/logout" type="mobile">
         Sign out

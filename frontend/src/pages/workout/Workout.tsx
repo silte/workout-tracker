@@ -26,6 +26,7 @@ import {
 } from "../../utils/distanceConverter";
 import { useWindowWidth } from "../../containers/workout/windowSize";
 import Loader from "../../components/loader/loader";
+import SEO from "../../components/seo/seo";
 
 interface IWorkout {
   workout: IWorkoutData;
@@ -191,6 +192,7 @@ const Workout = ({
   }
   return (
     <>
+      <SEO title="Workout summary" />
       <Container>
         <Spacer large>
           <Heading headingLevel={1} className="workout__title">

@@ -1,11 +1,12 @@
 /* eslint-disable react/button-has-type */
-import React from "react";
+import React, { MouseEvent } from "react";
 
 interface IProps {
   children: string;
-  onClick(): void;
+  onClick?(e: MouseEvent): void;
   className: string;
   type?: "button" | "submit" | "reset" | undefined;
+  disabled?: boolean;
 }
 
 const ButtonPlain = ({
@@ -13,6 +14,7 @@ const ButtonPlain = ({
   onClick,
   className,
   type = "button",
+  disabled,
 }: IProps): JSX.Element => {
   return (
     <button
@@ -20,6 +22,7 @@ const ButtonPlain = ({
       onClick={onClick}
       aria-label={children}
       className={className}
+      disabled={disabled}
     >
       {children}
     </button>
