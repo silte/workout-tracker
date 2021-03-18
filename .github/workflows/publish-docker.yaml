@@ -32,7 +32,7 @@ jobs:
         id: build-tags
         shell: bash
         run: |
-          IMAGE_NAME=ghcr.io/USERNAME/PROJECT-NAME
+          IMAGE_NAME=ghcr.io/silte/workout-tracker
           echo "##[set-output name=BUILD_NUMBER;]$(echo $IMAGE_NAME:${{ github.run_number }})"
           echo "##[set-output name=COMMIT_REF;]$(echo $IMAGE_NAME:$(git rev-parse --short HEAD))"
           echo "##[set-output name=LATEST;]$(echo $IMAGE_NAME:$([[ ${GITHUB_REF#refs/heads/} = "production" ]] && echo "latest" || echo "latest-dev"))"
