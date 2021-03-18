@@ -1,22 +1,37 @@
-import fs from "fs";
+import fetch from "node-fetch";
 
 import { getWorkoutListEndpoint } from "../../../constants/endpoints";
 import {
-  WORKOUT_LIST_RAW_FILENAME,
-  DATA_DIR,
-} from "../../../constants/filesNames";
-import { downloadJson } from "../../../utils/jsonHelper";
+  createRawWorkoutSummary,
+  findRawWorkoutSummariesByUser,
+} from "../../../services/raw-workout-list-service";
 
-const ensureDataDirectoryExists = () =>
-  !fs.existsSync(DATA_DIR) && fs.mkdirSync(DATA_DIR);
-
-const fetchWorkoutList = async (apiToken: string): Promise<void> => {
+const fetchWorkoutList = async (
+  apiToken: string,
+  userId: string
+): Promise<void> => {
   // eslint-disable-next-line no-console
   console.log(`Fetching workout list with api token: ${apiToken}`);
-  ensureDataDirectoryExists();
 
   const endpoint = getWorkoutListEndpoint(apiToken);
-  await downloadJson(WORKOUT_LIST_RAW_FILENAME, endpoint);
+
+  const workoutList: IRawWorkoutSummaryWrapper = await (
+    await fetch(endpoint)
+  ).json();
+  const allCurrentRawSummaries = await findRawWorkoutSummariesByUser(userId);
+  const allCurrentRawSummaryKeys = allCurrentRawSummaries?.map(
+    ({ workoutKey }) => workoutKey
+  );
+
+  const missingRawSummaries = workoutList.payload.filter(
+    ({ workoutKey }) => !allCurrentRawSummaryKeys?.includes(workoutKey)
+  );
+
+  await Promise.all(
+    missingRawSummaries.map(async (rawSummarryData) =>
+      createRawWorkoutSummary({ ...rawSummarryData, userId })
+    )
+  );
 };
 
 export default fetchWorkoutList;

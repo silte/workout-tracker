@@ -6,7 +6,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import Container from "../../components/container/container";
 import Heading from "../../components/heading/heading";
 import Listing from "../../components/listing/listing";
-import Spacer from "../../components/spacer/spacer";
 import Button from "../../components/button/button";
 import WorkoutItem from "./WorkoutItem";
 import {
@@ -29,8 +28,9 @@ import {
 
 import "./WorkoutSummary.scss";
 import { sumNumbers } from "../../utils/numberOperations";
-import ButtonGroup from "../../components/button/buttonGroup";
 import Loader from "../../components/loader/loader";
+import Hero from "../../components/hero/hero";
+import ButtonGroup from "../../components/button/button.group";
 
 interface IWorkoutSummary {
   workoutList: IWorkoutSummaryData[];
@@ -70,35 +70,89 @@ const WorkoutTotalSummary = ({
   return (
     <ul className="listing col--3 workout-summary-data workout-summary-data--total">
       <li className="listing__item workout-summary-data__item">
-        <Heading headingLevel={2} label="Duration" className="h3">
+        <Heading
+          headingLevel={2}
+          accent="Duration"
+          headingSize="m"
+          color="white"
+          accentColor="white"
+        >
           {secondsToHms(workoutTotalSummaryData.totalDuration)}
         </Heading>
       </li>
       <li className="listing__item workout-summary-data__item">
-        <Heading headingLevel={2} label="Distance" className="h3">
+        <Heading
+          headingLevel={2}
+          accent="Distance"
+          headingSize="m"
+          color="white"
+          accentColor="white"
+        >
           {metresToKilometres(workoutTotalSummaryData.totalDistance)}
         </Heading>
       </li>
       <li className="listing__item workout-summary-data__item">
-        <Heading headingLevel={2} label="Ascent" className="h3">
+        <Heading
+          headingLevel={2}
+          accent="Ascent"
+          headingSize="m"
+          color="white"
+          accentColor="white"
+        >
           {getRoundedMetres(workoutTotalSummaryData.totalAscent)}
         </Heading>
       </li>
       <li className="listing__item workout-summary-data__item">
-        <Heading headingLevel={2} label="Hr zones" className="h3">
-          <Heading headingLevel={3} label="zone 1">
+        <Heading
+          headingLevel={2}
+          accent="Hr zones"
+          headingSize="m"
+          color="white"
+          accentColor="white"
+        >
+          <Heading
+            headingLevel={3}
+            accent="zone 1"
+            headingSize="s"
+            color="white"
+            accentColor="white"
+          >
             {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone1)}
           </Heading>
-          <Heading headingLevel={3} label="zone 2">
+          <Heading
+            headingLevel={3}
+            accent="zone 2"
+            headingSize="s"
+            color="white"
+            accentColor="white"
+          >
             {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone2)}
           </Heading>
-          <Heading headingLevel={3} label="zone 3">
+          <Heading
+            headingLevel={3}
+            accent="zone 3"
+            headingSize="s"
+            color="white"
+            accentColor="white"
+          >
             {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone3)}
           </Heading>
-          <Heading headingLevel={3} label="zone 4">
+          <Heading
+            headingLevel={3}
+            accent="zone 4"
+            headingSize="s"
+            color="white"
+            accentColor="white"
+          >
             {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone4)}
           </Heading>
-          <Heading headingLevel={3} label="zone 5">
+          <Heading
+            headingLevel={3}
+            accent="zone 5"
+            headingSize="s"
+            color="white"
+            accentColor="white"
+          >
             {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone5)}
           </Heading>
         </Heading>
@@ -119,16 +173,16 @@ const WorkoutAcivitySummary = ({
           key={activityId}
           className="listing__item workout-summary-data__item"
         >
-          <Heading headingLevel={2} className="h4">
+          <Heading headingLevel={2} headingSize="m">
             {getActivityName(activityId)}
           </Heading>
-          <Heading headingLevel={3} label="Duration" className="h4">
+          <Heading headingLevel={3} accent="Duration" headingSize="m">
             {secondsToHms(totalDuration)}
           </Heading>
-          <Heading headingLevel={3} label="Distance" className="h4">
+          <Heading headingLevel={3} accent="Distance" headingSize="m">
             {metresToKilometres(totalDistance)}
           </Heading>
-          <Heading headingLevel={3} label="Ascent" className="h4">
+          <Heading headingLevel={3} accent="Ascent" headingSize="m">
             {getRoundedMetres(totalAscent)}
           </Heading>
         </li>
@@ -223,83 +277,78 @@ const WorkoutSummary = ({
   const isNextMonthFuture = new Date() < getFirstDayOfNextMonth(getStartDate());
 
   return (
-    <div className="workout-summary">
-      <Spacer large>
-        <Container>
-          <Spacer small>
-            <Heading
-              headingLevel={1}
-              className="workout-summary__title"
-              label="Summary of"
-            >
-              {workoutCount}{" "}
-              {workoutCount > 1 || workoutCount === 0 ? "Workouts" : "Workout"}
-            </Heading>
-            <Heading headingLevel={3}>Filters</Heading>
-            <div className="workout-summary__date-picker">
-              <DatePicker
-                selected={new Date(filterStartDate)}
-                onChange={(date: Date) => onChangeFilterStartDate(date)}
-                maxDate={today}
-                dateFormat="d.M.yyyy"
-                placeholderText="Start date"
-                className="workout-summary__date-picker-input"
-              />
-              <DatePicker
-                selected={new Date(filterEndDate + TIMEZONE_OFFSET)}
-                onChange={(date: Date) => onChangeFilterEndDate(date)}
-                maxDate={today}
-                dateFormat="d.M.yyyy"
-                placeholderText="End date"
-                className="workout-summary__date-picker-input"
-              />
+    <>
+      <Hero
+        accent="Summary of"
+        label={`${workoutCount} ${
+          workoutCount > 1 || workoutCount === 0 ? "Workouts" : "Workout"
+        }`}
+      >
+        View summary of your all workouts
+      </Hero>
+
+      <Container className="mt-9">
+        <h2 className="text-l leading-7 text-gray-900">Filters</h2>
+        <ButtonGroup>
+          <DatePicker
+            selected={
+              !Number.isNaN(filterStartDate) ? new Date(filterStartDate) : null
+            }
+            onChange={(date: Date) => onChangeFilterStartDate(date)}
+            maxDate={today}
+            dateFormat="d.M.yyyy"
+            placeholderText="Start date"
+          />
+          <DatePicker
+            selected={
+              !Number.isNaN(filterEndDate)
+                ? new Date(filterEndDate + TIMEZONE_OFFSET)
+                : null
+            }
+            onChange={(date: Date) => onChangeFilterEndDate(date)}
+            maxDate={today}
+            dateFormat="d.M.yyyy"
+            placeholderText="End date"
+          />
+        </ButtonGroup>
+        <ButtonGroup className="mt-6">
+          <Button onClick={selectPreviousWeek}>Previous</Button>
+          <Button onClick={selectWeek}>Week</Button>
+          <Button onClick={selectNextWeek}>
+            {isNextWeekFuture ? "disabled Next" : "Next"}
+          </Button>
+        </ButtonGroup>
+        <ButtonGroup className="mt-6">
+          <Button onClick={selectPreviousMonth}>Previous</Button>
+          <Button onClick={selectMonth}>Month</Button>
+          <Button onClick={selectNextMonth}>
+            {isNextMonthFuture ? "disabled Next" : "Next"}
+          </Button>
+        </ButtonGroup>
+      </Container>
+      {workoutCount > 0 ? (
+        <>
+          <Container className="mt-12">
+            <div className="flex justify-end">
+              <Button onClick={toggleMultisportExpose}>
+                Toggle multisports
+              </Button>
             </div>
-          </Spacer>
-          <Spacer>
-            <ButtonGroup>
-              <Button onClick={selectPreviousWeek}>Previous</Button>
-              <Button onClick={selectWeek}>Week</Button>
-              <Button onClick={selectNextWeek}>
-                {isNextWeekFuture ? "disabled Next" : "Next"}
-              </Button>
-            </ButtonGroup>
-            <ButtonGroup>
-              <Button onClick={selectPreviousMonth}>Previous</Button>
-              <Button onClick={selectMonth}>Month</Button>
-              <Button onClick={selectNextMonth}>
-                {isNextMonthFuture ? "disabled Next" : "Next"}
-              </Button>
-            </ButtonGroup>
-          </Spacer>
-        </Container>
-        {workoutCount > 0 ? (
-          <>
-            <Container>
-              <Spacer small>
-                <div className="workout-summary__multisport">
-                  <Button onClick={toggleMultisportExpose}>
-                    Toggle multisports
-                  </Button>
-                </div>
-                <WorkoutTotalSummary workoutSummaryData={workoutSummaryData} />
-                <WorkoutAcivitySummary
-                  workoutSummaryData={workoutSummaryData}
-                />
-              </Spacer>
-            </Container>
-            <Container>
-              <Listing
-                arrayOfContent={workoutList.slice(0, 100)}
-                listingComponent={WorkoutItem}
-                keyFieldName="workoutKey"
-              />
-            </Container>
-          </>
-        ) : (
-          <Loader />
-        )}
-      </Spacer>
-    </div>
+            <WorkoutTotalSummary workoutSummaryData={workoutSummaryData} />
+            <WorkoutAcivitySummary workoutSummaryData={workoutSummaryData} />
+          </Container>
+          <Container className="mt-6">
+            <Listing
+              arrayOfContent={workoutList.slice(0, 100)}
+              listingComponent={WorkoutItem}
+              keyFieldName="workoutKey"
+            />
+          </Container>
+        </>
+      ) : (
+        <Loader />
+      )}
+    </>
   );
 };
 

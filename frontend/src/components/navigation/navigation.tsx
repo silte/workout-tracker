@@ -20,6 +20,13 @@ const Navigation = (): JSX.Element => {
             <NavigationDesktopItem isExact accentColor="pink" location="/">
               Dashboard
             </NavigationDesktopItem>
+            <NavigationDesktopItem
+              isExact
+              accentColor="blue"
+              location="/workout/summary"
+            >
+              Summary
+            </NavigationDesktopItem>
           </NavigationDesktop>
         </div>
         <UserMenu type="desktop" />

@@ -1,22 +1,17 @@
 /* eslint-disable no-console */
-import fs from "fs";
-
-import { readJson, writeJson } from "./utils/jsonHelper";
+import { readJson } from "./utils/jsonHelper";
 import {
   getMultisportExtension,
   getIntensityExtension,
 } from "./model/getWorkoutExtension";
+import { getWorkoutRawDataFilename } from "./constants/filesNames";
+import { findRawWorkoutSummariesByUser } from "./services/raw-workout-list-service";
 import {
-  WORKOUT_LIST_RAW_FILENAME,
-  WORKOUT_LIST_FILENAME,
-  CACHE_DIR,
-  getWorkoutRawDataFilename,
-} from "./constants/filesNames";
+  findWorkoutSummariesByUser,
+  createWorkoutListItem,
+} from "./services/workout-list-service";
 
 const MULTISPORT_ACTIVITY_ID = 68;
-
-const ensureCacheDirectoryExists = () =>
-  !fs.existsSync(CACHE_DIR) && fs.mkdirSync(CACHE_DIR);
 
 const getHrIntensityData = ({
   payload: workoutData,
@@ -32,17 +27,12 @@ const getWorkoutMultisportSummaryData = (
 ) => {
   const getMissingMultisportSummaryFromWorkout = (
     activityRawData: IWorkoutRawData,
-    workoutMultisportSummaryData: IWorkoutMultisportSummaryData[],
+    workoutMultisportSummaryData: IWorkoutMultisportSummary[],
     missingActivityId: number
-  ): IWorkoutMultisportSummaryData => {
+  ): IWorkoutMultisportSummary => {
     const knowMultisportSummaries = workoutMultisportSummaryData.reduce(
       (
-        {
-          activityId,
-          ascent,
-          distance,
-          duration,
-        }: IWorkoutMultisportSummaryData,
+        { activityId, ascent, distance, duration }: IWorkoutMultisportSummary,
         currentValue
       ) => {
         return {
@@ -50,7 +40,7 @@ const getWorkoutMultisportSummaryData = (
           ascent: ascent + currentValue.ascent,
           distance: distance + currentValue.distance,
           duration: duration + currentValue.duration,
-        } as IWorkoutMultisportSummaryData;
+        } as IWorkoutMultisportSummary;
       }
     );
     return {
@@ -94,7 +84,7 @@ const getWorkoutMultisportSummaryData = (
       const { avg: avgSpeed, max: maxSpeed } =
         speed !== null ? speed : <ISummary>{};
 
-      return <IWorkoutMultisportSummaryData>{
+      return <IWorkoutMultisportSummary>{
         activityId: ActivityID,
         duration,
         distance,
@@ -135,7 +125,7 @@ const parseWorkoutSummarData = ({
   totalDescent,
   maxSpeed,
   energyConsumption,
-}: IWorkoutListItem): IWorkoutSummaryData => {
+}: IRawWorkoutSummary): IWorkoutSummary => {
   const workoutRawData = <IWorkoutRawDataContainer>(
     readJson(getWorkoutRawDataFilename(workoutKey))
   );
@@ -150,7 +140,7 @@ const parseWorkoutSummarData = ({
   const multisportSummary =
     activityId === MULTISPORT_ACTIVITY_ID
       ? getWorkoutMultisportSummaryData(workoutRawData)
-      : <IWorkoutMultisportSummaryData[]>[];
+      : <IWorkoutMultisportSummary[]>[];
   const hrIntensity = getHrIntensityData(workoutRawData);
 
   return {
@@ -173,44 +163,39 @@ const parseWorkoutSummarData = ({
   };
 };
 
-const buildWorkoutSummaryDataCache = (forceCacheRebuild = false): void => {
-  ensureCacheDirectoryExists();
+const buildWorkoutSummaryDataCache = async (userId: string): Promise<void> => {
   console.log("Building workout summary data to cache from workout list");
   const startTime = Date.now();
-  const allWorkoutListData: IWorkoutList = readJson(WORKOUT_LIST_RAW_FILENAME);
+  const rawWorkoutSummaries = await findRawWorkoutSummariesByUser(userId);
 
-  if (!forceCacheRebuild) {
-    const isCacheAvailable = fs.existsSync(WORKOUT_LIST_FILENAME);
-    const cachedWorkoutSummaryData: IWorkoutSummaryData[] = isCacheAvailable
-      ? readJson(WORKOUT_LIST_FILENAME)
-      : [];
-    const missingFromCacheWorkoutListData = allWorkoutListData.payload.filter(
-      ({ workoutKey }) =>
-        cachedWorkoutSummaryData.every(
-          ({ workoutKey: cachedWorkoutKey }) => workoutKey !== cachedWorkoutKey
-        )
-    );
-    if (missingFromCacheWorkoutListData.length === 0) {
-      console.log("All workouts found from cache, no need to build cache");
-    } else {
-      console.log(
-        `Adding ${missingFromCacheWorkoutListData.length} workout(s) to cache, total ${allWorkoutListData.payload.length} workout(s)`
-      );
-      const workoutSummartData = missingFromCacheWorkoutListData.map(
-        parseWorkoutSummarData
-      );
-      writeJson(
-        WORKOUT_LIST_FILENAME,
-        workoutSummartData.concat(cachedWorkoutSummaryData)
-      );
-    }
-  } else {
-    console.log("Full cache rebuild");
-    const workoutSummartData = allWorkoutListData.payload.map(
-      parseWorkoutSummarData
-    );
-    writeJson(WORKOUT_LIST_FILENAME, workoutSummartData);
+  if (rawWorkoutSummaries === null) {
+    console.error("Workout list not found cannot build summary list to cache");
+    return;
   }
+
+  const workoutSummaries = await findWorkoutSummariesByUser(userId);
+  const cachedWorkoutKeys = workoutSummaries?.map(
+    ({ workoutKey }) => workoutKey
+  );
+  const missingFromWorkoutSummaryCache = rawWorkoutSummaries.filter(
+    ({ workoutKey }) => !cachedWorkoutKeys?.includes(workoutKey)
+  );
+  if (missingFromWorkoutSummaryCache.length === 0) {
+    console.log("All workouts found from cache, no need to build cache");
+    return;
+  }
+  console.log(
+    `Adding ${missingFromWorkoutSummaryCache.length} workout(s) to cache, total ${rawWorkoutSummaries.length} workout(s)`
+  );
+  const newWorkoutSummariesToCache = missingFromWorkoutSummaryCache.map(
+    parseWorkoutSummarData
+  );
+
+  await Promise.all(
+    newWorkoutSummariesToCache.map((workout) =>
+      createWorkoutListItem({ ...workout, userId })
+    )
+  );
 
   const endTime = Date.now();
   const processingTime = (endTime - startTime) / 1000;

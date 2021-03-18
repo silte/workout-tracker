@@ -5,13 +5,14 @@ import PrivacyPolicy from "./Privacy";
 import Login from "./pages/login/login";
 import IssuesWithLogin from "./IssuesWithLogin";
 import ProfileRouter from "./pages/profile/ProfileRouter";
-import LoggedIn from "./LoggedIn";
+import WorkoutRouter from "./WorkoutRouter";
+import Home from "./pages/Home";
 
 interface IProps {
   isLoggedIn: boolean;
 }
 
-const AppRouter = ({ isLoggedIn = false }: IProps): JSX.Element => {
+const WorkoutTracker = ({ isLoggedIn = false }: IProps): JSX.Element => {
   return (
     <Switch>
       <Route path="/privacy-policy">
@@ -27,7 +28,10 @@ const AppRouter = ({ isLoggedIn = false }: IProps): JSX.Element => {
       )}
       <Layout>
         <Route exact path="/">
-          <LoggedIn />
+          <Home />
+        </Route>
+        <Route path="/workout">
+          <WorkoutRouter />
         </Route>
         <Route path="/profile">
           <ProfileRouter />
@@ -37,4 +41,4 @@ const AppRouter = ({ isLoggedIn = false }: IProps): JSX.Element => {
   );
 };
 
-export default AppRouter;
+export default WorkoutTracker;
