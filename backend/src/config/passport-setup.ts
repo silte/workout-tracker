@@ -10,8 +10,8 @@ import User, { IUserModel } from "../models/user-model";
 
 // serialize the user.id to save in the cookie session
 // so the browser will remember the user when login
-passport.serializeUser((user: any, done) => {
-  done(null, user.id);
+passport.serializeUser((user: unknown, done) => {
+  done(null, (user as IUserModel).id);
 });
 
 // deserialize the cookieUserId to user in the database

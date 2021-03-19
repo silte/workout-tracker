@@ -3,7 +3,7 @@ import React from "react";
 import MuiButtonGroup from "@material-ui/core/ButtonGroup";
 
 interface IButtonGroup {
-  children: any;
+  children: React.Component[];
   className?: string;
 }
 

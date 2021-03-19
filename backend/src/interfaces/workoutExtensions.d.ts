@@ -11,8 +11,8 @@ interface ILapExtension {
 interface ISummaryExtension {
   type: string;
   avgSpeed: number;
-  avgPower?: any;
-  maxPower?: any;
+  avgPower?: number;
+  maxPower?: number;
   avgCadence: number;
   maxCadence: number;
   ascent: number;
@@ -21,18 +21,18 @@ interface ISummaryExtension {
   descentTime: number;
   pte: number;
   peakEpoc: number;
-  performanceLevel?: any;
+  performanceLevel?: number;
   recoveryTime: number;
-  weather?: any;
-  minTemperature?: any;
-  avgTemperature?: any;
-  maxTemperature?: any;
-  workoutType?: any;
+  weather?: never;
+  minTemperature?: number;
+  avgTemperature?: number;
+  maxTemperature?: number;
+  workoutType?: never;
   feeling: number;
-  tags?: any;
+  tags?: never;
   gear: IGear;
   exerciseId: string;
-  apps: any[];
+  apps: never[];
 }
 
 interface IFitnessExtension {
@@ -51,8 +51,8 @@ interface IHrExtension {
 interface IIntensityExtension {
   type: string;
   zones: IZones;
-  physiologicalThresholds?: any;
-  overallIntensity?: any;
+  physiologicalThresholds?: never;
+  overallIntensity?: never;
 }
 
 interface ILocationExtension {
@@ -86,24 +86,24 @@ interface ILapTotal {
   altitude: ISummary;
   ascent: number;
   ascentTime: number;
-  cadence?: any;
+  cadence?: number;
   descent: number;
   descentMax: number;
   descentTime: number;
   distance: number;
   distanceMax: number;
-  downhillGrade?: any;
+  downhillGrade?: never;
   duration: number;
   energy: number;
   hr: ISummary;
-  power?: any;
+  power?: number;
   recoveryTime: number;
   speed: ISummary;
-  strokeRate?: any;
-  strokes?: any;
-  swimmingStyle?: any;
-  swolf?: any;
-  temperature?: any;
+  strokeRate?: number;
+  strokes?: number;
+  swimmingStyle?: never;
+  swolf?: never;
+  temperature?: number;
   verticalSpeed: ISummary;
 }
 
@@ -116,16 +116,16 @@ interface ISummary {
 interface IZones {
   heartRate: IZoneSummary;
   speed: IZoneSummary;
-  power?: any;
+  power?: number;
 }
 
 interface ILocationPoint {
   altitude: number;
-  bearing?: any;
-  ehpe?: any;
+  bearing?: never;
+  ehpe?: never;
   latitude: number;
   longitude: number;
-  speed?: any;
+  speed?: number;
   timestamp: number;
 }
 
@@ -147,18 +147,18 @@ interface IMultisportTotals {
   descentTime: number;
   distance: number;
   distanceMax: number;
-  downhillGrade?: any;
+  downhillGrade?: never;
   duration: number;
   energy: number;
   hr: ISummary;
-  power?: any;
+  power?: number;
   recoveryTime: number;
   speed: ISummary;
-  strokeRate?: any;
-  strokes?: any;
-  swimmingStyle?: any;
-  swolf?: any;
-  temperature?: any;
+  strokeRate?: number;
+  strokes?: number;
+  swimmingStyle?: never;
+  swolf?: never;
+  temperature?: number;
   verticalSpeed: ISummary;
 }
 

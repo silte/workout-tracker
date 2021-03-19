@@ -42,7 +42,6 @@ interface IWorkoutSummaryProps {
   isMultisportExposed: boolean;
 }
 
-const DAY_IN_MS = 86400000;
 const TIMEZONE_OFFSET = new Date().getTimezoneOffset() * 60 * 1000;
 
 const WorkoutTotalSummary = ({
@@ -202,7 +201,7 @@ const WorkoutSummary = ({
   setIsMultisportExposed,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   isMultisportExposed,
-}: IWorkoutSummaryProps): JSX.Element => {
+}: IWorkoutSummaryProps): React.ReactElement => {
   const onChangeFilterStartDate = (date: Date | number) =>
     setFilterStartDate(
       typeof date !== "number" ? new Date(date).getTime() : NaN
@@ -342,7 +341,7 @@ const WorkoutSummary = ({
             />
           </Container>
           <Container className="mt-6">
-            <Listing
+            <Listing<IWorkoutSummary, "workoutKey">
               arrayOfContent={workoutList.slice(0, 100)}
               listingComponent={WorkoutItem}
               keyFieldName="workoutKey"

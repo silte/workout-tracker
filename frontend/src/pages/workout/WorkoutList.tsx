@@ -10,7 +10,7 @@ const WorkoutList = ({ workoutList }: IWorkoutList): JSX.Element => (
     <Heading headingLevel={1} className="workout-list__title">
       Workout list
     </Heading>
-    <Listing
+    <Listing<IWorkoutSummary, "workoutKey">
       arrayOfContent={workoutList}
       listingComponent={WorkoutItem}
       keyFieldName="workoutKey"

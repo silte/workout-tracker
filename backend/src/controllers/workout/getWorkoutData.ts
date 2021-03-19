@@ -14,7 +14,9 @@ export const roundToSingleDecimal = (number: number): number =>
 export const parseDataPoints = (
   workoutRawData: IWorkoutRawData
 ): IWorkoutDataPointData[] => {
-  const dataPoints: any = {};
+  const dataPoints = {} as {
+    [timestamp in number]: { [dataPointKey in string]: string | number };
+  };
 
   const roundDataPointTimestampToSeconds = ({
     timestamp,
@@ -58,7 +60,7 @@ export const parseDataPoints = (
   altitudeData?.forEach(addValueToDatapoint("altitude"));
   cadenceData?.forEach(addValueToDatapoint("cadence"));
 
-  return Object.entries(dataPoints).map(([timestamp, content]: any) => ({
+  return Object.entries(dataPoints).map(([timestamp, content]) => ({
     timestamp,
     ...content,
   }));

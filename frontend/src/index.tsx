@@ -19,11 +19,14 @@ const Root = (): JSX.Element => {
 
         if (waitingServiceWorker) {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          waitingServiceWorker.addEventListener("statechange", (event: any) => {
-            if (event?.target?.state === "activated") {
-              setIsAppUpdateAvailable(true);
+          waitingServiceWorker.addEventListener(
+            "statechange",
+            (event: Event) => {
+              if ((event.target as ServiceWorker).state === "activated") {
+                setIsAppUpdateAvailable(true);
+              }
             }
-          });
+          );
           waitingServiceWorker.postMessage({ type: "SKIP_WAITING" });
         }
       },

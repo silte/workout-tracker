@@ -8,7 +8,6 @@ import SuuntoApiTokenModal from "./suuntoApi.tokenModel";
 
 const SuuntoApi = (): JSX.Element => {
   const [errors, setErrors] = useState<string[]>([]);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [suuntoApiInfo, setSuuntoApiInfo] = useState<ISuuntoApiInfo | null>(
     null
   );

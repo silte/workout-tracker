@@ -47,6 +47,7 @@ const ProfileNavigationItem = ({
 };
 
 const ProfileNavigation = ({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   userRoles,
 }: IProfileNavigationProps): JSX.Element => {
   return (

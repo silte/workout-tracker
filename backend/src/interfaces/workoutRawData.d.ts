@@ -1,5 +1,5 @@
 interface IWorkoutRawDataContainer {
-  error?: any;
+  error?: never;
   payload: IWorkoutRawData;
   metadata: Metadata;
 }
@@ -31,14 +31,14 @@ interface IWorkoutRawData {
   energyConsumption: number;
   cadence: ICadence;
   fullname: string;
-  userPhoto?: any;
-  coverPhoto?: any;
+  userPhoto?: never;
+  coverPhoto?: never;
   stepCount: number;
   reactionCount: number;
   sharingFlags: number;
-  comments: any[];
-  photos: any[];
-  videos: any[];
+  comments: never[];
+  photos: never[];
+  videos: never[];
   rankings: IRankings;
   recoveryTime: number;
   cumulativeRecoveryTime: number;
@@ -59,8 +59,8 @@ interface IWorkoutRawData {
   >;
   minAltitude: number;
   maxAltitude: number;
-  clientCalculatedAchievements?: any;
-  achievements: any[];
+  clientCalculatedAchievements?: never;
+  achievements: never[];
   userReacted: boolean;
 }
 

@@ -9,7 +9,7 @@ interface IWorkoutSummary {
   maxSpeed: number;
   hrmax: number;
   hravg: number;
-  avgSpeed: number;
+  avgSpeed?: number;
   avgCadence: number;
   feeling: number;
   energyConsumption: number;

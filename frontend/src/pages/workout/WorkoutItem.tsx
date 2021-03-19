@@ -26,7 +26,7 @@ const WorkoutItem = ({
   totalTime,
   totalDistance,
   workoutKey,
-}: IWorkoutSummary): JSX.Element => (
+}: IWorkoutSummary): React.ReactElement => (
   <article className="workout-item">
     <Link
       to={`/workout/${workoutKey}`}

@@ -1,5 +1,5 @@
 interface IRawWorkoutSummaryWrapper {
-  error?: any;
+  error?: never;
   payload: IRawWorkoutSummary[];
   metadata: IMetadata;
 }
@@ -62,29 +62,29 @@ interface ICadence {
 
 interface IExtension {
   type: string;
-  avgSpeed?: any;
-  avgPower?: any;
-  maxPower?: any;
+  avgSpeed?: number;
+  avgPower?: number;
+  maxPower?: number;
   avgCadence: number;
-  maxCadence?: any;
+  maxCadence?: number;
   ascent: number;
   descent: number;
-  ascentTime?: any;
-  descentTime?: any;
+  ascentTime?: number;
+  descentTime?: number;
   pte: number;
   peakEpoc: number;
-  performanceLevel?: any;
+  performanceLevel?: number;
   recoveryTime: number;
-  weather?: any;
-  minTemperature?: any;
-  avgTemperature?: any;
-  maxTemperature?: any;
-  workoutType?: any;
+  weather?: never;
+  minTemperature?: number;
+  avgTemperature?: number;
+  maxTemperature?: number;
+  workoutType?: never;
   feeling: number;
-  tags?: any;
+  tags?: never;
   gear: IGear;
-  exerciseId?: any;
-  apps: any[];
+  exerciseId?: never;
+  apps: never[];
 }
 
 interface IGear {

@@ -23,7 +23,6 @@ import {
   metresToKilometres,
   getRoundedMetres,
 } from "../../utils/distanceConverter";
-import { useWindowWidth } from "../../containers/workout/windowSize";
 import Loader from "../../components/loader/loader";
 import SEO from "../../components/seo/seo";
 
@@ -31,8 +30,8 @@ interface IWorkout {
   workout: IWorkoutData;
   chartStartIndex: number;
   chartEndIndex: number;
-  setChartStartIndex: any;
-  setChartEndIndex: any;
+  setChartStartIndex: React.Dispatch<React.SetStateAction<number>>;
+  setChartEndIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 interface IWorkoutDataPointsChart extends IWorkoutDataPointData {
@@ -50,7 +49,7 @@ interface IDataChart {
   isSpeedVisible: boolean;
   isAltitudeVisible: boolean;
   isCadenceVisible: boolean;
-  handleSelectionChange: any;
+  handleSelectionChange(startAndEndIndex: BrushStartEndIndex): void;
   startIndex: number;
   endIndex: number;
 }
@@ -114,7 +113,7 @@ const DataChart = ({
         )}
         <Brush
           dataKey="timeString"
-          onChange={handleSelectionChange}
+          onChange={handleSelectionChange as never}
           gap={60}
           startIndex={startIndex}
           endIndex={endIndex}
@@ -137,8 +136,6 @@ const Workout = ({
   const [isCadenceVisible, setIsCadenceVisible] = useState<boolean>(true);
 
   const toggleBooleanState = (prevStat: boolean) => !prevStat;
-
-  const windowWidth = useWindowWidth();
 
   const getWorkoutDurationFromTimestamp = (timestamp: number) => {
     return secondsToHms((timestamp - workout.startTime) / 1000);
