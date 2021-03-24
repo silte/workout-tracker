@@ -11,7 +11,7 @@ on:
     branches:
       - development
       - production
-        -
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -50,4 +50,3 @@ jobs:
         run: npm --prefix frontend run test
       - name: Run backend tests
         run: npm --prefix backend run test
-
