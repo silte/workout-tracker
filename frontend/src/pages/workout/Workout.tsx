@@ -16,7 +16,6 @@ import {
 import { ButtonGroup } from "@material-ui/core";
 import Container from "../../components/container/container";
 import Heading from "../../components/heading/heading";
-import Spacer from "../../components/spacer/spacer";
 import Button from "../../components/button/button";
 import getActivityName from "../../utils/activityInfo";
 import { unixtimeToDate, secondsToHms } from "../../utils/timeConverter";
@@ -193,25 +192,23 @@ const Workout = ({
   return (
     <>
       <SEO title="Workout summary" />
-      <Container>
-        <Spacer large>
-          <Heading headingLevel={1} className="workout__title">
-            {getActivityName(workout.activityId)}{" "}
-            {unixtimeToDate(workout.startTime)}
-          </Heading>
-          <Heading headingLevel={2} accent="Duration">
-            {secondsToHms(workout.totalTime)}
-          </Heading>
-          <Heading headingLevel={2} accent="Distance">
-            {metresToKilometres(workout.totalDistance)}
-          </Heading>
-          <Heading headingLevel={2} accent="Ascent">
-            {getRoundedMetres(workout.totalAscent)}
-          </Heading>
-          <Heading headingLevel={2} accent="Max speed">
-            {workout.maxSpeed}
-          </Heading>
-        </Spacer>
+      <Container className="py-16 lg:py-32">
+        <Heading headingLevel={1} className="workout__title">
+          {getActivityName(workout.activityId)}{" "}
+          {unixtimeToDate(workout.startTime)}
+        </Heading>
+        <Heading headingLevel={2} accent="Duration">
+          {secondsToHms(workout.totalTime)}
+        </Heading>
+        <Heading headingLevel={2} accent="Distance">
+          {metresToKilometres(workout.totalDistance)}
+        </Heading>
+        <Heading headingLevel={2} accent="Ascent">
+          {getRoundedMetres(workout.totalAscent)}
+        </Heading>
+        <Heading headingLevel={2} accent="Max speed">
+          {workout.maxSpeed}
+        </Heading>
       </Container>
       <Container>
         <ButtonGroup>
@@ -229,7 +226,7 @@ const Workout = ({
           </Button>
         </ButtonGroup>
       </Container>
-      <Spacer>{memoDataChart}</Spacer>
+      <div className="py-8 lg:py-16">{memoDataChart}</div>
     </>
   );
 };
