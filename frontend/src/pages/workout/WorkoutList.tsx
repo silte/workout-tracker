@@ -7,7 +7,7 @@ import Spacer from "../../components/spacer/spacer";
 import WorkoutItem from "./WorkoutItem";
 
 const WorkoutList = ({ workoutList }: IWorkoutList): JSX.Element => (
-  <Container className="workout-list">
+  <Container className="overflow-x-auto overflow-y-hidden">
     <Spacer large>
       <Heading headingLevel={1} className="workout-list__title">
         Workout list

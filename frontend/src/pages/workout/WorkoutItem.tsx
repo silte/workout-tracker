@@ -4,20 +4,18 @@ import getActivityName from "../../utils/activityInfo";
 import { unixtimeToDate, secondsToHms } from "../../utils/timeConverter";
 import { metresToKilometres } from "../../utils/distanceConverter";
 
-import "./WorkoutItem.scss";
-
-interface IWorkoutDataItem {
+interface IWorkoutDataItemProps {
   label: string;
-  children: any;
+  children: React.ReactNode;
 }
 
-const WorkoutDataItem = ({ label, children }: IWorkoutDataItem) => {
+const WorkoutDataItem = ({ label, children }: IWorkoutDataItemProps) => {
   const type = label.split(" ").join("-").toLowerCase();
 
   return (
-    <li className={`workout-data__item workout-data__item--${type}`}>
-      <span className="workout-item__label">{label}</span>
-      <p className="workout-item__type">{children}</p>
+    <li className="flex flex-col" data-type={type}>
+      <span className="text-sm opacity-75">{label}</span>
+      <p className="text-lg font-bold">{children}</p>
     </li>
   );
 };
@@ -30,8 +28,11 @@ const WorkoutItem = ({
   workoutKey,
 }: IWorkoutSummary): JSX.Element => (
   <article className="workout-item">
-    <Link to={`/workout/${workoutKey}`} className="workout-item__link">
-      <ul className="workout-data">
+    <Link
+      to={`/workout/${workoutKey}`}
+      className="block py-3 px-6 bg-gray-50 rounded-md border-solid border-gray-100 border-1 overflow-x-auto overflow-y-hidden whitespace-nowrap hover:border-gray-200 hover:bg-gray-100"
+    >
+      <ul className="grid grid-cols-workout-item justify-between gap-8">
         <WorkoutDataItem label="Activity">
           {getActivityName(activityId)}
         </WorkoutDataItem>
