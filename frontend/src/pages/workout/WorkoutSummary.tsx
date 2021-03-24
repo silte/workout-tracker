@@ -26,7 +26,6 @@ import {
   getRoundedMetres,
 } from "../../utils/distanceConverter";
 
-import "./WorkoutSummary.scss";
 import { sumNumbers } from "../../utils/numberOperations";
 import Loader from "../../components/loader/loader";
 import Hero from "../../components/hero/hero";
@@ -68,8 +67,8 @@ const WorkoutTotalSummary = ({
   );
 
   return (
-    <ul className="listing col--3 workout-summary-data workout-summary-data--total">
-      <li className="listing__item workout-summary-data__item">
+    <ul className="listing col--3">
+      <li className="listing__item py-9 px-6 bg-blue-600 rounded-md">
         <Heading
           headingLevel={2}
           accent="Duration"
@@ -80,7 +79,7 @@ const WorkoutTotalSummary = ({
           {secondsToHms(workoutTotalSummaryData.totalDuration)}
         </Heading>
       </li>
-      <li className="listing__item workout-summary-data__item">
+      <li className="listing__item py-9 px-6 bg-blue-600 rounded-md">
         <Heading
           headingLevel={2}
           accent="Distance"
@@ -91,7 +90,7 @@ const WorkoutTotalSummary = ({
           {metresToKilometres(workoutTotalSummaryData.totalDistance)}
         </Heading>
       </li>
-      <li className="listing__item workout-summary-data__item">
+      <li className="listing__item py-9 px-6 bg-blue-600 rounded-md">
         <Heading
           headingLevel={2}
           accent="Ascent"
@@ -102,7 +101,7 @@ const WorkoutTotalSummary = ({
           {getRoundedMetres(workoutTotalSummaryData.totalAscent)}
         </Heading>
       </li>
-      <li className="listing__item workout-summary-data__item">
+      <li className="listing__item py-9 px-6 bg-blue-600 rounded-md">
         <Heading
           headingLevel={2}
           accent="Hr zones"
@@ -166,12 +165,12 @@ const WorkoutAcivitySummary = ({
 }: {
   workoutSummaryData: ISummaryData[];
 }) => (
-  <ul className="listing col--3 workout-summary-data workout-summary-data--activity">
+  <ul className="listing col--3">
     {workoutSummaryData.map(
       ({ activityId, totalDistance, totalDuration, totalAscent }) => (
         <li
           key={activityId}
-          className="listing__item workout-summary-data__item"
+          className="listing__item py-9 px-6 bg-gray-50 rounded-md border-solid border-gray-100 border-1"
         >
           <Heading headingLevel={2} headingSize="m">
             {getActivityName(activityId)}
@@ -329,7 +328,7 @@ const WorkoutSummary = ({
       {workoutCount > 0 ? (
         <>
           <Container className="mt-12">
-            <div className="flex justify-end">
+            <div className="flex justify-end mb-3">
               <Button onClick={toggleMultisportExpose}>
                 Toggle multisports
               </Button>
