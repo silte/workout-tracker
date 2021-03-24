@@ -67,8 +67,8 @@ const WorkoutTotalSummary = ({
   );
 
   return (
-    <ul className="listing col--3">
-      <li className="listing__item py-9 px-6 bg-blue-600 rounded-md">
+    <ul className="grid grid-cols-3 gap-6">
+      <li className="py-9 px-6 bg-blue-600 rounded-md">
         <Heading
           headingLevel={2}
           accent="Duration"
@@ -79,7 +79,7 @@ const WorkoutTotalSummary = ({
           {secondsToHms(workoutTotalSummaryData.totalDuration)}
         </Heading>
       </li>
-      <li className="listing__item py-9 px-6 bg-blue-600 rounded-md">
+      <li className="py-9 px-6 bg-blue-600 rounded-md">
         <Heading
           headingLevel={2}
           accent="Distance"
@@ -90,7 +90,7 @@ const WorkoutTotalSummary = ({
           {metresToKilometres(workoutTotalSummaryData.totalDistance)}
         </Heading>
       </li>
-      <li className="listing__item py-9 px-6 bg-blue-600 rounded-md">
+      <li className="py-9 px-6 bg-blue-600 rounded-md">
         <Heading
           headingLevel={2}
           accent="Ascent"
@@ -101,7 +101,7 @@ const WorkoutTotalSummary = ({
           {getRoundedMetres(workoutTotalSummaryData.totalAscent)}
         </Heading>
       </li>
-      <li className="listing__item py-9 px-6 bg-blue-600 rounded-md">
+      <li className="py-9 px-6 bg-blue-600 rounded-md">
         <Heading
           headingLevel={2}
           accent="Hr zones"
@@ -162,15 +162,17 @@ const WorkoutTotalSummary = ({
 
 const WorkoutAcivitySummary = ({
   workoutSummaryData,
+  className = "",
 }: {
   workoutSummaryData: ISummaryData[];
+  className?: string;
 }) => (
-  <ul className="listing col--3">
+  <ul className={`grid grid-cols-3 gap-6 ${className}`}>
     {workoutSummaryData.map(
       ({ activityId, totalDistance, totalDuration, totalAscent }) => (
         <li
           key={activityId}
-          className="listing__item py-9 px-6 bg-gray-50 rounded-md border-solid border-gray-100 border-1"
+          className="py-9 px-6 bg-gray-50 rounded-md border-solid border-gray-100 border-1"
         >
           <Heading headingLevel={2} headingSize="m">
             {getActivityName(activityId)}
@@ -334,7 +336,10 @@ const WorkoutSummary = ({
               </Button>
             </div>
             <WorkoutTotalSummary workoutSummaryData={workoutSummaryData} />
-            <WorkoutAcivitySummary workoutSummaryData={workoutSummaryData} />
+            <WorkoutAcivitySummary
+              workoutSummaryData={workoutSummaryData}
+              className="mt-6"
+            />
           </Container>
           <Container className="mt-6">
             <Listing
