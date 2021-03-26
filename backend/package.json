@@ -11,7 +11,7 @@
     "build": "tsc && npm run compile",
     "format": "prettier --write src/**/*.ts{,x} && eslint src/**/*.ts{,x} --fix",
     "lint": "eslint src/**/*.ts{,x}",
-    "test": "jest --silent --runInBand --config ./jest.config.json --forceExit",
+    "test": "jest --silent --runInBand --config ./jest.config.json --forceExit --passWithNoTests",
     "test:watch": "npm run test -- --watch",
     "update-workout-data": "tsc && node build/updateWorkoutData.js"
   },
