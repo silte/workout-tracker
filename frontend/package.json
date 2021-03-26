@@ -34,13 +34,16 @@
     "workbox-strategies": "^5.1.4"
   },
   "scripts": {
-    "start": "npm run watch:css && react-scripts start",
-    "build": "npm run watch:css && react-scripts build",
+    "start": "run-p watch:css start:react",
+    "build": "run-s build:css build:react",
+    "start:react": "react-scripts start",
+    "build:react": "react-scripts build",
     "test": "react-scripts test",
     "format": "prettier --write src/**/*.ts{,x} && eslint src/**/*.ts{,x} --fix",
     "lint": "eslint src/**/*.ts{,x}",
     "eject": "react-scripts eject",
-    "watch:css": "postcss src/assets/tailwind.css -o src/assets/workout-tracker.css"
+    "watch:css": "NODE_ENV=development postcss src/assets/tailwind.css -o src/assets/workout-tracker.css",
+    "build:css": "NODE_ENV=production  postcss src/assets/tailwind.css -o src/assets/workout-tracker.css"
   },
   "eslintConfig": {
     "extends": [
@@ -61,9 +64,10 @@
     ]
   },
   "devDependencies": {
+    "@tailwindcss/jit": "^0.1.10",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "@typescript-eslint/parser": "^4.6.1",
-    "autoprefixer": "^9.8.6",
+    "autoprefixer": "^10.2.5",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-typescript": "^12.0.0",
     "eslint-config-prettier": "^6.15.0",
@@ -73,8 +77,9 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "http-proxy-middleware": "^0.19.1",
+    "npm-run-all": "^4.1.5",
     "postcss-cli": "^8.2.0",
     "prettier": "^2.1.2",
-    "tailwindcss": "^2.0.1"
+    "tailwindcss": "^2.0.4"
   }
 }

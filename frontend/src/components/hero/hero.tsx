@@ -2,9 +2,11 @@ import React from "react";
 import Container from "../container/container";
 import Heading from "../heading/heading";
 
+type AccentColor = "pink" | "red" | "green" | "blue";
+
 interface IProps {
   accent?: string;
-  accentColor?: "pink" | "red" | "green" | "blue" | "white" | "black";
+  accentColor?: AccentColor;
   label: string;
   children: React.ReactNode;
   standAlone?: boolean;
