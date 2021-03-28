@@ -1,5 +1,5 @@
 export const getSuuntoApiInfo = async (): Promise<
-  IApiResponse<ISuuntoApiInfo>
+  IApiResponse<ISuuntoApiInfo | undefined>
 > =>
   (
     await fetch("/api/data-source/suunto", {

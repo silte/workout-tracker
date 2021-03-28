@@ -16,8 +16,8 @@ const SuuntoApi = (): JSX.Element => {
   useEffect(() => {
     const fetchApiInfo = async () => {
       const newSuuntoApiInfo = (await getSuuntoApiInfo()).payload;
-      setSuuntoApiInfo(newSuuntoApiInfo);
-      if (newSuuntoApiInfo.isFetching) {
+      setSuuntoApiInfo(newSuuntoApiInfo || null);
+      if (newSuuntoApiInfo && newSuuntoApiInfo?.isFetching) {
         setTimeout(setReload, 1000, Date.now());
       }
     };
