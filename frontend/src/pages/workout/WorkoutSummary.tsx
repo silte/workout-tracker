@@ -66,7 +66,7 @@ const WorkoutTotalSummary = ({
   );
 
   return (
-    <ul className="grid grid-cols-3 gap-6">
+    <ul className="grid grid-cols-1 md:grid-cols-3 gap-6">
       <li className="py-9 px-6 bg-blue-600 rounded-md">
         <Heading
           headingLevel={2}
@@ -166,7 +166,7 @@ const WorkoutAcivitySummary = ({
   workoutSummaryData: ISummaryData[];
   className?: string;
 }) => (
-  <ul className={`grid grid-cols-3 gap-6 ${className}`}>
+  <ul className={`grid grid-cols-1 md:grid-cols-3 gap-6 ${className}`}>
     {workoutSummaryData.map(
       ({ activityId, totalDistance, totalDuration, totalAscent }) => (
         <li
