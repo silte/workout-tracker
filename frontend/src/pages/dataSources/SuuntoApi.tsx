@@ -5,6 +5,7 @@ import Container from "../../components/container/container";
 import Heading from "../../components/heading/heading";
 import { getSuuntoApiInfo, updateDataFromSuunto } from "./dataSources.service";
 import SuuntoApiTokenModal from "./suuntoApi.tokenModel";
+import SEO from "../../components/seo/seo";
 
 const SuuntoApi = (): JSX.Element => {
   const [errors, setErrors] = useState<string[]>([]);
@@ -41,6 +42,7 @@ const SuuntoApi = (): JSX.Element => {
 
   return (
     <>
+      <SEO title="Manage Suunto integration" />
       <Container className="my-12">
         {errors.length > 0 && (
           <Alert additionalInformation={errors}>

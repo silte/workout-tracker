@@ -188,7 +188,7 @@ const Workout = ({
   }
   return (
     <>
-      <SEO title="Workout summary" />
+      <SEO title="Workout" />
       <Container className="py-16 lg:py-32">
         <Heading headingLevel={1} className="workout__title">
           {getActivityName(workout.activityId)}{" "}

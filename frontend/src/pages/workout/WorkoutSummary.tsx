@@ -30,6 +30,7 @@ import { sumNumbers } from "../../utils/numberOperations";
 import Loader from "../../components/loader/loader";
 import Hero from "../../components/hero/hero";
 import ButtonGroup from "../../components/button/button.group";
+import SEO from "../../components/seo/seo";
 
 interface IWorkoutSummaryProps {
   workoutList: IWorkoutSummary[];
@@ -278,6 +279,7 @@ const WorkoutSummary = ({
 
   return (
     <>
+      <SEO title="Workout Summary" />
       <Hero
         accent="Summary of"
         label={`${workoutCount} ${
