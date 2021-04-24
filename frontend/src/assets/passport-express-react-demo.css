@@ -1,4 +1,4 @@
-/*! tailwindcss v2.0.4 | MIT License | https://tailwindcss.com *//*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
+/*! tailwindcss v2.1.2 | MIT License | https://tailwindcss.com *//*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
 
 /*
 Document
@@ -525,7 +525,7 @@ object {
 
 /**
  * Constrain images and videos to the parent width and preserve
- * their instrinsic aspect ratio.
+ * their intrinsic aspect ratio.
  *
  * https://github.com/mozdevs/cssremedy/issues/14
  */
@@ -1325,17 +1325,17 @@ select {
 .-mr-2 {
 	margin-right: -0.5rem;
 }
-.inline-block {
-	display: inline-block;
-}
 .block {
 	display: block;
 }
-.inline-flex {
-	display: inline-flex;
+.inline-block {
+	display: inline-block;
 }
 .flex {
 	display: flex;
+}
+.inline-flex {
+	display: inline-flex;
 }
 .hidden {
 	display: none;
@@ -1505,6 +1505,22 @@ select {
 	--tw-border-opacity: 1;
 	border-color: rgba(229, 231, 235, var(--tw-border-opacity));
 }
+.border-blue-500 {
+	--tw-border-opacity: 1;
+	border-color: rgba(63, 131, 248, var(--tw-border-opacity));
+}
+.border-green-500 {
+	--tw-border-opacity: 1;
+	border-color: rgba(14, 159, 110, var(--tw-border-opacity));
+}
+.border-pink-500 {
+	--tw-border-opacity: 1;
+	border-color: rgba(231, 70, 148, var(--tw-border-opacity));
+}
+.border-red-500 {
+	--tw-border-opacity: 1;
+	border-color: rgba(240, 82, 82, var(--tw-border-opacity));
+}
 .bg-white {
 	--tw-bg-opacity: 1;
 	background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
@@ -1536,6 +1552,22 @@ select {
 .bg-gray-500 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(107, 114, 128, var(--tw-bg-opacity));
+}
+.bg-blue-50 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(235, 245, 255, var(--tw-bg-opacity));
+}
+.bg-green-50 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(243, 250, 247, var(--tw-bg-opacity));
+}
+.bg-pink-50 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(253, 242, 248, var(--tw-bg-opacity));
+}
+.bg-red-50 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(253, 242, 242, var(--tw-bg-opacity));
 }
 .p-4 {
 	padding: 1rem;
@@ -1729,6 +1761,22 @@ select {
 	--tw-text-opacity: 1;
 	color: rgba(55, 65, 81, var(--tw-text-opacity));
 }
+.text-blue-500 {
+	--tw-text-opacity: 1;
+	color: rgba(63, 131, 248, var(--tw-text-opacity));
+}
+.text-green-500 {
+	--tw-text-opacity: 1;
+	color: rgba(14, 159, 110, var(--tw-text-opacity));
+}
+.text-pink-500 {
+	--tw-text-opacity: 1;
+	color: rgba(231, 70, 148, var(--tw-text-opacity));
+}
+.text-red-500 {
+	--tw-text-opacity: 1;
+	color: rgba(240, 82, 82, var(--tw-text-opacity));
+}
 .text-gray-400 {
 	--tw-text-opacity: 1;
 	color: rgba(159, 166, 178, var(--tw-text-opacity));
@@ -1744,6 +1792,22 @@ select {
 .text-gray-600 {
 	--tw-text-opacity: 1;
 	color: rgba(75, 85, 99, var(--tw-text-opacity));
+}
+.text-blue-700 {
+	--tw-text-opacity: 1;
+	color: rgba(26, 86, 219, var(--tw-text-opacity));
+}
+.text-green-700 {
+	--tw-text-opacity: 1;
+	color: rgba(4, 108, 78, var(--tw-text-opacity));
+}
+.text-pink-700 {
+	--tw-text-opacity: 1;
+	color: rgba(191, 18, 93, var(--tw-text-opacity));
+}
+.text-red-700 {
+	--tw-text-opacity: 1;
+	color: rgba(200, 30, 30, var(--tw-text-opacity));
 }
 .opacity-0 {
 	opacity: 0;
@@ -1783,7 +1847,9 @@ select {
 	--tw-ring-opacity: 0.05;
 }
 .transition {
-	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	transition-duration: 150ms;
 }
@@ -1866,9 +1932,41 @@ select {
 	--tw-text-opacity: 1;
 	color: rgba(75, 85, 99, var(--tw-text-opacity));
 }
+.focus\:border-blue-700:focus {
+	--tw-border-opacity: 1;
+	border-color: rgba(26, 86, 219, var(--tw-border-opacity));
+}
+.focus\:border-green-700:focus {
+	--tw-border-opacity: 1;
+	border-color: rgba(4, 108, 78, var(--tw-border-opacity));
+}
+.focus\:border-pink-700:focus {
+	--tw-border-opacity: 1;
+	border-color: rgba(191, 18, 93, var(--tw-border-opacity));
+}
+.focus\:border-red-700:focus {
+	--tw-border-opacity: 1;
+	border-color: rgba(200, 30, 30, var(--tw-border-opacity));
+}
 .focus\:border-gray-300:focus {
 	--tw-border-opacity: 1;
 	border-color: rgba(210, 214, 220, var(--tw-border-opacity));
+}
+.focus\:bg-blue-100:focus {
+	--tw-bg-opacity: 1;
+	background-color: rgba(225, 239, 254, var(--tw-bg-opacity));
+}
+.focus\:bg-green-100:focus {
+	--tw-bg-opacity: 1;
+	background-color: rgba(222, 247, 236, var(--tw-bg-opacity));
+}
+.focus\:bg-pink-100:focus {
+	--tw-bg-opacity: 1;
+	background-color: rgba(252, 232, 243, var(--tw-bg-opacity));
+}
+.focus\:bg-red-100:focus {
+	--tw-bg-opacity: 1;
+	background-color: rgba(253, 232, 232, var(--tw-bg-opacity));
 }
 .focus\:bg-gray-50:focus {
 	--tw-bg-opacity: 1;
@@ -1881,6 +1979,22 @@ select {
 .focus\:text-gray-700:focus {
 	--tw-text-opacity: 1;
 	color: rgba(55, 65, 81, var(--tw-text-opacity));
+}
+.focus\:text-blue-800:focus {
+	--tw-text-opacity: 1;
+	color: rgba(30, 66, 159, var(--tw-text-opacity));
+}
+.focus\:text-green-800:focus {
+	--tw-text-opacity: 1;
+	color: rgba(3, 84, 63, var(--tw-text-opacity));
+}
+.focus\:text-pink-800:focus {
+	--tw-text-opacity: 1;
+	color: rgba(153, 21, 75, var(--tw-text-opacity));
+}
+.focus\:text-red-800:focus {
+	--tw-text-opacity: 1;
+	color: rgba(155, 28, 28, var(--tw-text-opacity));
 }
 .focus\:text-gray-800:focus {
 	--tw-text-opacity: 1;
@@ -1985,20 +2099,20 @@ select {
 		margin-left: 1.5rem;
 	}
 
-	.sm\:flex {
-		display: flex;
-	}
-
-	.sm\:grid {
-		display: grid;
+	.sm\:block {
+		display: block;
 	}
 
 	.sm\:inline-block {
 		display: inline-block;
 	}
 
-	.sm\:block {
-		display: block;
+	.sm\:flex {
+		display: flex;
+	}
+
+	.sm\:grid {
+		display: grid;
 	}
 
 	.sm\:hidden {
