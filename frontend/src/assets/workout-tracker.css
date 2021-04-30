@@ -1,4 +1,4 @@
-/*! tailwindcss v2.0.4 | MIT License | https://tailwindcss.com *//*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
+/*! tailwindcss v2.1.2 | MIT License | https://tailwindcss.com *//*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
 
 /*
 Document
@@ -89,8 +89,7 @@ Add the correct text decoration in Chrome, Edge, and Safari.
 */
 
 abbr[title] {
-	-webkit-text-decoration: underline dotted;
-	        text-decoration: underline dotted;
+	text-decoration: underline dotted;
 }
 
 /**
@@ -437,16 +436,6 @@ textarea {
   resize: vertical;
 }
 
-input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-  opacity: 1;
-  color: #9fa6b2;
-}
-
-input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-  opacity: 1;
-  color: #9fa6b2;
-}
-
 input::placeholder,
 textarea::placeholder {
   opacity: 1;
@@ -536,7 +525,7 @@ object {
 
 /**
  * Constrain images and videos to the parent width and preserve
- * their instrinsic aspect ratio.
+ * their intrinsic aspect ratio.
  *
  * https://github.com/mozdevs/cssremedy/issues/14
  */
@@ -601,16 +590,6 @@ video {
 	border-color: #1c64f2;
 }
 
-input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-	color: #6b7280;
-	opacity: 1;
-}
-
-input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-	color: #6b7280;
-	opacity: 1;
-}
-
 input::placeholder, textarea::placeholder {
 	color: #6b7280;
 	opacity: 1;
@@ -657,10 +636,8 @@ select {
 	vertical-align: middle;
 	background-origin: border-box;
 	-webkit-user-select: none;
-	    -ms-user-select: none;
 	        user-select: none;
-	-webkit-flex-shrink: 0;
-	        flex-shrink: 0;
+	flex-shrink: 0;
 	height: 1rem;
 	width: 1rem;
 	color: #1c64f2;
@@ -1368,18 +1345,16 @@ select {
 .-mr-2 {
 	margin-right: -0.5rem;
 }
-.inline-block {
-	display: inline-block;
-}
 .block {
 	display: block;
 }
+.inline-block {
+	display: inline-block;
+}
 .flex {
-	display: -webkit-flex;
 	display: flex;
 }
 .inline-flex {
-	display: -webkit-inline-flex;
 	display: inline-flex;
 }
 .grid {
@@ -1440,12 +1415,10 @@ select {
 	max-width: 24rem;
 }
 .flex-1 {
-	-webkit-flex: 1 1 0%;
-	        flex: 1 1 0%;
+	flex: 1 1 0%;
 }
 .flex-shrink-0 {
-	-webkit-flex-shrink: 0;
-	        flex-shrink: 0;
+	flex-shrink: 0;
 }
 .transform {
 	--tw-translate-x: 0;
@@ -1455,12 +1428,10 @@ select {
 	--tw-skew-y: 0;
 	--tw-scale-x: 1;
 	--tw-scale-y: 1;
-	-webkit-transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-	        transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+	transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .origin-top-right {
-	-webkit-transform-origin: top right;
-	        transform-origin: top right;
+	transform-origin: top right;
 }
 .translate-x-32 {
 	--tw-translate-x: 8rem;
@@ -1502,32 +1473,25 @@ select {
 	grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 .flex-col {
-	-webkit-flex-direction: column;
-	        flex-direction: column;
+	flex-direction: column;
 }
 .items-center {
-	-webkit-align-items: center;
-	        align-items: center;
+	align-items: center;
 }
 .items-end {
-	-webkit-align-items: flex-end;
-	        align-items: flex-end;
+	align-items: flex-end;
 }
 .items-start {
-	-webkit-align-items: flex-start;
-	        align-items: flex-start;
+	align-items: flex-start;
 }
 .justify-center {
-	-webkit-justify-content: center;
-	        justify-content: center;
+	justify-content: center;
 }
 .justify-between {
-	-webkit-justify-content: space-between;
-	        justify-content: space-between;
+	justify-content: space-between;
 }
 .justify-end {
-	-webkit-justify-content: flex-end;
-	        justify-content: flex-end;
+	justify-content: flex-end;
 }
 .gap-8 {
 	gap: 2rem;
@@ -1933,14 +1897,6 @@ select {
 	--tw-text-opacity: 1;
 	color: rgba(191, 18, 93, var(--tw-text-opacity));
 }
-.placeholder-gray-400::-webkit-input-placeholder {
-	--tw-placeholder-opacity: 1;
-	color: rgba(159, 166, 178, var(--tw-placeholder-opacity));
-}
-.placeholder-gray-400:-ms-input-placeholder {
-	--tw-placeholder-opacity: 1;
-	color: rgba(159, 166, 178, var(--tw-placeholder-opacity));
-}
 .placeholder-gray-400::placeholder {
 	--tw-placeholder-opacity: 1;
 	color: rgba(159, 166, 178, var(--tw-placeholder-opacity));
@@ -1982,10 +1938,22 @@ select {
 .ring-opacity-5 {
 	--tw-ring-opacity: 0.05;
 }
+.filter {
+	--tw-blur: var(--tw-empty,/*!*/ /*!*/);
+	--tw-brightness: var(--tw-empty,/*!*/ /*!*/);
+	--tw-contrast: var(--tw-empty,/*!*/ /*!*/);
+	--tw-grayscale: var(--tw-empty,/*!*/ /*!*/);
+	--tw-hue-rotate: var(--tw-empty,/*!*/ /*!*/);
+	--tw-invert: var(--tw-empty,/*!*/ /*!*/);
+	--tw-saturate: var(--tw-empty,/*!*/ /*!*/);
+	--tw-sepia: var(--tw-empty,/*!*/ /*!*/);
+	--tw-drop-shadow: var(--tw-empty,/*!*/ /*!*/);
+	filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
 .transition {
-	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, -webkit-transform;
-	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
-	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, -webkit-transform;
+	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	transition-duration: 150ms;
 }
@@ -2254,21 +2222,20 @@ select {
 		margin-left: 1.5rem;
 	}
 
-	.sm\:flex {
-		display: -webkit-flex;
-		display: flex;
-	}
-
-	.sm\:grid {
-		display: grid;
-	}
-
 	.sm\:block {
 		display: block;
 	}
 
 	.sm\:inline-block {
 		display: inline-block;
+	}
+
+	.sm\:flex {
+		display: flex;
+	}
+
+	.sm\:grid {
+		display: grid;
 	}
 
 	.sm\:hidden {
@@ -2316,33 +2283,27 @@ select {
 	}
 
 	.sm\:flex-row-reverse {
-		-webkit-flex-direction: row-reverse;
-		        flex-direction: row-reverse;
+		flex-direction: row-reverse;
 	}
 
 	.sm\:flex-row {
-		-webkit-flex-direction: row;
-		        flex-direction: row;
+		flex-direction: row;
 	}
 
 	.sm\:items-start {
-		-webkit-align-items: flex-start;
-		        align-items: flex-start;
+		align-items: flex-start;
 	}
 
 	.sm\:items-center {
-		-webkit-align-items: center;
-		        align-items: center;
+		align-items: center;
 	}
 
 	.sm\:justify-end {
-		-webkit-justify-content: flex-end;
-		        justify-content: flex-end;
+		justify-content: flex-end;
 	}
 
 	.sm\:justify-center {
-		-webkit-justify-content: center;
-		        justify-content: center;
+		justify-content: center;
 	}
 
 	.sm\:gap-4 {
@@ -2487,7 +2448,6 @@ select {
 	}
 
 	.lg\:flex {
-		display: -webkit-flex;
 		display: flex;
 	}
 
@@ -2504,13 +2464,11 @@ select {
 	}
 
 	.lg\:flex-1 {
-		-webkit-flex: 1 1 0%;
-		        flex: 1 1 0%;
+		flex: 1 1 0%;
 	}
 
 	.lg\:flex-shrink-0 {
-		-webkit-flex-shrink: 0;
-		        flex-shrink: 0;
+		flex-shrink: 0;
 	}
 
 	.lg\:px-8 {

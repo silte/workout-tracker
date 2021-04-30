@@ -5,7 +5,9 @@ module.exports = {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
   },
+  mode: "jit",
   purge: ["./src/**/*.{js,ts,jsx,tsx}", './public/**/*.html',],
+  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       fontFamily: {
@@ -17,11 +19,7 @@ module.exports = {
     },
   },
   variants: {
-    extend: {
-      opacity: ['disabled'],
-      cursor: ['disabled'],
-    }
-
+    extend: {},
   },
   plugins: [require("@tailwindcss/ui"), require("@tailwindcss/forms")],
-};
+}
