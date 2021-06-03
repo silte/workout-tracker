@@ -86,7 +86,7 @@ const SuuntoApi = (): JSX.Element => {
         <Heading headingLevel={3} headingSize="m">
           Synchronization status messages
         </Heading>
-        <ol className="list-decimal mt-6">
+        <ol className="list-decimal mt-6 ml-8">
           {suuntoApiInfo?.fetchMessage?.map((message) => (
             <li key={message}>{message}</li>
           ))}
