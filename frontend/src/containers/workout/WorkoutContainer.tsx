@@ -26,6 +26,18 @@ const WorkoutContainer = (): JSX.Element => {
       : NaN
   );
 
+  let startIndexUpdateTimer: number;
+  let endIndexUpdateTimer: number;
+
+  const updateStartIndex = (index: number) => {
+    clearTimeout(startIndexUpdateTimer);
+    startIndexUpdateTimer = setTimeout(setChartStartIndex, 500, index);
+  };
+  const updateEndIndex = (index: number) => {
+    clearTimeout(endIndexUpdateTimer);
+    endIndexUpdateTimer = setTimeout(setChartEndIndex, 500, index);
+  };
+
   const history = useHistory();
 
   useEffect(() => {
@@ -60,8 +72,8 @@ const WorkoutContainer = (): JSX.Element => {
       workout={workout}
       chartStartIndex={chartStartIndex}
       chartEndIndex={chartEndIndex}
-      setChartStartIndex={setChartStartIndex}
-      setChartEndIndex={setChartEndIndex}
+      setChartStartIndex={updateStartIndex}
+      setChartEndIndex={updateEndIndex}
     />
   );
 };

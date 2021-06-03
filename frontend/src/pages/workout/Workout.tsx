@@ -30,8 +30,8 @@ interface IWorkout {
   workout: IWorkoutData;
   chartStartIndex: number;
   chartEndIndex: number;
-  setChartStartIndex: React.Dispatch<React.SetStateAction<number>>;
-  setChartEndIndex: React.Dispatch<React.SetStateAction<number>>;
+  setChartStartIndex(index: number): void;
+  setChartEndIndex(index: number): void;
 }
 
 interface IWorkoutDataPointsChart extends IWorkoutDataPointData {
