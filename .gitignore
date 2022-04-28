@@ -2,5 +2,9 @@ node_modules
 docker/.env.production
 .vscode
 build
-data/*
+data
+dist
+tsconfig.tsbuildinfo
+
+*/.env.local
 
