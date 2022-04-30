@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
-import { WORKOUT_LIST_ENDPOINT } from '../../constants/endpoints';
 import WorkoutSummary from '../../pages/workout/WorkoutSummary';
+import { getWorkoutSummaries } from '../../services/workout-service';
 import { sumNumbers } from '../../utils/numberOperations';
 import { formatDateToISO8601 } from '../../utils/timeConverter';
 
@@ -116,9 +116,7 @@ const WorkoutSummaryContainer = (): JSX.Element => {
 
   useEffect(() => {
     const fetchWorkoutList = async () => {
-      const rawData = await fetch(WORKOUT_LIST_ENDPOINT);
-      const jsonData = await rawData.json();
-      setWorkoutList(jsonData);
+      setWorkoutList(await getWorkoutSummaries());
     };
     fetchWorkoutList();
   }, []);

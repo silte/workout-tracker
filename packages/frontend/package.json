@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@local/types": "*",
     "@material-ui/core": "^4.11.0",
     "@headlessui/react": "^0.2.0",
     "@silte/react-loader": "^1.0.4",

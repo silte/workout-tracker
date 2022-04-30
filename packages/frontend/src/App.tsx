@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Notification from './components/notification/notification';
-import { getAuthenticationStatus } from './services/AuthenticationService';
+import { getAuthenticationStatus } from './services/authentication-service';
 import WorkoutTracker from './WorkoutTracker';
 
 const App = (): JSX.Element => {

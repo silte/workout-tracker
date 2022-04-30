@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Container from '../../components/container/container';
+import { getProfileInformation } from '../../services/profile-service';
 
 import Profile from './Profile';
 import ProfileNavigation from './ProfileNavigation';
-import { getProfileInformation } from './ProfileService';
 
 const ProfileRouter = (): JSX.Element => {
   const [profileInfo, setProfileInfo] = useState<IUser | null>(null);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { getProfileInformation } from './pages/profile/ProfileService';
+import { getProfileInformation } from './services/profile-service';
 
 const LoggedIn = (): JSX.Element => {
   const [authenticationStatus, setAuthenticationStatus] = useState<IUser>();

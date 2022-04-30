@@ -11,19 +11,12 @@ import mongoose from 'mongoose';
 import passport from 'passport';
 
 import { configuration } from './config/configuration';
-import { AccountBalanceChangesModule } from './modules/account-balance-changes/account-balance-changes.module';
-import { AccountsModule } from './modules/accounts/accounts.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { ExpensesModule } from './modules/expenses/expenses.module';
 import { HealthCheckModule } from './modules/health-check/health-check.module';
-import { IncomesModule } from './modules/incomes/incomes.module';
-import { TransactionCategoriesModule } from './modules/transaction-categories/transaction-categories.module';
-import { TransactionCategoryMappingsModule } from './modules/transaction-category-mappings/transaction-category-mappings.module';
-import { TransactionsModule } from './modules/transactions/transactions.module';
-import { TransfersModule } from './modules/transfers/transfers.module';
 import { UserDataModule } from './modules/user-data/user-data.module';
 import { UserPreferencesModule } from './modules/user-preferences/user-preferences.module';
 import { UsersModule } from './modules/users/users.module';
+import { WorkoutSummaryModule } from './modules/workout-summary/workout-summary.module';
 
 @Module({
   imports: [
@@ -45,17 +38,10 @@ import { UsersModule } from './modules/users/users.module';
     }),
     AuthModule.register(),
     UsersModule,
-    AccountsModule,
-    TransactionsModule,
-    TransactionCategoriesModule,
-    TransactionCategoryMappingsModule,
     UserDataModule,
-    ExpensesModule,
-    IncomesModule,
-    TransfersModule,
-    AccountBalanceChangesModule,
     HealthCheckModule,
     UserPreferencesModule,
+    WorkoutSummaryModule,
   ],
 })
 export class AppModule implements NestModule {

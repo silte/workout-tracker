@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
-import { WORKOUT_DATA_ENDPOINT } from '../../constants/endpoints';
 import Workout from '../../pages/workout/Workout';
+import { getWorkoutById } from '../../services/workout-service';
 
 const WorkoutContainer = (): JSX.Element => {
   const [workout, setWorkout] = useState<IWorkoutData>({} as IWorkoutData);
@@ -51,9 +51,7 @@ const WorkoutContainer = (): JSX.Element => {
 
   useEffect(() => {
     const fetchWorkout = async () => {
-      const rawData = await fetch(WORKOUT_DATA_ENDPOINT + workoutId);
-      const jsonData = await rawData.json();
-      setWorkout(jsonData);
+      setWorkout(await getWorkoutById(workoutId));
     };
     fetchWorkout();
   }, [workoutId]);
