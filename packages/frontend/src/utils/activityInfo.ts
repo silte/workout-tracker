@@ -1,4 +1,4 @@
-import activityInfoData from "../constants/activityTypes.json";
+import activityInfoData from '../constants/activityTypes.json';
 
 const getActivity = (activityId: number) =>
   (activityInfoData as IActivityInfo[]).find(
@@ -8,9 +8,9 @@ const getActivity = (activityId: number) =>
 const getActivityName = (activityId: number): string => {
   const activityInfo = getActivity(activityId);
 
-  return typeof activityInfo !== "undefined"
+  return typeof activityInfo !== 'undefined'
     ? activityInfo.Name
-    : "unknown activity";
+    : 'unknown activity';
 };
 
 export default getActivityName;

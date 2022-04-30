@@ -1,11 +1,13 @@
-import React, { MouseEvent, useEffect, useState } from "react";
-import Alert from "../../components/alert/alert";
-import Button from "../../components/button/button";
-import Container from "../../components/container/container";
-import Heading from "../../components/heading/heading";
-import { getSuuntoApiInfo, updateDataFromSuunto } from "./dataSources.service";
-import SuuntoApiTokenModal from "./suuntoApi.tokenModel";
-import SEO from "../../components/seo/seo";
+import React, { MouseEvent, useEffect, useState } from 'react';
+
+import Alert from '../../components/alert/alert';
+import Button from '../../components/button/button';
+import Container from '../../components/container/container';
+import Heading from '../../components/heading/heading';
+import SEO from '../../components/seo/seo';
+
+import { getSuuntoApiInfo, updateDataFromSuunto } from './dataSources.service';
+import SuuntoApiTokenModal from './suuntoApi.tokenModel';
 
 const SuuntoApi = (): JSX.Element => {
   const [errors, setErrors] = useState<string[]>([]);
@@ -30,11 +32,11 @@ const SuuntoApi = (): JSX.Element => {
   const handleUpdate = async (
     e: MouseEvent<HTMLButtonElement>
   ): Promise<void> => {
-    ((e.target as unknown) as { disabled: boolean }).disabled = true;
+    (e.target as unknown as { disabled: boolean }).disabled = true;
     const response = await updateDataFromSuunto();
     setTimeout(runReload, 1000);
     if (response.status >= 300) {
-      setErrors(response.errors || ["Unknow error."]);
+      setErrors(response.errors || ['Unknow error.']);
       return;
     }
     setErrors([]);
@@ -54,11 +56,11 @@ const SuuntoApi = (): JSX.Element => {
           <Heading headingLevel={2} accent="Current API token" headingSize="m">
             {suuntoApiInfo
               ? `${suuntoApiInfo.apiToken?.substr(0, 5)}********`
-              : "NOT FOUND"}
+              : 'NOT FOUND'}
           </Heading>
           <SuuntoApiTokenModal
             setErrors={setErrors}
-            currentToken={suuntoApiInfo?.apiToken || ""}
+            currentToken={suuntoApiInfo?.apiToken || ''}
             setReload={setReload}
           />
         </div>
@@ -67,7 +69,7 @@ const SuuntoApi = (): JSX.Element => {
         <Heading headingLevel={2}>Data synchronization status</Heading>
         <div className="mt-6 flex items-end">
           <Heading accent="Status" headingLevel={3} headingSize="m">
-            {!suuntoApiInfo?.isFetching ? "Ready" : "Updating data..."}
+            {!suuntoApiInfo?.isFetching ? 'Ready' : 'Updating data...'}
           </Heading>
           <Button
             onClick={handleUpdate}

@@ -1,5 +1,5 @@
 const addThousandSeparatorsToNumberString = (numberStr: string) =>
-  numberStr?.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  numberStr?.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 
 export const metresToKilometres = (distance: number): string =>
   `${(distance / 1000)?.toFixed(2)} km`;

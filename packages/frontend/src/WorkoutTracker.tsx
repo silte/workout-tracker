@@ -1,13 +1,14 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
-import Layout from "./components/layout/layout";
-import PrivacyPolicy from "./Privacy";
-import Login from "./pages/login/login";
-import IssuesWithLogin from "./IssuesWithLogin";
-import ProfileRouter from "./pages/profile/ProfileRouter";
-import WorkoutRouter from "./WorkoutRouter";
-import Home from "./pages/Home";
-import SuuntoApi from "./pages/dataSources/SuuntoApi";
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+
+import Layout from './components/layout/layout';
+import IssuesWithLogin from './IssuesWithLogin';
+import SuuntoApi from './pages/dataSources/SuuntoApi';
+import Home from './pages/Home';
+import Login from './pages/login/login';
+import ProfileRouter from './pages/profile/ProfileRouter';
+import PrivacyPolicy from './Privacy';
+import WorkoutRouter from './WorkoutRouter';
 
 interface IProps {
   isLoggedIn: boolean;

@@ -1,5 +1,6 @@
-import React from "react";
-import logo from "../../assets/logo512.png";
+import React from 'react';
+
+import logo from '../../assets/logo512.png';
 
 interface IProps {
   label: string;

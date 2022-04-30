@@ -4,11 +4,9 @@
     "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",
     "prettier",
-    "prettier/react",
-    "prettier/@typescript-eslint",
     "plugin:prettier/recommended"
   ],
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": ["react", "@typescript-eslint", "prettier", "import"],
   "env": {
     "browser": true,
     "es6": true,
@@ -21,14 +19,26 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "react/require-default-props": "off",
     "linebreak-style": "off",
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+    "prefer-template": "error",
+    "import/prefer-default-export": "off",
+    "import/no-default-export": "warn",
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "alphabetize": { "order": "asc", "caseInsensitive": true }
+      }
+    ],
     "prettier/prettier": [
       "error",
       {
-        "endOfLine": "auto"
+        "endOfLine": "auto",
+        "singleQuote": true,
+        "semi": true
       }
-    ],
-    "react/require-default-props": "off",
-    "no-underscore-dangle":  ["error", { "allow": ["_id"] }]
+    ]
   }
 }

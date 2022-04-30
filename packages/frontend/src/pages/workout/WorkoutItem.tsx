@@ -1,8 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import getActivityName from "../../utils/activityInfo";
-import { unixtimeToDate, secondsToHms } from "../../utils/timeConverter";
-import { metresToKilometres } from "../../utils/distanceConverter";
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+import getActivityName from '../../utils/activityInfo';
+import { metresToKilometres } from '../../utils/distanceConverter';
+import { unixtimeToDate, secondsToHms } from '../../utils/timeConverter';
 
 interface IWorkoutDataItemProps {
   label: string;
@@ -10,7 +11,7 @@ interface IWorkoutDataItemProps {
 }
 
 const WorkoutDataItem = ({ label, children }: IWorkoutDataItemProps) => {
-  const type = label.split(" ").join("-").toLowerCase();
+  const type = label.split(' ').join('-').toLowerCase();
 
   return (
     <li className="flex flex-col" data-type={type}>

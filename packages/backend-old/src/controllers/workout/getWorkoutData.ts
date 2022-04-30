@@ -25,15 +25,14 @@ export const parseDataPoints = (
     timestamp: roundToThousands(timestamp),
     value,
   });
-  const addValueToDatapoint = (dataPointName: string) => ({
-    timestamp,
-    value,
-  }: IDataPoint) => {
-    if (!(timestamp in dataPoints)) {
-      dataPoints[timestamp] = {};
-    }
-    dataPoints[timestamp][dataPointName] = value;
-  };
+  const addValueToDatapoint =
+    (dataPointName: string) =>
+    ({ timestamp, value }: IDataPoint) => {
+      if (!(timestamp in dataPoints)) {
+        dataPoints[timestamp] = {};
+      }
+      dataPoints[timestamp][dataPointName] = value;
+    };
   const hrData = getHeartrateStreamExtension(workoutRawData).points?.map(
     roundDataPointTimestampToSeconds
   );

@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import NavigationContainer from "./navigation.container";
-import NavigationDesktop from "./desktop/navigation.desktop";
-import NavigationDesktopItem from "./desktop/navigation.desktop.item";
-import NavigationLogo from "./navigation.logo";
-import NavigationMobile from "./mobile/navigation.mobile";
-import NavigationMobileToggle from "./mobile/navigation.mobile.toggle";
-import UserMenu from "./user-menu/user.menu";
+import React, { useState } from 'react';
+
+import NavigationDesktop from './desktop/navigation.desktop';
+import NavigationDesktopItem from './desktop/navigation.desktop.item';
+import NavigationMobile from './mobile/navigation.mobile';
+import NavigationMobileToggle from './mobile/navigation.mobile.toggle';
+import NavigationContainer from './navigation.container';
+import NavigationLogo from './navigation.logo';
+import UserMenu from './user-menu/user.menu';
 
 const Navigation = (): JSX.Element => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

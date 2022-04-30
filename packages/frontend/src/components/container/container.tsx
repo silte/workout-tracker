@@ -1,5 +1,6 @@
-import React from "react";
-import Sidebar from "../sidebar/sidebar";
+import React from 'react';
+
+import Sidebar from '../sidebar/sidebar';
 
 interface IProps {
   className?: string;
@@ -8,14 +9,14 @@ interface IProps {
 }
 
 const Container = ({
-  className = "",
+  className = '',
   children,
   sidebarComponent,
 }: IProps): JSX.Element => {
   return (
     <div
       className={`mx-auto px-4 max-w-screen-xl ${className} ${
-        sidebarComponent ? "lg:flex" : ""
+        sidebarComponent ? 'lg:flex' : ''
       }`}
     >
       {sidebarComponent && <Sidebar>{sidebarComponent}</Sidebar>}

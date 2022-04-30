@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import UserMenuDesktopToggle from "./user.menu.desktop.toggle";
-import UserMenuDesktopItems from "./user.menu.desktop.items";
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
+import UserMenuDesktopItems from './user.menu.desktop.items';
+import UserMenuDesktopToggle from './user.menu.desktop.toggle';
 
 interface IProps {
   children: React.ReactNode;

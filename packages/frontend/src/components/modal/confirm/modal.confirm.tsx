@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import Modal from "../modal";
-import ModalConfirmActions from "./modal.confirm.actions";
-import ModalConfirmHeader from "./modal.confirm.header";
+import React, { useState } from 'react';
+
+import Modal from '../modal';
+
+import ModalConfirmActions from './modal.confirm.actions';
+import ModalConfirmHeader from './modal.confirm.header';
 
 interface IProps {
-  accentColor?: "pink" | "red" | "green" | "blue";
+  accentColor?: 'pink' | 'red' | 'green' | 'blue';
   children?: string | React.ReactNode | Element;
   label: string;
   modalOpenButtonLabel: string;

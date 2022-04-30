@@ -1,11 +1,11 @@
 /* eslint-disable react/button-has-type */
-import React, { MouseEvent } from "react";
+import React, { MouseEvent } from 'react';
 
 interface IProps {
   children: string;
   onClick?(e: MouseEvent): void;
   className: string;
-  type?: "button" | "submit" | "reset" | undefined;
+  type?: 'button' | 'submit' | 'reset' | undefined;
   disabled?: boolean;
 }
 
@@ -13,7 +13,7 @@ const ButtonPlain = ({
   children,
   onClick,
   className,
-  type = "button",
+  type = 'button',
   disabled,
 }: IProps): JSX.Element => {
   return (

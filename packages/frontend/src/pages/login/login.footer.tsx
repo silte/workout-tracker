@@ -1,11 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface IProps {
   className: string;
 }
 
-const LoginFooter = ({ className = "" }: IProps): JSX.Element => {
+const LoginFooter = ({ className = '' }: IProps): JSX.Element => {
   return (
     <div
       className={`bg-white py-3 flex flex-col sm:flex-row sm:justify-center sm:items-center ${className}`}

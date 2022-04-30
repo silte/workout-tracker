@@ -1,8 +1,9 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
-import WorkoutListContainer from "./containers/workout/WorkoutListContainer";
-import WorkoutSummaryContainer from "./containers/workout/WorkoutSummaryContainer";
-import WorkoutContainer from "./containers/workout/WorkoutContainer";
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+
+import WorkoutContainer from './containers/workout/WorkoutContainer';
+import WorkoutListContainer from './containers/workout/WorkoutListContainer';
+import WorkoutSummaryContainer from './containers/workout/WorkoutSummaryContainer';
 
 const WorkoutRouter = (): JSX.Element => (
   <Switch>

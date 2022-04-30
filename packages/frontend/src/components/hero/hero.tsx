@@ -1,8 +1,9 @@
-import React from "react";
-import Container from "../container/container";
-import Heading from "../heading/heading";
+import React from 'react';
 
-type AccentColor = "pink" | "red" | "green" | "blue";
+import Container from '../container/container';
+import Heading from '../heading/heading';
+
+type AccentColor = 'pink' | 'red' | 'green' | 'blue';
 
 interface IProps {
   accent?: string;
@@ -15,11 +16,11 @@ interface IProps {
 
 const Hero = ({
   accent,
-  accentColor = "pink",
+  accentColor = 'pink',
   label,
   children,
   standAlone,
-  className = "",
+  className = '',
 }: IProps): JSX.Element => {
   const heroContent = (
     <div className="max-w-xl">

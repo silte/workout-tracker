@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
 interface IProps {
   children: React.ReactNode;
   help?: string;
   id: string;
   isRequired?: boolean;
-  type?: "text" | "number";
+  type?: 'text' | 'number';
   value?: string | number;
   inputRef?:
     | React.LegacyRef<HTMLInputElement>
@@ -14,11 +14,11 @@ interface IProps {
 
 const Input = ({
   children,
-  help = "",
+  help = '',
   id,
   isRequired = false,
-  type = "text",
-  value = "",
+  type = 'text',
+  value = '',
   inputRef: reference,
 }: IProps): JSX.Element => {
   return (

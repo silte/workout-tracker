@@ -1,6 +1,7 @@
-import React from "react";
-import Button from "../../button/button";
-import ButtonGroup from "../../button/button.group";
+import React from 'react';
+
+import Button from '../../button/button';
+import ButtonGroup from '../../button/button.group';
 
 interface IProps {
   onCancel(): void;

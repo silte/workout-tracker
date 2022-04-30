@@ -1,7 +1,9 @@
-import React from "react";
-import Container from "../container/container";
-import DescriptionListBody from "./description-list.body";
-import DescriptionListHeader from "./description-list.header";
+import React from 'react';
+
+import Container from '../container/container';
+
+import DescriptionListBody from './description-list.body';
+import DescriptionListHeader from './description-list.header';
 
 interface IProps {
   label: string;
@@ -11,7 +13,7 @@ interface IProps {
 
 const DescriptionList = ({
   label,
-  className = "",
+  className = '',
   children,
 }: IProps): JSX.Element => {
   return (

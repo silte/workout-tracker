@@ -1,5 +1,5 @@
-import React from "react";
-import { Transition } from "@headlessui/react";
+import { Transition } from '@headlessui/react';
+import React from 'react';
 
 interface IProps {
   children?: React.ReactNode;

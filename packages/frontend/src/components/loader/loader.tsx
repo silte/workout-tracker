@@ -1,19 +1,19 @@
-import React from "react";
-import { Loader as OrinalLoader } from "@silte/react-loader";
+import { Loader as OrinalLoader } from '@silte/react-loader';
+import React from 'react';
 
 interface IProps {
-  loaderColor?: "pink" | "red" | "green" | "blue";
+  loaderColor?: 'pink' | 'red' | 'green' | 'blue';
 }
 
-const Loader = ({ loaderColor = "pink" }: IProps): JSX.Element => {
+const Loader = ({ loaderColor = 'pink' }: IProps): JSX.Element => {
   const colorCode = {
-    blue: "#3182ce",
-    green: "#38a169",
-    pink: "#d53f8c",
-    red: "#e53e3e",
+    blue: '#3182ce',
+    green: '#38a169',
+    pink: '#d53f8c',
+    red: '#e53e3e',
   };
 
-  const loaderColorReal = loaderColor.length > 0 ? colorCode[loaderColor] : "";
+  const loaderColorReal = loaderColor.length > 0 ? colorCode[loaderColor] : '';
 
   return (
     <OrinalLoader

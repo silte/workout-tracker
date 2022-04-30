@@ -1,14 +1,15 @@
-import React from "react";
-import UserMenuDesktop from "./user.menu.desktop";
-import UserMenuMobile from "./user.menu.mobile";
-import UserMenuItem from "./user.menu.item";
+import React from 'react';
+
+import UserMenuDesktop from './user.menu.desktop';
+import UserMenuItem from './user.menu.item';
+import UserMenuMobile from './user.menu.mobile';
 
 interface IProps {
-  type: "mobile" | "desktop";
+  type: 'mobile' | 'desktop';
 }
 
 const UserMenu = ({ type }: IProps): JSX.Element => {
-  if (type === "desktop") {
+  if (type === 'desktop') {
     return (
       <UserMenuDesktop>
         <UserMenuItem link="/profile" type="desktop">

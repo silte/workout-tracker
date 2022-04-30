@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef } from 'react';
 
-import Input from "../../components/input/input";
-import ModalConfirm from "../../components/modal/confirm/modal.confirm";
-import { setSuuntoApiToken } from "./dataSources.service";
+import Input from '../../components/input/input';
+import ModalConfirm from '../../components/modal/confirm/modal.confirm';
+
+import { setSuuntoApiToken } from './dataSources.service';
 
 interface ISuuntoApiTokenModalProps {
   setErrors: React.Dispatch<React.SetStateAction<string[]>>;
@@ -21,11 +22,11 @@ const SuuntoApiTokenModal = ({
   const apiTokenInputRef = useRef<HTMLInputElement>(null);
   const handleSubmit = async (): Promise<boolean> => {
     const response = await setSuuntoApiToken(
-      apiTokenInputRef.current?.value || ""
+      apiTokenInputRef.current?.value || ''
     );
 
     if (response.status >= 300) {
-      setErrors(response.errors || ["Unknow error."]);
+      setErrors(response.errors || ['Unknow error.']);
       return false;
     }
     setErrors([]);

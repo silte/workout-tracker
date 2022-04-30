@@ -1,5 +1,6 @@
-import React from "react";
-import SEO from "../components/seo/seo";
+import React from 'react';
+
+import SEO from '../components/seo/seo';
 
 const Home = (): JSX.Element => (
   <>

@@ -1,5 +1,6 @@
-import React from "react";
-import Container from "../container/container";
+import React from 'react';
+
+import Container from '../container/container';
 
 interface IProps {
   children: React.ReactNode;

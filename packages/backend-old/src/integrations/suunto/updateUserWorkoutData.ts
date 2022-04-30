@@ -29,7 +29,11 @@ const updateUserWorkoutData = async (userId: string): Promise<void> => {
     await fetchWorkoutsFromList(apiToken, userId);
     await buildWorkoutSummaryDataCache(userId);
   } catch (e) {
-    await expandSuuntoEventlog(userId, "ERROR: Failed to fetch workouts", e);
+    await expandSuuntoEventlog(
+      userId,
+      "ERROR: Failed to fetch workouts",
+      `error: ${e}`
+    );
   } finally {
     await markFetchFinished(userId);
   }

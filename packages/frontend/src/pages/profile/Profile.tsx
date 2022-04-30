@@ -1,8 +1,9 @@
-import React from "react";
-import DescriptionList from "../../components/description-list/description-list";
-import DescriptionListItem from "../../components/description-list/description-list.item";
-import Hero from "../../components/hero/hero";
-import SEO from "../../components/seo/seo";
+import React from 'react';
+
+import DescriptionList from '../../components/description-list/description-list';
+import DescriptionListItem from '../../components/description-list/description-list.item';
+import Hero from '../../components/hero/hero';
+import SEO from '../../components/seo/seo';
 
 interface IProfileProps {
   profileInfo: IUser | null;
@@ -17,10 +18,10 @@ const Profile = ({ profileInfo }: IProfileProps): JSX.Element => {
       </Hero>
       <DescriptionList label="Profile information">
         <DescriptionListItem label="Name">
-          {profileInfo?.name || "-"}
+          {profileInfo?.name || '-'}
         </DescriptionListItem>
         <DescriptionListItem label="Roles">
-          {profileInfo?.roles?.join(", ") || "-"}
+          {profileInfo?.roles?.join(', ') || '-'}
         </DescriptionListItem>
       </DescriptionList>
     </>

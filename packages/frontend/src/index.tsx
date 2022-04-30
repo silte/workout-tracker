@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter as Router, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, useLocation } from 'react-router-dom';
 
-import App from "./App";
-import "./assets/workout-tracker.css";
-import reportWebVitals from "./reportWebVitals";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
-import isUpdateAllowed from "./utils/allowedUpdateLocations";
+import App from './App';
+import './assets/tailwind.css';
+import reportWebVitals from './reportWebVitals';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import isUpdateAllowed from './utils/allowedUpdateLocations';
 
 const Root = (): JSX.Element => {
   const { pathname } = useLocation();
@@ -20,14 +20,14 @@ const Root = (): JSX.Element => {
         if (waitingServiceWorker) {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           waitingServiceWorker.addEventListener(
-            "statechange",
+            'statechange',
             (event: Event) => {
-              if ((event.target as ServiceWorker).state === "activated") {
+              if ((event.target as ServiceWorker).state === 'activated') {
                 setIsAppUpdateAvailable(true);
               }
             }
           );
-          waitingServiceWorker.postMessage({ type: "SKIP_WAITING" });
+          waitingServiceWorker.postMessage({ type: 'SKIP_WAITING' });
         }
       },
     });
@@ -50,7 +50,7 @@ ReactDOM.render(
   <Router>
     <Root />
   </Router>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

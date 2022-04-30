@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
-import Notification from "./components/notification/notification";
-import WorkoutTracker from "./WorkoutTracker";
-import { getAuthenticationStatus } from "./services/AuthenticationService";
+import React, { useEffect, useState } from 'react';
+
+import Notification from './components/notification/notification';
+import { getAuthenticationStatus } from './services/AuthenticationService';
+import WorkoutTracker from './WorkoutTracker';
 
 const App = (): JSX.Element => {
-  const [
-    authenticationStatus,
-    setAuthenticationStatus,
-  ] = useState<IAuthenticationStatus>({
-    authenticated: false,
-  });
+  const [authenticationStatus, setAuthenticationStatus] =
+    useState<IAuthenticationStatus>({
+      authenticated: false,
+    });
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -26,7 +25,7 @@ const App = (): JSX.Element => {
           label="Something went wrong!"
           className="z-20"
         >
-          {authenticationStatus.errors?.join(" ") || ""}
+          {authenticationStatus.errors?.join(' ') || ''}
         </Notification>
       )}
       <WorkoutTracker isLoggedIn={authenticationStatus?.authenticated} />

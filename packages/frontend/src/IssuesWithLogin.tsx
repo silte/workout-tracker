@@ -1,14 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import SEO from "./components/seo/seo";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const {
-  REACT_APP_IS_GITHUB_OAUTH_ENABLED,
-  REACT_APP_IS_AUTH0_OAUTH_ENABLED,
-} = process.env;
+import SEO from './components/seo/seo';
+
+const { REACT_APP_IS_GITHUB_OAUTH_ENABLED, REACT_APP_IS_AUTH0_OAUTH_ENABLED } =
+  process.env;
 
 const checkIsEnabled = (stringBoolean: string | undefined) =>
-  stringBoolean && stringBoolean.toLocaleLowerCase() !== "false";
+  stringBoolean && stringBoolean.toLocaleLowerCase() !== 'false';
 
 const ResolveGithubIssues = (): JSX.Element => {
   return (
@@ -33,7 +32,7 @@ const ResolveAuth0Issues = (): JSX.Element => {
           className="focus:outline-none focus:ring-2 focus:ring-offset-4 rounded-sm mb-12 text-blue-600"
         >
           Click here
-        </a>{" "}
+        </a>{' '}
         to reset the session and then the login (should in theory) work.
       </p>
     </>

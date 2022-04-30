@@ -1,8 +1,9 @@
-import React from "react";
-import Button from "../button/button";
+import React from 'react';
+
+import Button from '../button/button';
 
 interface IProps {
-  accentColor?: "pink" | "red" | "green" | "blue";
+  accentColor?: 'pink' | 'red' | 'green' | 'blue';
   children: React.ReactNode;
   isOpen: boolean;
   modalOpenButtonLabel: string;

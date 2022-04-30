@@ -1,5 +1,5 @@
 const isUpdateAllowed = (location: string): boolean => {
-  const isBadPage = location.includes("/bad-update-path");
+  const isBadPage = location.includes('/bad-update-path');
 
   return !isBadPage;
 };

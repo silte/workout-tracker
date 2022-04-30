@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface IProps {
   children: React.ReactNode;
@@ -31,7 +31,7 @@ const Alert = ({ children, additionalInformation }: IProps): JSX.Element => {
             <div className="mt-2 text-sm leading-5 text-red-700">
               <ul className="list-disc pl-5">
                 {additionalInformation.map((information, index) => (
-                  <li key={information} className={index > 0 ? "mt-1" : ""}>
+                  <li key={information} className={index > 0 ? 'mt-1' : ''}>
                     {information}
                   </li>
                 ))}

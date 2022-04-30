@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import suuntoApiInfoModel, {
   ISuuntoApiInfoModel,
 } from "../models/suunto-api-info-model";

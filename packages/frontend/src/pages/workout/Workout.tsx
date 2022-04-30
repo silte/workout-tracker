@@ -1,5 +1,4 @@
-import React, { useMemo, useState } from "react";
-
+import { ButtonGroup } from '@material-ui/core';
 import {
   Line,
   XAxis,
@@ -11,20 +10,20 @@ import {
   ComposedChart,
   Area,
   ResponsiveContainer,
-} from "@silte/recharts";
+} from '@silte/recharts';
+import React, { useMemo, useState } from 'react';
 
-import { ButtonGroup } from "@material-ui/core";
-import Container from "../../components/container/container";
-import Heading from "../../components/heading/heading";
-import Button from "../../components/button/button";
-import getActivityName from "../../utils/activityInfo";
-import { unixtimeToDate, secondsToHms } from "../../utils/timeConverter";
+import Button from '../../components/button/button';
+import Container from '../../components/container/container';
+import Heading from '../../components/heading/heading';
+import Loader from '../../components/loader/loader';
+import SEO from '../../components/seo/seo';
+import getActivityName from '../../utils/activityInfo';
 import {
   metresToKilometres,
   getRoundedMetres,
-} from "../../utils/distanceConverter";
-import Loader from "../../components/loader/loader";
-import SEO from "../../components/seo/seo";
+} from '../../utils/distanceConverter';
+import { unixtimeToDate, secondsToHms } from '../../utils/timeConverter';
 
 interface IWorkout {
   workout: IWorkoutData;
@@ -64,21 +63,23 @@ const DataChart = ({
   startIndex,
   endIndex,
 }: IDataChart) => (
-  <div style={{ width: "100%", height: "33vh", minHeight: "450px" }}>
+  <div style={{ width: '100%', height: '33vh', minHeight: '450px' }}>
     <ResponsiveContainer>
       <ComposedChart
         width={1500}
         height={800}
         data={dataPoints}
         margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
-        maxDataPointsToRender={300}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        maxDataPointsToRender={300} // ts-ignore
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="timeString" minTickGap={10} />
-        <YAxis domain={["dataMin", "dataMax"]} />
-        <YAxis domain={["dataMin", "dataMax"]} yAxisId="altitude" hide />
+        <YAxis domain={['dataMin', 'dataMax']} />
+        <YAxis domain={['dataMin', 'dataMax']} yAxisId="altitude" hide />
         <YAxis yAxisId="speed" orientation="right" />
-        <YAxis domain={["dataMin", "dataMax"]} yAxisId="cadence" hide />
+        <YAxis domain={['dataMin', 'dataMax']} yAxisId="cadence" hide />
         <Tooltip />
         <Legend />
         {isAltitudeVisible && (
@@ -183,7 +184,7 @@ const Workout = ({
     setChartEndIndex,
   ]);
 
-  if (!("activityId" in workout)) {
+  if (!('activityId' in workout)) {
     return <Loader />;
   }
   return (
@@ -191,7 +192,7 @@ const Workout = ({
       <SEO title="Workout" />
       <Container className="py-16 lg:py-32">
         <Heading headingLevel={1} className="workout__title">
-          {getActivityName(workout.activityId)}{" "}
+          {getActivityName(workout.activityId)}{' '}
           {unixtimeToDate(workout.startTime)}
         </Heading>
         <Heading headingLevel={2} accent="Duration">
@@ -210,16 +211,16 @@ const Workout = ({
       <Container>
         <ButtonGroup>
           <Button onClick={() => setIsHearRateVisible(toggleBooleanState)}>
-            {isHearRateVisible ? "isActive Toggle HR" : "Toggle HR"}
+            {isHearRateVisible ? 'isActive Toggle HR' : 'Toggle HR'}
           </Button>
           <Button onClick={() => setIsAltitudeVisible(toggleBooleanState)}>
-            {isAltitudeVisible ? "isActive Toggle Altitude" : "Toggle Altitude"}
+            {isAltitudeVisible ? 'isActive Toggle Altitude' : 'Toggle Altitude'}
           </Button>
           <Button onClick={() => setIsSpeedVisible(toggleBooleanState)}>
-            {isSpeedVisible ? "isActive Toggle Speed" : "Toggle Speed"}
+            {isSpeedVisible ? 'isActive Toggle Speed' : 'Toggle Speed'}
           </Button>
           <Button onClick={() => setIsCadenceVisible(toggleBooleanState)}>
-            {isCadenceVisible ? "isActive Toggle Cadence" : "Toggle Cadence"}
+            {isCadenceVisible ? 'isActive Toggle Cadence' : 'Toggle Cadence'}
           </Button>
         </ButtonGroup>
       </Container>

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import WorkoutSummary from "../../pages/workout/WorkoutSummary";
-import { WORKOUT_LIST_ENDPOINT } from "../../constants/endpoints";
-import { formatDateToISO8601 } from "../../utils/timeConverter";
-import { sumNumbers } from "../../utils/numberOperations";
+import React, { useState, useEffect } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
+
+import { WORKOUT_LIST_ENDPOINT } from '../../constants/endpoints';
+import WorkoutSummary from '../../pages/workout/WorkoutSummary';
+import { sumNumbers } from '../../utils/numberOperations';
+import { formatDateToISO8601 } from '../../utils/timeConverter';
 
 const sumSummaryDataAndWorkoutSummaryData = (
   summaryData: ISummaryData | undefined,
@@ -55,7 +56,7 @@ const parseMultisportSummaryData = (workoutList: IWorkoutSummary[]) =>
         } as IWorkoutSummary)
     );
     if (
-      typeof multisportSummaries === "undefined" ||
+      typeof multisportSummaries === 'undefined' ||
       multisportSummaries.length === 0
     ) {
       return previousValue.concat(currentValue);
@@ -102,14 +103,13 @@ const WorkoutSummaryContainer = (): JSX.Element => {
   const history = useHistory();
 
   const [workoutList, setWorkoutList] = useState<IWorkoutSummary[]>([]);
-  const [isMultisportExposed, setIsMultisportExposed] = useState<boolean>(
-    false
-  );
+  const [isMultisportExposed, setIsMultisportExposed] =
+    useState<boolean>(false);
   const [filterStartDate, setFilterStartDate] = useState<number>(
     new Date(startDate).getTime()
   );
   const [filterEndDate, setFilterEndDate] = useState<number>(
-    typeof endDate !== "undefined"
+    typeof endDate !== 'undefined'
       ? new Date(endDate).getTime() + 86399999
       : NaN
   );
@@ -124,7 +124,7 @@ const WorkoutSummaryContainer = (): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    let path = "/workout/summary";
+    let path = '/workout/summary';
     if (!Number.isNaN(filterStartDate) && !Number.isNaN(filterEndDate)) {
       const formattedStartDate = formatDateToISO8601(new Date(filterStartDate));
       const formattedEndDate = formatDateToISO8601(new Date(filterEndDate));

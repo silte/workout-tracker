@@ -1,10 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import Container from "../../components/container/container";
-import Heading from "../../components/heading/heading";
-import Listing from "../../components/listing/listing";
-import SEO from "../../components/seo/seo";
-import WorkoutItem from "./WorkoutItem";
+import Container from '../../components/container/container';
+import Heading from '../../components/heading/heading';
+import Listing from '../../components/listing/listing';
+import SEO from '../../components/seo/seo';
+
+import WorkoutItem from './WorkoutItem';
 
 const WorkoutList = ({ workoutList }: IWorkoutList): JSX.Element => (
   <>
@@ -13,7 +14,7 @@ const WorkoutList = ({ workoutList }: IWorkoutList): JSX.Element => (
       <Heading headingLevel={1} className="workout-list__title">
         Workout list
       </Heading>
-      <Listing<IWorkoutSummary, "workoutKey">
+      <Listing<IWorkoutSummary, 'workoutKey'>
         arrayOfContent={workoutList}
         listingComponent={WorkoutItem}
         keyFieldName="workoutKey"

@@ -1,7 +1,9 @@
-import React from "react";
-import NavigationMobileMenu from "./navigation.mobile.menu";
-import NavigationMobileMenuItem from "./navigation.mobile.menu.item";
-import UserMenu from "../user-menu/user.menu";
+import React from 'react';
+
+import UserMenu from '../user-menu/user.menu';
+
+import NavigationMobileMenu from './navigation.mobile.menu';
+import NavigationMobileMenuItem from './navigation.mobile.menu.item';
 
 interface IProps {
   isOpen: boolean;
@@ -9,7 +11,7 @@ interface IProps {
 
 const NavigationMobile = ({ isOpen }: IProps): JSX.Element => {
   return (
-    <div className={`${isOpen ? "block" : "hidden"} sm:hidden`}>
+    <div className={`${isOpen ? 'block' : 'hidden'} sm:hidden`}>
       <NavigationMobileMenu>
         <NavigationMobileMenuItem isExact link="/" accentColor="pink">
           Dashboard

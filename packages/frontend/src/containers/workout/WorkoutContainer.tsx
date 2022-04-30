@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import { WORKOUT_DATA_ENDPOINT } from "../../constants/endpoints";
-import Workout from "../../pages/workout/Workout";
+import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+
+import { WORKOUT_DATA_ENDPOINT } from '../../constants/endpoints';
+import Workout from '../../pages/workout/Workout';
 
 const WorkoutContainer = (): JSX.Element => {
   const [workout, setWorkout] = useState<IWorkoutData>({} as IWorkoutData);
@@ -16,12 +17,12 @@ const WorkoutContainer = (): JSX.Element => {
   }>();
 
   const [chartStartIndex, setChartStartIndex] = useState<number>(
-    typeof defaultChartStartIndex !== "undefined"
+    typeof defaultChartStartIndex !== 'undefined'
       ? parseInt(defaultChartStartIndex, 10)
       : NaN
   );
   const [chartEndIndex, setChartEndIndex] = useState<number>(
-    typeof defaultChartEndIndex !== "undefined"
+    typeof defaultChartEndIndex !== 'undefined'
       ? parseInt(defaultChartEndIndex, 10)
       : NaN
   );
@@ -31,11 +32,19 @@ const WorkoutContainer = (): JSX.Element => {
 
   const updateStartIndex = (index: number) => {
     clearTimeout(startIndexUpdateTimer);
-    startIndexUpdateTimer = setTimeout(setChartStartIndex, 500, index);
+    startIndexUpdateTimer = setTimeout(
+      setChartStartIndex,
+      500,
+      index
+    ) as unknown as number;
   };
   const updateEndIndex = (index: number) => {
     clearTimeout(endIndexUpdateTimer);
-    endIndexUpdateTimer = setTimeout(setChartEndIndex, 500, index);
+    endIndexUpdateTimer = setTimeout(
+      setChartEndIndex,
+      500,
+      index
+    ) as unknown as number;
   };
 
   const history = useHistory();

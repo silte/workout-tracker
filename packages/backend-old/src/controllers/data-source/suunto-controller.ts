@@ -1,4 +1,5 @@
 import { Response, Request } from "express";
+
 import updateUserWorkoutData from "../../integrations/suunto/updateUserWorkoutData";
 import { IUserModel } from "../../models/user-model";
 import {

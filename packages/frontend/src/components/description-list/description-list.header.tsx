@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface IProps {
   label: string;
@@ -7,7 +7,7 @@ interface IProps {
 
 const DescriptionListHeader = ({
   label,
-  children = "",
+  children = '',
 }: IProps): JSX.Element => {
   return (
     <div className="px-4 py-5">

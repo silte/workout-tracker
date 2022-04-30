@@ -1,16 +1,16 @@
-import React from "react";
-import LoginHeader from "./login.header";
-import LoginActions from "./login.actions";
-import LoginFooter from "./login.footer";
-import SEO from "../../components/seo/seo";
+import React from 'react';
 
-const {
-  REACT_APP_IS_GITHUB_OAUTH_ENABLED,
-  REACT_APP_IS_AUTH0_OAUTH_ENABLED,
-} = process.env;
+import SEO from '../../components/seo/seo';
+
+import LoginActions from './login.actions';
+import LoginFooter from './login.footer';
+import LoginHeader from './login.header';
+
+const { REACT_APP_IS_GITHUB_OAUTH_ENABLED, REACT_APP_IS_AUTH0_OAUTH_ENABLED } =
+  process.env;
 
 const checkIsEnabled = (stringBoolean: string | undefined) =>
-  stringBoolean && stringBoolean.toLocaleLowerCase() !== "false";
+  stringBoolean && stringBoolean.toLocaleLowerCase() !== 'false';
 
 const Login = (): JSX.Element => {
   return (

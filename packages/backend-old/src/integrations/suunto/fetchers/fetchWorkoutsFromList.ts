@@ -5,13 +5,15 @@ import { getWorkoutEndpoint } from "../../../constants/endpoints";
 import { findRawWorkoutSummariesByUser } from "../../../services/raw-workout-list-service";
 import { expandSuuntoEventlog } from "../logSuuntoFetchEvent";
 
+const SUUNTO_FETCH_CHUNK_SIZE = parseInt(process.env.SUUNTO_FETCH_CHUNK_SIZE || "1")
+
 const fetchWorkouts = async (
   workoutId: string,
   apiToken: string,
   current: number,
   totalCount: number,
   userId: string
-): Promise<{ cached: number; downloaded: number }> => {
+): Promise<{ cached: number; downloaded: number }> => { 
   const endpoint = getWorkoutEndpoint(workoutId, apiToken);
   const filename = getWorkoutRawDataFilename(workoutId);
   if (!fs.existsSync(filename)) {
@@ -45,21 +47,28 @@ const fetchWorkoutsFromList = async (
     `Fetching ${totalCount} workouts`,
     `user ${apiToken}`
   );
-  const fetchResults: { cached: number; downloaded: number }[] = [];
 
-  let index = 0;
-  // eslint-disable-next-line no-restricted-syntax
-  for (const { workoutKey } of workoutList) {
-    index += 1;
-    // eslint-disable-next-line no-await-in-loop
-    const fetchResult = await fetchWorkouts(
-      workoutKey,
-      apiToken,
-      index,
-      totalCount,
-      userId
+  let fetchResults: { cached: number; downloaded: number }[] = [];
+
+  const fetchGroupCount = Math.ceil(workoutList.length / SUUNTO_FETCH_CHUNK_SIZE);
+
+  for (let i = 0; i < fetchGroupCount; i++) {
+    const chunkFirstItem = i * SUUNTO_FETCH_CHUNK_SIZE;
+    const chunk = workoutList.slice(chunkFirstItem, (i + 1) * SUUNTO_FETCH_CHUNK_SIZE);
+
+    const chunkFetchResults = await Promise.all(
+      chunk.map(async ({ workoutKey }, index) =>
+        fetchWorkouts(
+          workoutKey,
+          apiToken,
+          chunkFirstItem + index,
+          totalCount,
+          userId
+        )
+      )
     );
-    fetchResults.push(fetchResult);
+
+    fetchResults = fetchResults.concat(chunkFetchResults);
   }
 
   const totalCached = fetchResults.reduce(

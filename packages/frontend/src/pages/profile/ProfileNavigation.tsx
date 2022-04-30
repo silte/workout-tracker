@@ -1,6 +1,7 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { isExternalLink } from "../../components/button/button";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+
+import { isExternalLink } from '../../components/button/button';
 
 interface IProfileNavigationItemProps {
   link: string;
@@ -17,8 +18,8 @@ const ProfileNavigationItem = ({
 }: IProfileNavigationItemProps): JSX.Element => {
   const linkClasses = {
     default:
-      "text-gray-600 hover:bg-gray-50 hover:text-gray-900 flex items-center px-3 py-2 text-sm font-medium rounded-md",
-    active: "bg-gray-100 text-gray-900",
+      'text-gray-600 hover:bg-gray-50 hover:text-gray-900 flex items-center px-3 py-2 text-sm font-medium rounded-md',
+    active: 'bg-gray-100 text-gray-900',
   };
 
   if (isExternalLink(link)) {

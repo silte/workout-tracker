@@ -1,4 +1,5 @@
 import mongoose, { Schema, Document } from "mongoose";
+
 import { USER_MODEL_NAME } from "./user-model";
 
 export const SUUNTO_API_INFO_MODEL_NAME = "suunto-api-info";

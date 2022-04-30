@@ -1,5 +1,6 @@
-import React from "react";
-import Button from "../../components/button/button";
+import React from 'react';
+
+import Button from '../../components/button/button';
 
 interface IProps {
   submitButtonLabel: string;

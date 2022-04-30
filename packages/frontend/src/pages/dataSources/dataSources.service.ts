@@ -2,9 +2,9 @@ export const getSuuntoApiInfo = async (): Promise<
   IApiResponse<ISuuntoApiInfo | undefined>
 > =>
   (
-    await fetch("/api/data-source/suunto", {
+    await fetch('/api/data-source/suunto', {
       headers: {
-        Accept: "application/json",
+        Accept: 'application/json',
       },
     })
   ).json();
@@ -13,11 +13,11 @@ export const setSuuntoApiToken = async (
   apiToken: string
 ): Promise<IApiResponse<ISuuntoApiInfo>> =>
   (
-    await fetch("/api/data-source/suunto/set-token", {
-      method: "POST",
+    await fetch('/api/data-source/suunto/set-token', {
+      method: 'POST',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ apiToken }),
     })
@@ -27,10 +27,10 @@ export const updateDataFromSuunto = async (): Promise<
   IApiResponse<ISuuntoApiInfo>
 > =>
   (
-    await fetch("/api/data-source/suunto/update", {
-      method: "PUT",
+    await fetch('/api/data-source/suunto/update', {
+      method: 'PUT',
       headers: {
-        Accept: "application/json",
+        Accept: 'application/json',
       },
     })
   ).json();

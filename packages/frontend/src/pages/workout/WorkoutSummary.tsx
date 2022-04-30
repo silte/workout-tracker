@@ -1,13 +1,22 @@
-import React from "react";
-import DatePicker from "react-datepicker";
+import React from 'react';
+import DatePicker from 'react-datepicker';
 
-import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker.css';
 
-import Container from "../../components/container/container";
-import Heading from "../../components/heading/heading";
-import Listing from "../../components/listing/listing";
-import Button from "../../components/button/button";
-import WorkoutItem from "./WorkoutItem";
+import Button from '../../components/button/button';
+import ButtonGroup from '../../components/button/button.group';
+import Container from '../../components/container/container';
+import Heading from '../../components/heading/heading';
+import Hero from '../../components/hero/hero';
+import Listing from '../../components/listing/listing';
+import Loader from '../../components/loader/loader';
+import SEO from '../../components/seo/seo';
+import getActivityName from '../../utils/activityInfo';
+import {
+  metresToKilometres,
+  getRoundedMetres,
+} from '../../utils/distanceConverter';
+import { sumNumbers } from '../../utils/numberOperations';
 import {
   secondsToHms,
   formatDateToISO8601,
@@ -19,18 +28,9 @@ import {
   getFirstDayOfPreviousWeek,
   getFirstDayOfNextMonth,
   getFirstDayOfPreviousMonth,
-} from "../../utils/timeConverter";
-import getActivityName from "../../utils/activityInfo";
-import {
-  metresToKilometres,
-  getRoundedMetres,
-} from "../../utils/distanceConverter";
+} from '../../utils/timeConverter';
 
-import { sumNumbers } from "../../utils/numberOperations";
-import Loader from "../../components/loader/loader";
-import Hero from "../../components/hero/hero";
-import ButtonGroup from "../../components/button/button.group";
-import SEO from "../../components/seo/seo";
+import WorkoutItem from './WorkoutItem';
 
 interface IWorkoutSummaryProps {
   workoutList: IWorkoutSummary[];
@@ -162,7 +162,7 @@ const WorkoutTotalSummary = ({
 
 const WorkoutAcivitySummary = ({
   workoutSummaryData,
-  className = "",
+  className = '',
 }: {
   workoutSummaryData: ISummaryData[];
   className?: string;
@@ -205,14 +205,14 @@ const WorkoutSummary = ({
 }: IWorkoutSummaryProps): React.ReactElement => {
   const onChangeFilterStartDate = (date: Date | number) =>
     setFilterStartDate(
-      typeof date !== "number" ? new Date(date).getTime() : NaN
+      typeof date !== 'number' ? new Date(date).getTime() : NaN
     );
 
   const onChangeFilterEndDate = (date: Date | number) => {
     // eslint-disable-next-line no-console
     console.log(date);
     return setFilterEndDate(
-      typeof date !== "number"
+      typeof date !== 'number'
         ? new Date(formatDateToISO8601(date)).getTime() + 86399999
         : NaN
     );
@@ -283,7 +283,7 @@ const WorkoutSummary = ({
       <Hero
         accent="Summary of"
         label={`${workoutCount} ${
-          workoutCount > 1 || workoutCount === 0 ? "Workouts" : "Workout"
+          workoutCount > 1 || workoutCount === 0 ? 'Workouts' : 'Workout'
         }`}
       >
         View summary of your all workouts
@@ -317,14 +317,14 @@ const WorkoutSummary = ({
           <Button onClick={selectPreviousWeek}>Previous</Button>
           <Button onClick={selectWeek}>Week</Button>
           <Button onClick={selectNextWeek}>
-            {isNextWeekFuture ? "disabled Next" : "Next"}
+            {isNextWeekFuture ? 'disabled Next' : 'Next'}
           </Button>
         </ButtonGroup>
         <ButtonGroup className="mt-6">
           <Button onClick={selectPreviousMonth}>Previous</Button>
           <Button onClick={selectMonth}>Month</Button>
           <Button onClick={selectNextMonth}>
-            {isNextMonthFuture ? "disabled Next" : "Next"}
+            {isNextMonthFuture ? 'disabled Next' : 'Next'}
           </Button>
         </ButtonGroup>
       </Container>
@@ -343,7 +343,7 @@ const WorkoutSummary = ({
             />
           </Container>
           <Container className="mt-6">
-            <Listing<IWorkoutSummary, "workoutKey">
+            <Listing<IWorkoutSummary, 'workoutKey'>
               arrayOfContent={workoutList.slice(0, 100)}
               listingComponent={WorkoutItem}
               keyFieldName="workoutKey"

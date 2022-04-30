@@ -1,7 +1,7 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-type AccentColor = "pink" | "red" | "green" | "blue";
+type AccentColor = 'pink' | 'red' | 'green' | 'blue';
 
 interface IProps {
   location: string;
@@ -14,16 +14,16 @@ const getNavigationDesktopMenuItemColorClasses = (
   color: AccentColor
 ): string => {
   switch (color) {
-    case "blue":
-      return "border-blue-500 focus:border-blue-700";
-    case "green":
-      return "border-green-500 focus:border-green-700";
-    case "pink":
-      return "border-pink-500 focus:border-pink-700";
-    case "red":
-      return "border-red-500 focus:border-red-700";
+    case 'blue':
+      return 'border-blue-500 focus:border-blue-700';
+    case 'green':
+      return 'border-green-500 focus:border-green-700';
+    case 'pink':
+      return 'border-pink-500 focus:border-pink-700';
+    case 'red':
+      return 'border-red-500 focus:border-red-700';
     default:
-      return "";
+      return '';
   }
 };
 
@@ -31,7 +31,7 @@ const NavigationDesktopItem = ({
   location,
   children,
   isExact = false,
-  accentColor = "blue",
+  accentColor = 'blue',
 }: IProps): JSX.Element => {
   return (
     <NavLink

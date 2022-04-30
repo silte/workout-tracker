@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
 interface INotificationIconProps {
-  type: "success" | "error";
+  type: 'success' | 'error';
 }
 
 const NotificationIcon = ({ type }: INotificationIconProps): JSX.Element => {
-  if (type === "error") {
+  if (type === 'error') {
     return (
       <div className="flex-shrink-0">
         <svg

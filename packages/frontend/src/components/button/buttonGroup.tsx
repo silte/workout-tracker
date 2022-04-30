@@ -1,6 +1,5 @@
-import React from "react";
-
-import MuiButtonGroup from "@material-ui/core/ButtonGroup";
+import MuiButtonGroup from '@material-ui/core/ButtonGroup';
+import React from 'react';
 
 interface IButtonGroup {
   children: React.Component[];
