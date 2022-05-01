@@ -6,9 +6,10 @@
     "packages/*"
   ],
   "scripts": {
-    "start": "run-p start:backend start:frontend",
+    "start": "run-p start:types start:backend start:frontend",
     "start:backend": "npm -w backend run start:dev",
     "start:frontend": "npm -w frontend run start",
+    "start:types": "npm -w @local/types run compile:watch",
     "lint": "npm -w backend run lint & npm -w frontend run lint",
     "format": "npm -w backend run format & npm -w frontend run format",
     "test": "CI=true npm -w backend run test && CI=true npm -w frontend run test",

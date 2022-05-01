@@ -2,8 +2,7 @@ import React, { useRef } from 'react';
 
 import Input from '../../components/input/input';
 import ModalConfirm from '../../components/modal/confirm/modal.confirm';
-
-import { setSuuntoApiToken } from './dataSources.service';
+import { setSuuntoApiToken } from '../../services/data-sources.service';
 
 interface ISuuntoApiTokenModalProps {
   setErrors: React.Dispatch<React.SetStateAction<string[]>>;

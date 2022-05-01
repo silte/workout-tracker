@@ -5,7 +5,6 @@ import {
   WorkoutSummary,
   WorkoutSummarySchema,
 } from './schemas/workout-summary.schema';
-import { WorkoutSummaryController } from './workout-summary.controller';
 import { WorkoutSummaryService } from './workout-summary.service';
 
 @Module({
@@ -14,7 +13,6 @@ import { WorkoutSummaryService } from './workout-summary.service';
       { name: WorkoutSummary.name, schema: WorkoutSummarySchema },
     ]),
   ],
-  controllers: [WorkoutSummaryController],
   providers: [WorkoutSummaryService],
   exports: [WorkoutSummaryService],
 })

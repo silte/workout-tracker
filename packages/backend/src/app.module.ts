@@ -17,6 +17,7 @@ import { UserDataModule } from './modules/user-data/user-data.module';
 import { UserPreferencesModule } from './modules/user-preferences/user-preferences.module';
 import { UsersModule } from './modules/users/users.module';
 import { WorkoutSummaryModule } from './modules/workout-summary/workout-summary.module';
+import { SuuntoApiInfoModule } from './modules/suunto-api-info/suunto-api-info.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { WorkoutSummaryModule } from './modules/workout-summary/workout-summary.
     HealthCheckModule,
     UserPreferencesModule,
     WorkoutSummaryModule,
+    SuuntoApiInfoModule,
   ],
 })
 export class AppModule implements NestModule {
