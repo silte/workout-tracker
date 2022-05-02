@@ -1,4 +1,4 @@
-import { SuuntoApiInfoDto } from '@local/types';
+import { SuuntoApiInfoDto, UpdateSuuntoApiInfoDto } from '@local/types';
 
 export const getSuuntoApiInfo = async (): Promise<SuuntoApiInfoDto> =>
   (
@@ -9,17 +9,17 @@ export const getSuuntoApiInfo = async (): Promise<SuuntoApiInfoDto> =>
     })
   ).json();
 
-export const setSuuntoApiToken = async (
-  apiToken: string
+export const updateSuuntoApiInfo = async (
+  suuntoApiInfo: UpdateSuuntoApiInfoDto
 ): Promise<IApiResponse<SuuntoApiInfoDto>> =>
   (
-    await fetch('/api/data-source/suunto/set-token', {
-      method: 'POST',
+    await fetch('/api/suunto-api-info', {
+      method: 'PATCH',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ apiToken }),
+      body: JSON.stringify(suuntoApiInfo),
     })
   ).json();
 

@@ -1,8 +1,8 @@
+import { WorkoutMultisportSummary } from '@local/types';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types as MogooseTypes } from 'mongoose';
 
 import { ObjectId } from '../../../types/objectId';
-import { User } from '../../users/schemas/user.schema';
 
 import { HrIntensity } from './hr-intensity.schema';
 
@@ -15,7 +15,7 @@ export class WorkoutSummary {
     required: true,
     index: true,
     type: MogooseTypes.ObjectId,
-    ref: User.name,
+    ref: 'users',
   })
   userId: ObjectId;
 
@@ -65,7 +65,7 @@ export class WorkoutSummary {
   hrIntensity: HrIntensity;
 
   @Prop({ default: [] })
-  multisportSummary: [];
+  multisportSummary: WorkoutMultisportSummary[];
 }
 
 export const WorkoutSummarySchema =

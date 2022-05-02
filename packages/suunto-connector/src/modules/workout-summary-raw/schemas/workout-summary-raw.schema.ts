@@ -1,9 +1,16 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types as MogooseTypes } from 'mongoose';
 
+import { HrData } from '../../../types/common-raw/hr-data';
 import { ObjectId } from '../../../types/objectId';
+import {
+  Cadence,
+  Extension,
+  ExternalBlobSource,
+  Ranking,
+} from '../../../types/workout-summary-raw/workout-summary-raw';
 
-export type RawWorkoutSummaryDocument = RawWorkoutSummary &
+export type WorkoutSummaryRawDocument = WorkoutSummaryRaw &
   Document<MogooseTypes.ObjectId>;
 
 @Schema()
@@ -16,7 +23,7 @@ class PositionCoordinates {
 }
 
 @Schema({ collection: 'raw-workout-summaries' })
-export class RawWorkoutSummary {
+export class WorkoutSummaryRaw {
   @Prop({
     required: true,
     index: true,
@@ -71,7 +78,7 @@ export class RawWorkoutSummary {
   cumulativeRecoveryTime: number;
 
   @Prop({ default: [] })
-  extensions: [];
+  extensions: Extension[];
 
   @Prop({ default: [], type: [{ type: String }] })
   extensionTypes: string[];
@@ -82,14 +89,14 @@ export class RawWorkoutSummary {
   @Prop({ default: true })
   isManuallyAdded: boolean;
 
-  @Prop({ default: null })
-  cadence: any;
+  @Prop({ default: null, type: Object })
+  cadence: Cadence;
 
   @Prop({ default: null })
   avgPace: number;
 
-  @Prop({ default: null })
-  hrdata: any;
+  @Prop({ default: null, type: Object })
+  hrdata: HrData;
 
   @Prop({ default: null })
   commentCount: number;
@@ -103,15 +110,12 @@ export class RawWorkoutSummary {
   @Prop({ default: null })
   timeOffsetInMinutes: number;
 
-  @Prop({ default: null })
-  externalBlobSourceRaw: any;
+  @Prop({ default: null, type: Object })
+  externalBlobSourceRaw: ExternalBlobSource;
 
-  @Prop({ default: null })
-  rankings: {
-    max: number;
-    avg: number;
-  };
+  @Prop({ default: null, type: Object })
+  rankings: Ranking;
 }
 
-export const RawWorkoutSummarySchema =
-  SchemaFactory.createForClass(RawWorkoutSummary);
+export const WorkoutSummaryRawSchema =
+  SchemaFactory.createForClass(WorkoutSummaryRaw);

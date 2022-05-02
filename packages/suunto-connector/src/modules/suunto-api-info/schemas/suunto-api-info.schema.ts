@@ -2,7 +2,6 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types as MogooseTypes } from 'mongoose';
 
 import { ObjectId } from '../../../types/objectId';
-import { User } from '../../users/schemas/user.schema';
 
 export type SuuntoApiInfoDocument = SuuntoApiInfo &
   Document<MogooseTypes.ObjectId>;
@@ -14,7 +13,7 @@ export class SuuntoApiInfo {
     index: true,
     unique: true,
     type: MogooseTypes.ObjectId,
-    ref: User.name,
+    ref: 'users',
   })
   userId: ObjectId;
 

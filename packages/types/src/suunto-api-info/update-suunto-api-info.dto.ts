@@ -1,12 +1,15 @@
-import { IsBoolean, IsString } from 'class-validator';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
 
 export class UpdateSuuntoApiInfoDto {
+  @IsOptional()
   @IsString()
-  apiToken: string;
+  apiToken?: string;
 
+  @IsOptional()
   @IsBoolean()
-  isFetching: boolean;
+  isFetching?: boolean;
 
+  @IsOptional()
   @IsString()
-  fetchMessage: string[];
+  fetchMessage?: string[];
 }

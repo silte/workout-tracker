@@ -5,8 +5,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { FetchUserWorkoutsCommand } from './basic-command';
 import { configuration } from './config/configuration';
 import { SuuntoApiInfoModule } from './modules/suunto-api-info/suunto-api-info.module';
-import { WorkoutFetcherModule } from './modules/workout-fetcher/workout-fetcher.module';
-import { WorkoutListFetcherModule } from './modules/workout-list-fetcher/workout-list-fetcher.module';
+import { WorkoutHandlerModule } from './modules/workout-handler/workout-handler.module';
+import { WorkoutListHandlerModule } from './modules/workout-list-handler/workout-list-handler.module';
 
 @Module({
   imports: [
@@ -23,8 +23,8 @@ import { WorkoutListFetcherModule } from './modules/workout-list-fetcher/workout
       }),
     }),
     SuuntoApiInfoModule,
-    WorkoutListFetcherModule,
-    WorkoutFetcherModule,
+    WorkoutHandlerModule,
+    WorkoutListHandlerModule,
   ],
   providers: [FetchUserWorkoutsCommand],
 })

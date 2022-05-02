@@ -1,8 +1,9 @@
 import { IsMongoId } from 'class-validator';
 
 import { IntesityZone } from './intensity-zone';
+import { WorkoutMultisportSummary } from './multisport-summary';
 
-export class WorkoutSummary<ObjectIdType = string> {
+export class WorkoutSummaryDto<ObjectIdType = string> {
   @IsMongoId()
   _id: ObjectIdType;
 
@@ -46,5 +47,5 @@ export class WorkoutSummary<ObjectIdType = string> {
     zone5: IntesityZone;
   };
 
-  multisportSummary: any[];
+  multisportSummary: WorkoutMultisportSummary[];
 }

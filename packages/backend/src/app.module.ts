@@ -13,11 +13,11 @@ import passport from 'passport';
 import { configuration } from './config/configuration';
 import { AuthModule } from './modules/auth/auth.module';
 import { HealthCheckModule } from './modules/health-check/health-check.module';
+import { SuuntoApiInfoModule } from './modules/suunto-api-info/suunto-api-info.module';
 import { UserDataModule } from './modules/user-data/user-data.module';
 import { UserPreferencesModule } from './modules/user-preferences/user-preferences.module';
 import { UsersModule } from './modules/users/users.module';
 import { WorkoutSummaryModule } from './modules/workout-summary/workout-summary.module';
-import { SuuntoApiInfoModule } from './modules/suunto-api-info/suunto-api-info.module';
 
 @Module({
   imports: [

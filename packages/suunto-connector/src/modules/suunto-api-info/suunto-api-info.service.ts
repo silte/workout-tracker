@@ -29,4 +29,42 @@ export class SuuntoApiInfoService {
       .findOneAndUpdate({ userId }, updateSuuntoApiInfoDto, { new: true })
       .exec();
   }
+
+  async addMessageItem(
+    userId: ObjectId,
+    message: string,
+  ): Promise<SuuntoApiInfo> {
+    return this.suuntoApiModel
+      .findOneAndUpdate(
+        { userId },
+        { $push: { fetchMessage: message } },
+        { new: true },
+      )
+      .exec();
+  }
+
+  async clearFetchMessages(userId: ObjectId): Promise<SuuntoApiInfo> {
+    return this.suuntoApiModel
+      .findOneAndUpdate({ userId }, { fetchMessage: [] }, { new: true })
+      .exec();
+  }
+
+  async setFetchStatus(
+    userId: ObjectId,
+    fetchStatus: boolean,
+  ): Promise<SuuntoApiInfo> {
+    return this.suuntoApiModel
+      .findOneAndUpdate(
+        { userId },
+        { $set: { isFetching: fetchStatus } },
+        { new: true },
+      )
+      .exec();
+  }
+
+  async clearMEssages(userId: ObjectId): Promise<SuuntoApiInfo> {
+    return this.suuntoApiModel
+      .findOneAndUpdate({ userId }, { messages: [] }, { new: true })
+      .exec();
+  }
 }

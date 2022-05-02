@@ -17,6 +17,10 @@ export class SuuntoApiInfoService {
     private suuntoApiModel: Model<SuuntoApiInfoDocument>,
   ) {}
 
+  async create(suuntoApiInfo: Partial<SuuntoApiInfo>): Promise<SuuntoApiInfo> {
+    return this.suuntoApiModel.create(suuntoApiInfo);
+  }
+
   async findByUser(userId: ObjectId): Promise<SuuntoApiInfo> {
     return this.suuntoApiModel.findOne({ userId }).exec();
   }
@@ -25,6 +29,12 @@ export class SuuntoApiInfoService {
     userId: ObjectId,
     updateSuuntoApiInfoDto: UpdateSuuntoApiInfoDto,
   ): Promise<SuuntoApiInfo> {
+    const suuntoApiInfo = await this.findByUser(userId);
+
+    if (!suuntoApiInfo) {
+      return this.create({ ...updateSuuntoApiInfoDto, userId });
+    }
+
     return this.suuntoApiModel
       .findOneAndUpdate({ userId }, updateSuuntoApiInfoDto, { new: true })
       .exec();

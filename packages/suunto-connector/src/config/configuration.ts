@@ -23,11 +23,6 @@ const parseMongoDbUri = async (): Promise<string> => {
 };
 
 export const configuration = async () => ({
-  port: parseInt(process.env.PORT, 10) || 3000,
-  publicUrl: process.env.PUBLIC_URL,
-  cookieKey: process.env.COOKIE_KEY
-    ? process.env.COOKIE_KEY
-    : 'thisappisawesome',
   mongodbConnectionString: await parseMongoDbUri(),
   githubKeys: isGithubAuthEnabled()
     ? {
@@ -42,4 +37,8 @@ export const configuration = async () => ({
         clientSecret: process.env.AUTH0_CLIENT_SECRET,
       }
     : undefined,
+  workoutFetchChunkSize: parseInt(process.env.FETCH_WORKOUT_CHUNK_SIZE || '1'),
+  workoutBuildCacheChunkSize: parseInt(
+    process.env.BUILD_WORKOUT_CACHE_CHUNK_SIZE || '5',
+  ),
 });

@@ -1,9 +1,15 @@
-import fs from "fs";
-import https from "https";
+import fs from 'fs';
+import https from 'https';
 
 export const readJson = <T>(filename: string): T => {
   const rawdata = fs.readFileSync(filename);
-  return JSON.parse(rawdata.toString());
+
+  try {
+    return JSON.parse(rawdata.toString());
+  } catch (error) {
+    console.error(`Could not parse JSON file: ${filename}`);
+    throw error;
+  }
 };
 
 export const writeJson = <T>(filename: string, data: T): void => {
@@ -13,19 +19,19 @@ export const writeJson = <T>(filename: string, data: T): void => {
 
 export const downloadJson = (
   filename: string,
-  endpoint: string
+  endpoint: string,
 ): Promise<void> =>
   new Promise<void>((resolve, reject) => {
     const file = fs.createWriteStream(filename);
     https
       .get(endpoint, function (response) {
         response.pipe(file);
-        file.on("finish", function () {
+        file.on('finish', function () {
           file.close();
           resolve();
         });
       })
-      .on("error", function (err) {
+      .on('error', function (err) {
         // Handle errors
         // eslint-disable-next-line no-console
         console.log(err.message);

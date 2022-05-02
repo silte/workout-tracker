@@ -2,27 +2,27 @@ import { Schema, Prop } from '@nestjs/mongoose';
 
 @Schema()
 class IntensityZone {
-  @Prop({ required: true })
+  @Prop({ default: null })
   totalTime: number;
 
-  @Prop({ required: true })
+  @Prop({ default: null })
   lowerLimit: number;
 }
 
 @Schema()
 export class HrIntensity {
-  @Prop({ required: true, type: IntensityZone })
+  @Prop({ type: IntensityZone })
   zone1: IntensityZone;
 
-  @Prop({ required: true, type: IntensityZone })
+  @Prop({ type: IntensityZone })
   zone2: IntensityZone;
 
-  @Prop({ required: true, type: IntensityZone })
+  @Prop({ type: IntensityZone })
   zone3: IntensityZone;
 
-  @Prop({ required: true, type: IntensityZone })
+  @Prop({ type: IntensityZone })
   zone4: IntensityZone;
 
-  @Prop({ required: true, type: IntensityZone })
+  @Prop({ type: IntensityZone })
   zone5: IntensityZone;
 }

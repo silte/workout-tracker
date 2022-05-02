@@ -8,6 +8,7 @@ import { Model } from 'mongoose';
 
 import { ObjectId } from '../../types/objectId';
 
+import { CreateWorkoutSummaryDto } from './dto/create-workout-summary.dto';
 import {
   WorkoutSummary,
   WorkoutSummaryDocument,
@@ -20,7 +21,7 @@ export class WorkoutSummaryService {
     private userModel: Model<WorkoutSummaryDocument>,
   ) {}
 
-  async createMany(workoutSummaries: WorkoutSummary[]) {
+  async createMany(workoutSummaries: CreateWorkoutSummaryDto[]) {
     return this.userModel.insertMany(workoutSummaries);
   }
 
