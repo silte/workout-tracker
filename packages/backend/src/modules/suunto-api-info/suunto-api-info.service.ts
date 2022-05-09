@@ -71,4 +71,18 @@ export class SuuntoApiInfoService {
 
     return { status: 'Sync started' };
   }
+
+  async abortAllActiveUpdates(): Promise<void> {
+    await this.suuntoApiModel
+      .updateMany(
+        {
+          isFetching: true,
+        },
+        {
+          $push: { fetchMessage: 'Update aborted due to server restart' },
+          isFetching: false,
+        },
+      )
+      .exec();
+  }
 }

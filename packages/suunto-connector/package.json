@@ -1,10 +1,12 @@
 {
-  "name": "suunto-connector",
+  "name": "@local/suunto-connector",
   "version": "0.0.1",
   "description": "",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
+  "main": "src/index.ts",
+  "exports": "./dist/index.js",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",

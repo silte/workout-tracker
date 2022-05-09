@@ -6,6 +6,7 @@ import { AppModule } from './app.module';
 import { isNodeEnvInTest } from './config/configuration';
 import { startMemoryDb } from './config/memoryDatabaseServer';
 import { mockAuthenticationMiddleware } from './config/mockAuthenticationMiddleware';
+import { SuuntoApiInfoService } from './modules/suunto-api-info/suunto-api-info.service';
 
 const PORT = process.env.PORT || 4000;
 
@@ -24,5 +25,8 @@ async function bootstrap() {
   if (isNodeEnvInTest()) app.use(mockAuthenticationMiddleware);
 
   await app.listen(PORT);
+
+  const suuntoApiInfoService = app.get(SuuntoApiInfoService);
+  suuntoApiInfoService.abortAllActiveUpdates();
 }
 bootstrap();

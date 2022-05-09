@@ -32,7 +32,7 @@ const parseSuuntoStartUpdateCommand = (): string => {
   if (!isNodeEnvInDev()) {
     return 'node /app/suunto-connector/main.js';
   }
-  return 'npm run -w suunto-connector start -- -- fetch-workouts';
+  return 'npm --prefix ../../ run -w @local/suunto-connector start -- -- fetch-workouts';
 };
 
 export const configuration = async () => ({
