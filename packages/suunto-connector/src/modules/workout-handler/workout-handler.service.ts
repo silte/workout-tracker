@@ -37,10 +37,7 @@ export class WorkoutHandlerService {
     }
 
     const totalCount = workoutList.length;
-    await this.addLogEntry(
-      userId,
-      `Fetching ${totalCount} workouts user ${userId}`,
-    );
+    await this.addLogEntry(userId, `Fetching ${totalCount} workouts`);
 
     let fetchResults: { cached: number; downloaded: number }[] = [];
 
@@ -105,7 +102,7 @@ export class WorkoutHandlerService {
   }
 
   private async addLogEntry(userId: ObjectId, message: string): Promise<void> {
-    this.logger.log(message);
+    this.logger.log(`${message} for user ${userId}`);
     await this.suuntoApiInfoService.addMessageItem(userId, message);
   }
 }

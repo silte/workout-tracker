@@ -1,5 +1,5 @@
 import { UpdateSuuntoApiInfoDto } from '@local/types';
-import { Controller, Get, Body, Patch } from '@nestjs/common';
+import { Controller, Get, Body, Patch, Post } from '@nestjs/common';
 
 import { ObjectId } from '../../types/objectId';
 import { UserId } from '../users/users.decorators';
@@ -21,5 +21,10 @@ export class SuuntoApiInfoController {
     @Body() updateSuuntoApiInfoDto: UpdateSuuntoApiInfoDto,
   ) {
     return this.suuntoApiInfoService.update(userId, updateSuuntoApiInfoDto);
+  }
+
+  @Post('/sync-data')
+  updateSummaryList(@UserId() userId: ObjectId) {
+    return this.suuntoApiInfoService.updateSummaryList(userId);
   }
 }

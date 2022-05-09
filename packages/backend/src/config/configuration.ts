@@ -3,6 +3,7 @@ import { getMemoryDbUri } from './memoryDatabaseServer';
 const isNotEmptyString = (value: string) => value && value.length > 0;
 
 export const isNodeEnvInTest = () => process.env.NODE_ENV === 'test';
+export const isNodeEnvInDev = () => process.env.NODE_ENV === 'development';
 
 export const isGithubAuthEnabled = () =>
   !isNodeEnvInTest() &&
@@ -20,6 +21,18 @@ const parseMongoDbUri = async (): Promise<string> => {
     return `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}`;
   }
   return getMemoryDbUri();
+};
+
+const parseSuuntoStartUpdateCommand = (): string => {
+  const startCommandFromEnv = process.env.SUUNTO_START_UPDATE_COMMAND;
+  if (startCommandFromEnv) {
+    return startCommandFromEnv;
+  }
+
+  if (!isNodeEnvInDev()) {
+    return 'node /app/suunto-connector/main.js';
+  }
+  return 'npm run -w suunto-connector start -- -- fetch-workouts';
 };
 
 export const configuration = async () => ({
@@ -42,4 +55,5 @@ export const configuration = async () => ({
         clientSecret: process.env.AUTH0_CLIENT_SECRET,
       }
     : undefined,
+  suuntoStartUpdateCommand: parseSuuntoStartUpdateCommand(),
 });

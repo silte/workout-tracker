@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import {
@@ -13,6 +14,7 @@ import { SuuntoApiInfoService } from './suunto-api-info.service';
     MongooseModule.forFeature([
       { name: SuuntoApiInfo.name, schema: SuuntoApiInfoSchema },
     ]),
+    ConfigModule,
   ],
   controllers: [SuuntoApiInfoController],
   providers: [SuuntoApiInfoService],

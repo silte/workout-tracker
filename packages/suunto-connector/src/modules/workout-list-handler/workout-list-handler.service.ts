@@ -42,7 +42,7 @@ export class WorkoutListHandlerService {
   ) {}
 
   async updateWorkoutList(apiToken: string, userId: ObjectId): Promise<void> {
-    await this.addLogEntry(userId, `Updating workout list for user: ${userId}`);
+    await this.addLogEntry(userId, `Updating workout list`);
 
     const updatedSummaryList = await this.fetchWorkoutList(apiToken);
 
@@ -72,7 +72,7 @@ export class WorkoutListHandlerService {
       await this.workoutSummaryRawService.findAllByUser(userId);
 
     if (rawWorkoutSummaries === null) {
-      this.addLogEntry(
+      await this.addLogEntry(
         userId,
         'Workout list not found cannot build summary list to cache',
       );
@@ -128,7 +128,7 @@ export class WorkoutListHandlerService {
   }
 
   private async addLogEntry(userId: ObjectId, message: string): Promise<void> {
-    this.logger.log(message);
+    this.logger.log(`${message} for user ${userId}`);
     await this.suuntoApiInfoService.addMessageItem(userId, message);
   }
 

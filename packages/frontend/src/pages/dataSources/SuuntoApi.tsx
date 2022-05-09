@@ -1,5 +1,5 @@
 import { SuuntoApiInfoDto } from '@local/types';
-import React, { MouseEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Alert from '../../components/alert/alert';
 import Button from '../../components/button/button';
@@ -19,26 +19,31 @@ const SuuntoApi = (): JSX.Element => {
     null
   );
   const [reload, setReload] = useState(0);
+  const [isUpdateButtonDisabled, setisUpdateButtonDisabled] = useState(true);
 
   useEffect(() => {
     const fetchApiInfo = async () => {
       const newSuuntoApiInfo = await getSuuntoApiInfo();
       setSuuntoApiInfo(newSuuntoApiInfo || null);
       if (newSuuntoApiInfo && newSuuntoApiInfo?.isFetching) {
-        setTimeout(setReload, 1000, Date.now());
+        setTimeout(setReload, 2000, Date.now());
       }
     };
     fetchApiInfo();
   }, [reload]);
 
+  useEffect(() => {
+    setisUpdateButtonDisabled(
+      Boolean(!suuntoApiInfo?.apiToken.length || suuntoApiInfo?.isFetching)
+    );
+  }, [suuntoApiInfo]);
+
   const runReload = () => setReload(Date.now());
 
-  const handleUpdate = async (
-    e: MouseEvent<HTMLButtonElement>
-  ): Promise<void> => {
-    (e.target as unknown as { disabled: boolean }).disabled = true;
+  const handleUpdate = async (): Promise<void> => {
+    setisUpdateButtonDisabled(true);
     const response = await updateDataFromSuunto();
-    setTimeout(runReload, 1000);
+    runReload();
     if (response.status >= 300) {
       setErrors(response.errors || ['Unknow error.']);
       return;
@@ -77,11 +82,7 @@ const SuuntoApi = (): JSX.Element => {
           </Heading>
           <Button
             onClick={handleUpdate}
-            disabled={Boolean(
-              !suuntoApiInfo?.apiToken ||
-                suuntoApiInfo.apiToken.length === 0 ||
-                suuntoApiInfo.isFetching
-            )}
+            disabled={isUpdateButtonDisabled}
             className="ml-12"
           >
             Sync data from API

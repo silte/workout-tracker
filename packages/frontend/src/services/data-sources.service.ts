@@ -23,12 +23,10 @@ export const updateSuuntoApiInfo = async (
     })
   ).json();
 
-export const updateDataFromSuunto = async (): Promise<
-  IApiResponse<SuuntoApiInfoDto>
-> =>
+export const updateDataFromSuunto = async (): Promise<IApiResponse<void>> =>
   (
-    await fetch('/api/data-source/suunto/update', {
-      method: 'PUT',
+    await fetch('/api/suunto-api-info/sync-data', {
+      method: 'POST',
       headers: {
         Accept: 'application/json',
       },
