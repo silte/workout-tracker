@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+
 import { SuuntoApiInfoController } from './suunto-api-info.controller';
 import { SuuntoApiInfoService } from './suunto-api-info.service';
 

@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+
 import { WorkoutSummaryService } from './workout-summary.service';
 
 describe('WorkoutSummaryService', () => {

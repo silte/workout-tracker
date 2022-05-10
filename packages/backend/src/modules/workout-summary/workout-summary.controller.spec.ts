@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+
 import { WorkoutSummaryController } from './workout-summary.controller';
 import { WorkoutSummaryService } from './workout-summary.service';
 

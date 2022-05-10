@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+
 import { WorkoutController } from './workout.controller';
 
 describe('WorkoutController', () => {
