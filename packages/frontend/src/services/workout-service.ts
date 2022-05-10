@@ -1,4 +1,4 @@
-import { WorkoutSummaryDto } from '@local/types';
+import { WorkoutDto, WorkoutSummaryDto } from '@local/types';
 
 import {
   WORKOUT_DATA_ENDPOINT,
@@ -8,7 +8,7 @@ import { parseJsonOrThrowError } from '../utils/apiHelper';
 
 export const getWorkoutById = async (
   workoutId: string
-): Promise<IWorkoutData> => {
+): Promise<WorkoutDto> => {
   const rawData = await fetch(WORKOUT_DATA_ENDPOINT + workoutId);
   return parseJsonOrThrowError(rawData);
 };

@@ -1,7 +1,5 @@
-import React from 'react';
+import { WorkoutSummaryDto } from '@local/types';
 import DatePicker from 'react-datepicker';
-
-import 'react-datepicker/dist/react-datepicker.css';
 
 import Button from '../../components/button/button';
 import ButtonGroup from '../../components/button/button.group';
@@ -32,8 +30,9 @@ import {
 
 import WorkoutItem from './WorkoutItem';
 
+import 'react-datepicker/dist/react-datepicker.css';
 interface IWorkoutSummaryProps {
-  workoutList: IWorkoutSummary[];
+  workoutList: WorkoutSummaryDto[];
   workoutSummaryData: ISummaryData[];
   filterStartDate: number;
   filterEndDate: number;
@@ -67,8 +66,8 @@ const WorkoutTotalSummary = ({
   );
 
   return (
-    <ul className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <li className="py-9 px-6 bg-blue-600 rounded-md">
+    <ul className="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <li className="px-6 bg-blue-600 rounded-md py-9">
         <Heading
           headingLevel={2}
           accent="Duration"
@@ -79,7 +78,7 @@ const WorkoutTotalSummary = ({
           {secondsToHms(workoutTotalSummaryData.totalDuration)}
         </Heading>
       </li>
-      <li className="py-9 px-6 bg-blue-600 rounded-md">
+      <li className="px-6 bg-blue-600 rounded-md py-9">
         <Heading
           headingLevel={2}
           accent="Distance"
@@ -90,7 +89,7 @@ const WorkoutTotalSummary = ({
           {metresToKilometres(workoutTotalSummaryData.totalDistance)}
         </Heading>
       </li>
-      <li className="py-9 px-6 bg-blue-600 rounded-md">
+      <li className="px-6 bg-blue-600 rounded-md py-9">
         <Heading
           headingLevel={2}
           accent="Ascent"
@@ -101,7 +100,7 @@ const WorkoutTotalSummary = ({
           {getRoundedMetres(workoutTotalSummaryData.totalAscent)}
         </Heading>
       </li>
-      <li className="py-9 px-6 bg-blue-600 rounded-md">
+      <li className="px-6 bg-blue-600 rounded-md py-9">
         <Heading
           headingLevel={2}
           accent="Hr zones"
@@ -172,7 +171,7 @@ const WorkoutAcivitySummary = ({
       ({ activityId, totalDistance, totalDuration, totalAscent }) => (
         <li
           key={activityId}
-          className="py-9 px-6 bg-gray-50 rounded-md border-solid border-gray-100 border-1"
+          className="px-6 border-gray-100 border-solid rounded-md py-9 bg-gray-50 border-1"
         >
           <Heading headingLevel={2} headingSize="m">
             {getActivityName(activityId)}
@@ -290,7 +289,7 @@ const WorkoutSummary = ({
       </Hero>
 
       <Container className="mt-9">
-        <h2 className="text-l leading-7 text-gray-900">Filters</h2>
+        <h2 className="leading-7 text-gray-900 text-l">Filters</h2>
         <ButtonGroup>
           <DatePicker
             selected={
@@ -343,7 +342,7 @@ const WorkoutSummary = ({
             />
           </Container>
           <Container className="mt-6">
-            <Listing<IWorkoutSummary, 'workoutKey'>
+            <Listing<WorkoutSummaryDto, 'workoutKey'>
               arrayOfContent={workoutList.slice(0, 100)}
               listingComponent={WorkoutItem}
               keyFieldName="workoutKey"

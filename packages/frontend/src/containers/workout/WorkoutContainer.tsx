@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { WorkoutDto } from '@local/types';
+import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 import Workout from '../../pages/workout/Workout';
 import { getWorkoutById } from '../../services/workout-service';
 
 const WorkoutContainer = (): JSX.Element => {
-  const [workout, setWorkout] = useState<IWorkoutData>({} as IWorkoutData);
+  const [workout, setWorkout] = useState<WorkoutDto>({} as WorkoutDto);
   const {
     workoutId,
     chartEndIndex: defaultChartEndIndex,

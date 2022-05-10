@@ -1,4 +1,4 @@
-import React from 'react';
+import { WorkoutSummaryDto } from '@local/types';
 
 import Container from '../../components/container/container';
 import Heading from '../../components/heading/heading';
@@ -10,11 +10,11 @@ import WorkoutItem from './WorkoutItem';
 const WorkoutList = ({ workoutList }: IWorkoutList): JSX.Element => (
   <>
     <SEO title="Workout list" />
-    <Container className="overflow-x-auto overflow-y-hidden py-16 lg:py-32">
+    <Container className="py-16 overflow-x-auto overflow-y-hidden lg:py-32">
       <Heading headingLevel={1} className="workout-list__title">
         Workout list
       </Heading>
-      <Listing<IWorkoutSummary, 'workoutKey'>
+      <Listing<WorkoutSummaryDto, 'workoutKey'>
         arrayOfContent={workoutList}
         listingComponent={WorkoutItem}
         keyFieldName="workoutKey"
@@ -24,6 +24,6 @@ const WorkoutList = ({ workoutList }: IWorkoutList): JSX.Element => (
 );
 
 interface IWorkoutList {
-  workoutList: IWorkoutSummary[];
+  workoutList: WorkoutSummaryDto[];
 }
 export default WorkoutList;

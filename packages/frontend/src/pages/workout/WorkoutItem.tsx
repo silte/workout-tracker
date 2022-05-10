@@ -1,4 +1,4 @@
-import React from 'react';
+import { WorkoutSummaryDto } from '@local/types';
 import { Link } from 'react-router-dom';
 
 import getActivityName from '../../utils/activityInfo';
@@ -27,13 +27,13 @@ const WorkoutItem = ({
   totalTime,
   totalDistance,
   workoutKey,
-}: IWorkoutSummary): React.ReactElement => (
+}: WorkoutSummaryDto): React.ReactElement => (
   <article className="workout-item">
     <Link
       to={`/workout/${workoutKey}`}
-      className="block py-3 px-6 bg-gray-50 rounded-md border-solid border-gray-100 border-1 overflow-x-auto overflow-y-hidden whitespace-nowrap hover:border-gray-200 hover:bg-gray-100"
+      className="block px-6 py-3 overflow-x-auto overflow-y-hidden border-gray-100 border-solid rounded-md bg-gray-50 border-1 whitespace-nowrap hover:border-gray-200 hover:bg-gray-100"
     >
-      <ul className="grid grid-cols-workout-item justify-between gap-8">
+      <ul className="grid justify-between gap-8 grid-cols-workout-item">
         <WorkoutDataItem label="Activity">
           {getActivityName(activityId)}
         </WorkoutDataItem>

@@ -1,4 +1,8 @@
-import { SuuntoApiInfoDto, UpdateSuuntoApiInfoDto } from '@local/types';
+import {
+  IApiResponse,
+  SuuntoApiInfoDto,
+  UpdateSuuntoApiInfoDto,
+} from '@local/types';
 
 export const getSuuntoApiInfo = async (): Promise<SuuntoApiInfoDto> =>
   (

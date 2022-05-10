@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { WorkoutSummaryDto } from '@local/types';
+import { useState, useEffect } from 'react';
 
 import WorkoutList from '../../pages/workout/WorkoutList';
 import { getWorkoutSummaries } from '../../services/workout-service';
 
 const WorkoutListContainer = (): JSX.Element => {
-  const [workoutList, setWorkoutList] = useState<IWorkoutSummary[]>([]);
+  const [workoutList, setWorkoutList] = useState<WorkoutSummaryDto[]>([]);
 
   useEffect(() => {
     const fetchWorkoutList = async () => {

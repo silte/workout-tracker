@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { UserDto } from '@local/types';
+import { useEffect, useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Container from '../../components/container/container';
@@ -8,7 +9,7 @@ import Profile from './Profile';
 import ProfileNavigation from './ProfileNavigation';
 
 const ProfileRouter = (): JSX.Element => {
-  const [profileInfo, setProfileInfo] = useState<IUser | null>(null);
+  const [profileInfo, setProfileInfo] = useState<UserDto | null>(null);
 
   useEffect(() => {
     const fetchUserInfo = async () => {

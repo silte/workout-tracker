@@ -1,4 +1,4 @@
-import React from 'react';
+import { UserDto } from '@local/types';
 
 import DescriptionList from '../../components/description-list/description-list';
 import DescriptionListItem from '../../components/description-list/description-list.item';
@@ -6,7 +6,7 @@ import Hero from '../../components/hero/hero';
 import SEO from '../../components/seo/seo';
 
 interface IProfileProps {
-  profileInfo: IUser | null;
+  profileInfo: UserDto | null;
 }
 
 const Profile = ({ profileInfo }: IProfileProps): JSX.Element => {

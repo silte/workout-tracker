@@ -1,3 +1,4 @@
+import { WorkoutDataPoint, WorkoutDto } from '@local/types';
 import { ButtonGroup } from '@material-ui/core';
 import {
   Line,
@@ -11,7 +12,7 @@ import {
   Area,
   ResponsiveContainer,
 } from '@silte/recharts';
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import Button from '../../components/button/button';
 import Container from '../../components/container/container';
@@ -26,18 +27,18 @@ import {
 import { unixtimeToDate, secondsToHms } from '../../utils/timeConverter';
 
 interface IWorkout {
-  workout: IWorkoutData;
+  workout: WorkoutDto;
   chartStartIndex: number;
   chartEndIndex: number;
   setChartStartIndex(index: number): void;
   setChartEndIndex(index: number): void;
 }
 
-interface IWorkoutDataPointsChart extends IWorkoutDataPointData {
+interface IWorkoutDataPointsChart extends WorkoutDataPoint {
   timeString?: string;
 }
 
-interface BrushStartEndIndex extends IWorkoutDataPointData {
+interface BrushStartEndIndex extends WorkoutDataPoint {
   startIndex: number;
   endIndex: number;
 }

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { IAuthenticationStatus } from '@local/types';
+import { useEffect, useState } from 'react';
 
 import Notification from './components/notification/notification';
 import { getAuthenticationStatus } from './services/authentication-service';

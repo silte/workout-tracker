@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { WorkoutSummaryDto } from '@local/types';
+import { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
 import WorkoutSummary from '../../pages/workout/WorkoutSummary';
@@ -14,7 +15,7 @@ const sumSummaryDataAndWorkoutSummaryData = (
     totalAscent: newAscent,
     totalDistance: newDistance,
     hrIntensity: newHrIntensity,
-  }: IWorkoutSummary
+  }: WorkoutSummaryDto
 ): ISummaryData => ({
   activityId: newActivityId,
   totalDistance: sumNumbers(summaryData?.totalDistance, newDistance),
@@ -44,8 +45,8 @@ const sumSummaryDataAndWorkoutSummaryData = (
   },
 });
 
-const parseMultisportSummaryData = (workoutList: IWorkoutSummary[]) =>
-  workoutList.reduce((previousValue: IWorkoutSummary[], currentValue) => {
+const parseMultisportSummaryData = (workoutList: WorkoutSummaryDto[]) =>
+  workoutList.reduce((previousValue: WorkoutSummaryDto[], currentValue) => {
     const multisportSummaries = currentValue.multisportSummary?.map(
       ({ duration, distance, ascent, activityId }) =>
         ({
@@ -53,7 +54,7 @@ const parseMultisportSummaryData = (workoutList: IWorkoutSummary[]) =>
           totalTime: duration,
           totalDistance: distance,
           totalAscent: ascent,
-        } as IWorkoutSummary)
+        } as WorkoutSummaryDto)
     );
     if (
       typeof multisportSummaries === 'undefined' ||
@@ -63,10 +64,10 @@ const parseMultisportSummaryData = (workoutList: IWorkoutSummary[]) =>
     }
     multisportSummaries[0].hrIntensity = currentValue.hrIntensity;
     return previousValue.concat(multisportSummaries);
-  }, [] as IWorkoutSummary[]);
+  }, [] as WorkoutSummaryDto[]);
 
 const parseSummaryData = (
-  workoutList: IWorkoutSummary[],
+  workoutList: WorkoutSummaryDto[],
   isMultisportExposed: boolean
 ) => {
   const parsedWorkoutList = !isMultisportExposed
@@ -102,7 +103,7 @@ const WorkoutSummaryContainer = (): JSX.Element => {
   }>();
   const history = useHistory();
 
-  const [workoutList, setWorkoutList] = useState<IWorkoutSummary[]>([]);
+  const [workoutList, setWorkoutList] = useState<WorkoutSummaryDto[]>([]);
   const [isMultisportExposed, setIsMultisportExposed] =
     useState<boolean>(false);
   const [filterStartDate, setFilterStartDate] = useState<number>(
