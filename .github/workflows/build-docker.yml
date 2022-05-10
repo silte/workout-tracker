@@ -2,9 +2,18 @@ name: Build and publish docker
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - production
+  workflow_call:
+    secrets:
+      REGISTERY_TOKEN:
+        description: "The docker registery token"
+        required: true
+      DOCKER_TARGET_PLATFORMS:
+        description: "The docker target platforms"
+        required: false
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -39,6 +48,6 @@ jobs:
         with:
           context: .
           file: ./docker/Dockerfile
-          platforms: linux/amd64,linux/arm64
+          platforms: ${{ secrets.DOCKER_TARGET_PLATFORMS || 'linux/amd64,linux/arm64' }}
           push: true
           tags: ${{ steps.build-tags.outputs.BUILD_NUMBER }},${{ steps.build-tags.outputs.COMMIT_REF }},${{ steps.build-tags.outputs.LATEST }}

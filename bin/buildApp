@@ -1,9 +1,11 @@
 #!/bin/sh
 
-npm --prefix backend run build
-npm --prefix frontend run build
+npm -w backend run build
+npm -w frontend run build
+npm -w @local/suunto-connector run build
 
 rm -rf build
-mkdir -p build/static build/app
-cp backend/dist/server.js build/app/
-cp -r frontend/build build/static/react-app
+mkdir build/
+cp -r packages/backend/dist/ build/server
+cp -r packages/frontend/build/ build/client
+cp -r packages/suunto-connector/build/ build/suunto-connector

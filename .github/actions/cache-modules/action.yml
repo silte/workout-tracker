@@ -1,0 +1,18 @@
+name: "Cache node_modules"
+description: "Cache node_modules for the project"
+
+outputs:
+  cache-hit:
+    description: "true/false if node_modules were cached"
+    value: "{{ steps.cache-modules.outputs.cache-hit }}"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/cache@v3
+      id: cache-modules
+      with:
+        path: |
+          **/node_modules
+          packages/types/dist
+        key: ${{ runner.os }}-modules-${{ hashFiles('./package-lock.json') }}-${{ hashFiles('./packages/types/src/*') }}
