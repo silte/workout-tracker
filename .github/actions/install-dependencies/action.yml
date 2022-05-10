@@ -1,0 +1,9 @@
+name: "Install dependencies"
+description: "Install dependencies for the project and cache cypress binaries"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install dependencies
+      shell: bash
+      run: npm ci

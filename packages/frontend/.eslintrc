@@ -1,0 +1,44 @@
+{
+  "extends": [
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["react", "@typescript-eslint", "prettier", "import"],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": false
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "react/require-default-props": "off",
+    "linebreak-style": "off",
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+    "prefer-template": "error",
+    "import/prefer-default-export": "off",
+    "import/no-default-export": "off",
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "alphabetize": { "order": "asc", "caseInsensitive": true }
+      }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto",
+        "singleQuote": true,
+        "semi": true
+      }
+    ]
+  }
+}

@@ -1,23 +1,29 @@
-FROM node:16.0.0-alpine as builder
+FROM node:16.14.0-alpine as builder
 
-ENV NODE_ENV production
+ENV NODE_ENV development
 RUN apk add --update --no-cache python3 make g++ && ln -sf python3 /usr/bin/python
 
 COPY . /app
 WORKDIR /app
 
-RUN npm ci --quiet -f --also=dev
+RUN npm ci --quiet
 RUN npm run build
+RUN npm ci --only=production --ignore-scripts
 
 RUN ls -al /app/build
 
-FROM node:16.0.0-alpine
+FROM node:16.14.0-alpine
 
 ENV NODE_ENV production
 
 WORKDIR /app
 COPY --from=builder /app/build /app
+COPY --from=builder /app/node_modules /app/node_modules
+COPY --from=builder /app/packages/suunto-connector /app/node_modules/@local/types
 
-CMD [ "node", "/app/app/server.js" ]
+# We need suunto connecto as dependency since we dont't have workouts in db at the moment
+COPY --from=builder /app/packages/types /app/node_modules/@local/suunto-connector
+
+CMD [ "node", "/app/server/main.js" ]
 
 EXPOSE 4000
