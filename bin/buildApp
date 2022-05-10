@@ -8,4 +8,4 @@ rm -rf build
 mkdir build/
 cp -r packages/backend/dist/ build/server
 cp -r packages/frontend/build/ build/client
-cp -r packages/suunto-connector/build/ build/suunto-connector
+cp -r packages/suunto-connector/dist/ build/suunto-connector
