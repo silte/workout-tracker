@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-import { WorkoutDataPoint } from '@local/types';
+import { WorkoutDataPoint, WorkoutDto } from '@local/types';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
@@ -89,7 +89,7 @@ export class WorkoutHandlerService {
     );
   }
 
-  static async parseWorkout(workoutId: string): Promise<any> {
+  static async parseWorkout(workoutId: string): Promise<WorkoutDto> {
     const filename = getWorkoutRawDataFilename(workoutId);
     const { payload: workoutData } = <WorkoutRawContainer>readJson(filename);
     const {

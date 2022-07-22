@@ -1,5 +1,6 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { json } from 'express';
 
 import { AppModule } from './app.module';
@@ -23,6 +24,14 @@ async function bootstrap() {
   );
 
   if (isNodeEnvInTest()) app.use(mockAuthenticationMiddleware);
+
+  const config = new DocumentBuilder()
+    .setTitle('Workout tracker')
+    .setDescription('The workout tracker API description')
+    .setVersion('1.0')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(PORT);
 

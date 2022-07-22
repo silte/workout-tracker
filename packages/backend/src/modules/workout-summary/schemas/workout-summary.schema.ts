@@ -7,7 +7,7 @@ import { User } from '../../users/schemas/user.schema';
 import { HrIntensity } from './hr-intensity.schema';
 
 export type WorkoutSummaryDocument = WorkoutSummary &
-  Document<MogooseTypes.ObjectId>;
+  Document<MogooseTypes.ObjectId> & { _id: MogooseTypes.ObjectId };
 
 @Schema({ collection: 'workout-summaries' })
 export class WorkoutSummary {
