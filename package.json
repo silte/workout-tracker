@@ -6,6 +6,7 @@
     "packages/*"
   ],
   "scripts": {
+    "postinstall": "npm run types:update",
     "start": "run-p start:types start:backend start:frontend",
     "start:backend": "npm -w backend run start:dev",
     "start:frontend": "npm -w frontend run start",
@@ -13,7 +14,9 @@
     "lint": "npm -w backend run lint & npm -w frontend run lint",
     "format": "npm -w backend run format & npm -w frontend run format",
     "test": "CI=true npm -w backend run test && CI=true npm -w frontend run test",
-    "build": "./bin/buildApp"
+    "build": "./bin/buildApp",
+    "types:update": "npm -w backend run types:export && npm run types:copy && npm -w frontend run types:generate",
+    "types:copy": "cp packages/backend/api-spec.json packages/frontend/api-spec.json"
   },
   "author": "",
   "license": "ISC",

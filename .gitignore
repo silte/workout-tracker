@@ -8,3 +8,5 @@ tsconfig.tsbuildinfo
 
 */.env.local
 
+packages/backend/api-spec.json
+packages/frontend/api-spec.json

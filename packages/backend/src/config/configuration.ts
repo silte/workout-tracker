@@ -4,6 +4,8 @@ const isNotEmptyString = (value: string) => value && value.length > 0;
 
 export const isNodeEnvInTest = () => process.env.NODE_ENV === 'test';
 export const isNodeEnvInDev = () => process.env.NODE_ENV === 'development';
+export const shouldOnlyExportApiSpec = () =>
+  `${process.env.NEST_ONLY_EXPORT_API_SPEC}`.toUpperCase() === 'TRUE';
 
 export const isGithubAuthEnabled = () =>
   !isNodeEnvInTest() &&
