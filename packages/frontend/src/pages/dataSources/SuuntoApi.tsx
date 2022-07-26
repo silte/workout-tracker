@@ -5,32 +5,31 @@ import Button from '../../components/button/button';
 import Container from '../../components/container/container';
 import Heading from '../../components/heading/heading';
 import SEO from '../../components/seo/seo';
-import { SuuntoApiInfoDto } from '../../redux/generated/api';
 import {
-  getSuuntoApiInfo,
-  updateDataFromSuunto,
-} from '../../services/data-sources.service';
+  api,
+  useSuuntoApiInfoControllerUpdateSummaryListMutation,
+} from '../../redux/generated/api';
 
 import SuuntoApiTokenModal from './suuntoApi.tokenModel';
 
+const { useLazySuuntoApiInfoControllerFindByUserQuery } = api;
+
 const SuuntoApi = (): JSX.Element => {
   const [errors, setErrors] = useState<string[]>([]);
-  const [suuntoApiInfo, setSuuntoApiInfo] = useState<SuuntoApiInfoDto | null>(
-    null
-  );
+  const [fetchSuuntoApi, { data: suuntoApiInfo }] =
+    useLazySuuntoApiInfoControllerFindByUserQuery();
+  const [updateDataFromSuunto] =
+    useSuuntoApiInfoControllerUpdateSummaryListMutation();
   const [reload, setReload] = useState(0);
   const [isUpdateButtonDisabled, setisUpdateButtonDisabled] = useState(true);
 
   useEffect(() => {
-    const fetchApiInfo = async () => {
-      const newSuuntoApiInfo = await getSuuntoApiInfo();
-      setSuuntoApiInfo(newSuuntoApiInfo || null);
-      if (newSuuntoApiInfo && newSuuntoApiInfo?.isFetching) {
-        setTimeout(setReload, 2000, Date.now());
-      }
-    };
-    fetchApiInfo();
-  }, [reload]);
+    fetchSuuntoApi(undefined, false);
+
+    if (suuntoApiInfo?.isFetching) {
+      setTimeout(setReload, 2000, Date.now());
+    }
+  }, [fetchSuuntoApi, reload, suuntoApiInfo?.isFetching]);
 
   useEffect(() => {
     setisUpdateButtonDisabled(
@@ -44,8 +43,8 @@ const SuuntoApi = (): JSX.Element => {
     setisUpdateButtonDisabled(true);
     const response = await updateDataFromSuunto();
     runReload();
-    if (response.status >= 300) {
-      setErrors(response.errors || ['Unknow error.']);
+    if ('error' in response) {
+      setErrors((response.error as string[]) || ['Unknow error.']);
       return;
     }
     setErrors([]);

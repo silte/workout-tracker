@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 
 import Input from '../../components/input/input';
 import ModalConfirm from '../../components/modal/confirm/modal.confirm';
-import { updateSuuntoApiInfo } from '../../services/data-sources.service';
+import { useSuuntoApiInfoControllerUpdateMutation } from '../../redux/generated/api';
 
 interface ISuuntoApiTokenModalProps {
   setErrors: React.Dispatch<React.SetStateAction<string[]>>;
@@ -18,14 +18,18 @@ const SuuntoApiTokenModal = ({
   setReload,
   currentToken,
 }: ISuuntoApiTokenModalProps): JSX.Element => {
+  const [updateSuuntoApiInfo] = useSuuntoApiInfoControllerUpdateMutation();
+
   const apiTokenInputRef = useRef<HTMLInputElement>(null);
   const handleSubmit = async (): Promise<boolean> => {
     const response = await updateSuuntoApiInfo({
-      apiToken: apiTokenInputRef.current?.value || '',
+      updateSuuntoApiInfoDto: {
+        apiToken: apiTokenInputRef.current?.value || '',
+      },
     });
 
-    if (response.status >= 300) {
-      setErrors(response.errors || ['Unknow error.']);
+    if ('error' in response) {
+      setErrors((response.error as string[]) || ['Unknow error.']);
       return false;
     }
     setErrors([]);

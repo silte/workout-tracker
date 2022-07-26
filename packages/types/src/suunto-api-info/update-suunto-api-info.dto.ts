@@ -1,5 +1,6 @@
 import { IsBoolean, IsOptional, IsString } from 'class-validator';
 
+// Required by backends
 export class UpdateSuuntoApiInfoDto {
   @IsOptional()
   @IsString()
