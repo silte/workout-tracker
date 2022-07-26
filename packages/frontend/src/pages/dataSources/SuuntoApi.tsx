@@ -1,4 +1,3 @@
-import { SuuntoApiInfoDto } from '@local/types';
 import { useEffect, useState } from 'react';
 
 import Alert from '../../components/alert/alert';
@@ -6,6 +5,7 @@ import Button from '../../components/button/button';
 import Container from '../../components/container/container';
 import Heading from '../../components/heading/heading';
 import SEO from '../../components/seo/seo';
+import { SuuntoApiInfoDto } from '../../redux/generated/api';
 import {
   getSuuntoApiInfo,
   updateDataFromSuunto,

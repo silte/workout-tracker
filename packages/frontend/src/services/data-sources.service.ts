@@ -1,8 +1,9 @@
+import { IApiResponse } from '@local/types';
+
 import {
-  IApiResponse,
   SuuntoApiInfoDto,
   UpdateSuuntoApiInfoDto,
-} from '@local/types';
+} from '../redux/generated/api';
 
 export const getSuuntoApiInfo = async (): Promise<SuuntoApiInfoDto> =>
   (

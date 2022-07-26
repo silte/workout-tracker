@@ -1,4 +1,3 @@
-import { WorkoutSummaryDto } from '@local/types';
 import DatePicker from 'react-datepicker';
 
 import Button from '../../components/button/button';
@@ -9,6 +8,7 @@ import Hero from '../../components/hero/hero';
 import Listing from '../../components/listing/listing';
 import Loader from '../../components/loader/loader';
 import SEO from '../../components/seo/seo';
+import { WorkoutSummaryDto } from '../../redux/generated/api';
 import getActivityName from '../../utils/activityInfo';
 import {
   metresToKilometres,

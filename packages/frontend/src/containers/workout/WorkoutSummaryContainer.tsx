@@ -1,9 +1,11 @@
-import { WorkoutSummaryDto } from '@local/types';
 import { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
 import WorkoutSummary from '../../pages/workout/WorkoutSummary';
-import { getWorkoutSummaries } from '../../services/workout-service';
+import {
+  useWorkoutSummaryControllerFindAllQuery,
+  WorkoutSummaryDto,
+} from '../../redux/generated/api';
 import { sumNumbers } from '../../utils/numberOperations';
 import { formatDateToISO8601 } from '../../utils/timeConverter';
 
@@ -103,7 +105,8 @@ const WorkoutSummaryContainer = (): JSX.Element => {
   }>();
   const history = useHistory();
 
-  const [workoutList, setWorkoutList] = useState<WorkoutSummaryDto[]>([]);
+  const { data: workoutList } = useWorkoutSummaryControllerFindAllQuery();
+
   const [isMultisportExposed, setIsMultisportExposed] =
     useState<boolean>(false);
   const [filterStartDate, setFilterStartDate] = useState<number>(
@@ -114,13 +117,6 @@ const WorkoutSummaryContainer = (): JSX.Element => {
       ? new Date(endDate).getTime() + 86399999
       : NaN
   );
-
-  useEffect(() => {
-    const fetchWorkoutList = async () => {
-      setWorkoutList(await getWorkoutSummaries());
-    };
-    fetchWorkoutList();
-  }, []);
 
   useEffect(() => {
     let path = '/workout/summary';
@@ -138,11 +134,12 @@ const WorkoutSummaryContainer = (): JSX.Element => {
     history.replace({ pathname: path });
   }, [filterEndDate, filterStartDate, history]);
 
-  const filteredWorkoutList = workoutList.filter(
-    ({ startTime }) =>
-      (Number.isNaN(filterStartDate) || filterStartDate < startTime) &&
-      (Number.isNaN(filterEndDate) || filterEndDate > startTime)
-  );
+  const filteredWorkoutList =
+    workoutList?.filter(
+      ({ startTime }) =>
+        (Number.isNaN(filterStartDate) || filterStartDate < startTime) &&
+        (Number.isNaN(filterEndDate) || filterEndDate > startTime)
+    ) ?? [];
 
   const workoutSummaryData =
     filteredWorkoutList.length > 0

@@ -1,12 +1,13 @@
-import { WorkoutDto } from '@local/types';
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 import Workout from '../../pages/workout/Workout';
-import { getWorkoutById } from '../../services/workout-service';
+import {
+  useWorkoutControllerGetSuuntoWorkoutQuery,
+  WorkoutDto,
+} from '../../redux/generated/api';
 
 const WorkoutContainer = (): JSX.Element => {
-  const [workout, setWorkout] = useState<WorkoutDto>({} as WorkoutDto);
   const {
     workoutId,
     chartEndIndex: defaultChartEndIndex,
@@ -16,6 +17,10 @@ const WorkoutContainer = (): JSX.Element => {
     chartStartIndex?: string;
     chartEndIndex?: string;
   }>();
+
+  const { data: workout } = useWorkoutControllerGetSuuntoWorkoutQuery({
+    workoutId: workoutId,
+  });
 
   const [chartStartIndex, setChartStartIndex] = useState<number>(
     typeof defaultChartStartIndex !== 'undefined'
@@ -51,13 +56,7 @@ const WorkoutContainer = (): JSX.Element => {
   const history = useHistory();
 
   useEffect(() => {
-    const fetchWorkout = async () => {
-      setWorkout(await getWorkoutById(workoutId));
-    };
-    fetchWorkout();
-  }, [workoutId]);
-
-  useEffect(() => {
+    if (!workout) return;
     let path = `/workout/${workoutId}`;
     if (
       !Number.isNaN(chartStartIndex) &&
@@ -72,12 +71,13 @@ const WorkoutContainer = (): JSX.Element => {
     chartEndIndex,
     workoutId,
     history,
-    workout.dataPoints?.length,
+    workout?.dataPoints?.length,
+    workout,
   ]);
 
   return (
     <Workout
-      workout={workout}
+      workout={workout ?? ({} as WorkoutDto)}
       chartStartIndex={chartStartIndex}
       chartEndIndex={chartEndIndex}
       setChartStartIndex={updateStartIndex}

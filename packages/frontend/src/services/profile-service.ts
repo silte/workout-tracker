@@ -1,15 +1,8 @@
-import { UserDto } from '@local/types';
-
-import { parseJsonOrThrowError } from '../utils/apiHelper';
+import { UserDto } from '../redux/generated/api';
 
 export interface IOverrideProfileData {
   user: UserDto;
 }
-
-export const getProfileInformation = async (): Promise<UserDto> => {
-  const profile = await fetch('/api/users/my-user');
-  return parseJsonOrThrowError(profile);
-};
 
 export const postOverrideProfileData = async (
   uploadedUserData: IOverrideProfileData

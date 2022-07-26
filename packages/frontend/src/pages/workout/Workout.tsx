@@ -1,4 +1,3 @@
-import { WorkoutDataPoint, WorkoutDto } from '@local/types';
 import { ButtonGroup } from '@material-ui/core';
 import {
   Line,
@@ -19,6 +18,7 @@ import Container from '../../components/container/container';
 import Heading from '../../components/heading/heading';
 import Loader from '../../components/loader/loader';
 import SEO from '../../components/seo/seo';
+import { WorkoutDataPointDto, WorkoutDto } from '../../redux/generated/api';
 import getActivityName from '../../utils/activityInfo';
 import {
   metresToKilometres,
@@ -34,17 +34,17 @@ interface IWorkout {
   setChartEndIndex(index: number): void;
 }
 
-interface IWorkoutDataPointsChart extends WorkoutDataPoint {
+interface IWorkoutDataPointDtosChart extends WorkoutDataPointDto {
   timeString?: string;
 }
 
-interface BrushStartEndIndex extends WorkoutDataPoint {
+interface BrushStartEndIndex extends WorkoutDataPointDto {
   startIndex: number;
   endIndex: number;
 }
 
 interface IDataChart {
-  dataPoints: IWorkoutDataPointsChart[];
+  dataPoints: IWorkoutDataPointDtosChart[];
   isHearRateVisible: boolean;
   isSpeedVisible: boolean;
   isAltitudeVisible: boolean;
@@ -143,14 +143,13 @@ const Workout = ({
     return secondsToHms((timestamp - workout.startTime) / 1000);
   };
 
-  const chartDataPoints: IWorkoutDataPointsChart[] = workout?.dataPoints?.map(
-    (dataPoint) => ({
+  const chartDataPoints: IWorkoutDataPointDtosChart[] =
+    workout?.dataPoints?.map((dataPoint) => ({
       ...dataPoint,
       timeString: getWorkoutDurationFromTimestamp(
         parseInt(dataPoint.timestamp, 10)
       ),
-    })
-  );
+    }));
 
   const memoDataChart = useMemo(() => {
     const handleChartSelectionChange = ({
@@ -200,7 +199,7 @@ const Workout = ({
           {secondsToHms(workout.totalTime)}
         </Heading>
         <Heading headingLevel={2} accent="Distance">
-          {metresToKilometres(workout.totalDistance)}
+          {metresToKilometres(workout.totalDistance ?? NaN)}
         </Heading>
         <Heading headingLevel={2} accent="Ascent">
           {getRoundedMetres(workout.totalAscent)}

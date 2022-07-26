@@ -1,6 +1,6 @@
-import { WorkoutSummaryDto } from '@local/types';
 import { Link } from 'react-router-dom';
 
+import { WorkoutSummaryDto } from '../../redux/generated/api';
 import getActivityName from '../../utils/activityInfo';
 import { metresToKilometres } from '../../utils/distanceConverter';
 import { unixtimeToDate, secondsToHms } from '../../utils/timeConverter';

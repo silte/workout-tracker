@@ -1,35 +1,24 @@
-import { IAuthenticationStatus } from '@local/types';
-import { useEffect, useState } from 'react';
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Notification from './components/notification/notification';
-import { getAuthenticationStatus } from './services/authentication-service';
+import { useAuthControllerGetAuthenticationStatusQuery } from './redux/generated/api';
 import WorkoutTracker from './WorkoutTracker';
 
 const App = (): JSX.Element => {
-  const [authenticationStatus, setAuthenticationStatus] =
-    useState<IAuthenticationStatus>({
-      authenticated: false,
-    });
-
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      setAuthenticationStatus(await getAuthenticationStatus());
-    };
-    fetchUserInfo();
-  }, []);
+  const { data: authenticationStatus } =
+    useAuthControllerGetAuthenticationStatusQuery();
 
   return (
     <>
-      {authenticationStatus.errors && (
+      {(authenticationStatus as any)?.errors && (
         <Notification
           type="error"
           label="Something went wrong!"
           className="z-20"
         >
-          {authenticationStatus.errors?.join(' ') || ''}
+          {(authenticationStatus as any)?.errors?.join(' ') || ''}
         </Notification>
       )}
-      <WorkoutTracker isLoggedIn={authenticationStatus?.authenticated} />
+      <WorkoutTracker isLoggedIn={!!authenticationStatus?.authenticated} />
     </>
   );
 };

@@ -1,22 +1,13 @@
-import { UserDto } from '@local/types';
-import { useEffect, useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Container from '../../components/container/container';
-import { getProfileInformation } from '../../services/profile-service';
+import { useUsersControllerFindOwnUserQuery } from '../../redux/generated/api';
 
 import Profile from './Profile';
 import ProfileNavigation from './ProfileNavigation';
 
 const ProfileRouter = (): JSX.Element => {
-  const [profileInfo, setProfileInfo] = useState<UserDto | null>(null);
-
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      setProfileInfo(await getProfileInformation());
-    };
-    fetchUserInfo();
-  }, []);
+  const { data: profileInfo } = useUsersControllerFindOwnUserQuery();
 
   return (
     <Container
@@ -25,7 +16,7 @@ const ProfileRouter = (): JSX.Element => {
     >
       <Switch>
         <Route exact path="/profile">
-          <Profile profileInfo={profileInfo} />
+          <Profile profileInfo={profileInfo ?? null} />
         </Route>
       </Switch>
     </Container>

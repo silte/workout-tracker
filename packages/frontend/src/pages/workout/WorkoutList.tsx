@@ -1,9 +1,8 @@
-import { WorkoutSummaryDto } from '@local/types';
-
 import Container from '../../components/container/container';
 import Heading from '../../components/heading/heading';
 import Listing from '../../components/listing/listing';
 import SEO from '../../components/seo/seo';
+import { WorkoutSummaryDto } from '../../redux/generated/api';
 
 import WorkoutItem from './WorkoutItem';
 
