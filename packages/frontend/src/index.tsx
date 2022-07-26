@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router, useLocation } from 'react-router-dom';
 
 import App from './App';
 import './assets/tailwind.css';
+import { store } from './redux/store';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import isUpdateAllowed from './utils/allowedUpdateLocations';
@@ -41,7 +43,9 @@ const Root = (): JSX.Element => {
 
   return (
     <React.StrictMode>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </React.StrictMode>
   );
 };
