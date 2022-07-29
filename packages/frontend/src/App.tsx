@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Notification from './components/notification/notification';
+import { Notification } from './components/notification/notification';
 import { useAuthControllerGetAuthenticationStatusQuery } from './redux/generated/api';
 import WorkoutTracker from './WorkoutTracker';
 

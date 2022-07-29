@@ -1,90 +1,63 @@
-import React from 'react';
+import { ReactNode } from 'react';
+import { NavLink } from 'react-router-dom';
 
-type IHeadingSize = 's' | 'm' | 'l';
+type HeadingVariants = 'h1' | 'h2' | 'h3' | 'h4';
 
-type IColors = 'pink' | 'red' | 'green' | 'blue' | 'white' | 'black';
-
-interface IHeading {
-  children: React.ReactNode;
+interface HeadingProps {
+  variant?: HeadingVariants;
+  style?: HeadingVariants;
+  children: string | ReactNode;
+  titleClassName?: string;
   className?: string;
-  headingLevel: 1 | 2 | 3 | 4 | 5;
-  accent?: string;
-  color?: 'white' | 'black';
-  accentColor?: IColors;
-  headingSize?: IHeadingSize;
+  testId?: string;
+  ctaUrl?: string;
+  ctaLabel?: string;
+  ctaElement?: ReactNode;
+  ctaEntityTitle?: string;
 }
 
-const getHeadingTextSize = (headingSize: IHeadingSize): string => {
-  if (headingSize === 's') {
-    return 'text-lg sm:text-xl';
-  }
-  if (headingSize === 'm') {
-    return 'text-2xl sm:text-3xl';
-  }
-  return 'text-4xl sm:text-5xl';
-};
-const getAccentTextSize = (headingSize: IHeadingSize): string => {
-  if (headingSize === 's') {
-    return 'text-sm';
-  }
-  if (headingSize === 'm') {
-    return 'text-lg';
-  }
-  return 'text-2xl';
-};
-
-const getTextColor = (color: IColors): string => {
-  if (color === 'black') {
-    return 'text-gray-900';
-  }
-  if (color === 'blue') {
-    return 'text-blue-500';
-  }
-  if (color === 'green') {
-    return 'text-green-500';
-  }
-  if (color === 'pink') {
-    return 'text-pink-500';
-  }
-  if (color === 'red') {
-    return 'text-red-500';
-  }
-  return 'text-gray-50';
-};
-
-const Heading = ({
-  headingLevel = 2,
-  className = '',
+export const Heading = ({
+  variant = 'h2',
   children,
-  accent,
-  color = 'black',
-  accentColor = 'black',
-  headingSize = 'l',
-}: IHeading): JSX.Element => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const HeadingElement: any = `h${headingLevel}`;
+  titleClassName = '',
+  className = '',
+  style,
+  testId,
+  ctaLabel,
+  ctaUrl,
+  ctaElement,
+  ctaEntityTitle,
+}: HeadingProps) => {
+  const HeadingType = variant;
+  const styleToApply = style || variant;
 
   return (
-    <HeadingElement
-      className={`tracking-tight leading-10 font-extrabold sm:leading-none ${getTextColor(
-        color
-      )} ${getHeadingTextSize(headingSize)} ${className}`}
+    <section
+      className={`flex items-center ${
+        (ctaUrl && ctaLabel) || ctaElement ? 'justify-between items-end' : ''
+      } ${className}`}
     >
-      {accent && (
-        <>
-          <span
-            className={`${getAccentTextSize(headingSize)} ${getTextColor(
-              accentColor
-            )} leading-none`}
-          >
-            {accent}
-          </span>
-          <br />
-        </>
+      <HeadingType
+        className={`!font-bold !leading-tight tracking-tighter text-gray-900 truncate ${titleClassName}
+        ${styleToApply === 'h1' ? 'text-2xl lg:text-3xl' : ''}
+        ${styleToApply === 'h2' ? 'text-xl lg:text-2xl' : ''}
+        ${styleToApply === 'h3' ? 'text-lg lg:text-xl' : ''}
+        ${styleToApply === 'h4' ? 'text-md lg:text-lg' : ''}
+        `}
+        data-testid={testId}
+      >
+        {children}
+      </HeadingType>
+      {ctaElement && ctaElement}
+      {!ctaElement && ctaUrl && ctaLabel && (
+        <NavLink
+          to={ctaUrl}
+          className="flex-shrink-0 font-medium text-blue-financer hover:underline"
+          data-entity-title={ctaEntityTitle ?? undefined}
+        >
+          {ctaLabel}
+        </NavLink>
       )}
-      {children}
-    </HeadingElement>
+    </section>
   );
 };
-
-export default Heading;

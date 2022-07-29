@@ -48,6 +48,6 @@ export class WorkoutSummaryRawService {
   }
 
   async removeAllByUser(userId: ObjectId) {
-    return this.workoutSummaryRawModel.deleteMany({ userId });
+    this.workoutSummaryRawModel.deleteMany({ userId });
   }
 }

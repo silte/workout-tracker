@@ -1,26 +1,24 @@
-import { Switch, Route } from 'react-router-dom';
+import { Role } from '@local/types';
+import { Routes, Route } from 'react-router-dom';
 
-import Container from '../../components/container/container';
 import { useUsersControllerFindOwnUserQuery } from '../../redux/generated/api';
 
-import Profile from './Profile';
-import ProfileNavigation from './ProfileNavigation';
+import SuuntoApi from './dataSources/SuuntoApi';
+import { Profile } from './Profile';
+import { ProfileOverrideData } from './ProfileOverrideData';
+import { UserPreferencesRouter } from './UserPreferences/UserPreferencesRouter';
 
-const ProfileRouter = (): JSX.Element => {
+export const ProfileRouter = (): JSX.Element => {
   const { data: profileInfo } = useUsersControllerFindOwnUserQuery();
 
   return (
-    <Container
-      className="mt-6 sm:mt-12"
-      sidebarComponent={<ProfileNavigation userRoles={profileInfo?.roles} />}
-    >
-      <Switch>
-        <Route exact path="/profile">
-          <Profile profileInfo={profileInfo ?? null} />
-        </Route>
-      </Switch>
-    </Container>
+    <Routes>
+      <Route index element={<Profile />} />
+      <Route path="user-preferences/*" element={<UserPreferencesRouter />} />
+      <Route path="suunto" element={<SuuntoApi />} />
+      {profileInfo?.roles.includes(Role.testUser) && (
+        <Route path="override-data" element={<ProfileOverrideData />} />
+      )}
+    </Routes>
   );
 };
-
-export default ProfileRouter;

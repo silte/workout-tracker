@@ -1,19 +1,24 @@
-import DatePicker from 'react-datepicker';
+import { ButtonGroup } from '@material-ui/core';
+import { ChangeEvent, useMemo } from 'react';
 
-import Button from '../../components/button/button';
-import ButtonGroup from '../../components/button/button.group';
-import Container from '../../components/container/container';
-import Heading from '../../components/heading/heading';
-import Hero from '../../components/hero/hero';
-import Listing from '../../components/listing/listing';
-import Loader from '../../components/loader/loader';
-import SEO from '../../components/seo/seo';
+import { Button } from '../../components/button/button';
+import { Container } from '../../components/container/container';
+import { DescriptionList } from '../../components/description-list/description-list';
+import { DescriptionListItem } from '../../components/description-list/description-list.item';
+import { Details } from '../../components/details/details';
+import { Heading } from '../../components/heading/heading';
+import { Input } from '../../components/input/input';
+import { Loader } from '../../components/loader/loader';
+import { WorkoutStackedList } from '../../components/workout-stacked-list/workout-stacked-list';
+import { PagerOptions } from '../../hooks/usePager';
+import { useSetPageInfo } from '../../hooks/useSetPageInfo';
 import { WorkoutSummaryDto } from '../../redux/generated/api';
 import getActivityName from '../../utils/activityInfo';
 import {
   metresToKilometres,
   getRoundedMetres,
 } from '../../utils/distanceConverter';
+import { inputDateFormat } from '../../utils/formatDate';
 import { sumNumbers } from '../../utils/numberOperations';
 import {
   secondsToHms,
@@ -26,11 +31,9 @@ import {
   getFirstDayOfPreviousWeek,
   getFirstDayOfNextMonth,
   getFirstDayOfPreviousMonth,
+  unixtimeToDate,
 } from '../../utils/timeConverter';
 
-import WorkoutItem from './WorkoutItem';
-
-import 'react-datepicker/dist/react-datepicker.css';
 interface IWorkoutSummaryProps {
   workoutList: WorkoutSummaryDto[];
   workoutSummaryData: ISummaryData[];
@@ -41,8 +44,6 @@ interface IWorkoutSummaryProps {
   setIsMultisportExposed: React.Dispatch<React.SetStateAction<boolean>>;
   isMultisportExposed: boolean;
 }
-
-const TIMEZONE_OFFSET = new Date().getTimezoneOffset() * 60 * 1000;
 
 const WorkoutTotalSummary = ({
   workoutSummaryData,
@@ -66,96 +67,37 @@ const WorkoutTotalSummary = ({
   );
 
   return (
-    <ul className="grid grid-cols-1 gap-6 md:grid-cols-3">
-      <li className="px-6 bg-blue-600 rounded-md py-9">
-        <Heading
-          headingLevel={2}
-          accent="Duration"
-          headingSize="m"
-          color="white"
-          accentColor="white"
-        >
+    <>
+      <DescriptionList>
+        <DescriptionListItem label="Duration" isLarge>
           {secondsToHms(workoutTotalSummaryData.totalDuration)}
-        </Heading>
-      </li>
-      <li className="px-6 bg-blue-600 rounded-md py-9">
-        <Heading
-          headingLevel={2}
-          accent="Distance"
-          headingSize="m"
-          color="white"
-          accentColor="white"
-        >
+        </DescriptionListItem>
+        <DescriptionListItem label="Distance">
           {metresToKilometres(workoutTotalSummaryData.totalDistance)}
-        </Heading>
-      </li>
-      <li className="px-6 bg-blue-600 rounded-md py-9">
-        <Heading
-          headingLevel={2}
-          accent="Ascent"
-          headingSize="m"
-          color="white"
-          accentColor="white"
-        >
+        </DescriptionListItem>
+        <DescriptionListItem label="Ascent">
           {getRoundedMetres(workoutTotalSummaryData.totalAscent)}
-        </Heading>
-      </li>
-      <li className="px-6 bg-blue-600 rounded-md py-9">
-        <Heading
-          headingLevel={2}
-          accent="Hr zones"
-          headingSize="m"
-          color="white"
-          accentColor="white"
-        >
-          <Heading
-            headingLevel={3}
-            accent="zone 1"
-            headingSize="s"
-            color="white"
-            accentColor="white"
-          >
-            {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone1)}
-          </Heading>
-          <Heading
-            headingLevel={3}
-            accent="zone 2"
-            headingSize="s"
-            color="white"
-            accentColor="white"
-          >
-            {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone2)}
-          </Heading>
-          <Heading
-            headingLevel={3}
-            accent="zone 3"
-            headingSize="s"
-            color="white"
-            accentColor="white"
-          >
-            {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone3)}
-          </Heading>
-          <Heading
-            headingLevel={3}
-            accent="zone 4"
-            headingSize="s"
-            color="white"
-            accentColor="white"
-          >
-            {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone4)}
-          </Heading>
-          <Heading
-            headingLevel={3}
-            accent="zone 5"
-            headingSize="s"
-            color="white"
-            accentColor="white"
-          >
-            {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone5)}
-          </Heading>
-        </Heading>
-      </li>
-    </ul>
+        </DescriptionListItem>
+      </DescriptionList>
+
+      <DescriptionList label="Hr zones" className="mt-6">
+        <DescriptionListItem label="zone 1">
+          {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone1)}
+        </DescriptionListItem>
+        <DescriptionListItem label="zone 2">
+          {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone2)}
+        </DescriptionListItem>
+        <DescriptionListItem label="zone 3">
+          {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone3)}
+        </DescriptionListItem>
+        <DescriptionListItem label="zone 4">
+          {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone4)}
+        </DescriptionListItem>
+        <DescriptionListItem label="zone 5">
+          {secondsToHms(workoutTotalSummaryData.hrIntensity?.zone5)}
+        </DescriptionListItem>
+      </DescriptionList>
+    </>
   );
 };
 
@@ -169,27 +111,46 @@ const WorkoutAcivitySummary = ({
   <ul className={`grid grid-cols-1 md:grid-cols-3 gap-6 ${className}`}>
     {workoutSummaryData.map(
       ({ activityId, totalDistance, totalDuration, totalAscent }) => (
-        <li
-          key={activityId}
-          className="px-6 border-gray-100 border-solid rounded-md py-9 bg-gray-50 border-1"
-        >
-          <Heading headingLevel={2} headingSize="m">
-            {getActivityName(activityId)}
-          </Heading>
-          <Heading headingLevel={3} accent="Duration" headingSize="m">
-            {secondsToHms(totalDuration)}
-          </Heading>
-          <Heading headingLevel={3} accent="Distance" headingSize="m">
-            {metresToKilometres(totalDistance)}
-          </Heading>
-          <Heading headingLevel={3} accent="Ascent" headingSize="m">
-            {getRoundedMetres(totalAscent)}
-          </Heading>
+        <li key={activityId}>
+          <DescriptionList label={getActivityName(activityId)}>
+            <DescriptionListItem label="Duration" isWide>
+              {secondsToHms(totalDuration)}
+            </DescriptionListItem>
+            <DescriptionListItem label="Distance" isWide>
+              {metresToKilometres(totalDistance)}
+            </DescriptionListItem>
+            <DescriptionListItem label="Ascent" isWide>
+              {getRoundedMetres(totalAscent)}
+            </DescriptionListItem>
+          </DescriptionList>
         </li>
       )
     )}
   </ul>
 );
+
+type WorkoutListingProps = { workouts: WorkoutSummaryDto[] };
+
+const WorkoutListing = ({ workouts }: WorkoutListingProps) =>
+  useMemo(() => {
+    const workoutList = workouts.map((workout) => ({
+      additionalInfo: metresToKilometres(workout.totalDistance),
+      additionalInfoLabel: 'Distance',
+      duration: secondsToHms(workout.totalTime),
+      date: unixtimeToDate(workout.startTime),
+      label: getActivityName(workout.activityId),
+      link: `/workout/${workout.workoutKey}`,
+      id: workout._id,
+    }));
+
+    return (
+      <WorkoutStackedList
+        rows={workoutList}
+        isPagerHidden
+        pagerOptions={{} as PagerOptions}
+      />
+    );
+  }, [workouts]);
 
 const WorkoutSummary = ({
   workoutList,
@@ -199,9 +160,10 @@ const WorkoutSummary = ({
   setFilterStartDate,
   setFilterEndDate,
   setIsMultisportExposed,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   isMultisportExposed,
 }: IWorkoutSummaryProps): React.ReactElement => {
+  useSetPageInfo({ title: 'Workout Summary' });
+
   const onChangeFilterStartDate = (date: Date | number) =>
     setFilterStartDate(
       typeof date !== 'number' ? new Date(date).getTime() : NaN
@@ -278,79 +240,82 @@ const WorkoutSummary = ({
 
   return (
     <>
-      <SEO title="Workout Summary" />
-      <Hero
-        accent="Summary of"
-        label={`${workoutCount} ${
-          workoutCount > 1 || workoutCount === 0 ? 'Workouts' : 'Workout'
-        }`}
-      >
-        View summary of your all workouts
-      </Hero>
-
       <Container className="mt-9">
-        <h2 className="leading-7 text-gray-900 text-l">Filters</h2>
-        <ButtonGroup>
-          <DatePicker
-            selected={
-              !Number.isNaN(filterStartDate) ? new Date(filterStartDate) : null
+        <div className="grid gap-y-4 gap-x-4 sm:grid-cols-2">
+          <Input
+            id="startDate"
+            type="date"
+            max={inputDateFormat(today)}
+            value={
+              filterStartDate ? inputDateFormat(new Date(filterStartDate)) : ''
             }
-            onChange={(date: Date) => onChangeFilterStartDate(date)}
-            maxDate={today}
-            dateFormat="d.M.yyyy"
-            placeholderText="Start date"
-          />
-          <DatePicker
-            selected={
-              !Number.isNaN(filterEndDate)
-                ? new Date(filterEndDate + TIMEZONE_OFFSET)
-                : null
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              onChangeFilterStartDate(new Date(e.target.value));
+            }}
+            isDate
+          >
+            Start date
+          </Input>
+          <Input
+            id="endDate"
+            type="date"
+            max={inputDateFormat(today)}
+            value={
+              filterEndDate ? inputDateFormat(new Date(filterEndDate)) : ''
             }
-            onChange={(date: Date) => onChangeFilterEndDate(date)}
-            maxDate={today}
-            dateFormat="d.M.yyyy"
-            placeholderText="End date"
-          />
-        </ButtonGroup>
-        <ButtonGroup className="mt-6">
-          <Button onClick={selectPreviousWeek}>Previous</Button>
-          <Button onClick={selectWeek}>Week</Button>
-          <Button onClick={selectNextWeek}>
-            {isNextWeekFuture ? 'disabled Next' : 'Next'}
-          </Button>
-        </ButtonGroup>
-        <ButtonGroup className="mt-6">
-          <Button onClick={selectPreviousMonth}>Previous</Button>
-          <Button onClick={selectMonth}>Month</Button>
-          <Button onClick={selectNextMonth}>
-            {isNextMonthFuture ? 'disabled Next' : 'Next'}
-          </Button>
-        </ButtonGroup>
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              onChangeFilterEndDate(new Date(e.target.value));
+            }}
+            isDate
+          >
+            End date
+          </Input>
+        </div>
+        <div className="flex gap-4">
+          <ButtonGroup className="mt-6">
+            <Button onClick={selectPreviousWeek}>Previous</Button>
+            <Button onClick={selectWeek}>Week</Button>
+            <Button onClick={selectNextWeek} isDisabled={isNextWeekFuture}>
+              Next
+            </Button>
+          </ButtonGroup>
+          <ButtonGroup className="mt-6">
+            <Button onClick={selectPreviousMonth}>Previous</Button>
+            <Button onClick={selectMonth}>Month</Button>
+            <Button onClick={selectNextMonth} isDisabled={isNextMonthFuture}>
+              Next
+            </Button>
+          </ButtonGroup>
+        </div>
       </Container>
       {workoutCount > 0 ? (
         <>
           <Container className="mt-12">
-            <div className="flex justify-end mb-3">
-              <Button onClick={toggleMultisportExpose}>
-                Toggle multisports
-              </Button>
-            </div>
-            <WorkoutTotalSummary workoutSummaryData={workoutSummaryData} />
-            <WorkoutAcivitySummary
-              workoutSummaryData={workoutSummaryData}
-              className="mt-6"
-            />
+            <Heading
+              ctaElement={
+                <Button
+                  accentColor={isMultisportExposed ? 'blue' : 'plain'}
+                  onClick={toggleMultisportExpose}
+                >
+                  Toggle multisports
+                </Button>
+              }
+            >
+              Summary of selected {workoutList.length} workouts
+            </Heading>
+            <Details label="Overall summary" isOpen>
+              <WorkoutTotalSummary workoutSummaryData={workoutSummaryData} />
+            </Details>
+            <Details label="Activity summary">
+              <WorkoutAcivitySummary workoutSummaryData={workoutSummaryData} />
+            </Details>
           </Container>
           <Container className="mt-6">
-            <Listing<WorkoutSummaryDto, 'workoutKey'>
-              arrayOfContent={workoutList.slice(0, 100)}
-              listingComponent={WorkoutItem}
-              keyFieldName="workoutKey"
-            />
+            <WorkoutListing workouts={workoutList} />
           </Container>
         </>
       ) : (
-        <Loader />
+        <Loader className="mt-8" />
       )}
     </>
   );

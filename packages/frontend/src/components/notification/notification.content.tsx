@@ -5,7 +5,7 @@ interface INotificationContentProps {
   children: string;
 }
 
-const NotificationContent = ({
+export const NotificationContent = ({
   label,
   children,
 }: INotificationContentProps): JSX.Element => {
@@ -16,5 +16,3 @@ const NotificationContent = ({
     </div>
   );
 };
-
-export default NotificationContent;

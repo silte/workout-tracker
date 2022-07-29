@@ -5,10 +5,11 @@ import { BrowserRouter as Router, useLocation } from 'react-router-dom';
 
 import App from './App';
 import './assets/tailwind.css';
+import { SEO } from './components/seo/seo';
 import { store } from './redux/store';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import isUpdateAllowed from './utils/allowedUpdateLocations';
+import { isUpdateAllowed } from './utils/allowedUpdateLocations';
 
 const Root = (): JSX.Element => {
   const { pathname } = useLocation();
@@ -44,6 +45,7 @@ const Root = (): JSX.Element => {
   return (
     <React.StrictMode>
       <Provider store={store}>
+        <SEO />
         <App />
       </Provider>
     </React.StrictMode>

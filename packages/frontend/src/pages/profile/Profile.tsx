@@ -1,30 +1,42 @@
-import DescriptionList from '../../components/description-list/description-list';
-import DescriptionListItem from '../../components/description-list/description-list.item';
-import Hero from '../../components/hero/hero';
-import SEO from '../../components/seo/seo';
-import { UserDto } from '../../redux/generated/api';
+import { Role } from '@local/types';
 
-interface IProfileProps {
-  profileInfo: UserDto | null;
-}
+import { IconName } from '../../components/icon/icon';
+import { LinkList } from '../../components/link-list/link-list';
+import { LinkListLink } from '../../components/link-list/link-list.link';
+import { useSetPageInfo } from '../../hooks/useSetPageInfo';
+import { useUsersControllerFindOwnUserQuery } from '../../redux/generated/api';
 
-const Profile = ({ profileInfo }: IProfileProps): JSX.Element => {
+export const Profile = (): JSX.Element => {
+  useSetPageInfo({ title: 'Profile' });
+
+  const { data: profileInfo } = useUsersControllerFindOwnUserQuery();
+
   return (
-    <>
-      <SEO title="Profile information | Profile" />
-      <Hero label="Profile information" standAlone className="mb-12">
-        Below you are able to see basic information about your profile.
-      </Hero>
-      <DescriptionList label="Profile information">
-        <DescriptionListItem label="Name">
-          {profileInfo?.name || '-'}
-        </DescriptionListItem>
-        <DescriptionListItem label="Roles">
-          {profileInfo?.roles?.join(', ') || '-'}
-        </DescriptionListItem>
-      </DescriptionList>
-    </>
+    <LinkList>
+      <LinkListLink link="/profile/user-preferences" icon={IconName.cog}>
+        User preferences
+      </LinkListLink>
+      <LinkListLink link="/profile/suunto" icon={IconName.switchHorizontal}>
+        Suunto connection
+      </LinkListLink>
+      <LinkListLink
+        link="/api/users/my-user/my-data"
+        icon={IconName.cloudDownload}
+      >
+        Download your data
+      </LinkListLink>
+      {profileInfo?.roles.includes(Role.testUser) && (
+        <LinkListLink link="/profile/override-data" icon={IconName.exclamation}>
+          Override data
+        </LinkListLink>
+      )}
+      <LinkListLink
+        link="/auth/logout"
+        icon={IconName.logout}
+        className="lg:hidden"
+      >
+        Sign out
+      </LinkListLink>
+    </LinkList>
   );
 };
-
-export default Profile;

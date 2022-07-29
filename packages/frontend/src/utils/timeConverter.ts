@@ -18,9 +18,9 @@ export const unixtimeToDate = (unixtime: number): string => {
   const hours = date.getHours();
   const minutes = date.getMinutes();
 
-  return `${day}.${month}.${year} – klo ${addLeadingZero(
-    hours
-  )}.${addLeadingZero(minutes)}`;
+  return `${day}.${month}.${year} klo ${addLeadingZero(hours)}.${addLeadingZero(
+    minutes
+  )}`;
 };
 
 export const formatDateToISO8601 = (date: Date): string => {

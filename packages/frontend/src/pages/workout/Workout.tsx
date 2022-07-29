@@ -13,11 +13,12 @@ import {
 } from '@silte/recharts';
 import { useMemo, useState } from 'react';
 
-import Button from '../../components/button/button';
-import Container from '../../components/container/container';
-import Heading from '../../components/heading/heading';
-import Loader from '../../components/loader/loader';
-import SEO from '../../components/seo/seo';
+import { Button } from '../../components/button/button';
+import { Container } from '../../components/container/container';
+import { DescriptionList } from '../../components/description-list/description-list';
+import { DescriptionListItem } from '../../components/description-list/description-list.item';
+import { Loader } from '../../components/loader/loader';
+import { useSetPageInfo } from '../../hooks/useSetPageInfo';
 import { WorkoutDataPointDto, WorkoutDto } from '../../redux/generated/api';
 import getActivityName from '../../utils/activityInfo';
 import {
@@ -73,7 +74,7 @@ const DataChart = ({
         margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        maxDataPointsToRender={300} // ts-ignore
+        maxDataPointsToRender={300}
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="timeString" minTickGap={10} />
@@ -132,6 +133,16 @@ const Workout = ({
   setChartStartIndex,
   setChartEndIndex,
 }: IWorkout): JSX.Element => {
+  const isLoading = !('workoutKey' in workout);
+  useSetPageInfo({
+    title: isLoading
+      ? 'Workout'
+      : `${getActivityName(workout.activityId)} - ${unixtimeToDate(
+          workout.startTime
+        )}`,
+    backLink: '/workout/summary',
+  });
+
   const [isHearRateVisible, setIsHearRateVisible] = useState<boolean>(true);
   const [isSpeedVisible, setIsSpeedVisible] = useState<boolean>(true);
   const [isAltitudeVisible, setIsAltitudeVisible] = useState<boolean>(true);
@@ -184,48 +195,54 @@ const Workout = ({
     setChartEndIndex,
   ]);
 
-  if (!('activityId' in workout)) {
+  if (isLoading) {
     return <Loader />;
   }
   return (
-    <>
-      <SEO title="Workout" />
-      <Container className="py-16 lg:py-32">
-        <Heading headingLevel={1} className="workout__title">
-          {getActivityName(workout.activityId)}{' '}
-          {unixtimeToDate(workout.startTime)}
-        </Heading>
-        <Heading headingLevel={2} accent="Duration">
+    <Container className="py-8">
+      <DescriptionList>
+        <DescriptionListItem label="Duration" isLarge>
           {secondsToHms(workout.totalTime)}
-        </Heading>
-        <Heading headingLevel={2} accent="Distance">
+        </DescriptionListItem>
+        <DescriptionListItem label="Distance">
           {metresToKilometres(workout.totalDistance ?? NaN)}
-        </Heading>
-        <Heading headingLevel={2} accent="Ascent">
+        </DescriptionListItem>
+        <DescriptionListItem label="Ascent">
           {getRoundedMetres(workout.totalAscent)}
-        </Heading>
-        <Heading headingLevel={2} accent="Max speed">
+        </DescriptionListItem>
+        <DescriptionListItem label="Max speed">
           {workout.maxSpeed}
-        </Heading>
-      </Container>
-      <Container>
-        <ButtonGroup>
-          <Button onClick={() => setIsHearRateVisible(toggleBooleanState)}>
-            {isHearRateVisible ? 'isActive Toggle HR' : 'Toggle HR'}
-          </Button>
-          <Button onClick={() => setIsAltitudeVisible(toggleBooleanState)}>
-            {isAltitudeVisible ? 'isActive Toggle Altitude' : 'Toggle Altitude'}
-          </Button>
-          <Button onClick={() => setIsSpeedVisible(toggleBooleanState)}>
-            {isSpeedVisible ? 'isActive Toggle Speed' : 'Toggle Speed'}
-          </Button>
-          <Button onClick={() => setIsCadenceVisible(toggleBooleanState)}>
-            {isCadenceVisible ? 'isActive Toggle Cadence' : 'Toggle Cadence'}
-          </Button>
-        </ButtonGroup>
-      </Container>
-      <div className="py-8 lg:py-16">{memoDataChart}</div>
-    </>
+        </DescriptionListItem>
+      </DescriptionList>
+
+      <ButtonGroup className="mt-8">
+        <Button
+          onClick={() => setIsHearRateVisible(toggleBooleanState)}
+          accentColor={isHearRateVisible ? 'blue' : 'plain'}
+        >
+          Toggle HR
+        </Button>
+        <Button
+          onClick={() => setIsAltitudeVisible(toggleBooleanState)}
+          accentColor={isAltitudeVisible ? 'blue' : 'plain'}
+        >
+          Toggle Altitude
+        </Button>
+        <Button
+          onClick={() => setIsSpeedVisible(toggleBooleanState)}
+          accentColor={isSpeedVisible ? 'blue' : 'plain'}
+        >
+          Toggle Speed
+        </Button>
+        <Button
+          onClick={() => setIsCadenceVisible(toggleBooleanState)}
+          accentColor={isCadenceVisible ? 'blue' : 'plain'}
+        >
+          Toggle Cadence
+        </Button>
+      </ButtonGroup>
+      <div className="py-8">{memoDataChart}</div>
+    </Container>
   );
 };
 

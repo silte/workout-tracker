@@ -1,11 +1,11 @@
 import { Transition } from '@headlessui/react';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import Container from '../container/container';
+import { Container } from '../container/container';
 
-import NotificationClose from './notification.close';
-import NotificationContent from './notification.content';
-import NotificationIcon from './notification.icon';
+import { NotificationClose } from './notification.close';
+import { NotificationContent } from './notification.content';
+import { NotificationIcon } from './notification.icon';
 
 export interface INotificationProps {
   type: 'success' | 'error';
@@ -15,7 +15,7 @@ export interface INotificationProps {
   className?: string;
 }
 
-const Notification = ({
+export const Notification = ({
   type,
   label,
   children,
@@ -36,7 +36,7 @@ const Notification = ({
 
   return (
     <Container
-      className={`fixed inset-0 flex items-end justify-center px-4 py-6 pointer-events-none sm:p-6 sm:items-start sm:justify-end ${className}`}
+      className={`fixed inset-0 flex items-end justify-center px-4 pt-6 pointer-events-none sm:p-6 sm:items-start sm:justify-end z-20 pb-[calc(78px+env(safe-area-inset-bottom))] ${className}`}
     >
       <Transition
         show={isOpen}
@@ -46,27 +46,17 @@ const Notification = ({
         leave="transition ease-in duration-100"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
+        className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden"
+        role="status"
       >
-        {(ref) => (
-          <div
-            className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden"
-            ref={ref}
-            role="status"
-          >
-            <div className="p-4">
-              <div className="flex items-start">
-                <NotificationIcon type={type} />
-                <NotificationContent label={label}>
-                  {children}
-                </NotificationContent>
-                <NotificationClose onClick={handleClose} />
-              </div>
-            </div>
+        <div className="p-4">
+          <div className="flex items-start">
+            <NotificationIcon type={type} />
+            <NotificationContent label={label}>{children}</NotificationContent>
+            <NotificationClose onClick={handleClose} />
           </div>
-        )}
+        </div>
       </Transition>
     </Container>
   );
 };
-
-export default Notification;

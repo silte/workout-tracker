@@ -1,21 +1,21 @@
 import React from 'react';
 
-import Sidebar from '../sidebar/sidebar';
+import { Sidebar } from '../sidebar/sidebar';
 
-interface IProps {
+interface IContainerProps {
   className?: string;
   children: React.ReactNode;
   sidebarComponent?: React.ReactNode;
 }
 
-const Container = ({
+export const Container = ({
   className = '',
   children,
   sidebarComponent,
-}: IProps): JSX.Element => {
+}: IContainerProps): JSX.Element => {
   return (
     <div
-      className={`mx-auto px-4 max-w-screen-xl ${className} ${
+      className={`mx-auto max-w-screen-xl ${className} ${
         sidebarComponent ? 'lg:flex' : ''
       }`}
     >
@@ -28,5 +28,3 @@ const Container = ({
     </div>
   );
 };
-
-export default Container;

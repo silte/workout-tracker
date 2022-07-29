@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
+import { Loader } from '../../components/loader/loader';
+import { useFirstDayOfSeason } from '../../hooks/useFirstDayOfSeason';
 import WorkoutSummary from '../../pages/workout/WorkoutSummary';
 import {
   useWorkoutSummaryControllerFindAllQuery,
@@ -99,40 +101,45 @@ const parseSummaryData = (
 };
 
 const WorkoutSummaryContainer = (): JSX.Element => {
-  const { startDate, endDate } = useParams<{
+  const firstDayOfSeason = useFirstDayOfSeason();
+
+  const { startDate = '', endDate } = useParams<{
     startDate: string;
     endDate: string;
   }>();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { data: workoutList } = useWorkoutSummaryControllerFindAllQuery();
 
   const [isMultisportExposed, setIsMultisportExposed] =
     useState<boolean>(false);
-  const [filterStartDate, setFilterStartDate] = useState<number>(
-    new Date(startDate).getTime()
-  );
-  const [filterEndDate, setFilterEndDate] = useState<number>(
-    typeof endDate !== 'undefined'
-      ? new Date(endDate).getTime() + 86399999
-      : NaN
-  );
+  const [filterStartDate, setFilterStartDate] = useState<number>(NaN);
+  const [filterEndDate, setFilterEndDate] = useState<number>(NaN);
+
+  useEffect(() => {
+    if (isNaN(filterEndDate) && endDate)
+      setFilterEndDate(new Date(endDate).getTime() + 86399999);
+    if (isNaN(filterStartDate) && startDate)
+      setFilterStartDate(new Date(startDate).getTime());
+
+    if (isNaN(filterStartDate) && firstDayOfSeason)
+      setFilterStartDate(firstDayOfSeason.getTime());
+  }, [endDate, filterEndDate, filterStartDate, firstDayOfSeason, startDate]);
 
   useEffect(() => {
     let path = '/workout/summary';
+    const formattedStartDate = formatDateToISO8601(new Date(filterStartDate));
+    const formattedEndDate = formatDateToISO8601(new Date(filterEndDate));
+
     if (!Number.isNaN(filterStartDate) && !Number.isNaN(filterEndDate)) {
-      const formattedStartDate = formatDateToISO8601(new Date(filterStartDate));
-      const formattedEndDate = formatDateToISO8601(new Date(filterEndDate));
       path = `${path}/${formattedStartDate}/${formattedEndDate}`;
     } else if (!Number.isNaN(filterStartDate)) {
-      const formattedStartDate = formatDateToISO8601(new Date(filterStartDate));
       path = `${path}/${formattedStartDate}`;
     } else if (!Number.isNaN(filterEndDate)) {
-      const formattedEndDate = formatDateToISO8601(new Date(filterEndDate));
       path = `${path}/-/${formattedEndDate}`;
     }
-    history.replace({ pathname: path });
-  }, [filterEndDate, filterStartDate, history]);
+    navigate({ pathname: path });
+  }, [filterEndDate, filterStartDate, navigate]);
 
   const filteredWorkoutList =
     workoutList?.filter(
@@ -145,6 +152,8 @@ const WorkoutSummaryContainer = (): JSX.Element => {
     filteredWorkoutList.length > 0
       ? parseSummaryData(filteredWorkoutList, isMultisportExposed)
       : [];
+
+  if (!firstDayOfSeason) return <Loader />;
 
   return (
     <WorkoutSummary

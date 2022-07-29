@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Workout from '../../pages/workout/Workout';
 import {
@@ -19,7 +19,7 @@ const WorkoutContainer = (): JSX.Element => {
   }>();
 
   const { data: workout } = useWorkoutControllerGetSuuntoWorkoutQuery({
-    workoutId: workoutId,
+    workoutId: workoutId ?? '',
   });
 
   const [chartStartIndex, setChartStartIndex] = useState<number>(
@@ -53,7 +53,7 @@ const WorkoutContainer = (): JSX.Element => {
     ) as unknown as number;
   };
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!workout) return;
@@ -65,14 +65,14 @@ const WorkoutContainer = (): JSX.Element => {
     ) {
       path = `/workout/${workoutId}/${chartStartIndex}/${chartEndIndex}`;
     }
-    history.replace(path);
+    navigate(path);
   }, [
     chartStartIndex,
     chartEndIndex,
     workoutId,
-    history,
     workout?.dataPoints?.length,
     workout,
+    navigate,
   ]);
 
   return (

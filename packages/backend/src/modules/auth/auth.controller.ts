@@ -93,7 +93,7 @@ export class AuthController {
   logout(@Req() req: Request, @Res() res: Response) {
     const publicUrl = this.configService.get('publicUrl');
 
-    req.logout();
+    req.logout(() => {});
     res.redirect(publicUrl);
   }
 

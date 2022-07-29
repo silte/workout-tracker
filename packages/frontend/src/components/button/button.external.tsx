@@ -1,17 +1,29 @@
 import React from 'react';
 
-interface IProps {
+interface IButtonExternalProps {
   children: string;
   className: string;
   link: string;
+  onClick?(): void;
+  testId?: string;
 }
 
-const ButtonExternal = ({ children, className, link }: IProps): JSX.Element => {
+export const ButtonExternal = ({
+  children,
+  className,
+  link,
+  onClick,
+  testId,
+}: IButtonExternalProps): JSX.Element => {
   return (
-    <a href={link} aria-label={children} className={className}>
+    <a
+      href={link}
+      aria-label={children}
+      className={className}
+      onClick={onClick}
+      data-testid={testId}
+    >
       {children}
     </a>
   );
 };
-
-export default ButtonExternal;
