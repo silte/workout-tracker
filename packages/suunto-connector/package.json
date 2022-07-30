@@ -35,7 +35,7 @@
     "mongodb-memory-server": "^8.8.0",
     "mongoose": "^6.5.0",
     "nest-commander": "^3.0.0",
-    "node-fetch": "^3.2.9",
+    "node-fetch": "^2.6.7",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.5.6"
   },
