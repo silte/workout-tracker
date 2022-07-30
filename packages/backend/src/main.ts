@@ -18,7 +18,7 @@ import { SuuntoApiInfoService } from './modules/suunto-api-info/suunto-api-info.
 const PORT = process.env.PORT || 4000;
 
 async function bootstrap() {
-  if (isNodeEnvInTest()) await startMemoryDb();
+  if (isNodeEnvInTest() || shouldOnlyExportApiSpec()) await startMemoryDb();
 
   const app = await NestFactory.create(AppModule);
   app.use(json({ limit: '50mb' }));
