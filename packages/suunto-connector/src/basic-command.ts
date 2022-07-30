@@ -12,14 +12,16 @@ import { isValidObjectId, ObjectId, parseObjectId } from './types/objectId';
   arguments: '<userId>',
   argsDescription: { userId: 'id from users collection' },
 })
-export class FetchUserWorkoutsCommand implements CommandRunner {
+export class FetchUserWorkoutsCommand extends CommandRunner {
   private readonly logger = new Logger(FetchUserWorkoutsCommand.name);
 
   constructor(
     private readonly suuntoApiInfoService: SuuntoApiInfoService,
     private readonly workoutListHandlerService: WorkoutListHandlerService,
     private readonly workoutHandlerService: WorkoutHandlerService,
-  ) {}
+  ) {
+    super();
+  }
 
   async run(passedParam: string[]): Promise<void> {
     const userIdStr = passedParam[0];
