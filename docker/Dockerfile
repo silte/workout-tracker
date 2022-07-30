@@ -1,7 +1,7 @@
 FROM node:16.14.0-stretch as builder
 
 ENV NODE_ENV development
-RUN apk add --update --no-cache python3 make g++ && ln -sf python3 /usr/bin/python
+RUN apt update && apt install python3 make g++
 
 COPY . /app
 WORKDIR /app
