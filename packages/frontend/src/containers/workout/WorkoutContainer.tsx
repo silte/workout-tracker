@@ -10,8 +10,8 @@ import {
 const WorkoutContainer = (): JSX.Element => {
   const {
     workoutId,
-    chartEndIndex: defaultChartEndIndex,
     chartStartIndex: defaultChartStartIndex,
+    chartEndIndex: defaultChartEndIndex,
   } = useParams<{
     workoutId: string;
     chartStartIndex?: string;
@@ -23,35 +23,11 @@ const WorkoutContainer = (): JSX.Element => {
   });
 
   const [chartStartIndex, setChartStartIndex] = useState<number>(
-    typeof defaultChartStartIndex !== 'undefined'
-      ? parseInt(defaultChartStartIndex, 10)
-      : NaN
+    defaultChartStartIndex ? parseInt(defaultChartStartIndex, 10) : NaN
   );
   const [chartEndIndex, setChartEndIndex] = useState<number>(
-    typeof defaultChartEndIndex !== 'undefined'
-      ? parseInt(defaultChartEndIndex, 10)
-      : NaN
+    defaultChartEndIndex ? parseInt(defaultChartEndIndex, 10) : NaN
   );
-
-  let startIndexUpdateTimer: number;
-  let endIndexUpdateTimer: number;
-
-  const updateStartIndex = (index: number) => {
-    clearTimeout(startIndexUpdateTimer);
-    startIndexUpdateTimer = setTimeout(
-      setChartStartIndex,
-      500,
-      index
-    ) as unknown as number;
-  };
-  const updateEndIndex = (index: number) => {
-    clearTimeout(endIndexUpdateTimer);
-    endIndexUpdateTimer = setTimeout(
-      setChartEndIndex,
-      500,
-      index
-    ) as unknown as number;
-  };
 
   const navigate = useNavigate();
 
@@ -65,6 +41,7 @@ const WorkoutContainer = (): JSX.Element => {
     ) {
       path = `/workout/${workoutId}/${chartStartIndex}/${chartEndIndex}`;
     }
+
     navigate(path);
   }, [
     chartStartIndex,
@@ -80,8 +57,8 @@ const WorkoutContainer = (): JSX.Element => {
       workout={workout ?? ({} as WorkoutDto)}
       chartStartIndex={chartStartIndex}
       chartEndIndex={chartEndIndex}
-      setChartStartIndex={updateStartIndex}
-      setChartEndIndex={updateEndIndex}
+      setChartStartIndex={setChartStartIndex}
+      setChartEndIndex={setChartEndIndex}
     />
   );
 };
