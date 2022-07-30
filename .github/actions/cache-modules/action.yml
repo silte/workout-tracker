@@ -15,4 +15,6 @@ runs:
         path: |
           **/node_modules
           packages/types/dist
+          packages/suunto-connector/dist
+          packages/frontend/src/redux/generated
         key: ${{ runner.os }}-modules-${{ hashFiles('./package-lock.json') }}-${{ hashFiles('./packages/types/src/*') }}
