@@ -6,7 +6,7 @@
     "packages/*"
   ],
   "scripts": {
-    "postinstall": "npm run types:update",
+    "postinstall": "npm -w @local/suunto-connector run build && npm run types:update",
     "start": "run-p start:types start:backend start:frontend",
     "start:backend": "npm -w backend run start:dev",
     "start:frontend": "npm -w frontend run start",
