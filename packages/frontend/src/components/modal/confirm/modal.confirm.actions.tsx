@@ -1,29 +1,35 @@
-import React from 'react';
+import { Button } from '../../button/button';
+import { ButtonGroup } from '../../button/button.group';
 
-import Button from '../../button/button';
-import ButtonGroup from '../../button/button.group';
-
-interface IProps {
+interface IModalConfirmActionsProps {
   onCancel(): void;
   onConfirm(): void;
   submitButtonLabel: string;
+  testId?: string;
 }
 
-const ModalConfirmActions = ({
+export const ModalConfirmActions = ({
   onCancel,
   onConfirm,
   submitButtonLabel,
-}: IProps): JSX.Element => {
+  testId,
+}: IModalConfirmActionsProps): JSX.Element => {
   return (
-    <ButtonGroup className="bg-gray-50 px-4 py-3 sm:px-6" isReverse>
-      <Button onClick={onConfirm} accentColor="red" size="small">
+    <ButtonGroup className="px-4 py-3 bg-gray-50 sm:px-6" isReverse>
+      <Button
+        onClick={onConfirm}
+        accentColor="red"
+        testId={`${testId}_confirm-button`}
+      >
         {submitButtonLabel}
       </Button>
-      <Button onClick={onCancel} accentColor="plain" size="small">
+      <Button
+        onClick={onCancel}
+        accentColor="plain"
+        testId={`${testId}_cancel-button`}
+      >
         Cancel
       </Button>
     </ButtonGroup>
   );
 };
-
-export default ModalConfirmActions;

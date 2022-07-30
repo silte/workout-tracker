@@ -1,19 +1,19 @@
-import React, { MouseEvent } from 'react';
+import React from 'react';
 
-import ButtonExternal from './button.external';
-import ButtonInternal from './button.internal';
-import ButtonPlain from './button.plain';
+import { ButtonExternal } from './button.external';
+import { ButtonInternal } from './button.internal';
+import { ButtonPlain } from './button.plain';
 
-type AccentColor = 'pink' | 'red' | 'green' | 'blue' | 'plain';
-interface IProps {
+export type AccentColor = 'red' | 'green' | 'blue' | 'plain';
+interface IButtonProps {
   accentColor?: AccentColor;
   children: string;
   className?: string;
   link?: string;
-  onClick?(e: MouseEvent): void;
+  onClick?(): void;
   type?: 'button' | 'submit' | 'reset' | undefined;
-  size?: 'small' | 'medium' | 'large';
-  disabled?: boolean;
+  testId?: string;
+  isDisabled?: boolean;
 }
 
 export const isExternalLink = (link: string): boolean =>
@@ -27,39 +27,28 @@ export const isExternalLink = (link: string): boolean =>
 const getButtonColorClasses = (color: AccentColor): string => {
   switch (color) {
     case 'blue':
-      return 'bg-blue-600 hover:bg-blue-500 active:bg-blue-700 focus:ring-blue-500';
+      return 'bg-blue-financer hover:bg-blue-500 active:bg-blue-700 focus:ring-blue-500';
     case 'green':
-      return 'bg-green-600 hover:bg-green-500 active:bg-green-700 focus:ring-green-500';
+      return 'bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 focus:ring-emerald-500';
     case 'red':
       return 'bg-red-600 hover:bg-red-500 active:bg-red-700 focus:ring-red-500';
-    case 'pink':
-      return 'bg-pink-600 hover:bg-pink-500 active:bg-pink-700 focus:ring-pink-500';
     default:
       return '';
   }
 };
 
-const Button = ({
+export const Button = ({
   accentColor = 'blue',
   children,
   className = '',
   link,
   onClick = () => {},
   type = 'button',
-  size = 'medium',
-  disabled,
-}: IProps): JSX.Element => {
-  const fontSizeMapping = {
-    small: 'sm:text-sm leading-5',
-    medium: 'leading-6',
-    large: 'sm:text-lg leading-7',
-  };
-
+  testId,
+  isDisabled,
+}: IButtonProps): JSX.Element => {
   const elementClasses = [
-    'inline-flex justify-center w-full sm:w-auto items-center px-4 py-2 border font-medium',
-    'rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 transition',
-    'ease-in-out duration-150 text-base disabled:cursor-not-allowed disabled:opacity-50 ',
-    `${fontSizeMapping[size]} ${className}`,
+    `inline-flex justify-center w-full sm:w-auto rounded-md items-center py-3 px-6 border font-medium text-base text-white focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:outline-none transition ease-in-out duration-150 ${className}`,
   ];
 
   if (accentColor === 'plain') {
@@ -72,17 +61,27 @@ const Button = ({
     );
   }
 
-  if (typeof link === 'string' && link.length > 0) {
+  if (typeof link === 'string' && link.length > 0 && !isDisabled) {
     if (isExternalLink(link)) {
       return (
-        <ButtonExternal link={link} className={elementClasses.join(' ')}>
+        <ButtonExternal
+          link={link}
+          className={elementClasses.join(' ')}
+          onClick={onClick}
+          testId={testId}
+        >
           {children}
         </ButtonExternal>
       );
     }
 
     return (
-      <ButtonInternal link={link} className={elementClasses.join(' ')}>
+      <ButtonInternal
+        link={link}
+        className={elementClasses.join(' ')}
+        onClick={onClick}
+        testId={testId}
+      >
         {children}
       </ButtonInternal>
     );
@@ -93,11 +92,10 @@ const Button = ({
       type={type}
       onClick={onClick}
       className={elementClasses.join(' ')}
-      disabled={disabled}
+      testId={testId}
+      isDisabled={isDisabled}
     >
       {children}
     </ButtonPlain>
   );
 };
-
-export default Button;

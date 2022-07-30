@@ -1,20 +1,20 @@
 import React from 'react';
 
-interface IProps {
+interface IButtonGroupProps {
   readonly children: React.ReactNode[];
   label?: string;
   isReverse?: boolean;
+  isHorizontal?: boolean;
   className?: string;
 }
 
-const ButtonGroup = ({
+export const ButtonGroup = ({
   children,
   label,
   className = '',
   isReverse,
-}: IProps): JSX.Element => {
-  const horizontalMargin = isReverse ? 'sm:mr-3' : 'sm:ml-3';
-
+  isHorizontal,
+}: IButtonGroupProps): JSX.Element => {
   return (
     <div className={className}>
       {label && (
@@ -22,22 +22,13 @@ const ButtonGroup = ({
           {label}
         </h2>
       )}
-      <div className={`sm:flex  ${isReverse ? 'sm:flex-row-reverse' : ''}`}>
-        {/* eslint-disable react/no-array-index-key */}
-        {children.map((child, index) => (
-          <span
-            className={`block ${
-              index > 0 ? `mt-3 sm:mt-0 ${horizontalMargin}` : ''
-            }`}
-            key={`button-${index}`}
-          >
-            {child}
-          </span>
-        ))}
-        {/* eslint-enable react/no-array-index-key */}
+      <div
+        className={`${isHorizontal ? 'flex' : 'flex flex-col sm:flex-row'} ${
+          isHorizontal && isReverse ? 'flex-row-reverse' : ''
+        } ${isReverse && !isHorizontal ? 'sm:flex-row-reverse' : ''} gap-3`}
+      >
+        {children}
       </div>
     </div>
   );
 };
-
-export default ButtonGroup;

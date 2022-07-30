@@ -21,18 +21,20 @@ export class SuuntoApiInfoService {
     private readonly configService: ConfigService,
   ) {}
 
-  async create(suuntoApiInfo: Partial<SuuntoApiInfo>): Promise<SuuntoApiInfo> {
+  async create(
+    suuntoApiInfo: Partial<SuuntoApiInfo>,
+  ): Promise<SuuntoApiInfoDocument> {
     return this.suuntoApiModel.create(suuntoApiInfo);
   }
 
-  async findByUser(userId: ObjectId): Promise<SuuntoApiInfo> {
+  async findByUser(userId: ObjectId): Promise<SuuntoApiInfoDocument> {
     return this.suuntoApiModel.findOne({ userId }).exec();
   }
 
   async update(
     userId: ObjectId,
     updateSuuntoApiInfoDto: UpdateSuuntoApiInfoDto,
-  ): Promise<SuuntoApiInfo> {
+  ): Promise<SuuntoApiInfoDocument> {
     const suuntoApiInfo = await this.findByUser(userId);
 
     if (!suuntoApiInfo) {

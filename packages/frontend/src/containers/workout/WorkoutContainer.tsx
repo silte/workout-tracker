@@ -1,63 +1,38 @@
-import { WorkoutDto } from '@local/types';
 import { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Workout from '../../pages/workout/Workout';
-import { getWorkoutById } from '../../services/workout-service';
+import {
+  useWorkoutControllerGetSuuntoWorkoutQuery,
+  WorkoutDto,
+} from '../../redux/generated/api';
 
 const WorkoutContainer = (): JSX.Element => {
-  const [workout, setWorkout] = useState<WorkoutDto>({} as WorkoutDto);
   const {
     workoutId,
-    chartEndIndex: defaultChartEndIndex,
     chartStartIndex: defaultChartStartIndex,
+    chartEndIndex: defaultChartEndIndex,
   } = useParams<{
     workoutId: string;
     chartStartIndex?: string;
     chartEndIndex?: string;
   }>();
 
+  const { data: workout } = useWorkoutControllerGetSuuntoWorkoutQuery({
+    workoutId: workoutId ?? '',
+  });
+
   const [chartStartIndex, setChartStartIndex] = useState<number>(
-    typeof defaultChartStartIndex !== 'undefined'
-      ? parseInt(defaultChartStartIndex, 10)
-      : NaN
+    defaultChartStartIndex ? parseInt(defaultChartStartIndex, 10) : NaN
   );
   const [chartEndIndex, setChartEndIndex] = useState<number>(
-    typeof defaultChartEndIndex !== 'undefined'
-      ? parseInt(defaultChartEndIndex, 10)
-      : NaN
+    defaultChartEndIndex ? parseInt(defaultChartEndIndex, 10) : NaN
   );
 
-  let startIndexUpdateTimer: number;
-  let endIndexUpdateTimer: number;
-
-  const updateStartIndex = (index: number) => {
-    clearTimeout(startIndexUpdateTimer);
-    startIndexUpdateTimer = setTimeout(
-      setChartStartIndex,
-      500,
-      index
-    ) as unknown as number;
-  };
-  const updateEndIndex = (index: number) => {
-    clearTimeout(endIndexUpdateTimer);
-    endIndexUpdateTimer = setTimeout(
-      setChartEndIndex,
-      500,
-      index
-    ) as unknown as number;
-  };
-
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchWorkout = async () => {
-      setWorkout(await getWorkoutById(workoutId));
-    };
-    fetchWorkout();
-  }, [workoutId]);
-
-  useEffect(() => {
+    if (!workout) return;
     let path = `/workout/${workoutId}`;
     if (
       !Number.isNaN(chartStartIndex) &&
@@ -66,22 +41,24 @@ const WorkoutContainer = (): JSX.Element => {
     ) {
       path = `/workout/${workoutId}/${chartStartIndex}/${chartEndIndex}`;
     }
-    history.replace(path);
+
+    navigate(path);
   }, [
     chartStartIndex,
     chartEndIndex,
     workoutId,
-    history,
-    workout.dataPoints?.length,
+    workout?.dataPoints?.length,
+    workout,
+    navigate,
   ]);
 
   return (
     <Workout
-      workout={workout}
+      workout={workout ?? ({} as WorkoutDto)}
       chartStartIndex={chartStartIndex}
       chartEndIndex={chartEndIndex}
-      setChartStartIndex={updateStartIndex}
-      setChartEndIndex={updateEndIndex}
+      setChartStartIndex={setChartStartIndex}
+      setChartEndIndex={setChartEndIndex}
     />
   );
 };

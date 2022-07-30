@@ -1,12 +1,19 @@
+import ChartJS from 'chart.js/auto';
+import zoomPlugin from 'chartjs-plugin-zoom';
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router, useLocation } from 'react-router-dom';
 
 import App from './App';
 import './assets/tailwind.css';
+import { SEO } from './components/seo/seo';
+import { store } from './redux/store';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import isUpdateAllowed from './utils/allowedUpdateLocations';
+import { isUpdateAllowed } from './utils/allowedUpdateLocations';
+
+ChartJS.register(zoomPlugin);
 
 const Root = (): JSX.Element => {
   const { pathname } = useLocation();
@@ -41,16 +48,23 @@ const Root = (): JSX.Element => {
 
   return (
     <React.StrictMode>
-      <App />
+      <Provider store={store}>
+        <SEO />
+        <App />
+      </Provider>
     </React.StrictMode>
   );
 };
 
-ReactDOM.render(
+const container = document.getElementById('root');
+if (!container) {
+  throw new Error('No container found');
+}
+const root = createRoot(container);
+root.render(
   <Router>
     <Root />
-  </Router>,
-  document.getElementById('root')
+  </Router>
 );
 
 // If you want your app to work offline and load faster, you can change

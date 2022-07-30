@@ -42,7 +42,7 @@ export class WorkoutSummaryService {
   }
 
   async removeAllByUser(userId: ObjectId) {
-    return this.userModel.deleteMany({ userId });
+    this.userModel.deleteMany({ userId });
   }
 
   async exportAllByUser(userId: ObjectId) {

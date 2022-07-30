@@ -6,7 +6,7 @@ import { ObjectId } from '../../../types/objectId';
 import { User } from '../../users/schemas/user.schema';
 
 export type UserPreferenceDocument = UserPreference &
-  Document<MogooseTypes.ObjectId>;
+  Document<MogooseTypes.ObjectId> & { _id: MogooseTypes.ObjectId };
 
 @Schema()
 export class UserPreference {

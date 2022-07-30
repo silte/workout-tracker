@@ -1,19 +1,36 @@
-import React from 'react';
+import { ReactNode } from 'react';
 
-export interface IProps {
+export interface IDescriptionListItemProps {
   label: string;
-  children: string;
+  children: string | ReactNode;
+  testId?: string;
+  isLarge?: boolean;
+  isWide?: boolean;
 }
 
-const DescriptionListItem = ({ label, children }: IProps): JSX.Element => {
+export const DescriptionListItem = ({
+  label,
+  children,
+  testId,
+  isLarge,
+}: IDescriptionListItemProps): JSX.Element => {
   return (
-    <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-4">
-      <dt className="text-sm font-medium text-gray-500">{label}</dt>
-      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+    <>
+      <dt
+        className={`${
+          isLarge ? 'text-sm lg:text-base' : 'text-xs lg:text-sm'
+        } font-medium text-gray-700 truncate`}
+      >
+        {label}
+      </dt>
+      <dd
+        className={`font-bold tracking-tight truncate ${
+          isLarge ? 'text-3xl' : 'text-xl'
+        }`}
+        data-testid={testId}
+      >
         {children}
       </dd>
-    </div>
+    </>
   );
 };
-
-export default DescriptionListItem;

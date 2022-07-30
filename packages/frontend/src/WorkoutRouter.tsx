@@ -1,31 +1,24 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import WorkoutContainer from './containers/workout/WorkoutContainer';
 import WorkoutListContainer from './containers/workout/WorkoutListContainer';
 import WorkoutSummaryContainer from './containers/workout/WorkoutSummaryContainer';
 
 const WorkoutRouter = (): JSX.Element => (
-  <Switch>
-    <Route exact path="/workout/list" component={WorkoutListContainer} />
-    <Route exact path="/workout/summary" component={WorkoutSummaryContainer} />
+  <Routes>
+    <Route path="/list" element={<WorkoutListContainer />} />
+    <Route path="/summary" element={<WorkoutSummaryContainer />} />
+    <Route path="/summary/:startDate" element={<WorkoutSummaryContainer />} />
     <Route
-      exact
-      path="/workout/summary/:startDate"
-      component={WorkoutSummaryContainer}
+      path="/summary/:startDate/:endDate"
+      element={<WorkoutSummaryContainer />}
     />
+    <Route path="/:workoutId" element={<WorkoutContainer />} />
     <Route
-      exact
-      path="/workout/summary/:startDate/:endDate"
-      component={WorkoutSummaryContainer}
+      path="/:workoutId/:chartStartIndex/:chartEndIndex"
+      element={<WorkoutContainer />}
     />
-    <Route exact path="/workout/:workoutId" component={WorkoutContainer} />
-    <Route
-      exact
-      path="/workout/:workoutId/:chartStartIndex/:chartEndIndex"
-      component={WorkoutContainer}
-    />
-  </Switch>
+  </Routes>
 );
 
 export default WorkoutRouter;

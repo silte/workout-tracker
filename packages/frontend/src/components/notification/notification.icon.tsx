@@ -4,7 +4,9 @@ interface INotificationIconProps {
   type: 'success' | 'error';
 }
 
-const NotificationIcon = ({ type }: INotificationIconProps): JSX.Element => {
+export const NotificationIcon = ({
+  type,
+}: INotificationIconProps): JSX.Element => {
   if (type === 'error') {
     return (
       <div className="flex-shrink-0">
@@ -29,7 +31,7 @@ const NotificationIcon = ({ type }: INotificationIconProps): JSX.Element => {
   return (
     <div className="flex-shrink-0">
       <svg
-        className="h-6 w-6 text-green-400"
+        className="h-6 w-6 text-emerald-400"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
@@ -46,5 +48,3 @@ const NotificationIcon = ({ type }: INotificationIconProps): JSX.Element => {
     </div>
   );
 };
-
-export default NotificationIcon;

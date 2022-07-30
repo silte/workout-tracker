@@ -1,32 +1,34 @@
-import React, { useState } from 'react';
+import { ReactNode, useState } from 'react';
 
-import Modal from '../modal';
+import { Modal } from '../modal';
 
-import ModalConfirmActions from './modal.confirm.actions';
-import ModalConfirmHeader from './modal.confirm.header';
+import { ModalConfirmActions } from './modal.confirm.actions';
+import { ModalConfirmHeader } from './modal.confirm.header';
 
-interface IProps {
-  accentColor?: 'pink' | 'red' | 'green' | 'blue';
-  children?: string | React.ReactNode | Element;
+interface IModalConfirmProps {
+  accentColor?: 'red' | 'green' | 'blue';
+  children?: ReactNode;
   label: string;
   modalOpenButtonLabel: string;
-  onConfirm(): void | boolean | Promise<boolean>;
+  onConfirm(): void;
   submitButtonLabel: string;
+  testId?: string;
 }
 
-const ModalConfirm = ({
+export const ModalConfirm = ({
   children,
   label,
   modalOpenButtonLabel,
   onConfirm,
   submitButtonLabel,
   accentColor,
-}: IProps): JSX.Element => {
+  testId = '',
+}: IModalConfirmProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggleOpen = () => setIsOpen(!isOpen);
-  const handleConfirm = async () => {
-    if ((await onConfirm()) === false) return;
+  const handleConfirm = () => {
+    onConfirm();
     handleToggleOpen();
   };
   return (
@@ -35,15 +37,15 @@ const ModalConfirm = ({
       toggleOpen={handleToggleOpen}
       isOpen={isOpen}
       accentColor={accentColor}
+      testId={testId}
     >
       <ModalConfirmHeader label={label}>{children}</ModalConfirmHeader>
       <ModalConfirmActions
         submitButtonLabel={submitButtonLabel}
         onCancel={handleToggleOpen}
         onConfirm={handleConfirm}
+        testId={testId}
       />
     </Modal>
   );
 };
-
-export default ModalConfirm;

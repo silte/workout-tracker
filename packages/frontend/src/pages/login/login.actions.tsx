@@ -1,6 +1,4 @@
-import React from 'react';
-
-import Button from '../../components/button/button';
+import { Button } from '../../components/button/button';
 
 interface IProps {
   submitButtonLabel: string;
@@ -9,7 +7,7 @@ interface IProps {
 
 const LoginActions = ({ submitButtonLabel, loginUrl }: IProps): JSX.Element => {
   return (
-    <div className="bg-gray-50 px-4 py-3 sm:px-6 flex justify-end">
+    <div className="flex justify-end px-4 py-3 bg-gray-50 sm:px-6">
       <Button link={loginUrl}>{submitButtonLabel}</Button>
     </div>
   );

@@ -1,7 +1,6 @@
-const isUpdateAllowed = (location: string): boolean => {
-  const isBadPage = location.includes('/bad-update-path');
+export const isUpdateAllowed = (location: string): boolean => {
+  const isEditPage = location.includes('/edit');
+  const isAddPage = location.includes('/add');
 
-  return !isBadPage;
+  return !isEditPage && !isAddPage;
 };
-
-export default isUpdateAllowed;

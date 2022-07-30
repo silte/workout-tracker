@@ -5,7 +5,7 @@ import { ObjectId } from '../../../types/objectId';
 import { User } from '../../users/schemas/user.schema';
 
 export type SuuntoApiInfoDocument = SuuntoApiInfo &
-  Document<MogooseTypes.ObjectId>;
+  Document<MogooseTypes.ObjectId> & { _id: ObjectId };
 
 @Schema({ collection: 'suunto-api-infos', timestamps: true })
 export class SuuntoApiInfo {

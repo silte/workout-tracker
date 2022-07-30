@@ -1,33 +1,41 @@
 import React from 'react';
 
-import Container from '../container/container';
+import { DropdownItemType } from '../dropdown/dropdown';
+import { IconName } from '../icon/icon';
 
-import DescriptionListBody from './description-list.body';
-import DescriptionListHeader from './description-list.header';
+import { DescriptionListBody } from './description-list.body';
+import { DescriptionListHeader } from './description-list.header';
 
-interface IProps {
-  label: string;
+interface DescriptionListProps {
+  label?: string;
   className?: string;
-  children: React.ReactNode;
+  children: React.ReactNode | React.ReactNode[];
+  testId?: string;
+  icon?: IconName;
+  filterOptions?: DropdownItemType[];
 }
 
-const DescriptionList = ({
+export const DescriptionList = ({
+  icon,
   label,
   className = '',
   children,
-}: IProps): JSX.Element => {
+  testId,
+  filterOptions,
+}: DescriptionListProps): JSX.Element => {
   return (
-    <Container>
-      <div
-        className={`py-8 px-4 -mx-4 bg-gray-100 md:rounded-lg md:-mx-5 md:px-5 lg:-mx-8 lg:px-8 ${className}`}
-      >
-        <div className="bg-white shadow overflow-hidden rounded-lg">
-          <DescriptionListHeader label={label} />
-          <DescriptionListBody>{children}</DescriptionListBody>
-        </div>
-      </div>
-    </Container>
+    <section className={`${className}`} data-testid={testId}>
+      {label && (
+        <DescriptionListHeader
+          icon={icon}
+          label={label}
+          filterOptions={filterOptions}
+          testId={`${testId}_list-header`}
+        />
+      )}
+      <DescriptionListBody testId={`${testId}_list-body`}>
+        {children}
+      </DescriptionListBody>
+    </section>
   );
 };
-
-export default DescriptionList;

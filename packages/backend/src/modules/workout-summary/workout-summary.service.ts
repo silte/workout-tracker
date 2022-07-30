@@ -8,6 +8,7 @@ import { Model } from 'mongoose';
 
 import { ObjectId } from '../../types/objectId';
 
+import { WorkoutSummaryDto } from './dto/workout-summary.dto';
 import {
   WorkoutSummary,
   WorkoutSummaryDocument,
@@ -20,7 +21,7 @@ export class WorkoutSummaryService {
     private userModel: Model<WorkoutSummaryDocument>,
   ) {}
 
-  async createMany(workoutSummaries: WorkoutSummary[]) {
+  async createMany(workoutSummaries: WorkoutSummaryDto[]) {
     return this.userModel.insertMany(workoutSummaries);
   }
 
@@ -38,6 +39,8 @@ export class WorkoutSummaryService {
         'Unauthorized to access this Workout summary.',
       );
     }
+
+    return workoutSummary;
   }
 
   async removeAllByUser(userId: ObjectId) {

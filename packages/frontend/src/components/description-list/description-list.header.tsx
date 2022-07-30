@@ -1,22 +1,33 @@
-import React from 'react';
+import { Dropdown, DropdownItemType } from '../dropdown/dropdown';
+import { Heading } from '../heading/heading';
+import { Icon, IconName } from '../icon/icon';
 
-interface IProps {
+interface DescriptionListHeaderProps {
   label: string;
-  children?: string;
+  testId?: string;
+  icon?: IconName;
+  filterOptions?: DropdownItemType[];
 }
 
-const DescriptionListHeader = ({
+export const DescriptionListHeader = ({
   label,
-  children = '',
-}: IProps): JSX.Element => {
+  testId,
+  icon,
+  filterOptions,
+}: DescriptionListHeaderProps): JSX.Element => {
   return (
-    <div className="px-4 py-5">
-      <h3 className="text-lg leading-6 font-medium text-gray-900">{label}</h3>
-      {children && (
-        <p className="mt-1 max-w-2xl text-sm text-gray-500">{children}</p>
+    <section className="mb-4 flex justify-between" data-testid={testId}>
+      <span className="flex items-center gap-2">
+        {icon && <Icon type={icon} />}
+        <Heading>{label}</Heading>
+      </span>
+      {filterOptions && (
+        <Dropdown
+          items={filterOptions}
+          label="Filter"
+          className="mb-[-3px] sm:mb-[-1px]"
+        />
       )}
-    </div>
+    </section>
   );
 };
-
-export default DescriptionListHeader;

@@ -1,21 +1,12 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 
 import { ObjectId } from '../../types/objectId';
-import { UserPreferenceDocument } from '../user-preferences/schemas/user-preference.schema';
 import { UserPreferencesService } from '../user-preferences/user-preferences.service';
-import { UserDocument } from '../users/schemas/user.schema';
 import { UsersService } from '../users/users.service';
-import { WorkoutSummaryDocument } from '../workout-summary/schemas/workout-summary.schema';
 import { WorkoutSummaryService } from '../workout-summary/workout-summary.service';
 
-export type ImportUserDataDto = {
-  workoutSummaries: WorkoutSummaryDocument[];
-  userPreferences: UserPreferenceDocument[];
-};
-
-export type ExportUserDataDto = ImportUserDataDto & {
-  user: UserDocument;
-};
+import { UserDataExportDto } from './dto/user-data-export.dto';
+import { UserDataImportDto } from './dto/user-data-import.dto';
 
 const getMyDataFilename = (): string => {
   const addLeadingZero = (number: number): string => `0${number}`.substr(-2);
@@ -40,7 +31,7 @@ export class UserDataService {
 
   async findAllOneUserData(
     userId: ObjectId,
-  ): Promise<{ filename: string; data: ExportUserDataDto }> {
+  ): Promise<{ filename: string; data: UserDataExportDto }> {
     const user = await this.usersService.findOne(userId);
     const workoutSummaries = await this.workoutSummaryService.exportAllByUser(
       userId,
@@ -59,7 +50,7 @@ export class UserDataService {
 
   async overrideUserData(
     userId: ObjectId,
-    { workoutSummaries = [], userPreferences = [] }: ImportUserDataDto,
+    { workoutSummaries = [], userPreferences = [] }: UserDataImportDto,
   ) {
     await Promise.all([
       this.workoutSummaryService.removeAllByUser(userId),

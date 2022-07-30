@@ -1,12 +1,9 @@
-import React from 'react';
+import { useSetPageInfo } from '../hooks/useSetPageInfo';
 
-import SEO from '../components/seo/seo';
+const Home = (): JSX.Element => {
+  useSetPageInfo({ title: 'Dashboard' });
 
-const Home = (): JSX.Element => (
-  <>
-    <SEO title="Dashboard" />
-    <h1>Workout tracker frontend</h1>
-  </>
-);
+  return <h1>Workout tracker frontend</h1>;
+};
 
 export default Home;

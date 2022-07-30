@@ -1,32 +1,33 @@
 /* eslint-disable react/button-has-type */
-import React, { MouseEvent } from 'react';
+import React from 'react';
 
-interface IProps {
+interface IButtonPlainProps {
   children: string;
-  onClick?(e: MouseEvent): void;
+  onClick(): void;
   className: string;
   type?: 'button' | 'submit' | 'reset' | undefined;
-  disabled?: boolean;
+  testId?: string;
+  isDisabled?: boolean;
 }
 
-const ButtonPlain = ({
+export const ButtonPlain = ({
   children,
   onClick,
   className,
   type = 'button',
-  disabled,
-}: IProps): JSX.Element => {
+  testId,
+  isDisabled,
+}: IButtonPlainProps): JSX.Element => {
   return (
     <button
       type={type}
       onClick={onClick}
       aria-label={children}
-      className={className}
-      disabled={disabled}
+      className={`${className} disabled:opacity-50 disabled:cursor-not-allowed`}
+      data-testid={testId}
+      disabled={isDisabled}
     >
       {children}
     </button>
   );
 };
-
-export default ButtonPlain;

@@ -10,23 +10,25 @@ import {
   forwardRef,
   Inject,
 } from '@nestjs/common';
+import { ApiBody, ApiOkResponse, ApiParam, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 
 import { ObjectId } from '../../types/objectId';
 import { ValidateEntityId } from '../../utils/validate-entity-id.pipe';
 import { Auth } from '../auth/decorators/auht.decorator';
 import { LoggedIn } from '../auth/decorators/loggedIn.decorators';
-import {
-  UserDataService,
-  ImportUserDataDto,
-} from '../user-data/user-data.service';
+import { UserDataExportDto } from '../user-data/dto/user-data-export.dto';
+import { UserDataImportDto } from '../user-data/dto/user-data-import.dto';
+import { UserDataService } from '../user-data/user-data.service';
 
 import { UpdateUserDto, UpdateUserOwnUserDto } from './dto/update-user.dto';
+import { UserDto } from './dto/user.dto';
 import { UserId } from './users.decorators';
 import { UsersService } from './users.service';
 
 @Controller('api/users')
 @LoggedIn()
+@ApiTags('Users')
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,
@@ -35,46 +37,65 @@ export class UsersController {
   ) {}
 
   @Get('my-user')
-  findOwnUser(@UserId() userId: ObjectId) {
+  @ApiOkResponse({ type: UserDto })
+  async findOwnUser(@UserId() userId: ObjectId): Promise<UserDto> {
     return this.usersService.findOne(userId);
   }
 
   @Get('my-user/my-data')
-  getAllOwnUserData(@UserId() userId: ObjectId, @Res() res: Response) {
+  @ApiOkResponse({ type: UserDataExportDto })
+  async getAllOwnUserData(@UserId() userId: ObjectId, @Res() res: Response) {
     this.getAllOneUserData(userId, res);
   }
 
   @Post('my-user/my-data')
-  @Auth('test-user')
+  @Auth(Role.testUser)
+  @ApiBody({ type: UserDataImportDto })
+  @ApiOkResponse({ schema: { properties: { payload: { type: 'string' } } } })
   overrideAllOwnUserData(
     @UserId() userId: ObjectId,
-    @Body() userData: ImportUserDataDto,
+    @Body() userData: UserDataImportDto,
   ) {
     return this.userDataService.overrideUserData(userId, userData);
   }
 
   @Patch('my-user')
-  updateOwnUser(
+  @ApiBody({ type: UpdateUserOwnUserDto })
+  @ApiOkResponse({ type: UserDto })
+  async updateOwnUser(
     @UserId() userId: ObjectId,
     @Body() updateUserDto: UpdateUserOwnUserDto,
-  ) {
+  ): Promise<UserDto> {
     return this.usersService.update(userId, updateUserDto);
   }
 
   @Get()
   @Auth(Role.admin)
-  findAll() {
+  @ApiOkResponse({ type: [UserDto] })
+  async findAll(): Promise<UserDto[]> {
     return this.usersService.findAll();
   }
 
   @Get(':id')
   @Auth(Role.admin)
-  findOne(@Param('id', ValidateEntityId) id: ObjectId) {
+  @ApiOkResponse({ type: UserDto })
+  @ApiParam({
+    name: 'id',
+    type: String,
+    description: 'Entity id from users collection.',
+  })
+  async findOne(@Param('id', ValidateEntityId) id: ObjectId): Promise<UserDto> {
     return this.usersService.findOne(id);
   }
 
   @Get(':id/my-data')
   @Auth(Role.admin)
+  @ApiOkResponse({ type: UserDataExportDto })
+  @ApiParam({
+    name: 'id',
+    type: String,
+    description: 'Entity id from users collection.',
+  })
   async getAllOneUserData(
     @Param('id', ValidateEntityId) userId: ObjectId,
     @Res() res: Response,
@@ -93,10 +114,17 @@ export class UsersController {
 
   @Patch(':id')
   @Auth('admin')
-  update(
+  @ApiBody({ type: UpdateUserDto })
+  @ApiOkResponse({ type: UserDto })
+  @ApiParam({
+    name: 'id',
+    type: String,
+    description: 'Entity id from users collection.',
+  })
+  async update(
     @Param('id', ValidateEntityId) id: ObjectId,
     @Body() updateUserDto: UpdateUserDto,
-  ) {
+  ): Promise<UserDto> {
     return this.usersService.update(id, updateUserDto);
   }
 }

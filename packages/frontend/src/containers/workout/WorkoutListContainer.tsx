@@ -1,20 +1,10 @@
-import { WorkoutSummaryDto } from '@local/types';
-import { useState, useEffect } from 'react';
-
 import WorkoutList from '../../pages/workout/WorkoutList';
-import { getWorkoutSummaries } from '../../services/workout-service';
+import { useWorkoutSummaryControllerFindAllQuery } from '../../redux/generated/api';
 
 const WorkoutListContainer = (): JSX.Element => {
-  const [workoutList, setWorkoutList] = useState<WorkoutSummaryDto[]>([]);
+  const { data: workoutList } = useWorkoutSummaryControllerFindAllQuery();
 
-  useEffect(() => {
-    const fetchWorkoutList = async () => {
-      setWorkoutList(await getWorkoutSummaries());
-    };
-    fetchWorkoutList();
-  }, []);
-
-  return <WorkoutList workoutList={workoutList} />;
+  return <WorkoutList workoutList={workoutList ?? []} />;
 };
 
 export default WorkoutListContainer;
