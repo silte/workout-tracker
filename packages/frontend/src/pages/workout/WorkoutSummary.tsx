@@ -1,7 +1,7 @@
-import { ButtonGroup } from '@material-ui/core';
 import { ChangeEvent, useMemo } from 'react';
 
 import { Button } from '../../components/button/button';
+import { ButtonGroup } from '../../components/button/button.group';
 import { Container } from '../../components/container/container';
 import { DescriptionList } from '../../components/description-list/description-list';
 import { DescriptionListItem } from '../../components/description-list/description-list.item';
